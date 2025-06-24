@@ -1,0 +1,117 @@
+<div class="mt-0 py-2">
+    <div class="d-flex mobile_row mob_font" *ngIf="travellers && !review && !ticket">
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{ 'getActive' : travellers}">
+                    <div>
+                        <i class="fa fa-users" aria-hidden="true"> </i> &nbsp;&nbsp;
+                        <span style="color: #000;">Guest Details</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #D2D2D2; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div>
+                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;<span style="color: #7d7c7c;">Review</span> 
+                </div>
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #D2D2D2; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div>
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp; <span style="color: #7d7c7c;">Payment Gateway </span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #D2D2D2; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div>
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp; <span style="color: #7d7c7c;">Confirmation </span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="d-flex" *ngIf="travellers && review && !ticket">
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getDone': travellers }">
+                    <i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Guest Details</span>
+                </div>
+
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getActive': review }">
+                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Review</span>
+                </div>
+
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getActive': payment }">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Payment Gateway</span>
+                </div>
+
+            </div>
+        </a>
+
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #D2D2D2; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div>
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;<span style="color: #7d7c7c;">Confirmation</span>
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="d-flex" *ngIf="travellers && review && ticket">
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getDone': travellers }">
+                    <i class="fa fa-users" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Guest Details</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div class="" [ngClass]="{'getDone': review }">
+                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Review</span>
+                </div>
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div class="" [ngClass]="{'getDone': payment }">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000;">Payment Gateway</span>
+                </div>
+            </div>
+        </a>
+
+
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 7px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div class="" [ngClass]="{'getActive': ticket }">
+                    <i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #000; font-size: 17px;">Confirmation</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="session_time"><i class="fi-rr-time-forward"></i> Session Time {{display}}</div>

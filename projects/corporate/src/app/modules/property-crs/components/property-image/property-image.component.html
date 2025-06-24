@@ -1,0 +1,83 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="btnAlign">
+            <button type="submit" class="btn btn-danger" class="btnStyle" (click)="addImage=!addImage"
+            > Upload Image</button> &nbsp;
+            <button type="submit" class="btn btn-danger" class="btnStyle" [routerLink]="['/property/property-list']"
+            style="text-align: end;"> Hotels List</button> 
+        </div>
+        <div *ngIf="addImage" style="margin-left: 140px;">
+            <input type="file" (change)="uploadImage($event)">
+            <button type="submit" class="btn btn-primary" (click)="onSubmit"> Upload</button> 
+        </div>
+        <div>
+            <div class="form-group mb-0 col-sm-3 p-0 float-right has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input class="form-control" type="text" name="Search" [(ngModel)]="searchText"
+                    autocomplete="off" placeholder="Search">
+            </div>
+            <div class="mb-3">
+                <form>
+                    <div class="wrapper1" id="notifications-list" (scroll)="scrollTwo.scrollLeft = scrollOne.scrollLeft"
+                        #scrollOne>
+                        <div class="div1"></div>
+                    </div>
+                    <div class="wrapper2" #scrollTwo (scroll)="scrollOne.scrollLeft = scrollTwo.scrollLeft">
+                        <div class="div2 invisible-scrollbar">
+                            <div class="table-respons">
+                                <table class="table table-borderless table-striped table-hover" matSort
+                                    (matSortChange)="sortData($event)" id="b2b-flight-data">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-left text-nowrap"
+                                                *ngFor="let header of displayColumn;" mat-sort-header="{{header.key}}">
+                                                {{header.value }}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="noData">
+                                            <td colspan="12">
+                                                <mat-spinner [diameter]="30" style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="!noData && (!respData.length || (respData | filter:searchText).length === 0)">
+                                            <td colspan="12">
+                                                <h4 class="text-muted text-center">
+                                                    No Data Found!
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            *ngFor="let data of respData | filter:searchText | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+                                            <td class="text-left text-muted">{{i+1}}.</td>
+                                            <td class="text-left"> <img alt="Phone" src="assets/images/admin_bg.jpg"></td>
+                                            <td class="text-left">
+                                                <button type="submit" class="btn btn-danger" class="btnStyle" (click)="onDelete()"
+                                                ><i class="fa fa-trash"></i> Delete</button> &nbsp;
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pb-0">
+                        <div class="d-flex w-100 justify-content-between">
+                            <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true" [boundaryLinks]="true" [(page)]="page"
+                                [pageSize]="pageSize">
+                            </ngb-pagination>
+                            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                                <option [ngValue]="2">2 items per page</option>
+                                <option [ngValue]="5">5 items per page</option>
+                                <option [ngValue]="10">10 items per page</option>
+                                <option [ngValue]="20">20 items per page</option>
+                                <option [ngValue]="50">50 items per page</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

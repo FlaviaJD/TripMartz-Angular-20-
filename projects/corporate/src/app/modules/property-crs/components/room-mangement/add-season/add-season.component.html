@@ -1,0 +1,139 @@
+<div class="bg-white">
+    <div style="display: flex; justify-content: space-between;">
+        <h6><i class="fa fa-credit-card"></i>&nbsp; Add Price</h6>
+        <button type="submit" class="btn btn-danger" class="btnStyle" 
+        [routerLink]="['/property/room-list']">{{'Back to Room List'}}</button>
+    </div>
+    <div class="col-md-10">
+        <div>
+            <form [formGroup]="regConfig" autocomplete="off">
+                <div class="form-group required row">
+                    <label for="selectSeason" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Select Season</label>
+                    <div class="col-sm-5">
+                        <select formControlName="selectSeason"
+                            class="form-control" id="selectSeason">
+                            <option [value]="''" selected>Please Select</option>
+                            <option *ngFor="let item of seasonList"  [value]="item">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="startDate" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Season Date Start</label>
+                    <div class="col-sm-5">
+                        <input formControlName="startDate" type="text" id="startDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                            bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="endDate" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Season Date End</label>
+                    <div class="col-sm-5">
+                        <input formControlName="endDate" type="text" id="endDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                            bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="noOfRooms" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">No. of Rooms</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="noOfRooms" autocomplete="off" formControlName="noOfRooms"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="No. of Rooms">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="singleRoom" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Single Room(BB)</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="singleRoom" autocomplete="off" formControlName="singleRoom"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Single Room(BB)">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="sRO" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">RO</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="sRO" autocomplete="off" formControlName="sRO"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="RO">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="sHB" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">HB</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="sHB" autocomplete="off" formControlName="sHB"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="HB">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="singleRoom" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Double Room</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="singleRoom" autocomplete="off" formControlName="singleRoom"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Single Room(BB)">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="dRO" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">RO</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="dRO" autocomplete="off" formControlName="dRO"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="RO">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="dHB" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">HB</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="dHB" autocomplete="off" formControlName="dHB"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="HB">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="adultExtraPrice" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Adult Extra Price</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="adultExtraPrice" autocomplete="off" formControlName="adultExtraPrice"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Adult Extra Price">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="childPriceWithBed" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Child Price with Bed</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="childPriceWithBed" autocomplete="off" formControlName="childPriceWithBed"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Child Price with Bed">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="childPriceWithoutBed" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Child Price without Bed</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="childPriceWithoutBed" autocomplete="off" formControlName="childPriceWithoutBed"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="childPriceWithoutBed">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="gst" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">GST(%)</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="gst" autocomplete="off" formControlName="gst"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="GST(%)">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="service" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Service(%)</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="service" autocomplete="off" formControlName="service"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Service(%)">
+                    </div>
+                </div>
+                <div class="form-group required row">
+                    <label for="stopScale" class="required" class="col-sm-3 col-form-label font-weight-bold labelAlign">Stop Scale</label>
+                    <div class="col-sm-5">
+                        <select formControlName="stopScale"
+                            class="form-control" id="stopScale">
+                            <option [value]="'Yes'" selected>{{'Yes'}}</option>
+                            <option [value]="'No'">{{'No'}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btnStyle" (click)="onBack()">Back</button>&nbsp;
+                    <button type="submit" class="btnStyle" (click)="onSubmit()">Add Price</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="addPropertyAmenities">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Add Property Amenities'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-add-property-amenities></app-add-property-amenities>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="propertyAmenitiesList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Property Amenities List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-property-amenities-list></app-property-amenities-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

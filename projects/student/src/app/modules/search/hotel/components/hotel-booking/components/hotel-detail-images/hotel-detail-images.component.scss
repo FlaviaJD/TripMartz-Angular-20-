@@ -1,0 +1,97 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+}
+
+.basic-container {
+    padding: 5px;
+}
+
+.version-info {
+    font-size: 8pt;
+    float: right;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+        width: 268px;
+        height: 189px;
+        object-fit: cover;
+        margin: 5px;
+    }
+}
+
+.g-overlay {
+    min-width: 320px;
+}
+
+gallery {
+    font-size: 16px;
+}
+
+img {
+    width: 150px;
+}
+
+.lightbox-example,
+.gallerize-example {
+    margin: 2em;
+}
+
+
+button {
+    margin-right: 1em;
+}
+
+.gallphoto {
+    padding: 0px !important;
+}
+
+::ng-deep gallery-core[thumbPosition=bottom] gallery-thumbs .g-slider {
+    left: 0px !important;
+    right: 0px;
+    margin: auto;
+    transform: inherit !important;
+}
+
+::ng-deep .g-image-item {
+    background-size: contain !important;
+    height: 380px !important;
+}
+
+::ng-deep gallery-thumb .g-image-item {
+    background-size: cover !important;
+    height: 88px !important;
+}
+
+#sync2 img {
+    height: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+    ::ng-deep #sync1 .owl-carousel .owl-stage-outer {
+        height: 300px;
+    }
+
+    ::ng-deep #sync1 .owl-carousel .owl-stage-outer .owl-item img {
+        object-fit: cover;
+    }
+
+    ::ng-deep #sync2 .owl-carousel .owl-stage-outer {
+        height: 50px;
+    }
+
+    ::ng-deep #sync2 .owl-carousel .owl-stage-outer .owl-item img {
+        object-fit: cover;
+    }
+}
+.modal {
+    top: 86px!important;
+}
+
+.list-unstyled li img { object-fit: cover;}

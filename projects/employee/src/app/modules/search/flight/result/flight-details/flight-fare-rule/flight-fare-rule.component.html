@@ -1,0 +1,32 @@
+<!-- fare-rule-modal.component.html -->
+
+<div class="modal" [style.display]="showFareRule ? 'block' : 'none'">
+    <div class="modal-dialog" style="min-width:880px;">
+        <div class="modal-content" >
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Fare Rule</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" style="height: 390px;">
+                <table class="table table-bordered table-responsive">
+                    <td colspan="4">
+                        <div class="">
+                            <p *ngIf="fareRuleData?.length"></p>
+                            <div class="rules_dropdown">
+                                <table *ngIf="fareRuleData?.length" style="width: 100%;">
+                                    <tr *ngFor="let f of fareRuleData">
+                                        <div [innerHTML]="f.FareRuleDetail" style="border-bottom: 1px solid;float: left;width: 100%;">
+                                        </div>
+                                    </tr>
+                                </table>
+                                <p *ngIf="noData">No Data Found.</p>
+                            </div>
+                        </div>
+                    </td>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

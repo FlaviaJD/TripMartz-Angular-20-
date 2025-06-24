@@ -1,0 +1,26 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="create/update_cost">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Cost Center'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <!-- <app-flight-api (toUpdate)="triggerTab($event)"></app-flight-api> -->
+            <app-create-update-cost-center (costCenterUpdate)="triggerTab($event)"></app-create-update-cost-center>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="costCenterList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Cost Center List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <!-- <app-hotel-api (someEvent)="triggerTab($event)"></app-hotel-api> -->
+            <app-cost-center-list (costCenterUpdate)="triggerTab($event)"></app-cost-center-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

@@ -1,0 +1,62 @@
+<div class="bg-white">
+    <h5 style="text-align: center; padding: 10px;">Send News</h5>
+</div>
+
+<div class="card-body bg-white">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="sendNewsForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="type" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Select Email</label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="cols mr-4">
+                            <label for="typeYes">
+                                <input type="radio" id="typeYes" name="type" value="All" formControlName="type" style="margin-right: 5px;">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">All</span>
+                            </label>
+                            </div>
+
+                            <div class="cols">
+                                <label for="typeNo">
+                                    <input type="radio" id="typeNo" name="type" value="Custom" formControlName="type"style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Custom</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required row" *ngIf="customEmail">
+                        <label for="emailIds" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Email ID</label>
+                        <div class="col-sm-6">
+                                <textarea name="" id="emailIds" cols="71" rows="5" formControlName="emailIds">
+                                </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="subject " class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Subject</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="lastName" 
+                                formControlName="subject" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="message" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Message</label>
+                        <div class="col-sm-6">
+                                <textarea name="" id="message" cols="71" rows="5" formControlName="message">
+                                </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-n2">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-6 buttonAllign">
+                            <button type="submit" class="btn btn-sm btn-primary mr-1" >Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary" (click)="onCancel()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

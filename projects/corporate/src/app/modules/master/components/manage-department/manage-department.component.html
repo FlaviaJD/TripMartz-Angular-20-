@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="create/update_department">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Department'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-create-update-department (departmentUpdate)="triggerTab($event)"></app-create-update-department>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="departmentList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Department List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-department-list  (departmentUpdate)="triggerTab($event)"></app-department-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

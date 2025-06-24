@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="addSupplier">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Add/Update Supplier'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-add-update-supplier></app-add-update-supplier>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="supplierList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Supplier List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-supplier-list></app-supplier-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

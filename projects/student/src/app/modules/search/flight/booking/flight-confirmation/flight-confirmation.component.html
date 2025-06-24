@@ -1,0 +1,485 @@
+<div style="margin-block-end: 10px" *ngIf="confirmedData">
+    <app-booking-steps [travellers]="true" [review]="true" [ticket]="true"></app-booking-steps>
+</div>
+<div class="card my-2" *ngIf="confirmedData">
+    <div class="card-body pb-3">
+        <div class="col-xs-12 nopad">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+    <div class="card-body pb-3">
+        <div class="col-xs-12 nopad">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h5 class="">Thanks {{confirmedData?.AgentFirstName}} {{confirmedData?.AgentLastName}}</h5>
+                    <h3 class="font-weight-bold" style=" font-size: 18px;">This is an auto message to inform you that a travel <span style="color: green;">Request ID: {{confirmedData.AppReference}}</span> has been generated and sent for approval. </h3>
+                    
+                    <ul class="list-unstyled mt-4" style="font-size: initial;">
+                        <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp;
+                            Mail has been sent to the approver {{confirmedData?.approvarName}} for approval.
+                        </li>
+                     
+                        <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp; <strong>Please note</strong>, confirmation of this booking will be done only on receipt of the approval. 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row" *ngIf="confirmedData">
+        <div class="col-md-8 col-lg-8">
+            <div class="card mb-2 mt-2">
+                <section style="background-color: #525a62;color: white;border-radius: 8px 8px 0px 0px;">
+                    <h5 class="p-2 m-0" style="padding:10px 15px !important;">Flight Details</h5>
+                </section>
+                <div class="card-body pb-3" style="font-size: 15px;">
+                    <div class="col-md-12 p-0">
+                        <table class="w-100 d-table">
+                            <ng-container *ngFor="let f of confirmedData?.FlightBookingTransaction;let i = index">
+                                        <tr>
+                                            <td style="padding:0px;   overflow: hidden;">
+                                                <table cellpadding="5"
+                                                    style="padding: 10px;font-size: 13px;padding:5px; border-radius: 15px; background-color: #fff; margin-bottom: 10px;"
+                                                    width="100%">
+                                                    <tbody>
+                                                        <tr class="htl_dscrptn">
+                                                            <td class="htl_dtl"
+                                                                style="padding:14px; width:100%;"
+                                                                valign="top">
+                                                                <img style="max-width: 75px;"
+                                                                    [src]="'./assets/airline_logo/'+ f.airline_code + '.png'">
+                                                                <span>
+                                                                    {{ f.airline_code }} | {{
+                                                                    f.flight_number }}
+                                                                </span>
+                                                                <span class="htl_nm"
+                                                                    style="line-height:30px;font-size:20px;color:#000;vertical-align:middle;font-weight: 600; float: right;">
+                                                                    {{f.from_airport_code}} -
+                                                                    {{f.to_airport_code}}
+                                                                </span>
+                                                                <table
+                                                                    style="width:100%; margin-top:7px; margin-bottom: 7px;">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td
+                                                                                style="color:#777E90; width: 33.333%; padding-left: 0px;">
+                                                                                <span
+                                                                                    style="font-size:16px;">{{f.from_airport_name}}
+                                                                                    ({{f.from_airport_code}})</span>
+                                                                                <br>
+                                                                                <span class="chck_n_o"
+                                                                                    style="color:#065081;font-size: 15px; font-weight:600;">
+                                                                                    {{
+                                                                                    f.departure_datetime
+                                                                                    | date: 'EEE, d MMM
+                                                                                    y'}}
+                                                                                    {{f.departure_datetime
+                                                                                    |
+                                                                                    date:'HH:mm'}}</span>
+                                                                                <br>
+                                                                                <span *ngIf="f.departure_terminal"
+                                                                                    style="font-size:15px;">{{'Terminal
+                                                                                    : ' +
+                                                                                    f.departure_terminal
+                                                                                    }}</span>
+                                                                            </td>
+                                                                            <td
+                                                                                style="width: 33.333%; text-align: center;">
+                                                                                <span class="htl_nights"
+                                                                                    *ngIf="f?.attributes?.Duration"
+                                                                                    style="background: #fff;
+padding: 3px 20px;
+border-radius: 30px; font-size: 15px;
+border: 1px solid #065081; margin-bottom: 5px; display: inline-block; margin-top: 10px;
+color: #000;"> {{ f?.attributes?.Duration }}</span>
+                                                                                <span
+                                                                                    *ngIf="!(f?.attributes?.Duration)">{{
+                                                                                    f | map:
+                                                                                    duration}}</span><br>
+                                                                                    <span *ngIf="confirmedData?.CabinClass">
+                                                                                {{ 'Cabin Class : ' +
+                                                                                confirmedData?.CabinClass
+                                                                                }}
+                                                                            </span>
+                                                                                
+                                                                            </td>
+
+                                                                            <td
+                                                                                style="color:#777E90; width: 33.333%; text-align:right; padding-right: 0px;">
+                                                                                <span
+                                                                                    style="font-size:16px;">{{f.to_airport_name}}
+                                                                                    ({{
+                                                                                    f.to_airport_code
+                                                                                    }})</span>
+                                                                                <br>
+                                                                                <span class="chck_n_o"
+                                                                                    style="color:#065081; font-size: 15px; font-weight:600;">
+                                                                                    {{
+                                                                                    f.arrival_datetime |
+                                                                                    date: 'EEE, d MMM
+                                                                                    y'}}
+                                                                                    {{f.arrival_datetime
+                                                                                    | date:
+                                                                                    'HH:mm'}}</span><br>
+                                                                                <span
+                                                                                    *ngIf="f.arrival_terminal">
+                                                                                    {{'Terminal: ' +
+                                                                                    f.arrival_terminal
+                                                                                    }}
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <table style="width: 100%;">
+                                                                    <tbody>
+                                                                        <tr style="color: #000; font-size: 16px;">
+                                                                            <td style="width: 33.333%;padding-left: 0px; padding-bottom: 0px; border-top: 1px dashed #B1B5C3;">
+                                                                                <!-- <span style="color: #F99D1C; font-weight: bold;">GDS Pnr- 
+                                                                                </span> {{f.gds_pnr || 'N/A'}},
+                                                                                <span style="color: #F99D1C; font-weight: bold;">Airline Pnr- 
+                                                                                </span> {{f.airline_pnr || 'N/A'}} -->
+                                                                            </td>
+                                                                            <td style="width: 33.333%; text-align: right;padding-left: 0px; padding-bottom: 0px; border-top: 1px dashed #B1B5C3;">
+                                                                                <span
+                                                                                    style="color: #F99D1C; font-weight: bold;">Baggage
+                                                                                    Info</span> - Cabin:
+                                                                                {{f.cabin_baggage}},
+                                                                                Check-in:
+                                                                                {{f.checkin_baggage}}
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-2 mt-2">
+                <section style="background-color: #525a62;color: white;border-radius: 8px 8px 0px 0px;">
+                    <h5 class="p-2 m-0" style="padding:10px 15px !important;">Travellers Details</h5>
+                </section>
+                <div class="card-body p-0" style="font-size: 15px;">
+                    <div class="col-md-12 p-0">
+                                <table
+                                    style="width:100%; border-radius: 7px; background: #fff;   margin-bottom: 10px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding:0px;" width="100%">
+                                                <table cellpadding="5" class="gst_dtl_ctn"
+                                                    style="padding: 10px;font-size: 15px;"
+                                                    width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td
+                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: auto; font-weight: bold;">
+                                                                Sl No.
+                                                            </td>
+                                                            <td
+                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945;width:auto;font-weight: bold;">
+                                                                Name
+                                                            </td>
+                                                            <!-- <td
+                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: auto; font-weight: bold;">
+                                                                Ticket No.
+                                                            </td>
+                                                            <ng-container
+                                                           >
+                                                                <td
+                                                                    style="width: 50%; padding: 0px; border-top: none;">
+                                                                    <table
+                                                                        style="width: 100%;">
+                                                                        <tr>
+                                                                            <td
+                                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: 23%; font-weight: bold;">
+                                                                                Sector
+                                                                            </td>
+
+                                                                            <td
+                                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: 40%; font-weight: bold;">
+                                                                                Meal
+                                                                            </td>
+
+                                                                            <td
+                                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: 15%; font-weight: bold;">
+                                                                                Seat
+                                                                            </td>
+
+                                                                            <td
+                                                                                style="background-color:#e3f1fc;padding:9px 15px;color: #353945; width: 22%; font-weight: bold;">
+                                                                                Baggage
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </ng-container> -->
+                                                        </tr>
+                                                        <ng-container *ngFor="let travellerDetailsList of passengersDetails;let index=index">
+
+                                                        <tr class="gst_dtl_contnt"
+                                                            style="font-size:15px;"
+                                                            *ngFor="let p of travellerDetailsList; let i = index">
+                                                            <td
+                                                                style="width: 50%; vertical-align: middle;">
+                                                               <ng-container *ngIf="i==0">{{index+1}}</ng-container> 
+                                                            </td>
+                                                            <td style="width: 50%;  text-transform: capitalize; vertical-align: middle;"
+                                                                class="">
+                                                                <ng-container *ngIf="i==0">{{p.title |
+                                                                uppercase}}. {{(p.first_name
+                                                                +' '+p.middle_name+'
+                                                                '+p.last_name |
+                                                                uppercase)}}</ng-container>
+                                                            </td>
+                                                            <!-- <td
+                                                                style="padding: 9px 15px;vertical-align: middle;">
+                                                                {{p.ticket_no|| 'N/A'}}</td> -->
+                                                            <!-- <td style="width: 50%; padding: 0px; border-top: none;"
+                                                            >
+                                                                <table style="width: 100%;" *ngFor="let extraService of p.SSR | keyvalue;">
+                                                                    <tr>
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 23%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <ng-container>
+                                                                                            <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                                {{extraService.key}}
+                                                                                            </div>
+                                                                                        </ng-container>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 40%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                            <ng-container *ngIf="extraService.value.MealInfo">
+                                                                                                <ng-container *ngFor="let meal of extraService.value.MealInfo">
+                                                                                                    {{meal?.Description}}
+                                                                                                </ng-container>
+                                                                                            </ng-container>
+                                                                                            <ng-container *ngIf="!extraService.value.MealInfo">
+                                                                                                N/A
+                                                                                            </ng-container>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 15%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <ng-container *ngIf="extraService.value.SeatInfo">
+                                                                                            <ng-container *ngFor="let seat of extraService.value.SeatInfo">
+                                                                                                {{seat?.Code}}
+                                                                                            </ng-container>
+                                                                                        </ng-container>
+                                                                                        <ng-container *ngIf="!extraService.value.SeatInfo">
+                                                                                            N/A
+                                                                                        </ng-container>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 22%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                            <ng-container *ngIf="extraService.value.BaggageInfo">
+                                                                                                <ng-container *ngFor="let baggage of extraService.value.BaggageInfo">
+                                                                                                    {{baggage.Description}}
+                                                                                                </ng-container>
+                                                                                            </ng-container>
+                                                                                            <ng-container *ngIf="!extraService.value?.BaggageInfo">
+                                                                                                N/A
+                                                                                            </ng-container>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                    </tr>
+                                                                </table>
+                                                                <table *ngIf="!(p.SSR | keyvalue)?.length">
+                                                                    <tr>
+                                                                        <td style="padding: 9px 15px; width: 22%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                            <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                                N/A
+                                                                                            </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 22%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                                N/A
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 13%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                            N/A
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                        <td style="padding: 9px 15px; width: 22%; border-bottom: 0px dashed #bebcb8; color: #343a40;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td style="vertical-align: top; padding: 0px; border-top: none;">
+                                                                                        <div style="color: #343a40; font-size: 14px; text-align: left;">
+                                                                                                N/A
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                
+                                                                    </tr>
+                                                                </table>
+                                                            </td> -->
+                                                        </tr>
+                                                    </ng-container>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-4 pl-0">
+            <div class="card mb-2 mt-2">
+                <section style="background-color: #525a62;color: white;border-radius: 8px 8px 0px 0px;">
+                    <h5 class="p-2 m-0" style="padding:10px 15px !important;">Fare Details
+                    </h5>
+                </section>
+                <div class="card-body pb-3">
+                    <table class="table mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="cusromBlue"><span style="padding-left: 0px;">Basic Fare</span>
+                                </th>
+                                <th class="text-right"><span style="padding-left: 0px;">{{
+                                        confirmedData?.TotalFarePriceBreakUp?.Currency }} {{
+                                        confirmedData?.TotalFarePriceBreakUp?.PriceBreakup?.BasicFare |
+                                        number:'1.0-0'
+                                        }}</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="cusromBlue"><span style="padding-left: 0px;">Taxes &amp; Fees</span>
+                                </th>
+                                <th class="text-right"><span style="padding-left: 0px;">{{
+                                        confirmedData?.TotalFarePriceBreakUp?.Currency }} {{
+                                        confirmedData?.TotalFarePriceBreakUp?.PriceBreakup?.Tax | number:'1.0-0'
+                                        }}</span>
+                                </th>
+                            </tr>
+                          
+                            <!-- <tr>
+                                <th class="cusromBlue">
+                                    <span>Baggage</span>
+                                </th>
+                                <th class="text-right">
+                                    <span>
+                                        {{ confirmedData?.TotalFarePriceBreakUp?.Currency}} {{
+                                            (confirmedData?.TotalFarePriceBreakUp?.TotalBaggagePrice |
+                                        number:'1.0-0')
+                                        ||
+                                        0}}
+                                    </span>
+                                </th>
+                            </tr> -->
+                            <!-- <tr>
+                                <th class="cusromBlue">
+                                    <span>Meal</span>
+                                </th>
+                                <th class="text-right">
+                                    <span>
+                                        {{ confirmedData?.TotalFarePriceBreakUp?.Currency }} {{
+                                            (confirmedData?.TotalFarePriceBreakUp?.TotalMealPrice |
+                                            number:'1.0-0')
+                                        ||
+                                        0}}
+                                    </span>
+                                </th>
+                            </tr> -->
+                            <!-- <tr>
+                                <th class="cusromBlue">
+                                    <span>Seat</span>
+                                </th>
+                                <th class="text-right">
+                                    <span>
+                                        {{ confirmedData?.TotalFarePriceBreakUp?.Currency }} {{
+                                            (confirmedData?.TotalFarePriceBreakUp?.TotalSeatPrice |
+                                            number:'1.0-0')
+                                        ||
+                                        0}}
+                                    </span>
+                                </th>
+                            </tr> -->
+                            <tr>
+                                <th class="float-left cusromBlue" style="font-size: large; color: #065081">Grand
+                                        Total
+                                </th>
+                                <th class="text-right">
+                                    <span class="font-weight-bold" style="color: #065081; font-size: large;">
+                                        {{ confirmedData?.TotalFarePriceBreakUp?.Currency }}
+                                        {{ confirmedData?.TotalFarePriceBreakUp?.TotalDisplayFare |
+                                        number:'1.0-0' }}
+                                    </span>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ngx-loading [show]="loading"
+        [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}">
+    </ngx-loading>

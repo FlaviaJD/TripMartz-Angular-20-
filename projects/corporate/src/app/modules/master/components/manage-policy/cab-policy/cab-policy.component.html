@@ -1,0 +1,47 @@
+<div class="card-body">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="cabPolicyForm" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="isCab" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Cab
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-3">
+                                <label for="isCabYes">
+                                    <input type="radio" id="isCabYes" name="isCab" value="true" formControlName="isCab" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                                </div>
+    
+                                <div class="col-3">
+                                    <label for="isCabNo">
+                                        <input type="radio" id="isCabNo" name="isCab" value="false" formControlName="isCab"style="margin-right: 5px;">
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;">No</span>
+                                    </label>
+                                    </div>
+                        </div>
+                    </div>
+                        <div class="form-group required row">
+                            <label for="starCategory" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Cab Type
+                                <span style="color: red;">*</span>
+                            </label>
+                            <div class="col-sm-6 align-self-center" style="display: flex;">
+                                <div class="col-3 p-0" *ngFor="let item of cabType;let index=index">
+                                    <input type="checkbox" id="item{{index}}" value="item.name" [checked]="item.isChecked"  formControlName="cabType" (change)="checkBoxSelection($event,item.name)" style="margin-right: 5px;">
+                                    <label for="item{{index}}" style="margin-right: 15px;">{{item.name}}<sup class="f-16"> * </sup></label>
+                                </div>
+                            </div> 
+                        </div>
+                    <div class="col-sm-8" style="text-align: end;">
+                        <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="goToPreviousPage()">Prev</button>
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

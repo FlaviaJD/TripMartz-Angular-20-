@@ -1,0 +1,72 @@
+<div class="rangebox">
+    <button data-target="#collapse506" data-toggle="collapse" class="collapsebtn" type="button">Departure</button>
+    <form *ngIf="busCopy.length" [formGroup]="depTimForm" style="clear:both;">
+        <div id="collapse506" class="collapse show">
+            <!-- <a style="cursor: pointer;font-size: 12px;" class="float-right"
+                (click)="clearFilterByDepartureTime()">Clear</a> -->
+            <div class="boxins">
+                <ul class="locationul">
+                    <li>
+                        <div class="squaredThree">
+                            <input formControlName="earlyMorning" type="checkbox"
+                                (change)="filterByDepartureTime('earlyMorning',$event.currentTarget.checked)"
+                                name="check" class="airlinecheckbox" id="dep1">
+                            <label for="dep1"></label>
+                        </div>
+                        <label for="dep1" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Early Morning 
+                            </span>
+                            <span class="htlcount">5-9AM</span>
+                            
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input type="checkbox" formControlName="midDay" name="check" class="airlinecheckbox"
+                                (change)="filterByDepartureTime('midDay',$event.currentTarget.checked)" id="dep2">
+                            <label for="dep2"></label>
+                        </div>
+                        <label for="dep2" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Mid-Day 
+                            </span>
+                            <span class="htlcount">9-5PM</span>
+                            
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input type="checkbox" formControlName="evening" name="check"
+                                (change)="filterByDepartureTime('evening',$event.currentTarget.checked)"
+                                class="airlinecheckbox" id="dep3">
+                            <label for="dep3"></label>
+                        </div>
+                        <label for="dep3" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Evening 
+                            </span>
+                            <span class="htlcount">5-9PM</span>
+                            
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input type="checkbox" formControlName="night" name="check"
+                                (change)="filterByDepartureTime('night',$event.currentTarget.checked)"
+                                class="airlinecheckbox" id="dep4">
+                            <label for="dep4"></label>
+                        </div>
+                        <label for="dep4" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Night 
+                            </span>
+                            <span class="htlcount">9PM-5AM</span>
+                            
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>

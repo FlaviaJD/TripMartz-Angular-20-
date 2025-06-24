@@ -1,0 +1,37 @@
+<div class="d-flex row res_mp0">
+    <div class="col-md-4 col-4 p-0">
+        <button class="mb-1 col-md-12 mr-2 btn custom-btn sort_bt active all_f">
+            <img src="assets/images/jet.svg">
+            All Flights
+            <span class="badge badge-pill badge-light">{{ totalFlights }} Flights</span>
+        </button>
+    </div>
+    <div class="col-md-4 col-4 p-0">
+        <button class="mb-1 mr-2 col-md-12 btn custom-btn sort_bt fa_f">
+            <img src="assets/images/fast_flight.svg">
+            Fastest Flight
+            <span class="badge badge-pill badge-light">{{ fastestFligtTime }}</span>
+        </button>
+    </div>
+    <div class="col-md-4 col-4 p-0">
+        <button class="mb-1 mr-2 col-md-12 btn custom-btn sort_bt cheap_f">
+            <img src="assets/images/flight.svg">
+            Cheapest Flight
+            <span class="badge badge-pill badge-light" *ngIf="cheapestFlight?.Price">{{
+                cheapestFlight?.Price?.TotalDisplayFare | number:'1.0-0' }}</span>
+            <span class="badge badge-pill badge-light" *ngIf="!cheapestFlight?.Price">{{ cheapestFlight |
+                number:'1.0-0'}}</span>
+        </button>
+    </div>
+    <!-- <div class="col-md-3 p-0">
+        <div class="dropdown sort_bt1">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-mdb-toggle="dropdown" aria-expanded="false">
+                Sort By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <app-sorting></app-sorting>
+            </ul>
+        </div>
+    </div> -->
+</div>

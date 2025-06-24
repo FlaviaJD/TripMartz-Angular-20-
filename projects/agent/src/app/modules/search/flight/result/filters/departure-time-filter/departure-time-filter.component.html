@@ -1,0 +1,68 @@
+<div class="rangebox">
+    <button data-target="#collapseDept" data-toggle="collapse" class="collapsebtn" type="button">Departure Time</button>
+    <a *ngIf="flightsCopy.length" style="cursor: pointer;font-size: 12px;" class="float-right d-none" (click)="clearDepartureTimeFilter()">Clear</a>
+    <form *ngIf="flightsCopy.length" [formGroup]="depTimForm" style="clear: both;">
+        <div id="collapseDept" class="collapse show">
+            <div class="boxins marret" id="departureTimeWrapper">
+                <div class="grid-container">
+                    <div class="grid-item" (click)="toggleSelection('earlyMorning')">
+                        <span class="htlcount" [class.selected]="selectedTimes['earlyMorning']">Before 6AM</span>
+                    </div>
+                
+                    <div class="grid-item" (click)="toggleSelection('morning')">
+                        <span class="htlcount" [class.selected]="selectedTimes['morning']">6AM - 12PM</span>
+                    </div>
+                
+                    <div class="grid-item" (click)="toggleSelection('midDay')">
+                        <span class="htlcount" [class.selected]="selectedTimes['midDay']">12PM - 6PM</span>
+                    </div>
+                
+                    <div class="grid-item" (click)="toggleSelection('evening')">
+                        <span class="htlcount" [class.selected]="selectedTimes['evening']">After 6PM</span>
+                    </div>
+                    <!-- <div class="grid-item">
+                        <a class="timone toglefil time-wrapper">
+                            <div class="starin">
+                              
+                                <mat-checkbox formControlName="earlyMorning" class="time-category hidecheck"
+                                (change)="filterByDepartureTime('earlyMorning',$event.checked)"></mat-checkbox>
+                                <span class="htlcount">Before 6AM</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper">
+                            <div class="starin">
+                              
+                                <mat-checkbox formControlName="morning"
+                                (change)="filterByDepartureTime('morning',$event.checked)"></mat-checkbox>
+                                <span class="htlcount">6AM - 12PM</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin">
+                               
+                                <mat-checkbox formControlName="midDay"
+                                (change)="filterByDepartureTime('midDay',$event.checked)"></mat-checkbox>
+                                <span class="htlcount">12PM - 6PM</span>
+                               
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin">
+                               
+                                <mat-checkbox formControlName="evening"
+                                (change)="filterByDepartureTime('evening',$event.checked)"></mat-checkbox>
+                                <span class="htlcount">After 6PM</span>
+                            </div>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

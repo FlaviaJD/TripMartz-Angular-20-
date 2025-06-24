@@ -1,0 +1,71 @@
+<div class="row card">
+  <div class="mb-3">
+      <div class="card-header-tab card-header">
+          <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+              <span class="my-color" style="color:#000; font-size:21px; font-weight:500;">
+                  {{'Create Trip'}}
+              </span>
+          </div>
+      </div>
+  </div>
+  <div class="offset-md-1 col-md-10">
+      <form class="p-3 clearfix" [formGroup]="regConfig" autocomplete="off">
+          <div class="form-group row">
+              <label for="TripName" class="col-sm-3 col-form-label ">Trip Name: <sup class="f-16 text-danger">*</sup>
+              </label>
+              <div class="col-sm-5">
+                  <input formControlName="TripName" maxlength="50" type="text" class="form-control " id="TripName">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label for="FromDate" class="col-sm-3 col-form-label">From Date <sup class="f-16 text-danger">*</sup></label>
+              <div class="col-sm-5">
+                <input type="text" maxlength="150" class="form-control" placeholder="dd/mm/yyyy"
+                  bsDatepicker [bsConfig]="bsDateConf" [readonly]="true"  [minDate]="minDate" [isOpen]="isOpen"
+                  id="FromDate" name="FromDate" formControlName="FromDate">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="ToDate" class="col-sm-3 col-form-label">To Date <sup class="f-16 text-danger">*</sup></label>
+              <div class="col-sm-5">
+                <input type="text" maxlength="150" class="form-control" placeholder="dd/mm/yyyy"
+                  bsDatepicker [bsConfig]="bsDateConf" [readonly]="true" [isOpen]="isOpen" [minDate]="toDateMin" 
+                  id="ToDate" name="ToDate" formControlName="ToDate">
+                <div *ngIf="regConfig.errors?.dateRangeInvalid" class="text-danger">
+                  The "To Date" must be greater than the "From Date".
+                </div>
+              </div>
+            </div>
+          <div class="form-group row" style="display: none;">
+              <label for="Venue" class="col-sm-3 col-form-label">Services <sup class="f-16 text-danger">*</sup> </label>
+              <div class="col-sm-9">
+                <div class="form-row m-0 mt-1">
+                  <div class="col-2 p-0" *ngFor="let service of services">
+                    <label>
+                      <input
+                        type="checkbox"
+                        formControlName="ServiceList"
+                        [value]="service.value" [checked]="service.isChecked"
+                        (change)="onServiceChange(service, $event.target.checked)"
+                      />
+                      <span class="design"></span>
+                      <span class="text" style="margin-left: 4px;">{{ service.name }}</span>
+                   </label> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="form-group row text-center mr-0" style="margin-left: 30%;">
+              <button class="btn btn-lg btn-primary mr-1"
+                  style="background: #0A5081 !important; border:1px solid #0A5081 !important;"
+                  (click)="onSubmit()" *ngIf="!isUpdate">Create</button>
+                  <button class="btn btn-lg btn-primary mr-1"
+                  style="background: #0A5081 !important; border:1px solid #0A5081 !important;"
+                  (click)="update()" *ngIf="isUpdate">Update</button>
+              <button class="btn btn-lg btn-primary"
+                  style="background: #333 !important; border:1px solid #333 !important;"
+                  (click)="onReset()">Reset</button>
+          </div>
+      </form>
+  </div>
+</div>

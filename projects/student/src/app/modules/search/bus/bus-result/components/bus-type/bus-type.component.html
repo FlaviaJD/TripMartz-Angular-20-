@@ -1,0 +1,24 @@
+<div class="rangebox">
+    <button data-target="#collapse505" data-toggle="collapse" class="collapsebtn" type="button">Bus Type</button>
+    <form style="clear:both;" [formGroup]="busTypeForm" *ngIf="busTypeForm && filteredArray">
+        <div id="collapse505" class="collapse show">
+            <!-- <a style="cursor: pointer;font-size: 12px;" class="float-right" (click)="clearFilterByBusType()">Clear</a> -->
+            <div class="boxins" id="allBusType">
+                <ul class="locationul">
+                    <li formArrayName="bus" *ngFor="let busType of filteredArray; let i = index">
+                        <div class="squaredThree">
+                            <input type="checkbox" [formControlName]="i" name="check" class="airlinecheckbox"
+                                (change)="filterByBusOperators($event.target.checked)" id="type{{i + 1}}">
+                            <label for="type{{i + 1}}"></label>
+                        </div>
+                        <label for="type{{i + 1}}" class="" style="max-width: 80%; margin-bottom: 0px;">
+                            <span class="col-sm-9 m-0 p-0 word-wrap" style="word-break: break-word;">
+                                {{busType?.busType}}
+                            </span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>

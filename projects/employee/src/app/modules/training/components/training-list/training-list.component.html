@@ -1,0 +1,153 @@
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+<!-- 
+<div class="card" style="background: none; box-shadow:none; padding: 0px;">
+    <form class="p-3 clearfix" autocomplete="off">
+        <div class="form-row">
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label>Traning Name</label>
+                    <input type="text"
+                        class="form-control form-control-sm nrm_input" 
+                        placeholder="Training Name">
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label>Trainer Name</label>
+                    <input type="text" class="form-control form-control-sm nrm_input"
+                        placeholder="Trainer Name">
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <span class="icon  fi-rr-calendar-days"></span>
+                    <label for="requested_date_from">From</label>
+                    <input type="text" formControlName="requested_date_from" id="fromDate"
+                         class="form-control form-control-sm nrm_input"
+                        placement="bottom left" placeholder="dd-mm-yyyy" bsDatepicker [readonly]="true"
+                        [bsConfig]="bsDateConf" [isOpen]="isOpen">
+                </div>
+            </div>
+
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label for="requested_date_to">To</label>
+                    <input type="text" formControlName="requested_date_to" id="toDate"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                        bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"
+                        [readonly]="true"
+                        >
+                </div>
+            </div>
+
+
+            <div class="cust-col-1 pr-0" style="float: right;">
+                <div class="form-group">
+                </div>
+            </div>
+            <div class="cust-col-1 pr-0" style="float: right;">
+                <div class="form-group">
+                </div>
+            </div>
+            <div class="cust-col-1 pr-0" style="float: right;">
+                <div class="form-group">
+                    <button type="submit" class="btn w-100 srch_btn" >
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="cust-col-1 pr-0" style="float: right;">
+                <div class="form-group">
+                    <button type="reset" style="background: #252c40;" class="btn w-100 srch_btn" >
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div id="demo" class="collapse">
+            <div style="display: flex;">
+               
+                <button class="btn btn-lg btn-primary mr-1" type="button">Clear
+                    Fliter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+ -->
+
+<div class="card mobile_mr-15 mart-3"> 
+    <div class="card-body">
+        <!-- <app-dynamic-table [data]=" tabsData "></app-dynamic-table> -->
+        <div class="mb-3">
+            <form>
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-hover"  id="agent-callback-list">
+                        <thead>
+                            <tr class="head_row">        
+                                <th style="width:5%;">SL No.</th> 
+                                <th style="width:20%;">Training Name</th> 
+                                <th style="width:10%;">Date</th>        
+                                <th style="width:5%;">Time</th>        
+                                <th style="width:15%;">Trainer</th>        
+                                <th style="width:25%;">Venue</th>
+                                <th style="width:25%;">Status</th>        
+                                <th>Action</th>      
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="!noData && !respData.length">
+                                <td colspan="11">
+                                    <h4 class="text-muted text-center">
+                                        No Data Found!
+                                    </h4>
+                                </td>
+                            </tr>    
+                            <tr *ngIf="noData">
+                                <td colspan="11">
+                                    <mat-spinner [diameter]="30" style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+                                </td>
+                            </tr>
+                            <tr style="white-space: nowrap;" *ngFor="let data of respData; let i=index;">
+                             
+                            <td style="text-align: center;">{{i+1}}.</td>     
+                            <td> {{data['TrainingName']}}</td>     
+                                <td>{{data['TrainingDate']}}</td>     
+                                <td>{{data['TrainingTime']}}</td>     
+                                <td>{{data['Trainer']}}</td>     
+                                <td>{{data['Venue']}}</td>  
+                                <td><span class="badge badge-success">Confrimed</span></td>     	
+                                <td>     	    
+                                    <a href="" class="particpan voucherlink">View Voucher</a> 
+                                
+                                </td>     
+                            </tr>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer pb-0">
+                    <div class="d-flex w-100 justify-content-between">
+                        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true" [boundaryLinks]="true" [(page)]="page"
+                            [pageSize]="pageSize">
+                        </ngb-pagination>
+                        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                            
+                            <option [ngValue]="10">10 items per page</option>
+                            <option [ngValue]="50">50 items per page</option>
+                            <option [ngValue]="100">100 items per page</option>
+                            <option [ngValue]="500">500 items per page</option>
+                            <option [ngValue]="1000">1000 items per page</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+.hotelDetailsBtn {
+    background: #F1F1F1 !important;
+    border-radius: 9px;
+    padding: 10px;
+    margin-top: 8px;
+    position: relative;
+  
+}
+b, strong { font-weight: 500;}
+
+/* Solid border */
+hr.solid {
+    border-top: 1px solid #bbb;
+    width: 100%;
+}
+
+.amelist svg {
+    margin-right: 10px;
+}
+.amelist .fi{ margin-right: 10px;}
+.icons {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 7px;
+    margin-top: 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    color: #000000;
+    font-size: 23px;
+    top: 8px;
+}
+.map_button{background: #252c40 !important; border-color: #252c40 !important;}
+.modal {
+    -webkit-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    top: 58%;
+    margin: 0 auto;
+}
+
+#mapview .modal-dialog {
+    max-width: 88%;
+}
+
+.modal-backdrop {
+    opacity: 0.5 !important;
+}
+
+.modal-backdrop.show {
+    opacity: -99.5 !important;
+}
+
+.overlay {
+    position: fixed;
+    /* Positioning and size */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    /* color */
+    display: block;
+    /* making it hidden by default */
+}
+.f-18{font-size: 18px;font-weight: 600;;}
+.addr{font-size: 15px;font-weight: 400;}
+
+@media only screen and (max-width: 767px) {
+    .hotelDetailsBtn {
+        border-radius: 2px;
+    }
+}
+
+.star_rtng_clr {
+    color: #fe8d00;
+}
+
+.star_rtng_empty{
+    color: #cfcfcf;
+}

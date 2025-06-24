@@ -1,0 +1,456 @@
+
+<div class="bookings-section w-100 mt-3 mt180">
+<h3 class="h-title">Dashboard</h3>
+    <div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="d-flex">
+        <div class="w-33 col-sm-6" *ngIf="isFlight">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="fi-rr-plane"></i>
+                    </div>
+                    <p class="card-category">Flight booking</p>
+                    <h3 class="card-title">{{bookingFlightsCount ? bookingFlightsCount : 0}}
+                        <small>Booking</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats" routerLink="/reports/flight-booking-details">
+                        <i class="fi-rr-arrow-small-up"></i>
+                        <a>Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-33 col-sm-6" *ngIf="isHotel">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="fi-rr-hotel"></i>
+                    </div>
+                    <p class="card-category">Hotel Booking</p>
+                    <h3 class="card-title">{{bookingHotelCount ? bookingHotelCount : 0}} <small>Booking</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats" routerLink="/reports/hotel-booking-details">
+                        <i class="fi-rr-arrow-small-up"></i> Report
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-33 col-sm-6" *ngIf="isBus">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="fi-rr-bus"></i>
+                    </div>
+                    <p class="card-category">Bus Booking</p>
+                    <h3 class="card-title">{{bookingBusCount ? bookingBusCount : 0}} <small>Booking</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fi-rr-arrow-small-up"></i> Report
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-md-5 p-0 bg-mobile">
+            <div class="cancellation-report-section d-flex w-100 row m-0">
+                <div class="w-33 col-sm-6 pl-0" *ngIf="isFlight">
+                    <div class="booking-cards w-100 m-t-0 m-r-20">
+                        <div class="title">
+                            <h3>flight cancellation</h3>
+                        </div>
+                        <div class="content">
+                            <i class="fi-rr-plane"></i>
+                            <span>{{cancellationFlightsCount ? cancellationFlightsCount : 0}}</span>
+                            <!-- <div class="footer">
+                                <ul class="vertical">
+                                    <li> View </li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    </div>
+                    <div class="w-33 col-sm-6" *ngIf="isHotel">
+                    <div class="booking-cards w-100 m-t-0 m-r-20">
+                        <div class="title">
+                            <h3>hotel cancellation</h3>
+                        </div>
+                        <div class="content">
+                            <i class="fi-rr-bed-alt"></i>
+                            <span>{{cancellationHotelCount ? cancellationHotelCount : 0}}</span>
+                            <!-- <div class="footer">
+                                <ul class="vertical">
+                                    <li> View</li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    </div>
+                
+                    <div class="w-33 col-sm-6" *ngIf="isBus">
+                    <div class="booking-cards w-100 mt-0 m-r-20">
+                        <div class="title">
+                            <h3>Bus cancellation</h3>
+                        </div>
+                        <div class="content">
+                            <i class="fi-rr-bus"></i>
+                            <span>{{cancellationHotelCount ? cancellationHotelCount : 0}}</span>
+                        </div>
+                    </div>
+                    </div>
+        </div>
+        </div>
+
+        <!-- <div class="w-20 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="fi-rr-train"></i>
+                    </div>
+                    <p class="card-category">Train Booking</p>
+                    <h3 class="card-title">{{bookingTrainCount ? bookingTrainCount : 0}} <small>Booking</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats" routerLink="/reports/train-booking-details">
+                        <i class="fi-rr-arrow-small-up"></i> Report
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-20 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="fi-rr-car"></i>
+                    </div>
+                    <p class="card-category">Car Booking</p>
+                    <h3 class="card-title">{{bookingCarCount ? bookingCarCount : 0}} <small>Booking</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats" routerLink="/reports/car-booking-details">
+                        <i class="fi-rr-arrow-small-up"></i> Report
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+    </div>
+</div>
+<!-- 
+<div class="flight-destination-section d-none">
+    <div class="section-title">
+        <h2 class="">Top Flight Destination</h2>
+    </div>
+    <div class="section-body">
+        <div class="destination-slider banner-section-with-text">
+            <ngx-slick-carousel class="slick-slider slick-dotted" #slickModal="slick-carousel"
+                [config]="destinationSliderConfig">
+                <div ngxSlickItem *ngFor="let slide of destinationSlides">
+                    <div class="banner-section text-center" (click)="navigateToTop(slide);">
+                        <img src="{{slide.image | map: getImage}}" height="210px" width="100%" alt="brands" class="slick_main_img">
+                        <p>{{slide.from_airport_code}}&nbsp;&nbsp;
+                                <span style="margin-bottom: -7px;">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </span>&nbsp;&nbsp;
+                            {{slide.to_airport_code}}
+                        </p>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
+</div>
+<hr>
+    <div class="right-section ml-0 mt-0  w-100 float-left d-none">
+        <div class="row col-md-12 col-lg-12 m-0 p-0 booking-cards1">
+            <table style="table-layout: fixed; width: 100%;" id="sub-agent-list">
+                <tr>
+                    <td>
+                        <div class="table-responsive">
+                            <table class="align-middle mb-0 table table-borderless table-striped table-hover" matSort
+                                (matSortChange)="sortData($event)">
+                                <thead>
+                                    <tr class="p-2">
+                                        <th scope="col" class="text-nowrap" *ngFor="let header of displayColumn;"
+                                            mat-sort-header="{{header.key}}">
+                                            {{header.value }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="noData">
+                                        <td colspan="12">
+                                            <p>No Data Found</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="p-2"
+                                        *ngFor="let subagent of respData ; let i=index;">
+                                        <td class="text-left text-muted">{{i+1}}.</td>
+                                        <td class="text-left text-capitalize"> {{subagent['first_name']}} </td>
+                                        <td class="text-left"> {{subagent['uuid']}} </td>
+                                        <td class="text-left"> {{subagent['phone']}} </td>
+                                        <td class="text-left"> {{subagent['email']}} </td>
+                                        <td class="text-left"> {{subagent['created_at']|date}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div> -->
+
+
+
+
+
+    <div class="row mb-5 mt-5"> 
+        <!-- <div class="col-md-4" [ngStyle]="{'display': (currentUser && currentUser?.auth_role_id!=2) ? 'block' : 'none'}">
+            <div class="card card-chart">
+                <div class="card-header card-header-success chart_mod" style="height: 350px; ">
+                    <div style="display: block; height: 100%; width: 100%;">
+                        <canvas id="canvas" style="height: 100% !important;">{{ chart }}</canvas>
+                      </div>
+                </div>
+                 <div class="card-body">
+                    <h4 class="card-title mb-0">STATISTICS</h4>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                       updated 4 minutes ago
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="col-md-6">
+            <div class="card card-chart">
+
+                <div class="card-header card-header-tabs card-header-primary1">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">CALENDAR BOOKING
+                                :</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" style="background: #fff; height: 490px; overflow: auto; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(215 207 207 / 40%);">
+                    <div class="fc-toolbar">
+                        <div class="fc-left">
+                            <h2>{{selectedDate | date: 'MMMM'}} {{selectedDate | date: 'yyyy'}}</h2>
+                        </div>
+                        <div class="fc-center"></div>
+                        <div class="fc-right">
+                            <button type="button" (click)="setToday()" class="fc-today-button fc-button fc-button-primary">
+                                Today
+                            </button>
+                            <div class="fc-button-group">
+                                <button type="button" (click)="calenderPrev()" class="fc-prev-button fc-button fc-button-primary">
+                                    <span class="fc-icon fc-icon-chevron-left"></span>
+                                </button>
+                                <button type="button" (click)="calenderNext()" class="fc-next-button fc-button fc-button-primary">
+                                    <span class="fc-icon fc-icon-chevron-right"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <full-calendar defaultView="dayGridMonth"  [showNonCurrentDates]="false" [plugins]="calendarPlugins" [events]="calendarEvents" #calender
+                    (eventClick)="eventClicked($event)" (dateClick)="handleDateClick($event)">
+                    </full-calendar>
+                </div>
+                
+            </div>
+        </div>
+    <div class="col-md-6">
+        <div class="card card-chart">
+
+            <div class="card-header card-header-tabs card-header-primary">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Bookings Confirmed On {{selectedDate | date : 'd MMM y'}}
+                            :</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body" style="background: #fff; height: 490px; overflow: auto; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(215 207 207 / 40%);">
+                
+                <ng-container *ngIf="bookingDetailsFound; else hideMe">
+                    <div class="booking_li" *ngFor="let booking of bookingDetails">
+                        <span>AppReference: {{booking?.AppReference}} <i class="fa fa-copy"></i></span>&nbsp;
+                        <br />
+                        <div class="row">
+                            <div class="col-md-7"> Name:
+                                <strong>{{booking?.FlightBookingTransactions[0]?.flightBookingTransactionPassengers[0].first_name}}
+                                    {{booking?.FlightBookingTransactions[0]?.flightBookingTransactionPassengers[0].last_name}}</strong></div>
+                            <div class="col-md-5">
+                                <a class="d-block c-pointer float-right" [routerLink]="['/reports/flight-voucher']"
+                                [queryParams]="{AppReference: booking?.AppReference}">
+                                    View Voucher
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #hideMe>
+                    <div class="booking_li" style="position: absolute;
+                    top: 150px;
+                    background: #f7f7f7;
+                    border: none;
+                    width: 250px;
+                    left: 0px;
+                    right: 0px;
+                    margin: auto;">
+                        <div class="text-center">
+                            <img style="width: 200px;" src="assets/images/no_data.png" alt="" /><br>
+                            No Data Found!
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            
+            
+        </div>
+    </div>
+    </div>
+
+
+    <div class="row mb-5">
+
+
+        <div class="col-md-6" [ngStyle]="{'display': (currentUser && currentUser?.auth_role_id==2) ? 'block' : 'none'}">
+            <div class="card card-chart mt-3">
+
+                <div class="card-header card-header-tabs card-header-primary1">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">Eligibility Details:</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body chart_mod" style="height:490px; background: #FFF; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(255 255 255 / 40%);">
+                    <div class="col-12 p-0">
+                    <ul ngbNav #nav="ngbNav" class="nav-pills m-0 mb-2 elgible_tab justify-content-center" orientation="horizontal" [(activeId)]="active">
+                        <li ngbNavItem="flight" (click)="onDetailsChange('flight')">
+                            <a ngbNavLink><i class="fi  fi-rr-plane"></i>
+                                </a>
+                            <ng-template ngbNavContent>
+                                <app-flight-eligibility [policyList]="policyList"></app-flight-eligibility>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="hotels"
+                            (click)="onDetailsChange('hotels')">
+                            <a ngbNavLink> <i class="fi  fi-rr-bed-alt"></i> </a>
+                            <ng-template ngbNavContent>
+                                <app-hotel-eligibility [policyList]="policyList"></app-hotel-eligibility>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="buses" (click)="onDetailsChange('buses')">
+                            <a ngbNavLink> <i class="fi fi-rr-bus"></i> </a>
+                            <ng-template ngbNavContent>
+                                <app-bus-eligibility [policyList]="policyList"></app-bus-eligibility>
+                            </ng-template>
+                        </li>
+                        <!-- <li ngbNavItem="trains"
+                            (click)="onDetailsChange('trains')">
+                            <a ngbNavLink #trains> <i class="fi fi-rr-train"></i> </a>
+                            <ng-template ngbNavContent>
+                               <app-train-eligibility [policyList]="policyList"></app-train-eligibility>
+                            </ng-template>
+                        </li>
+                        <li ngbNavItem="cars" (click)="onDetailsChange('cars')">
+                            <a ngbNavLink #cars> <i class="fi fi-rr-car"></i></a>
+                            <ng-template ngbNavContent>
+                               <app-car-eligibility [policyList]="policyList"></app-car-eligibility>
+                            </ng-template>
+                        </li> -->
+                    </ul>
+                    </div>
+                    <div [ngbNavOutlet]="nav" class="mt-4 float-left"></div>
+                </div>
+                
+            </div>
+        </div>
+
+
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-3">
+        <div class="col-xl-12 p-0">
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-primary">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">UPCOMING BOOKINGS:</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="height:490px; background: #FFF; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(255 255 255 / 40%);">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+                            <div class="table-responsive ">
+                                <table align="middle" ctable="" hover="" class="mb-0 align-middle table recent">
+                                  <thead class="fw-semibold text-disabled">
+                                    <tr>
+                                      <th class="text-center"></th>
+                                      <th>Details</th>
+                                      <th class="text-center">Trip Type</th>
+                                      <th>Booked On</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <ng-container *ngIf="upcommingBooking && upcommingBooking.length>0">
+                                    <tr class="ng-star-inserted" *ngFor="let upcommingBooking of upcommingBooking.slice(0, 5)">
+                                      <td class="text-center">
+                                        <div size="md" class="avatar avatar-md">
+                                          <i class="fi-rr-plane"></i>
+                                        </div>
+                                      </td>
+                                      <td>
+                                          <div class="font-weight-bold">{{upcommingBooking?.JourneyFrom}} - {{upcommingBooking?.JourneyTo}}</div>
+                                        <div class="small text-disabled text-nowrap">
+                                          <span>Departure : {{upcommingBooking?.JourneyStart | date : 'd MMM y'}}</span> 
+                                        </div>
+                                      </td>
+                                      <td class="text-center text-capitalize">
+                                        {{upcommingBooking?.TripType}}
+                                      </td>
+                                      <td>
+                                        <div class="d-flex justify-content-between mb-1">
+                                          <div class="fw-semibold text-nowrap  ms-1 text-nowrap">{{upcommingBooking?.CreatedDatetime | date : 'd MMM y'}}</div>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <div class="fw-semibold text-nowrap badge badge-success">{{upcommingBooking?.BookingStatus | map: getFormtedStatus}}</div>
+                                      </td>
+                                    </tr>
+                                </ng-container>
+                                <ng-container *ngIf="upcommingBooking && upcommingBooking.length==0">
+                                    <tr>
+                                        No records found
+                                    </tr>
+                                    </ng-container>
+
+                                  </tbody>
+                                </table>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+    
+<!-- Cancellation Report -->
+</div>
+
+<hr>

@@ -1,0 +1,31 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Cancellation Details</h4>
+      <button (click)="hide()" type="button" class="btn btn-close"><i style="font-size: 20px;" class="fs-4 fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="bus-info-modal-content" class="">
+        <table *ngIf="cancelPolicy && cancelPolicy.length>0"
+          class="booktblebus tblbooktblebus table table-bordered table-responsive"
+          style="width:100%;margin-top:12px; display: table;">
+          <tbody>
+            <tr style="background-color: #dcdfdf;">
+              <th>Cancellation From</th>
+              <th>Cancellation To</th>
+              <!-- <th>Cancellation Policy</th> -->
+              <th>Cancellation Charges</th>
+            </tr>
+            <tr *ngFor="let cancelPolicy of cancelPolicy;let i=index;">
+              <td>{{cancelPolicy?.fromTime}}</td>
+              <td>{{cancelPolicy?.toTime}}</td>
+              <td>{{cancelPolicy?.cancellationRate}} %</td>
+            </tr>
+          </tbody>
+        </table>
+        <h6 *ngIf="cancelPolicy && cancelPolicy.length==0">No Data Found</h6>
+      </div>
+    </div>
+    
+  </div>
+</div>

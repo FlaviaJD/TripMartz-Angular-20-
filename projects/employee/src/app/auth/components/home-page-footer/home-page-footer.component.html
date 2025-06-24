@@ -1,0 +1,36 @@
+<div class="footer">
+    <div class="container p-0">
+     <div class="foot_m d-flex">
+        <div class="col-md-6 nopad">
+            <ul class="onmobile">
+                <li><a href="">Home</a></li>
+                <li *ngFor="let content of staticContentData" >
+                    <a *ngIf="content.page_title !== 'Terms and conditions' && content.page_title !== 'Privacy policy' &&  content.page_title !== 'Careers' && content.page_title !== 'Terms' && content.page_title !== 'Disclaimer'" (click)="onStaticContent(content)">{{content.page_title}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="float-right">
+                <li><a href="https://www.facebook.com/people/Tripmartz/61567678178490/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://www.instagram.com/Tripmartz/?igsh=cGRjZDgyajNiOTQz#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/Tripmartz" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+     </div>
+     <div class="copyr">
+     <div class="d-flex">
+     <div class="col-md-6"><span>© 2025 Tripmartz</span></div>
+     <div class="col-md-6 nopad">
+        <div class="foot_r">
+            <ul>    
+                <li *ngFor="let content of staticContentData" >
+                    <a *ngIf="content.page_title !== 'About Us' && content.page_title !== 'Contact us' &&  content.page_title !== 'Careers' && content.page_title !== 'Terms'" (click)="onStaticContent(content)">{{content.page_title}}</a>
+                </li>
+            </ul>
+         </div>
+     </div>
+     </div>   
+     </div> 
+
+     </div>   
+    </div>    

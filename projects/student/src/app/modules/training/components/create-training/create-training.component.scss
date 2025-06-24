@@ -1,0 +1,50 @@
+.form-group label {
+    // font-weight: 400 !important;
+    // color: #000000;
+    color: #363636;
+    font-size: 14px;
+}
+.my-color,.btn{
+    font-size: 14px;
+}
+.form-control { height: auto;}
+.form-control[readonly] { padding-left: 15px !important;}
+@media only screen and (max-width: 767px) {
+
+    .padlt {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .mobile_left {
+        text-align: left !important;
+    }
+
+    .mobile_right {
+        text-align: right !important;
+    }
+
+    .mobile_row {
+        margin: 0px;
+    }
+
+    .mobile_nopad {
+        padding: 0px !important;
+    }
+
+    .mobile_top {
+        margin-top: 12px;
+    }
+
+    .mob_show {
+        display: inline;
+    }
+
+    .mob_hide {
+        display: none;
+    }
+    .mobile_pr-15{padding-right: 15px!important;}
+    .mobile_pl-15{padding-left: 15px!important;}
+    .closed-sidebar .app-main__outer{padding-right: 15px!important;padding-left: 15px!important;}
+    
+}

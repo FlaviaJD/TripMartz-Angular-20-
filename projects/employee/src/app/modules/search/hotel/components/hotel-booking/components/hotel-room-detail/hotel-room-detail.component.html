@@ -1,0 +1,251 @@
+<div class="container" #roomDetail id="roomDetail">
+    <div class="row">
+        <div class="col-md-12 mpad">
+            <div class="tabbable-panel">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs d-none">
+                        <li class="nav-item">
+                            <span class="mx-5">
+                                <i class="fa fa-exclamation-circle fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <a class="nav-link" href="#tab_default_1" data-toggle="tab">
+                                Hotel Details
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="mx-4"><i class="fa fa-bed fa-lg" aria-hidden="true"></i></span>
+                            <a class="nav-link active" id="rooms1" href="#tab_default_2" data-toggle="tab">
+                                Rooms
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <span class="mx-4 pl-2"> <i class="fas fa-home fa-lg"></i></span>
+                            <a class="nav-link" href="#tab_default_3" data-toggle="tab">
+                                Amenities
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-panes pt-0" id="tab_default_1">
+                            <h3>Description</h3>
+                            <ng-container *ngIf="hotel?.HotelDescription; else other">
+                                <p style="text-align: justify;">
+                                  <span *ngIf="!isExpandedHotelDescription; else fullText">
+                                    {{ hotel?.HotelDescription | slice:0:200 }}...
+                                  </span>
+                                  <ng-template #fullText>
+                                    <span [innerHTML]="hotel?.HotelDescription"></span>
+                                  </ng-template>
+                                </p>
+                                <button (click)="isExpandedHotelDescription = !isExpandedHotelDescription" class="view-more-btn">
+                                  {{ isExpandedHotelDescription ? 'View Less' : 'View More' }}
+                                </button>
+                              </ng-container>
+                            <ng-template #other>
+                                <p>
+                                    No Description Available
+                                </p>
+                            </ng-template>
+                        </div>
+                        <div class="tab-panes pt-0" id="tab_default_2" *ngIf="hotel?.RoomDetails.length!=0">
+                            <h3>Room Options</h3>
+                            <div class="d-flex">
+                                <div class="col-md-12 mb-2 valign-wrapper nopad">
+                                        <div class="tabs_hotel" style="border-bottom: none;">
+                                            <div class="row m-0">
+                                                <div class="text-center col-md-9 pl-0 mobile_pr-0">
+                                                    <!-- Loop Room -->
+                                                    <ngb-accordion #roomAccordion="ngbAccordion" [activeIds]="activePanelId">
+                                                        <ng-container *ngFor="let roomsList of hotel?.RoomDetails; let index = index">
+                                                            <ngb-panel id="room-panel-{{ index }}" (shown)="setActivePanel('room-panel-' + index)" (hidden)="clearActivePanel()">
+                                                                <ng-template ngbPanelTitle>
+                                                                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                                                                        <span>Room {{ index + 1 }}</span>
+                                                                        <!-- <span *ngIf="activePanelId === 'room-panel-' + index"><i class="fa fa-angle-up"></i></span>
+                                                                        <span *ngIf="activePanelId !== 'room-panel-' + index"><i class="fa fa-angle-down"></i></span> -->
+                                                                        <span><i class="fa fa-angle-down"></i></span>
+                                                                    </div>
+                                                                </ng-template>
+                                                                <ng-template ngbPanelContent>
+                                                                    <ng-container *ngFor="let rooms of roomsList; let roomIndex1 = index">
+                                                                        <div class="roomsdiv col-12 p-0" *ngIf="rooms.Rooms && rooms.Rooms.length > 0">
+                                                                            <h6 class="cusromGrey rooms_n room_name1">{{ rooms.RoomTypeName }}</h6>
+                                                    
+                                                                            <ng-container *ngFor="let room of rooms.Rooms; let roomIndex = index">
+                                                                                <div class="room_list justify-space-between">
+                                                                                    <div class="col-12 d-flex p-0">
+                                                                                        <div class="col-md-8 p-0 text-left align-self-start">
+                                                                                            <h6 class="cusromGrey m-0 mb-2 text-ellipsis" data-bs-toggle="tooltip">
+                                                                                                <strong [innerHTML]="room.Description"></strong>
+                                                                                            </h6>
+                                                                                            <p class="cusromGrey"><i class="fa fa-tag mr-1 clor-red"></i>{{ room?.RoomType }}</p>
+                                                                                            <p class="cusromGrey mb-2" *ngIf="room.Occupancy > 0">
+                                                                                                <img src='{{ "assets/images/sleeps-0" + room.Occupancy + ".png" }}'>&nbsp; &nbsp;Max Occupancy {{ room.Occupancy }}
+                                                                                            </p>
+                                                                                            <div class="d-block">
+                                                                                                <p class="cusromGrey mb-2">
+                                                                                                    <span class="iconsr fi-rr-person-simple"></span> Adults: {{ room?.NoOfAdults }}
+                                                                                                </p>
+                                                                                                <p class="cusromGrey">
+                                                                                                    <span class="iconsr fi-rr-child-head"></span> Child: {{ room?.NoOfChild }}
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-md-4 mobile-top p-0">
+                                                                                            <div class="float-right text-right">
+                                                                                                <span style="font-size: 13px; font-weight: 400; color: #5b5b5b;">Per Night</span>
+                                                                                                <h5 class="mt-0" style="line-height: 17px;">
+                                                                                                    {{ room?.Price?.Currency }} {{ room?.Price?.Amount | number: '1.0-0' }}<br>
+                                                                                                    <span style="font-size: 13px; font-weight: 400; color: #5b5b5b;">Inclusive of all taxes</span>
+                                                                                                </h5>
+                                                                                                <p class="cusromGrey" style="text-transform: capitalize;">
+                                                                                                    {{ room.NonRefundable }}
+                                                                                                </p>
+                                                                                                <label class="btn btn-lg p-0 mb-0 float-right" *ngIf="index == 0 || (index > 0 && (roomIndex1 == selectedRoomIndex))">
+                                                                                                    <input type="radio" name="roomSelection{{ index }}" (click)="selectedRoom(rooms, room, index, roomIndex1)" class="d-none">
+                                                                                                    <span class="button-label" [class.selected]="room.isSelected">{{ room.isSelected ? 'Selected' : 'Select' }}</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                    
+                                                                                    <!-- Cancellation Policy & Other Details Inside Room Group -->
+                                                                                    <ngb-tabset type="pills">
+                                                                                        <ngb-tab title="Cancellation Policy">
+                                                                                            <ng-template ngbTabContent>
+                                                                                                <span style="color: #fb7400;" *ngIf="room?.CancelPenalties[0]?.CancelPenalty">
+
+                                                                                                    <!-- <div class="canceltbl">
+                                                                                                        <table class="table" style="text-align: left;">
+                                                                                                            <tbody>
+                                                                                                                <tr style="background: #d9ebec;">
+                                                                                                                    <th>Cancelled on or After</th>
+                                                                                                                    <th>Cancelled on or Before</th>
+                                                                                                                    <th>Cancellation Charges</th>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>28 Mar 2025</td>
+                                                                                                                    <td>31 mar 2025</td>
+                                                                                                                    <td>100%</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td>1 Apr 2025</td>
+                                                                                                                    <td>3 Apr 2025</td>
+                                                                                                                    <td>100%</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td colspan="3">No show will attract full cancellation change unless specified.</td>
+                                                                                                                 </tr>
+                                                                                                                <tr>
+                                                                                                                    <td colspan="3">Early checkout will attract full cancellation change unless specified.</td>
+                                                                                                                   
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div> -->
+                                                                                                    {{ room?.CancelPenalties[0]?.CancelPenalty | lowercase }}
+                                                                                                </span>
+                                                                                            </ng-template>
+                                                                                        </ngb-tab>
+                                                                                        <ngb-tab *ngIf="room?.HotelPolicy" title="Hotel Policy">
+                                                                                            <ng-template ngbTabContent>
+                                                                                                <li class="htlpolcylist" *ngFor="let hotelPolicy of room?.HotelPolicy">
+                                                                                                    <span [innerHTML]="hotelPolicy"></span>
+                                                                                                </li>
+                                                                                            </ng-template>
+                                                                                        </ngb-tab>
+                                                                                        <ngb-tab *ngIf="room?.HotelFacilities" title="Hotel Facilities">
+                                                                                            <ng-template ngbTabContent>
+                                                                                                <ul>
+                                                                                                    <li class="htlpolcylist" *ngFor="let facility of room?.HotelFacilities | slice: 0:visibleCount">
+                                                                                                        <span [innerHTML]="facility"></span>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                    
+                                                                                                <!-- Toggle Button -->
+                                                                                                <button *ngIf="room?.HotelFacilities?.length > 5" (click)="toggleFacilities()" class="htfc-view-more-btn">
+                                                                                                    {{ ( isExpanded )? 'View Less' : 'View More' }}
+                                                                                                </button>
+                                                                                            </ng-template>
+                                                                                        </ngb-tab>
+                                                                                    </ngb-tabset>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </ng-template>
+                                                            </ngb-panel>
+                                                        </ng-container>
+                                                    </ngb-accordion>
+                                                    
+                                                    
+                                                    
+                                                      
+                                                    
+                                                <div class="room_list text-center" *ngIf="hotel?.RoomDetails.length==0">
+                                                    No Rooms Available
+                                                </div>
+                                                </div>
+                                                <div class="col-md-3 pr-0 room_list1" style="text-align: center;" *ngIf="hotel?.RoomDetails && hotel?.RoomDetails.length>0">
+                                                    <div class="sticky-top">
+                                                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                                                            <ng-container *ngFor="let rooms of roomList;">
+                                                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                                                <div class="room_selected"><span>Room {{index+1}}:</span> {{rooms?.SelectedRoom?.Description}}</div>
+                                                            </div>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <div class="bottom_button">
+                                                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                                                            <ng-container *ngFor="let rooms of roomList;">
+                                                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                                                <div class="selected_price" *ngIf="index==0">
+                                                            
+                                                                    {{rooms?.SelectedRoom?.Price?.Currency}} {{totalPrice | number:'1.0-0'}}
+                                                                </div>
+                                                            </div>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <br />
+                                                        <button (click)="onBookNow(hotel,true)" [disabled]="!allRoomsSelected" class="btn btn-lg btn-success booknowroom">
+                                                            {{'Book Now'}}
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-panes p-0 m-0" id="tab_default_3"
+                            *ngIf="hotel?.HotelAmenities.length > 0; else noAmenity">
+                            <h3>Amenities</h3>
+                           
+                            
+                            <ul class="row list-unstyled aminiwid">
+                                <li *ngFor="let amenity of hotel?.HotelAmenities | slice:0:visibleCount" 
+                                    style="line-height: 30px; text-transform: capitalize;">
+                                  <i class="fa fa-check-square" style="color: #252c40;"></i> {{ amenity }}
+                                </li>
+                              </ul>
+                            
+                              <!-- Toggle Button -->
+                              <button *ngIf="hotel?.HotelAmenities?.length > 5" (click)="toggleAmenities()" class="amini-view-more-btn">
+                                {{ isExpanded ? 'View Less' : 'View More' }}
+                              </button>
+                        </div>
+                        <ng-template #noAmenity>
+                            <div class="tab-pane columns mx-3" id="tab_default_3">
+                                No Amenities Found
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

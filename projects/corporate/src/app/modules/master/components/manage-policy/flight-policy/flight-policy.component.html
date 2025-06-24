@@ -1,0 +1,425 @@
+<div class="card-body">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="flightPolicyForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="airDomestic" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Air Domestic
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-auto p-0 mr-3">
+                                <label for="airDomesticYes">
+                                    <input type="radio" id="airDomesticYes" name="airDomestic" value="true" formControlName="airDomestic" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+                            <div class="col-auto p-0">
+                                <label for="airDomesticNo">
+                                    <input type="radio" id="airDomesticNo" name="airDomestic" value="false" formControlName="airDomestic" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="airInternationalYes" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Air International
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-auto p-0 mr-3">
+                                <label for="airInternationalYes">
+                                    <input type="radio" id="airInternationalYes" name="airInternational" value="true" formControlName="airInternational" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="airInternationalNo">
+                                    <input type="radio" id="airInternationalNo" name="airInternational" value="false" formControlName="airInternational" style="margin-right: 5px;">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="cabin" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Cabin
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 align-self-center" style="display: flex;">
+                            <div class="col-3 p-0" *ngFor="let item of cabinList;let index=index">
+                                <input type="checkbox" id="item{{index}}"  value="item.name" [checked]="item.isChecked" formControlName="cabin"  (change)="checkBoxSelection($event,item.name)" style="margin-right: 5px;">
+                                <label for="item{{index}}" style="margin-right: 5px;">{{item.name}}</label>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="form-group required row">
+                        <label for="cabin" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Buffer Amount
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 align-self-center" style="display: flex;">
+                            <div class="col-auto p-0 mr-3">
+                                <label for="plus">
+                                    <input type="radio" id="plus" value="plus" formControlName="bufferType" 
+                                    style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Plus (+)</span>
+                                </label>
+
+                                <label for="percent" class="ml-2">
+                                    <input type="radio" id="percent"  value="percent" formControlName="bufferType" 
+                                    style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Percentage (%)</span>
+                                </label>
+                            </div>
+
+                            <div class="col-3 p-0">
+                                <input type="text" class="form-control" id="BufferBox" formControlName="bufferAmount">
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="form-group required row" [formGroup]="flightPolicyForm.get('domesticLimit')">
+                        <label for="domesticLimit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Domestic Limit</label>
+                        <div class="col-sm-6">
+                            <table>
+                                <thead>
+                                    <th *ngFor="let header of listHeader">{{header}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr formGroupName="domesticEconomyClass">
+                                        <td>Economy</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="eOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="eReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticPremiumEconomyClass">
+                                        <td>Premium Economy</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="pOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="pReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticBusinessClass">
+                                        <td>Business</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="bOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="bReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticFirstClass">
+                                        <td>First</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="fOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="fReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fare Beyound Limit <span style="color: red;">*</span></td>
+                                        <td>
+                                            <div class="col-auto p-0">
+                                                <label for="domesticDisplayBeyondLimit">
+                                                    <input type="radio" id="domesticDisplayBeyondLimit" name="domesticDisplayBeyondLimit" value="true" formControlName="domesticDisplayBeyondLimit" style="margin-right: 5px;">
+                                                    <span class="design"></span>
+                                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                                </label>
+                                            </div>    
+                                            </td>                                    
+                                            <td>
+                                                <div class="col-auto p-0">
+                                                    <label for="domesticDisplayBeyondLimit1">
+                                                        <input type="radio" id="domesticDisplayBeyondLimit1" name="domesticDisplayBeyondLimit" value="false" formControlName="domesticDisplayBeyondLimit" style="margin-right: 5px;">
+                                                        <span class="design"></span>
+                                                        <span class="text" style="margin-left: 4px;">No</span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group required row" [formGroup]="flightPolicyForm.get('internationalLimit')">
+                        <label for="internationalLimit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">International Limit</label>
+                        <div class="col-sm-6">
+                            <table>
+                                <thead>
+                                    <th *ngFor="let header of listHeader">{{header}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr formGroupName="domesticEconomyClass">
+                                        <td>Economy</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="eOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="eReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticPremiumEconomyClass">
+                                        <td>Premium Economy</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="pOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="pOnwardUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticBusinessClass">
+                                        <td>Business</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="bOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="bReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr formGroupName="domesticFirstClass">
+                                        <td>First</td>
+                                        <td><input type="text" class="form-control" id="onwardUpperLimit" formControlName="fOnwardUpperLimit"></td>
+                                        <td><input type="text" class="form-control" id="returnUpperLimit" formControlName="fReturnUpperLimit"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fare Beyound Limit <span style="color: red;">*</span></td>
+                                        <td>
+                                            <div class="col-auto p-0">
+                                                <label for="internationalDisplayBeyondLimit">
+                                                    <input type="radio" id="internationalDisplayBeyondLimit" name="internationalDisplayBeyondLimit" value="true" formControlName="internationalDisplayBeyondLimit" style="margin-right: 5px;">
+                                                    <span class="design"></span>
+                                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                                </label>
+                                            </div>
+                                            </td>
+                                        <td>
+                                            <div class="col-auto p-0">
+                                                <label for="internationalDisplayBeyondLimit1">
+                                                    <input type="radio" id="internationalDisplayBeyondLimit1" name="internationalDisplayBeyondLimit" value="false" formControlName="internationalDisplayBeyondLimit" style="margin-right: 5px;">
+                                                    <span class="design"></span>
+                                                    <span class="text" style="margin-left: 4px;">No</span>
+                                                </label>
+                                            </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="isSector" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Is Sector
+                            <span style="color: red;">*</span>
+                        </label>
+                        
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-auto p-0 mr-3">
+                                <label for="isSectorYes">
+                                    <input type="radio" id="isSectorYes" name="isSector" value="true" formControlName="isSector" 
+                                    style="margin-right: 5px;" (click)="sortSectionValidationSet('true')">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="isSectorNo">
+                                    <input type="radio" id="isSectorNo" name="isSector" value="false" formControlName="isSector" 
+                                    style="margin-right: 5px;" (click)="sortSectionValidationSet('false')">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="form-group required row" *ngIf="checkSectorEnable('isSector')">
+                        <label for="isSector" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Sector</label>
+                        <div class="col-sm-6">
+                            <div class="col-sm-12 p-0" >
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 30%;">Short Sector <span style="color: red;">*</span></td>
+                                            <td style="width: 70%;" formArrayName="sector">
+                                                <tr>
+                                                    <td>From Airport</td>
+                                                    <td>To Airport</td>
+                                                </tr>
+                                                <tr *ngFor="let item of sector.controls; let i = index;"  [formGroupName]="i">
+                                                    <td>
+                                                        <input class="form-control" type="text" id="" (keyup)="getSearchedList($event,i,'fromAirport')" formControlName="fromAirport">
+                                                        <app-flight-city-list *ngIf="i==sectorIndex && control=='fromAirport'" (whichCity)="getCity($event,item,'fromAirport')"
+                                                        [getAirports]="searchedList">
+                                                    </app-flight-city-list>
+                                                </td>
+                                                    <td>
+                                                        <input class="form-control" type="text" (keyup)="getSearchedList($event,i,'toAirport')"  formControlName="toAirport">
+                                                        <app-flight-city-list *ngIf="i==sectorIndex && control=='toAirport'" (whichCity)="getCity($event,item,'toAirport')"
+                                                        [getAirports]="searchedList">
+                                                    </app-flight-city-list>
+                                                </td>
+                                                    <td *ngIf="i !=0" >
+                                                        <button class="btnStyle" (click)="removeFormField(i)"><i class=" fa fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr><button type="button" class="btn btn-sm btn-primary" (click)="addFormField('add')">Add</button></tr>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Display asking for reason <span style="color: red;">*</span></td>
+                                            <td>
+                                                
+                                                    <label for="askingForReasonYes">
+                                                        <input type="radio" id="askingForReasonYes" name="askingForReason" value="true" formControlName="askingForReason" style="margin-right: 5px;">
+                                                        <span class="design"></span>
+                                                        <span class="text" style="margin-left: 4px;">Yes</span>
+                                                    </label> &nbsp;&nbsp;
+                                               
+                                                    <label for="askingForReasonNo">
+                                                        <input type="radio" id="askingForReasonNo" name="askingForReason" value="false" formControlName="askingForReason" style="margin-right: 5px;">
+                                                        <span class="design"></span>
+                                                        <span class="text" style="margin-left: 4px;">No</span>
+                                                    </label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="isDayToDeparture" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Is Day To Departure
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+
+                            <div class="col-auto p-0 mr-3">
+                                <label for="isDayToDepartureYes">
+                                    <input type="radio" id="isDayToDepartureYes" name="isDayToDeparture" value="true" 
+                                    formControlName="isDayToDeparture" style="margin-right: 5px;" (click)="setDayToDepartValidation('true')">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="isDayToDepartureNo">
+                                    <input type="radio" id="isDayToDepartureNo" name="isDayToDeparture" value="false" 
+                                    formControlName="isDayToDeparture" style="margin-right: 5px;" (click)="setDayToDepartValidation('false')">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group required row" *ngIf="checkSectorEnable('isDayToDeparture')">
+                        <label for="isSector" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Days to Departure
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <div class="col-sm-12 p-0">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Days to Departure <span style="color: red;">*</span></td>
+                                            <td>No. of Days <span style="color: red;">*</span></td>
+                                            <td><input type="text" class="form-control" name="daysToDepart" id="daysToDepart" formControlName="daysToDepart"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Display beyond Days of Departure <span style="color: red;">*</span></td>
+                                            <td>
+                                                <label for="beyoundDaysToDepartYes">
+                                                    <input type="radio" id="beyoundDaysToDepartYes" name="beyoundDaysToDepart" value="true" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                    <span class="design"></span>
+                                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                                </label>
+                                                </td>
+                                                 <td>
+                                                    <label for="beyoundDaysToDepartNo">
+                                                        <input type="radio" id="beyoundDaysToDepartNo" name="beyoundDaysToDepart" value="false" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                        <span class="design"></span>
+                                                        <span class="text" style="margin-left: 4px;">No</span>
+                                                    </label>
+                                                </td>                                        
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group required row" [formGroup]="flightPolicyForm.get('approval')">
+                        <label for="approval" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Approval</label>
+                        <div class="col-sm-6">
+                            <table class="col-sm-11">
+                                <tbody>
+                                    <tr formGroupName="approverOne">
+                                        <td class="font-weight-bold">Level 1 Approval Required <span style="color: red;">*</span></td>
+                                        <td>
+
+                                            <label for="levelOneApproverYes">
+                                                <input type="radio" id="levelOneApproverYes" name="levelOneApprover" value="true" formControlName="levelOneApprover" style="margin-right: 5px;"
+                                            (click)="approvalValidationSet('true','1')">
+                                                <span class="design"></span>
+                                                <span class="text" style="margin-left: 4px;">Yes</span>
+                                            </label>
+                                           
+                                        </td>
+                                        <td><label for="levelOneApproverNo">
+                                            <input type="radio" id="levelOneApproverNo" name="levelOneApprover" value="false" formControlName="levelOneApprover" style="margin-right: 5px;"
+                                            (click)="approvalValidationSet('false','1')">
+                                            <span class="design"></span>
+                                            <span class="text" style="margin-left: 4px;">No</span>
+                                        </label>
+                                          </td>
+                                    </tr>
+                                    <tr formGroupName="approverOne">
+                                        <td class="font-weight-bold">Approver Name <span *ngIf="approverRequired(1)" style="color: red;">*</span></td>
+                                        <td colspan="2" >
+                                            <select formControlName="levelOneApproverName"
+                                                class="form-control" id="levelOneApproverName">
+                                                <option value='' disabled selected>Please Select</option>
+                                                <option *ngFor="let approvar of approvarList"  [value]="approvar.id">
+                                                    {{approvar.first_name}} {{approvar.last_name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="margin-bottom: 10px;"></div>
+                            <table class="col-sm-11">
+                                <tbody>
+                                    <tr formGroupName="approverTwo">
+                                        <td class="font-weight-bold">Level 2 Approval Required <span style="color: red;">*</span></td>
+                                        <td>
+                                            
+                                            <label for="levelTwoApproverYes">
+                                                <input type="radio" id="levelTwoApproverYes" name="levelTwoApprover" value="true" formControlName="levelTwoApprover" style="margin-right: 5px;"
+                                                (click)="approvalValidationSet('true','2')">
+                                                <span class="design"></span>
+                                                <span class="text" style="margin-left: 4px;">Yes</span>
+                                            </label>
+                                           </td>
+                                        <td>
+                                            <label for="levelTwoApproverNo">
+                                                <input type="radio" id="levelTwoApproverNo" name="levelTwoApprover" value="false" formControlName="levelTwoApprover" style="margin-right: 5px;"
+                                                (click)="approvalValidationSet('false','2')">
+                                                <span class="design"></span>
+                                                <span class="text" style="margin-left: 4px;">No</span>
+                                            </label>
+                                           </td>
+                                    </tr>
+                                    <tr formGroupName="approverTwo">
+                                        <td class="font-weight-bold">Approver Name <span *ngIf="approverRequired(2)" style="color: red;">*</span></td>
+                                        <td colspan="2">
+                                            <select formControlName="levelTwoApproverName"
+                                                class="form-control" id="levelTwoApproverName">
+                                                <option value='' disabled selected>Please Select</option>
+                                                <option *ngFor="let approvar of approvarList"  [value]="approvar.id">
+                                                    {{approvar.first_name}} {{approvar.last_name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-8" style="text-align: end;">
+                        <button type="submit" class="btn btn-sm btn-primary">Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

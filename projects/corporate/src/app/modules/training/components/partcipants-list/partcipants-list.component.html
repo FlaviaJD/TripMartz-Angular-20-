@@ -1,0 +1,66 @@
+<div class="tabspl hrtraining hrtrain_table">
+    <div class="bg-white card-body ">
+    <div class="form-row">
+      <div class="col-xl-4 nopad mst_srch">
+        <h3 style="padding-left:0px; margin:6px 0px; color:#065081; font-weight:600; font-size: 18px;">Training Name: <span style=" font-weight:500; padding-left:10px; color:#000; text-transform:capitalize;">{{respData['training_name']}}</span>
+        </h3>
+      </div>
+      <div class="col-xl-4 nopad mst_srch f-14">
+        <h3 style="padding-left:0px; margin:6px 0px; font-size: 18px; color:#065081; font-weight:600;">Trainer: <span style=" font-weight:500; padding-left:10px; color:#000; text-transform:capitalize;">{{respData['trainer']}}</span>
+        </h3>
+      </div>
+      <div class="col-xl-4 nopad mst_srch f-14">
+        <h3 style="padding-left:0px; margin:6px 0px; font-size: 18px; color:#065081; font-weight:600;">Venue: <span style="font-weight:500; padding-left:10px; color:#000; text-transform:capitalize;">{{respData['venue']}}</span>
+        </h3>
+      </div>
+      <div class="col-xl-4 nopad mst_srch f-14">
+        <h3 style="padding-left:0px; margin:6px 0px; font-size: 18px; color:#065081; font-weight:600;">Date: <span style="font-weight:500;padding-left:10px; color:#000; text-transform:capitalize;">{{respData['training_date']}}</span>
+        </h3>
+      </div>
+      <div class="col-xl-4 nopad mst_srch f-14">
+        <h3 style="padding-left:0px; margin:6px 0px; font-size: 18px; color:#065081; font-weight:600;">Time: <span style="font-weight:500; padding-left:10px; color:#000; text-transform:capitalize;">{{respData['training_time']}}</span>
+        </h3>
+      </div>
+    </div>
+    </div>
+      <div class="clearfix"></div>
+      <h3 style="font-size: 23px; font-weight: bold; margin-top: 20px;">Partcipants Lists</h3>
+      <div class="table-responsive bg-white">
+      <table class="table table-borderless table-striped table-hover">
+          <tr>
+            <th>SL No</th>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <th>Booking Status</th>
+            <th>Action</th>
+          </tr>
+        <tbody>
+            <tr *ngIf="!noData && !respData['EmployeeDetails'].length">
+                <td colspan="11">
+                    <h4 class="text-muted text-center">
+                        No Partcipant Found!
+                    </h4>
+                </td>
+            </tr>    
+            <tr *ngIf="noData">
+                <td colspan="11">
+                    <mat-spinner [diameter]="30" style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+                </td>
+            </tr>
+            <tr *ngFor="let data of respData['EmployeeDetails'] | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+            
+                <td>{{i+1}}.</td>
+                <td>{{data['employee_id']}}</td>
+               <td>{{data['first_name']}} {{data['last_name']}}</td>
+               <td>{{data['email']}}</td>
+               <td>{{data['phone']}}</td>
+               <td></td>
+               <td></td>
+            </tr>
+        </tbody>
+      </table>
+      </div>
+    
+  </div>

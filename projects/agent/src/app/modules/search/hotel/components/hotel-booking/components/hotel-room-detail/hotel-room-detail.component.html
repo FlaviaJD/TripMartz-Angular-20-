@@ -1,0 +1,387 @@
+<div class="container" #roomDetail id="roomDetail">
+    <div class="row">
+        <div class="col-md-12 mpad">
+            <div class="top_over_txt">
+                <h5 class="cusromGrey f-18 mb-0" *ngIf="hotel?.HotelName">{{hotel?.HotelName}}</h5>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center rating-see py-3">
+                        <h3 *ngIf="hotel?.StarRating">{{hotel?.StarRating}}</h3>
+                        <span class="pl-3" style="display: none;">
+                            <h6 class="mb-0">Excellent</h6>
+                            <p>190 Ratings</p>
+                        </span>
+                     </div>
+                      <p class="cusromGrey mt-0 addr pl-3" *ngIf="hotel?.HotelAddress">
+                        <i class="fa fa-map-marker-alt cusromGrey" aria-hidden="true"></i>
+                           &nbsp;{{hotel?.HotelAddress}}
+                       </p>
+                </div>
+            </div>
+            <div class="tabbable-panel">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                           <a class="nav-link" href="#tab_default_1" data-toggle="tab" (click)="scrollToDescription()">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="rooms1" data-toggle="tab" (click)="scrollToRooms()">Rooms</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link"  data-toggle="tab">Hotel Amenities</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" (click)="scrollToLocation()">Location</a>
+                         </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-panes py-4 m-0" id="tab_default_3"
+                            *ngIf="hotel?.HotelAmenities.length > 0; else noAmenity">
+                            <h3>Hotel Amenities</h3>
+                            <div class="clearfix"></div>
+                            <div>
+                            <ul class="list-unstyled facl_txt">
+                                <li *ngFor="let amenity of hotel.HotelAmenities">
+                                    <ng-container *ngIf="amenityImageMap[amenity]">
+                                      <img [src]="amenityImageMap[amenity]" [alt]="amenity">
+                                      {{amenity}}
+                                    </ng-container>
+                                  </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <ng-template #noAmenity>
+                            <div class="tab-pane columns mx-3" id="tab_default_3">
+                                No Amenities Found
+                            </div>
+                        </ng-template>
+                        <div class="tab-panes py-4" id="tab_default_1">
+                            <h3>Description</h3>
+                            <ng-container *ngIf="hotel?.HotelDescription; else other">
+                                <p style="text-align: justify;" [innerHTML]="isExpanded ? hotel?.HotelDescription : (hotel?.HotelDescription | slice:0:150) + '...'">
+                                </p>
+                                
+                                <!-- Toggle Button -->
+                                <button (click)="toggleDescription()" class="view-more-btn">
+                                  {{ isExpanded ? 'View Less' : 'View More' }}
+                                </button>
+                              </ng-container>
+                            <ng-template #other>
+                                <p>
+                                    No Description Available
+                                </p>
+                            </ng-template>
+                        </div>
+                        <div class="tab-panes py-4" id="tab_default_2" *ngIf="hotel?.RoomDetails.length!=0">
+                            <h3>Room Options</h3>
+                            <div class="d-flex">
+                                <div class="col-md-12 mb-2 valign-wrapper nopad">
+                                        <div class="tabs_hotel" style="border-bottom: none;"> 
+                                            <div class="row m-0">
+                                                <div class="text-center col-md-12 pl-0">
+                                                    <!-- Loop Room -->
+                                                    <ng-container *ngFor="let roomsList of hotel?.RoomDetails;let index=index">
+                                                    <ng-container *ngFor="let rooms of roomsList;let roomIndex1=index">
+                                                        <div class="roomsdiv col-12 p-0" *ngIf="rooms.Rooms && rooms.Rooms.length>0">
+                                                            <div class="col-md-12 p-0 text-left nopad bg-blue" >
+                                                                <h4 class="cusromGrey m-0 room_name" *ngIf="roomIndex1==0">
+                                                                    Room {{index+1}} 
+                                                                </h4>
+                                                                <!-- <h6 class="cusromGrey rooms_n room_name1">
+                                                                    {{rooms.RoomTypeName}}
+                                                                </h6> -->
+                                                            </div>
+                                                             
+                                                            <div class="col-12 d-flex gryclrbg brd-12 p-0">
+                                                                <div class="col-md-4 text-left f-18 fw-4 gryclr">Room Types</div>
+                                                                <div class="col-md-5 text-left f-18 fw-4 gryclr">Benefits</div>
+                                                                <div class="col-md-3 text-left f-18 fw-4 gryclr">Per Night Price </div>
+                                                            </div>
+                                                            <ng-container *ngFor="let room of rooms.Rooms; let roomIndex=index">
+                                                                <div class="room_list justify-space-between nopad">
+                                                                   
+
+                                                                    <div class="col-12 d-flex p-0 bord-fl">
+                                                                    <div class="col-md-4 p-3 text-left align-self-start bord-rt">
+
+                                                                        <h6 class="cusromGrey rooms_n room_name1">
+                                                                            {{rooms.RoomTypeName}}
+                                                                        </h6>
+                                                                        <!-- <div>
+                                                                            <img src="assets/images/hotel_imgsd.png" style="width: 230px;
+                                                                            height: 130px;
+                                                                            object-fit: cover;
+                                                                            border-radius: 8px;"/>
+                                                                        </div> -->
+
+                                                                        <h6 class="non-refund mt-1" *ngIf="room?.HotelFacilities">
+                                                                            <!-- Hotel Facilities: -->
+                                                                            <ul class="px-3 mt-3">
+                                                                              <li class="hotlfacil" *ngFor="let facility of room?.HotelFacilities | slice:0:3">
+                                                                                <span [innerHTML]="facility"></span>
+                                                                              </li>
+                                                                            </ul>
+                                                                            <button *ngIf="room?.HotelFacilities.length > 5" class="btn btn-link p-0 bl-clr fw-5" (click)="openFacilitiesModal()">
+                                                                              More Facilities
+                                                                            </button>
+                                                                          </h6>
+
+                                                                          <!-- Modal for hotel facility start -->
+
+                                                                          <div class="modal" tabindex="-1" [ngClass]="{'show': isFacilitiesModalOpen}" 
+                                                                                [ngStyle]="{'display': isFacilitiesModalOpen ? 'block' : 'none'}">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Hotel Facilities</h5>
+                                                                                    <button type="button" class="btn-close" (click)="closeFacilitiesModal()"> <i class="fa fa-times"></i></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <ul>
+                                                                                    <li class="hotlfacil" *ngFor="let facility of room?.HotelFacilities">
+                                                                                        <span [innerHTML]="facility"></span>
+                                                                                    </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+
+                                                                          <!-- Modal for hotel facility end -->
+
+
+                                                                        <!-- <h6 class="cusromGrey m-0 mb-2">
+                                                                            <strong>
+                                                                                {{room.Description}}
+                                                                            </strong>
+                                                                        </h6> -->
+                                                                        <!-- <p class="cusromGrey">
+                                                                            {{room?.RoomType}}
+                                                                        </p> -->
+                                                                        <!-- <p class="cusromGrey" style="text-transform: capitalize;">
+                                                                            Non Refundable : {{room.NonRefundable}}
+                                                                        </p> -->
+                                                                        <p class="cusromGrey mb-2" *ngIf="room.Occupancy>0">
+                                                                            <img src='{{ "assets/images/sleeps-0" + room.Occupancy + ".png" }}'>&nbsp; &nbsp;Max Occupancy
+                                                                            {{room.Occupancy}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-5 p-3 text-left bord-rt" style="line-height: 20px;">
+                                                                        <!-- <p class="cusromGrey mb-2">
+                                                                            <span class="iconsr fi-rr-person-simple"></span> Adults: {{room?.NoOfAdults}}
+                                                                        </p>
+                                                                        <p class="cusromGrey">
+                                                                            <span class="iconsr fi-rr-child-head"></span> Child: {{room?.NoOfChild}}
+                                                                        </p> -->
+
+                                                                        <p class="cusromGrey mb-4">
+                                                                            {{room?.RoomType}}
+                                                                        </p>
+                                                                        <h6 class="cusromGrey m-0 mb-4" title="{{room.Description}}">
+                                                                            <span class="text-ellipsis fw-5">{{room.Description}}</span>
+                                                                        </h6>
+
+                                                                        <p class="cusromGrey mb-2" style="text-transform: capitalize;">
+                                                                            {{room.NonRefundable}}
+                                                                         </p>
+
+                                                                         <h6 class="non-refund bl-clr mb-2" (click)="openModal()">
+                                                                            Cancellation Policy 
+                                                                             <!-- <span style="color: #fb7400;" *ngIf="room?.CancelPenalties[0]?.CancelPenalty">
+                                                                              {{room?.CancelPenalties[0]?.CancelPenalty | lowercase}}
+                                                                            </span> -->
+                                                                        </h6>
+
+                                                                          <!-- Modal for cancellation policy start -->
+                                                                                <div class="modal cancelationpoly-modal" tabindex="-1" [ngClass]="{'show': isModalOpen}" [ngStyle]="{'display': isModalOpen ? 'block' : 'none'}">
+                                                                                    <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                        <h5 class="modal-title">Cancellation Policy</h5>
+                                                                                        <button type="button" class="btn-close" (click)="closeModal()"><i class="fa fa-times"></i></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                        <p *ngIf="room?.CancelPenalties[0]?.CancelPenalty">
+                                                                                            {{room?.CancelPenalties[0]?.CancelPenalty | lowercase}}
+                                                                                        </p>
+                                                                                        <p *ngIf="!room?.CancelPenalties[0]?.CancelPenalty">
+                                                                                            No cancellation policy available.
+                                                                                        </p>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Modal for cancellation policy end -->
+
+
+
+                                                                          
+                                                                           <h6 class="non-refund or-clr mb-2" *ngIf="room?.HotelPolicy" (click)="openHotelPolicyModal()">
+                                                                            Hotel Policy 
+                                                                            <!-- <li *ngFor="let hotelPolicy of room?.HotelPolicy">
+                                                                                <span [innerHTML]="hotelPolicy"></span>
+                                                                            </li> -->
+                                                                          </h6>
+                                                                           <!-- Modal for hotel policy start -->
+
+                                                                           <div class="modal" tabindex="-1" [ngClass]="{'show': isHotelPolicyModalOpen}" 
+                                                                                [ngStyle]="{'display': isHotelPolicyModalOpen ? 'block' : 'none'}">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Hotel Policy</h5>
+                                                                                    <button type="button" class="btn-close" (click)="closeHotelPolicyModal()"><i class="fa fa-times"></i></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <ul>
+                                                                                    <li *ngFor="let hotelPolicy of room?.HotelPolicy">
+                                                                                        <span [innerHTML]="hotelPolicy"></span>
+                                                                                    </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+
+                                                                            <!-- Modal for hotel policy end -->
+                                                                    </div>
+                                                                    <div class="col-md-3 mobile-top p-3">
+                                                                        <div class="float-right text-right">
+                                                                            <span style="font-size: 13px;font-weight: 400;color: #5b5b5b;">Per Night</span>
+                                                                            <h5 class="mt-2" style="line-height: 17px;font-weight: 500;">{{room?.Price?.Currency}}
+                                                                                {{room?.Price?.Amount | number:'1.0-0'}}<br>
+                                                                                <span style="font-size: 13px;font-weight: 400;color: #5b5b5b;">Inclusive of all taxes</span></h5>
+                                                                                 
+                                                                            <!-- <label class="btn btn-lg p-0" *ngIf="index==0 || (index > 0 && (selectedRoomTypeName == rooms.RoomTypeName && selectedBoardType == room.BoardType))"> -->
+                                                                                <label class="btn btn-lg p-0 mb-0 mt-2" *ngIf="index==0 || (index > 0 && (roomIndex1 == selectedRoomIndex))">
+                                                                                    <input type="radio" name="roomSelection{{index}}"  (click)="selectedRoom(rooms,room,index,roomIndex1)"
+                                                                                    class="d-none">
+                                                                                <span class="button-label slectroom pl-0 w-100">{{ 'Select Room' }} 
+                                                                               </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  <!-- <h6 class="non-refund mt-1">Cancellation Policy : <span style="color: #fb7400;" *ngIf="room?.CancelPenalties[0]?.CancelPenalty">{{room?.CancelPenalties[0]?.CancelPenalty | lowercase}}</span>
+                                                                  </h6>
+                                                                    <h6 class="non-refund mt-1" *ngIf="room?.HotelPolicy">Hotel Policy :
+                                                                        <li *ngFor="let hotelPolicy of room?.HotelPolicy">
+                                                                            <span [innerHTML]="hotelPolicy"></span>
+                                                                        </li>
+                                                                     </h6> -->
+                                                                     <!-- <h6 class="non-refund mt-1" *ngIf="room?.HotelFacilities">Hotel Facilities :
+                                                                        <li *ngFor="let hotelFacilities of room?.HotelFacilities">
+                                                                            <span [innerHTML]="hotelFacilities"></span>
+                                                                        </li>
+                                                                     </h6> -->
+                                                                 <div class="clearfix"></div>
+                                                                 <div *ngIf="visibleCancelPolicyIndex === index" class="subheader text-left">
+                                                                    <div class="col-12 p-0">
+                                                                        <ul class="pl-3 m-0">
+                                                                        <li><span class="darkclr">NIl Charges</span> - If cancel before 72 hrs.</li>
+                                                                        <li><span class="darkclr">1 Night / 50%</span> - If cancel within 48 hrs prior to 24hrs.</li>
+                                                                        <li><span class="darkclr">NIl Refund</span> - If cancel within 24 hrs.</li>
+                                                                        </ul>
+                                                                        <br>
+                                                                        <p><strong>Note:</strong> The above given charges are generic charges based on hotel policy. Exact charges will be known once we cancel the booking.</p>
+                                                                    </div>
+                                                                 </div>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                                <div class="room_list text-center" *ngIf="hotel?.RoomDetails.length==0">
+                                                    No Rooms Available
+                                                </div>
+                                                </div>
+                                                <!-- <div class="col-md-3 pr-0 room_list1" style="text-align: center;" *ngIf="hotel?.RoomDetails && hotel?.RoomDetails.length>0">
+                                                    <div class="sticky-top">
+                                                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                                                            <ng-container *ngFor="let rooms of roomList;">
+                                                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                                                <div class="room_selected"><span>Room {{index+1}}:</span> {{rooms?.SelectedRoom?.Description}}</div>
+                                                            </div>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <div class="bottom_button">
+                                                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                                                            <ng-container *ngFor="let rooms of roomList;">
+                                                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                                                <div class="selected_price" *ngIf="index==0">
+                                                            
+                                                                    {{rooms?.SelectedRoom?.Price?.Currency}} {{totalPrice | number:'1.0-0'}}
+                                                                </div>
+                                                            </div>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <br />
+                                                        <button (click)="onBookNow(hotel,true)" [disabled]="!allRoomsSelected" class="btn btn-lg btn-success booknowroom">
+                                                            {{'Book Now'}}
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- location start -->
+                                <div class="tab-panes pt-0" id="location_tab">
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <h3>Location</h3>
+                                        <!-- <p class="blu_txt">View on google maps</p> -->
+                                    </div>
+                                    <div #mapContainer id="map1" style="width: 100%; height:300px;"></div> 
+                                    <p class="my-4 loc_txt " style="text-align: justify;"><i class="fa fa-map-marker-alt"></i> {{hotel?.HotelAddress}}</p>
+                                </div>
+                        <!-- location start -->
+                        <!-- rating and review start -->
+                        <div class="tab-panes pt-0" id="review_tab" style="display: none;">
+                            <h3>Rating & Review</h3>
+                            <div class="d-flex align-items-center rating-se py-3">
+                                <h3>4.3</h3>
+                                <span class="pl-3">
+                                    <h6>Very good</h6>
+                                    <p>371 verified reviews</p>
+                                </span>
+                             </div>
+                             <div class="py-4 rating-ind d-flex align-items-center">
+                                <img src="assets/images/testi_man.png">
+                                <span class="pl-3">
+                                    <p>
+                                        <strong>5.0 Amazing</strong> | <span>Omar Siphron</span>
+                                    </p>
+                                    <p class="nor_txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </span>
+                             </div>
+                             <div class="py-4 rating-ind d-flex align-items-center">
+                                <img src="assets/images/testi_man.png">
+                                <span class="pl-3">
+                                    <p>
+                                        <strong>5.0 Amazing</strong> | <span>Omar Siphron</span>
+                                    </p>
+                                    <p class="nor_txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </span>
+                             </div>
+                             <div class="py-4 rating-ind d-flex align-items-center">
+                                <img src="assets/images/testi_man.png">
+                                <span class="pl-3">
+                                    <p>
+                                        <strong>5.0 Amazing</strong> | <span>Omar Siphron</span>
+                                    </p>
+                                    <p class="nor_txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </span>
+                             </div>
+                        </div>
+                        <!-- rating and review end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

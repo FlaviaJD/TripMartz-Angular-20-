@@ -1,0 +1,217 @@
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 pb-0 mb-2" style="box-shadow: none;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            border-radius: 5px;">
+                <div class="card-body p-0">
+                    <table class="mb-0 table table-hover" *ngIf="!isDomesticFlightSelected">
+                        <thead>
+                            <tr>
+                                <th>Passengers</th>
+                                <th style="text-align: right;">Base Fare</th>
+                                <th style="text-align: right;">Taxes</th>
+                                <th style="text-align: right;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isAdult(flight)" [ngClass]="{'custom-prices':true}">
+                                <th scope="row">Adult * {{ flight.Price.PassengerBreakup.ADT.PassengerCount }}</th>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.BasePrice *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.Tax *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount | number:'1.0-0'}}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.TotalPrice *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount | number:'1.0-0'}}
+                                </td>
+                            </tr>
+                            <tr *ngIf="isChild(flight)" [ngClass]="{'custom-prices':true}">
+                                <ng-container *ngIf="childProp === 'CHD'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.CHD.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.BasePrice *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.Tax *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.TotalPrice *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="childProp === 'CNN'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.CNN.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.BasePrice *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.Tax *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.TotalPrice *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="childProp === 'C09'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.C09.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.BasePrice *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.Tax *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.TotalPrice *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                            </tr>
+                            <tr *ngIf="isInfant(flight)" [ngClass]="{'custom-prices':true}">
+                                <th scope="row">Infant * {{ flight.Price.PassengerBreakup.INF.PassengerCount }}</th>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.BasePrice *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.Tax *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount | number:'1.0-0' }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.TotalPrice *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount | number:'1.0-0' }}
+                                </td>
+                            </tr>
+
+                            <tr [ngClass]="{'custom-prices':true}">
+                                <td colspan="4" style="color: #065081;
+                                font-size: 16px;">
+                                    <b>Grand Total: {{ flight.Price.Currency }}
+                                        {{ flight.Price.TotalDisplayFare | number:'1.0-0' }}</b>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!isDomesticFlightSelected" style="display: none;">
+                                <td colspan="4">
+                                    <a href="javascript:void(0);" class=""
+                                        (click)="getFareRule(flight)"
+                                        > Fare Rules
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
+                    <table class="mb-0 table table-hover" *ngIf="isDomesticFlightSelected">
+                        <thead>
+                            <tr>
+                                <th>Passengers</th>
+                                <th style="text-align: right;">Base Fare</th>
+                                <th style="text-align: right;">Taxes</th>
+                                <th style="text-align: right;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="isAdult(flight)" [ngClass]="{'custom-prices':true}">
+                                <th scope="row">Adult * {{ flight.Price.PassengerBreakup.ADT.PassengerCount }}</th>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.BasePrice *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.Tax *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount | number:'1.0-0'}}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.TotalPrice *
+                                    flight.Price.PassengerBreakup.ADT.PassengerCount | number:'1.0-0'}}
+                                </td>
+                            </tr>
+                            <tr *ngIf="isChild(flight)" [ngClass]="{'custom-prices':true}">
+                                <ng-container *ngIf="childProp === 'CHD'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.CHD.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.BasePrice *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.Tax *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD.TotalPrice *
+                                        flight.Price.PassengerBreakup.CHD.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="childProp === 'CNN'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.CNN.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.BasePrice *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.Tax *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CNN.TotalPrice *
+                                        flight.Price.PassengerBreakup.CNN.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                                <ng-container *ngIf="childProp === 'C09'">
+                                    <th scope="row">Child * {{ flight.Price.PassengerBreakup.C09.PassengerCount }}</th>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.BasePrice *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.Tax *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                    <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.C09.TotalPrice *
+                                        flight.Price.PassengerBreakup.C09.PassengerCount | number:'1.0-0' }}
+                                    </td>
+                                </ng-container>
+                            </tr>
+                            <tr *ngIf="isInfant(flight)" [ngClass]="{'custom-prices':true}">
+                                <th scope="row">Infant * {{ flight.Price.PassengerBreakup.INF.PassengerCount }}</th>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.BasePrice *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.Tax *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount | number:'1.0-0' }}
+                                </td>
+                                <td>{{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF.TotalPrice *
+                                    flight.Price.PassengerBreakup.INF.PassengerCount | number:'1.0-0' }}
+                                </td>
+                            </tr>
+
+                            <tr [ngClass]="{'custom-prices':true}">
+                                <td colspan="4" style="color: #065081;
+                                font-size: 16px;">
+                                    <b>Grand Total: {{ flight.Price.Currency }}
+                                        {{ flight.Price.TotalDisplayFare | number:'1.0-0' }}</b>
+                                </td>
+                            </tr>
+                            <tr *ngIf="flight?.booking_source!='ZBAPINO00019' && flight?.booking_source!='ZBAPINO00020'" style="display: none;">
+                                <td colspan="4">
+                                    <a href="javascript:void(0);" class=""
+                                        (click)="getFareRule(flight)"
+                                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"> Fare Rules
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- The Modal -->
+ <div class="modal" id="fareRule" [style.display]="showModel ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content" style="min-width:882px;margin-left: -196px;">
+            <div class="modal-header">
+                <h4 class="modal-title">Fare Rule</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="rules_dropdown">
+                    <table *ngIf="fareRuleData.length" style="width: 100%;">
+                        <tr *ngFor="let f of fareRuleData">
+                            <div [innerHTML]="f.FareRuleDetail"
+                                style="border-bottom: 1px solid;float: left;width: 100%;">
+                            </div>
+                        </tr>
+                    </table>
+                    <p *ngIf="noData">No Data Found.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

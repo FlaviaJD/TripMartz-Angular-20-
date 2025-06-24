@@ -1,0 +1,33 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-icic-guest-house-list',
+  templateUrl: './icic-guest-house-list.component.html',
+  styleUrls: ['./icic-guest-house-list.component.scss']
+})
+export class IcicGuestHouseListComponent implements OnInit {
+
+    @ViewChild('tabs', { static: true }) public tabs: NgbTabset;
+    constructor() { }
+  
+    ngOnInit() {
+    }
+  
+    ngAfterViewInit(){
+      setTimeout(() => {
+          this.tabs.select('costCenterList');
+      });
+    }
+  
+    beforeChange(e) {
+      //   console.log('tab changed',e)
+    }
+  
+    triggerTab(data: any) {
+        if (data)
+        this.tabs.select(data.tabId);
+    }
+
+
+}

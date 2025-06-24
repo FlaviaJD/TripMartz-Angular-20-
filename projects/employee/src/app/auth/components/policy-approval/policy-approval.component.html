@@ -1,0 +1,89 @@
+<table style="font-size:14px;font-family:'Arial';width:100%;margin:0px auto">
+    <tbody>
+        
+        <tr>
+            <td style="background-color:#065081; padding-top: 0px;" class="paddinginc">
+                <table style="width:100%;background:#fff;border-radius:3px 3px 0 0">
+                    <tbody>
+
+                        <tr>
+                            <td style="background-color:#fff;" class="paddinginc">
+                                <table style="width:100%;background:none;border-radius:3px 3px 0 0">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" style="padding:15px 20px">
+                                                <img 
+                                                                        [src]="loggedInUser.domain_logo || 'assets/images/login-images/l-logo.png'"
+                                                                        [style.width]="loggedInUser.domain_logo ? '160px' : '280px'"
+                                                                        [style.height]="loggedInUser.domain_logo ? '58px' : 'auto'">
+                                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table style="width:100%;background:#fff;border-radius:3px 3px 0 0">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding:20px 20px 0px;font-size:21px; text-align: center;">
+                                                <h4><strong>Approve Request</strong></h4>
+                                            </td>
+                                        </tr>
+                                  
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:20px 20px 30px;">
+                                <p><b>Request Id : {{approveDetailsList.req_id}}</b></p>
+                                <p><b>Requested by : {{approveDetailsList.req_by}}</b></p>
+                                <p><b>Journey : {{approveDetailsList.journey}}</b></p>
+                                <p><b>Total Fare : {{approveDetailsList.total_fare}}</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:20px 20px 30px;font-size:21px;">
+                                <form [formGroup]="policyForm">
+                                    <div class="col-12">
+                                        <div class="form-group row cust-radio-group">
+                                            <label class="col-sm-1 col-form-label"style="color: #000;">Status:</label>
+                                            <div class="col-sm-5 p-0 d-flex align-items-center">
+                                                <div class="col-auto">
+                                                    
+                                                    <label class="m-0">
+                                                        <input type="radio"  value="Approve" formControlName="status"
+                                                            (change)="toggleRemarkRequired($event)">
+                                                        <span class="design"></span>
+                                                        <span class="text">Approve</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <label class="m-0">
+                                                        <input type="radio"  value="Reject" formControlName="status"
+                                                            (change)="toggleRemarkRequired($event)">
+                                                        <span class="design"></span>
+                                                        <span class="text">Reject</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" *ngIf="selectedPolicy">
+                                            <label style="color: #000;">Remarks:</label>
+                                            <textarea formControlName="remarks"
+                                                class="form-control form-control-sm nrm_input"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn submit" (click)="onSubmit()">Submit</button>
+                                            <button class="btn cancel" routerLink="">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

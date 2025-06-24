@@ -1,0 +1,35 @@
+<table style="font-size:14px;font-family:'Arial';width:100%;margin:0px auto">
+    <tbody>
+        <tr>
+            <td style="background-color:#F99D1C;" class="paddinginc">
+                <table style="width:100%;background:none;border-radius:3px 3px 0 0">
+                    <tbody>
+                        <tr>
+                            <td align="center" style="padding:15px 20px"><img style="width:280px;margin-bottom:30px"
+                                    src="https://ci3.googleusercontent.com/meips/ADKq_NYXzxl0bcxm9YNH4cXqAGodVBcrJYK7IywNk4dC7ON0qSqLdLivyrMx5gGAkJJmJYrgI8iwF9d7I6YWuRBFWIHQbbGbL2fqfSxE3vmFTfTB-euE68PM_d38AVZb5SflWA=s0-d-e1-ft#http://54.198.46.240/HyperMiles/student/assets/images/login-images/l-logo2.png"
+                                    alt="image/png" class="CToWUd" data-bit="iit"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width:100%;background:#fff;border-radius:3px 3px 0 0">
+                    <tbody>
+                        <tr>
+                            <td  *ngIf='showAprove' style="padding:20px 20px 0px;font-size:21px; text-align: center;">
+                                <img class="failed" src="assets/images/success.png" alt="" />
+                                <br/>
+                                <h4><strong>Feedback sent successfully.</strong></h4>
+                                <br/>
+                            </td>
+                            <td  *ngIf='!showAprove' style="padding:20px 20px 0px;font-size:21px; text-align: center;">
+                                <img class="failed" src="assets/images/failed.png" alt="" />
+                                <br/>
+                                <h4><strong>Failed to submit feedback.</strong></h4>
+                                <br/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,229 @@
+<app-hotel-booking-steps [rooms]="true" [guests]="true" [payment]="true" [confirmation]="true">
+</app-hotel-booking-steps>
+<div class="card my-2" *ngIf=" bookingDetails">
+    <div class="card-body pb-3">
+        <div class="col-xs-12 nopad">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h5 class="">Thanks {{bookingDetails?.Name}}</h5>
+                    <!-- <h3 class="font-weight-bold">Your booking in {{bookingDetails.HotelName}} is confirmed.</h3> -->
+                    <h3 class="font-weight-bold" style=" font-size: 18px;">This is an auto message to inform you that a travel <span style="color: green;">Request ID: {{bookingDetails.AppReference}}</span> has been generated and sent for approval. </h3>
+                    
+                    <ul class="list-unstyled mt-4" style="font-size: initial;">
+                        <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp;
+                            Mail has been sent to the approver for approval.
+                            <!-- <strong>{{bookingDetails.Email}} </strong> -->
+                        </li>
+                        <!-- <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp;
+                            <strong>{{bookingDetails.HotelName}}</strong> is
+                            expecting you on
+                            <span class="bigdate_book">{{bookingDetails.HotelCheckIn | date: 'dd MMM yyyy'}}</span>
+                        </li> -->
+                        <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp; <strong>Please note</strong>, confirmation of this booking will be done only on receipt of the approval. 
+                        </li>
+                        <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp; Confirmation on this booking, is subject to room availability at the time of booking.  
+                        </li>
+                        <!-- <li>
+                            <i class="fa fa-check" aria-hidden="true"></i>&nbsp;
+                            Your <strong>payment</strong> will be handled
+                            by <strong> {{bookingDetails.HotelName}} </strong>.
+                            The <strong>Payment </strong>section below has more
+                            details.
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="bookingDetails">
+    <div class="col-md-8 col-lg-8">
+        <div class="card mb-2 mt-2">
+            <section style="background-color: #525a62;font-size: 18px !important;font-weight: 600 !important;color: #fff;border-radius: 8px 8px 0px 0px;">
+                <h5 class="p-2 m-0" style="padding:14px 10px 14px 17px!important;font-weight: 600;">Hotel Details</h5>
+            </section>
+            <div class="card-body pb-3" style="font-size: 15px;">
+
+               
+                <div class="col-md-12 nopad">
+                    <div class="row">
+                        <div class="col-md-3">
+                        <img class="htl_img2" *ngIf="bookingDetails.MainImage!=''"
+                        src="{{bookingDetails.MainImage}}">
+                        <img class="htl_img2" *ngIf="bookingDetails.MainImage==''"
+                        src="assets/images/no_image.png">
+                        </div>
+                        <div class="col-md-9" style="text-align: left;">
+                            <h5 class="cusromGrey mb-1" style="line-height: 22px;"><strong>
+                                    {{bookingDetails.HotelName}}
+                                </strong> </h5>
+                           
+                            <div class="cusromGrey mb-2 mt-2">
+                                <i class="fa fa-map-marker-alt cusromGrey" aria-hidden="true"></i>
+                                &nbsp;
+                                {{bookingDetails.HotelAddress}}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="font-weight-bold cusromBlue">
+                                        <i class="fi-rr-calendar-days" aria-hidden="true"></i>&nbsp;Check-In
+                                    </div>
+                                    {{bookingDetails.HotelCheckIn | date: 'dd MMM yyyy'}}
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="font-weight-bold cusromBlue"><i class="fi-rr-calendar-days"
+                                            aria-hidden="true"></i>&nbsp;Check-Out</div>
+                                    {{bookingDetails.HotelCheckOut | date: 'dd MMM yyyy'}}
+                                </div>
+                            
+                                <div class="col-md-3">
+                                    <span class="font-weight-bold">No. of Nights:</span> <br>{{bookingDetails?.NoOfNights}}
+                                </div>
+                                <div class="col-md-3" *ngIf="roomDetails && roomDetails[0].RoomTypeName">
+                                    <span class="font-weight-bold">No. of Rooms:</span> <br>{{bookingDetails?.NoOfRooms}}
+                                </div>
+                                <ng-container *ngFor="let room of roomDetails;let index=index">
+                                    <div class="col-md-12 mt-3 d-flex" *ngIf="index==0">
+                                        <div class="col-5 p-0"><span class="font-weight-bold" *ngIf="room.RoomTypeName">Room Type:</span> {{room.RoomTypeName}}</div>
+                                        <div class="col-6 p-0"><span class="font-weight-bold" *ngIf="bookingDetails.PaymentMode">Board Type:</span>   {{bookingDetails.PaymentMode}}</div>
+                                    </div>
+                            
+                                </ng-container>
+
+                            
+                                <div class="col-md-12" *ngIf="bookingDetails.Remarks">
+                                    <p>
+                                        <span class="font-weight-bold">
+                                            {{'Remarks'}}
+                                        </span>
+                                        <span class="">
+                                            {{bookingDetails.Remarks}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="font-weight" *ngIf="bookingDetails.CancellationPolicy">
+                        <p class="cusromGrey mb-1 mt-1">
+                            <strong style="color: #252c40;">
+                            {{'Cancellation Policy'}}
+                            </strong><br>
+                            <span class="ml-0">
+                            </span>
+                            <span class="ml-0" [innerHTML]="getCancelationPolicy(bookingDetails.CancellationPolicy)">
+                            </span>
+                        </p> 
+    
+                        <!-- <div class="col-12 mt-1 p-0" style="line-height: 25px;">
+                            <ul class="pl-3 m-0">
+                            <li><span class="darkclr">NIl Charges</span> - If cancel before 72 hrs.</li>
+                            <li><span class="darkclr">1 Night / 50%</span> - If cancel within 48 hrs prior to 24hrs.</li>
+                            <li><span class="darkclr">NIl Refund</span> - If cancel within 24 hrs.</li>
+                            </ul>
+                            <br>
+                            <p class="m-0"><strong>Note:</strong> The above given charges are generic charges based on hotel policy. Exact charges will be known once we cancel the booking.</p>
+                        </div>  -->
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <!-- <div class="text-center">
+            <button class="btn btn-lg btn-primary view_voucher" (click)="goToVoucher(bookingDetails.AppReference)">View Voucher
+                </button>
+        </div>  -->
+    </div>
+    <div class="col-md-4 col-lg-4 pl-0">
+        <div class="card mb-2 mt-2">
+            <section style="background-color: #525a62;font-size: 18px !important;font-weight: 600 !important;color: #fff;border-radius: 8px 8px 0px 0px;">
+                <h5 class="p-2 m-0" style="padding:14px 10px 14px 17px !important;font-weight: 600;">Room Details
+                </h5>
+            </section>
+            <div class="card-body pb-3">
+                <table class="table mb-0">
+                    <tbody>
+                        <tr *ngIf="roomDetails && roomDetails.length>0">
+                            <th class="cusromBlue">Room Type</th>
+                            <ng-container *ngFor="let r of roomDetails; let i = index; last as isLast">
+                            <th class="text-right" *ngIf="i==0">
+                                {{r?.RoomTypeName || 'N/A'}}
+                            </th>
+                            </ng-container>
+                        </tr>
+                        <tr >
+                            <th class="cusromBlue">Board Type</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.PaymentMode || 'N/A' }}
+                            </th>
+                        </tr>
+                        <tr *ngIf="roomDetails && roomDetails.length>0">
+                            <th class="cusromBlue">No. Of Rooms</th>
+                            <th class="text-right">
+                                {{ roomDetails.length  }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="cusromBlue">Check-In</th>
+                            <th class="text-right">
+                                {{bookingDetails.HotelCheckIn | date: 'dd MMM yyyy'}} 
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="cusromBlue">Check-Out</th>
+                            <th class="text-right">
+                                {{bookingDetails.HotelCheckOut | date: 'dd MMM yyyy'}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="cusromBlue">No of Nights</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.NoOfNights  }}
+                            </th>
+                        </tr>
+                        <!-- <tr>
+                            <th class="cusromBlue">No of Adult:</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.Currency + ' ' + (getTotalAmount()|  number:'1.0-0')  }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="cusromBlue">No of Child:</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.Currency + ' ' + (getTotalAmount()|  number:'1.0-0')  }}
+                            </th>
+                        </tr> -->
+                        <tr *ngIf="roomDetails && roomDetails.length>0">
+                            <th class="cusromBlue">Total Room Price</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.Currency + ' ' + (getTotalAmount()|  number:'1.0-0')  }}
+                            </th>
+                        </tr>
+                        <tr *ngIf="roomDetails && roomDetails.length>0">
+                            <th class="cusromBlue">Tax</th>
+                            <th class="text-right">
+                                {{ bookingDetails?.Currency + ' ' + (getTotalTax()|  number:'1.0-0') }}
+                            </th>
+                        </tr>
+                        <tr *ngIf="roomDetails && roomDetails.length>0">
+                            <th class="float-left cusromBlue" style="color: #082B3A;font-size: 16px;text-transform: uppercase;">Total</th>
+                            <th class="text-right">
+                                <span class="font-weight-bold" style="font-size: 16px;color: #189AD3;">
+                                    {{bookingDetails.Currency}} {{bookingDetails?.TotalFair | number:'1.0-0'}}
+                                </span>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

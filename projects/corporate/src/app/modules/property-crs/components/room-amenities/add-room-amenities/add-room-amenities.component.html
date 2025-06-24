@@ -1,0 +1,113 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Room Amenity</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+                <form [formGroup]="regConfig" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>Room Amenities Details</h3>
+                    </div>
+                    <div formArrayName="roomAmenitiesDetails">
+                        <div *ngFor="let room of roomAmenitiesDetails.controls; let i = index;">
+                            <div [formGroupName]="i">
+                                <div class="form-row">
+                                    <div class="col-md-5 pr-0">
+                                        <div class="form-group">
+                                            <label for="roomAmenities" class="col-form-label font-weight-bold labelAlign">Room Amenities Name</label>
+                                            <input type="text" id="roomAmenities" autocomplete="off" formControlName="roomAmenities"
+                                                class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Room Amenities Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 pr-0">
+                                        <div class="form-group">
+                                            <label for="status" class="col-form-label font-weight-bold labelAlign">Status</label>
+                                            <select formControlName="status"
+                                                class="form-control" id="status">
+                                                <option [value]="''" selected> {{'--Select--'}} </option>
+                                                <option  [value]="'1'">{{'Active'}} </option>
+                                                <option  [value]="'0'">{{'Inactive'}} </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 pr-0">
+                                        <div class="form-group">
+                                            <label class="col-form-label col-sm-12 font-weight-bold labelAlign">&nbsp;</label>
+                                            <button class="btnStyle" (click)="addFormField('yes')"><i class=" fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="i !=0" class="col-md-1 pr-0">
+                                        <div class="form-group">
+                                            <label class="col-form-label col-sm-12 font-weight-bold labelAlign">&nbsp;</label>
+                                            <button class="btnStyle" (click)="removeFormField(i)"><i class=" fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary"
+                                    (click)="onSubmit()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+            <!-- <div class="col-md-12 text-center mt-5">    
+                <div class="title pl-30 or_cd">
+                    <h3>OR</h3>
+                </div>
+            </div> -->
+            <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+                <form class="" [formGroup]="fileUploadForm" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>CSV Upload - <a (click)="onSampleDownload()">(Download CSV Sample)</a> </h3>
+                    </div>
+                    <div class="form-group row">
+                        <label for="uploadFile" class="required" class="col-sm-12 col-form-label">File Upload<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <div class='file-input'>
+                            
+                                <input formControlName="uploadFile" type="file" (change)="uploadFile($event)" accept="image/*">
+                               
+                              </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onFileSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onFileReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

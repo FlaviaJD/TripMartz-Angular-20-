@@ -1,0 +1,159 @@
+<div class="container-fluid py-2 primary_bg pt-4 pb-4 mb-4">
+    <div class="row mobile_row" *ngIf="rooms && !guests && !payment && !confirmation">
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div [ngClass]="{ 'getActive' : rooms}">
+                    <div>
+                        <i class="fa fa-check stepactive" aria-hidden="true"></i>
+                        <span class="stpesmenu" style="color: #ffffff;">
+                            Select Rooms
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #ffffff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">2</span> &nbsp; Guest Details
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #ffffff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">3</span> &nbsp;
+                    Payment Method
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #fff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">4</span> &nbsp;
+                    Confirmation
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="row mobile_row" *ngIf="rooms && guests && !payment && !confirmation">
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div [ngClass]="{'getDone': rooms }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i> <span class="stpesmenu" style="color: #ffffff;">Select
+                        Rooms</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div [ngClass]="{'getActive': guests }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff;">Guest
+                        Details</span>
+                </div>
+
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #fff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">3</span>&nbsp;Payment
+                    Method
+                </div>
+
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #fff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">4</span> &nbsp;
+                    Confirmation
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="row mobile_row" *ngIf="rooms && guests && payment && !confirmation">
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div [ngClass]="{'getDone': rooms }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff;">Select
+                        Rooms</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="" [ngClass]="{'getDone': guests }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff;">Guest
+                        Details</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="" [ngClass]="{'getActive': payment }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff;">Payment
+                        Method</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" style="color: #fff;">
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">4</span> &nbsp;
+                    Confirmation
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="row mobile_row" *ngIf="rooms && guests && payment && confirmation">
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div [ngClass]="{'getDone': rooms }">
+                    <i class="fa fa-check fa-lg stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff">Select
+                        Rooms</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="" [ngClass]="{'getDone': guests }">
+                    <i class="fa fa-check  fa-lg stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff">Guest
+                        Details</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="" [ngClass]="{'getDone': payment }">
+                    <i class="fa fa-check fa-lg stepactive" aria-hidden="true"></i><span class="stpesmenu" style="color: #ffffff;">Payment
+                        Method</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customCenter">
+            <div class="d-flex flex-column whiteln">
+                <div class="stpesmenu" [ngClass]="{'getActive': confirmation }">
+                    <i class="fa fa-check  fa-lg stepactive" aria-hidden="true"></i> <span
+                        style="color: #ffffff;">Confirmation</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="session_time"><i class="fi-rr-time-forward"></i> Session Time {{display}}</div>

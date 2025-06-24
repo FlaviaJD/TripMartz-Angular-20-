@@ -1,0 +1,233 @@
+<div mat-dialog-content *ngIf="!isDomesticFlightSelected">
+    <div *ngFor="let iList of flight?.FlightDetails?.Details;let index = index" class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 pb-0 mb-2" style="box-shadow: none;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            border-radius: 5px;">
+                <div class="card-body pb-0" style="padding: 0px 15px;">
+                    <div *ngFor="let list of iList; let i = index">
+                        <!-- <div class="row">
+                            <div class="row col-md-12 m-0 p-0 bbottom" *ngIf="list.LayOverTime">
+                                <div class="col-md-3 text-danger customDetailsCenter">
+                                    <i class="pe-7s-clock f-20 font-weight-bold"></i>
+                                    <span class="f-12">
+                                        {{list.LayOverTime}}
+                                    </span>
+                                </div>
+                                <div class="col-md-9 m-0 pr-0 rounded-0 alert alert-danger" role="alert">
+                                    <div class="d-flex flex-column text-muted">
+                                        <div class="my-2 text-dark">
+                                            {{ 'Layover in ' + list.Origin.CityName + '(' + list.Origin.AirportCode +
+                                            ')' }}
+                                            {{' '+ list.LayOverTime}}
+                                        </div>
+                                        <div class="text-danger">
+                                            <span>
+                                                - A transit visa may be required
+                                            </span>
+                                        </div>
+                                        <div class="text-danger">
+                                            <span>
+                                                - Baggage can be checked through
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row pb-3 pt-3" style="position: relative">
+                        <div class="col-md-12 col-12 pr-0 customDetailsCenter">
+                            <div class="d-flex align-items-center">
+
+                                <img width="35" class="rounded mob_left" style="padding-top: 5px;"
+                                    [src]="[airline_logo + list.OperatorCode + '.gif']" alt="">
+
+                                <span class="mob_left d-flex ml-3">
+                                   
+                                        <div class="deemFont fs-14 m-1">
+                                            <small> {{ list.OperatorName + ' (' + list.OperatorCode + ')'}}</small>
+                                        </div>
+                                        <div class="fs-14 m-1">
+                                            <small> {{ 'Flight Number :'+' '+list.FlightNumber }}</small>
+                                        </div>
+                                        <div class="fs-14 m-1">
+                                            <small *ngIf="list.CabinClass"> {{'Cabin Class :'+' '+ list.CabinClass }}</small>
+                                            <!-- <small *ngIf="flight?.booking_source==='ZBAPINO00002'">{{ ' ('+ flight?.Price?.PriceBreakup?.RBD[index]+')' }}</small> -->
+                                        </div>
+                                        <div class="fs-14 m-1" *ngIf="list?.Equipment">
+                                            <small> {{'Aircraft :'+' '+ list.Equipment }}</small>
+                                        </div>
+                                   
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+
+                        
+
+                        <div class="row pb-3 pt-3 bbottomm a" style="position: relative">
+                            
+                            <div class="col-md-2 col-6 pr-0 text-center mobile_left customDetailsCenter">
+                                <div class="">
+
+                                    <div class="timesFont b">
+                                        {{list.Origin.AirportCode}}  {{list.Origin.DateTime | date: 'HH:mm' }}
+                                    </div>
+
+                                    <div class="fs-12">
+                                        {{list.Origin.DateTime | date:'EE, d MMM y'}}
+                                    </div>
+                                    <div class="fs-12">
+                                        {{list.Origin.AirportName}}
+                                    </div>
+                                    <div class="fs-12" *ngIf="list.Origin.Terminal">
+                                        Terminal : {{list.Origin.Terminal ? list.Origin.Terminal : ''}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-6 pr-0 text-center mobile_left customDetailsCenter">
+                                <div class="">{{list.Duration}}</div>
+                                <div class="route"></div>
+                                    <div class="stopsWrapper">
+                                        <div class="stop"></div>
+                                        <div class="stop"></div>
+                                    </div>
+                                <div class="">Stop: {{i}}</div>
+                            </div>
+
+                            <div
+                                class="col-md-2 col-6 pr-0 padding_right_mobile text-center mobile_right customDetailsCenter">
+                                <div class="">
+
+                                    <div class="timesFont c">
+                                        {{list.Destination.AirportCode}}  {{list.Destination.DateTime | date: 'HH:mm' }}
+                                    </div>
+
+                                    <div class="fs-12">
+                                        {{list.Destination.DateTime | date:'EE, d MMM y'}}
+                                    </div>
+                                    <div class="fs-12">
+                                        {{list.Destination.AirportName}}
+                                    </div>
+                                    <div class="fs-12" *ngIf="list.Destination.Terminal">
+                                        Terminal : {{list.Destination.Terminal}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-12 pr-0 text-right mobile_left customDetailsCenter">
+                                <div class="text-right mobile_left" style="padding-right: 15px !important;">
+                                    
+                                    
+                                    <div class="text-muted">
+                                        <i class="fa fa-wheelchair"></i>
+                                        <i> {{ list.Attr?.AvailableSeats }} </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="(list?.LayoverTime)"  class="layovertime"><span style="font-weight:500;">Change of planes:</span> &nbsp; <span style="color:#065081;">{{list?.LayoverTime}}</span> Layover Time </div>
+                            <div class="chnglay" *ngIf="(list?.LayoverTime)">Change of Planes {{list?.LayoverTime}} Layover time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div mat-dialog-content *ngIf="isDomesticFlightSelected">
+        <div *ngFor="let iList of flight?.FlightDetails?.Details;let index = index" class="row">
+            <div class="col-md-12">
+                <div class="card mt-2 pb-0 mb-2" style="box-shadow: none;
+                border: 1px solid #ddd;
+                background: #ffffff;
+                border-radius: 5px;">
+                    <div class="card-body pb-0" style="padding: 0px 15px;">
+                        <div *ngFor="let list of iList; let i = index">
+                           
+    
+                            <div class="row pb-3 pt-3 bbottom b" style="position: relative">
+                                <div class="col-md-12 col-12 pr-0 customDetailsCenter">
+                                    <div class="d-flex align-items-center">
+    
+                                        <img width="35" class="rounded mob_left float-left pr-2" style="padding-top: 5px;"
+                                            [src]="[airline_logo + list.OperatorCode + '.gif']" alt="">
+    
+                                        <span class="mob_left float-left d-flex">
+                                            
+                                                <div class="deemFont">
+                                                    <small> {{ list.OperatorName + ' (' + list.OperatorCode + ')'}}</small>
+                                                </div>
+                                                <div class="">
+                                                    <small> {{ 'Flight Number :'+' '+list.FlightNumber }}</small>
+                                                </div>
+                                                <div class="">
+                                                    <small *ngIf="list.CabinClass"> {{'Cabin Class :'+' '+ list.CabinClass }}</small>
+                                                    <!-- <small *ngIf="flight?.booking_source==='ZBAPINO00002'">{{ ' ('+ flight?.Price?.PriceBreakup?.RBD[index]+')' }}</small> -->
+                                                </div>
+                                                <div class="" *ngIf="list?.Equipment">
+                                                    <small> {{'Aircraft :'+' '+ list.Equipment }}</small>
+                                                </div>
+                                            
+                                        </span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row pb-3 pt-3 bbottom c" style="position: relative">
+                                <div class="col-md-4 col-6 pr-0 text-center mobile_left customDetailsCenter">
+                                    <div class="">
+    
+                                        <div class="timesFont d">
+                                            <strong style="color: #082b3a;">{{list.Origin.AirportCode}}</strong> {{list.Origin.DateTime | date: 'HH:mm' }}
+                                        </div>
+    
+                                        <div class="">
+                                            {{list.Origin.DateTime | date:'EE, d MMM y'}}
+                                        </div>
+                                        <div class="">
+                                            {{list.Origin.AirportName}}
+                                        </div>
+                                        <div class="" *ngIf="list.Origin.Terminal">
+                                            Terminal : {{list.Origin.Terminal ? list.Origin.Terminal : ''}}
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div
+                                    class="col-md-4 col-6 pr-0 padding_right_mobile text-center mobile_right customDetailsCenter">
+                                    <div class="">
+    
+                                        <div class="timesFont a">
+                                            <strong style="color: #082b3a;">{{list.Destination.AirportCode}}</strong> {{list.Destination.DateTime | date: 'HH:mm' }}
+                                        </div>
+    
+                                        <div class="">
+                                            {{list.Destination.DateTime | date:'EE, d MMM y'}}
+                                        </div>
+                                        <div class="">
+                                            {{list.Destination.AirportName}}
+                                        </div>
+                                        <div class="" *ngIf="list.Destination.Terminal">
+                                            Terminal : {{list.Destination.Terminal}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-12 pr-0 text-right mobile_left customDetailsCenter">
+                                    <div class="text-right mobile_left" style="padding-right: 15px !important;">
+                                        <div class="">{{list.Duration}}</div>
+                                        <div class="">Stop: {{i}}</div>
+                                        <div class="text-muted">
+                                            <i class="fa fa-wheelchair"></i>
+                                            <i> {{ list.Attr?.AvailableSeats }} </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="(list?.LayoverTime)"  class="layovertime"><span style="font-weight:500;">Change of planes:</span> &nbsp; <span style="color:#065081;">{{list?.LayoverTime}}</span> Layover Time </div>
+                                 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

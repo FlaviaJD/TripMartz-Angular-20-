@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="create/update_student_information">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Student Information'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-create-update-student-info (studentInfoUpdate)="triggerTab($event)" ></app-create-update-student-info>            
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="studentsInformation">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Student Information List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-student-information-list (studentInfoUpdate)="triggerTab($event)" ></app-student-information-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

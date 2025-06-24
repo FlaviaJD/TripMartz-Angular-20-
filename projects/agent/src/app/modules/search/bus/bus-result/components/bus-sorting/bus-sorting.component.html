@@ -1,0 +1,48 @@
+<div class="filterforall" id="top-sort-list-wrapper">
+    <div class="topmisty" id="top-sort-list-1">
+        <div class="col-xs-12 nopad">
+            <div class="divinsidefltr">
+                <div class="insidemyt col-xs-12">
+                    <ul class="sortul">
+                        <li class="sortli hide_lines">
+                            <a class="sorta">
+                                <strong>Sort by : </strong>
+                            </a>
+                        </li>
+                        <li class="sortli hide_lines">
+                            <a class="sorta name-l-2-h loader c-pointer asc" (click)="sortByDuration()"
+                                [ngClass]="byDuration && active == 'byDuration' ? 'des active' :(active == 'byDuration' ? 'asc active' : 'asc')">
+                                <strong>Duration</strong>
+                            </a>
+                        </li>
+                        <li class="sortli">
+                            <a class="sorta name-l-2-h loader c-pointer asc" (click)="sortByArrive()"
+                                [ngClass]="byDuration && active == 'byArrive' ? 'des active' :(active == 'byArrive' ? 'asc active' : 'asc')">
+                                <strong>Arrive</strong>
+                            </a>
+                        </li>
+                        <li class="sortli hide_lines">
+                            <a class="sorta name-l-2-h loader c-pointer asc" (click)="sortByOperation()"
+                                [ngClass]="byOperation && active == 'byOperation' ? 'des active' :(active == 'byOperation' ? 'asc active' : 'asc')">
+                                <strong>Operators</strong>
+                            </a>
+                        </li>
+                        <li class="sortli">
+                            <a class="sorta name-l-2-h loader c-pointer asc" (click)="sortByDepart()"
+                                [ngClass]="byDepart && active == 'byDepart' ? 'des active' :(active == 'byDepart' ? 'asc active' : 'asc')">
+                                <strong>Depart</strong>
+                            </a>
+                        </li>
+                       
+                        <li class="sortli">
+                            <a class="sorta name-l-2-h loader c-pointer asc" (click)="sortByPrice()"
+                                [ngClass]="byPrice && active == 'byPrice' ? 'des active' :(active == 'byPrice' ? 'asc active' : 'asc')">
+                                <strong>Price</strong>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

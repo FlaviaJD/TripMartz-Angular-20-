@@ -1,0 +1,503 @@
+<div class="bbottom">
+    <div class="col-md-12 col-lg-12 p-0">
+        <div id="collapseBasic" style="z-index: 9999;">
+            <div class="bg-white">
+                <div class="col-md-12 p-2 mb-3" style="box-shadow: -1px -7rem 2.1875rem rgba(0, 0, 0, 0.03), -2px 0rem 1.40625rem rgba(0, 0, 0, 0.03), 0 0.25rem 0.53125rem rgba(0, 0, 0, 0.05), 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.03);
+                    border-radius: 5px;
+                    background: #333;
+                    border: 1px solid #cecece;">
+                    <app-flight (callResult)="searchResult($event)"></app-flight>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section for="FlightFoundAndListSearchedResult" class="loading-container">
+    <div class="filter_tab" (click)="showFilter()" *ngIf="isMulticity">
+        <i class="fa fa-filter"></i>
+    </div>
+    <div class="d-flex">
+        <div class="col-md-3 col-lg-3 nopad" [ngStyle]="{'display': showMultiFilter ? 'block' : 'none'}"  [ngClass]="{'multifilter':isMulticity}">                
+            <span *ngIf="isMulticity" class="closefilter" (click)="closeFilterTab()"><i class="fa fa-times"></i></span>  
+            <div class="flteboxwrp">
+                <div style="padding: 0px">
+                    <a (click)="resetFilter()" class="pull-right" style="cursor: pointer;"
+                        id="reset_filters">Reset
+                        All</a>
+                </div>
+                <div class="fltrboxin rounded-bottom">
+                    <div class="celsrch">
+                        <app-filters></app-filters>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="" [ngClass]="{'col-md-12 col-lg-9': isMulticity, 'col-md-9 col-lg-9': !isMulticity}">
+            <div class="row mobhide" style="margin-top: 5px;" >
+                <div class="col-md-12 col-lg-12 pr-0" *ngIf="flights && flights.length>0">
+                    <div class="col-12 pb-0 mb-2 rounded">
+                        <div class="card-body card py-2">
+                            <app-airline-carousel></app-airline-carousel>
+                        </div>
+                    </div>
+                    <div class="card pb-0 mb-2 rounded d-none">
+                        <div class="card-body pb-0 pt-2 px-2">
+                            <app-airline-features (showFareDetails)="showFare($event)"></app-airline-features>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="scroll_result" *ngIf="isMulticity" [ngClass]="{
+                'd-none': flights.length >1 && flights.length<=3}">
+            <div class="left_scroll">
+                <button (click)="scrollLeft()"><i class="fa fa-chevron-left"></i></button>
+            </div>
+            <div class="right_scroll">
+                <button (click)="scrollRight()"><i class="fa fa-chevron-right"></i></button>
+            </div>
+            </div> -->
+
+            <div class="above-scroller" (scroll)="ScrollTwo.scrollLeft = scrollOne.scrollLeft" #scrollOne>
+                <div class="scroller" [ngClass]="{
+                    
+                    'scroller1': flights.length ===4, 'scroller2': flights.length ===5
+                }"></div>
+              </div>
+              
+            <div class="sector_scroll" #ScrollTwo style="overflow: auto;" (scroll)="scrollOne.scrollLeft = ScrollTwo.scrollLeft">
+                    <div class="d-flex" style=""  *ngIf="isMulticity">
+                    <div class="col-md-12 pr-0 mpad10" [ngClass]="{
+                        'col-lg-6': flights.length === 2, 'col-lg-4': flights.length === 3,
+                        'wid_350': flights.length >= 4 && flights.length <= 5
+                    }" *ngFor="let flightList of flights; index as columnIndex" (click)="onClick(columnIndex)">
+                    <ng-container *ngFor="let sector of sectorInfo;index as sectorIndex; let i=index;">
+                        <h4 class="sector_title" 
+                        [ngStyle]="{'background-color': (clickedColoumnIndex === columnIndex) ? '#065081' : '#4f535f'}" 
+                        *ngIf="columnIndex === sectorIndex">
+                        <span>{{i+1}}</span> {{sector?.OriginAirport}} ({{sector?.Origin}}) - {{sector?.DestinationAirport}} ({{sector?.Destination}})
+                    </h4></ng-container>
+                    </div>
+                    </div>
+            
+                <div class="col-md-12 col-lg-12 p-0">
+                    <div class="filterforall" id="top-sort-list-wrapper">
+                        <div class="topmisty" id="top-sort-list-1">
+                            <div class="nopad">
+                                <div class="d-flex col-12 p-0">
+                                    <div class="col-md-12 pr-0 mpad10" [ngClass]="{
+                                        'col-lg-6': flights.length === 2, 'col-lg-4': flights.length === 3,
+                                    'wid_350': flights.length >= 4 && flights.length <= 5
+                                    }" *ngFor="let flightList of flights; index as i; trackBy: trackByIndex">
+    <div class="insidemyt col-xs-12 nopad">
+        <app-sorting-round [selectedFilterIndex]="i"></app-sorting-round>
+    </div>
+</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            <div *ngIf="flights.length > 0" class="col-12 d-flex p-0" infiniteScroll [infiniteScrollDistance]="1"
+                [infiniteScrollUpDistance]="2" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()" (scrolledUp)="onScrollUp()">
+                <div class="col-md-12 pr-0 mpad10" [ngClass]="{
+                                    'col-lg-6': flights.length === 2, 'col-lg-4': flights.length === 3,
+                                    'wid_350': flights.length >= 4 && flights.length <= 5
+                                }" *ngFor="let flightList of flights; index as columnIndex" (click)="onClick(columnIndex)">
+                                <div *ngFor="let flight of flightList | slice: 0: endSlice; index as i" class="card pb-0 mb-2" [ngClass]="{'active':flight?.isSelected }"> 
+                                          <div [ngClass]="{'highlighted':((clickedColoumnIndex === columnIndex) || clickedColoumnIndex==null || !isMulticity)}" class="card-body pt-1 pb-1 pr-0 pl-0 column">
+                            <div class="d-flex align-items-center justify-content-center text-center bbottom removeBtm">
+                                <div class="col-12" *ngFor="let iFlight of flight.FlightDetails.Details; let index = index">
+                                    <div class="row align-items-center justify-content-center pt-1 pb-1 mpad10">
+                                        <div class="col-md-12">
+                                            <div class="d-flex align-items-center">
+                                                <div class="col-md-4 p-0 d-flex">
+                                                <div class="pr-2">
+                                                    <img width="35" class="rounded round-flight-logo" style="padding-top: 5px;"
+                                                        [src]="[airline_logo + iFlight[0].OperatorCode + '.gif']" alt="">
+                                                </div>
+                                                <div class="deemFont">
+                                                    {{ iFlight[0].OperatorName}}
+                                                    <p class="mb-0">
+                                                        <ng-container *ngFor="let flight of iFlight; let i = index;last as isLast">
+                                                            {{flight.OperatorCode + ' ' + flight.FlightNumber}}
+                                                            <span *ngIf="!isLast"><strong>|</strong></span>
+                                                        </ng-container>
+                                                    </p>
+                                                </div>
+                                                </div>
+
+                                                <div class="col-md-8 p-0">
+                                                    <div class="d-flex align-items-center justify-content-center addBtm pt-1 pb-1 mpad10">
+                                                    <div class="col-md-4 col-4 px-0 text-left" style="padding-left: 0px !important;">
+                                                        <div class="d-flex flex-column">
+                                                            <div class="timesFont">
+                                                                {{ iFlight[0].Origin.DateTime | date: 'HH:mm' }}
+                                                            </div>
+                                                            <div class="d-none">
+                                                                {{ iFlight[0].Origin.DateTime | date:'EE, d MMM y'}}
+                                                            </div>
+                                                            <div class="" style="color: #082b3a;
+                                                                       ">
+                                                                {{ iFlight[0].Origin.AirportCode }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-4 px-1" style="position: relative;">
+                                                        <div class="d-flex flex-column">
+                                                            <div class="text-info" style="margin-top: 10px;">
+                                                                {{iFlight.length-1}} stop
+                                                            </div>
+                                                            <div class="" style="position: relative">
+                                                                <div class="route"></div>
+                                                                <div class="stopsWrapper">
+                                                                    <div class="stop" *ngFor="let s of Fstops" (click)="onStopSelection(s)">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="deemFont">
+                                                                    <span
+                                                                        *ngIf="flight.Attr?.DurationList">{{flight.Attr?.DurationList[index]}}</span>
+                                                                    <span *ngIf="!(flight.Attr?.DurationList)">({{iFlight[0].Duration}})</span>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="(iFlight && iFlight[1]?.LayoverTime)" class="layovertime2">Layover Time
+                                                                : {{iFlight[1]?.LayoverTime}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-4 px-0 text-right" style="padding-right: 0px !important;">
+                                                        <div class="d-flex flex-column">
+                                                            <div class="timesFont">
+                                                                <span>
+                                                                    {{ iFlight[stops(iFlight)].Destination.DateTime | date:
+                                                                    'HH:mm'}}
+                                                                    <sup *ngIf="iFlight | map: checkDays" style="vertical-align: super; position:absolute; left:30px; top:-5px;"
+                                                                        class="text-danger font-italic font-weight-bold">
+                                                                        +{{ iFlight | map: checkDays }} day </sup>
+                                                                </span>
+                                                            </div>
+                                                            <div class="d-none">
+                                                                {{ iFlight[stops(iFlight)].Destination.DateTime | date:'EE, d MMM
+                                                                y'}}
+                                                            </div>
+                                                            <div class="" style="color: #082b3a;
+                                                                       ">
+                                                                {{
+                                                                iFlight[stops(iFlight)].Destination.AirportCode }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        </div>
+                            <div class="d-flex">
+                                <div class="col-md-12 pt-2 p-1">
+                                    <div class="d-flex addLeftBorder justify-content-center">
+                                        <div class="col-auto pl-2 pr-2 p-0">
+                                            <ng-template #popTemplate>
+                                                <app-retail-summary [exchangePrice]="flight?.Price">
+                                                </app-retail-summary>
+                                            </ng-template>
+                                            <span [tooltip]="popTemplate" placement="left" class="tooltip-300 width120 amnFont row">
+                                                <span class="corp_f">{{flight?.Price?.PriceBreakup?.FareType | slice:0:1}}</span> 
+                                                {{
+                                                    flight.Price.Currency}}
+                                                    {{ (flight.Price.TotalDisplayFare) | number:'1.0-0' }}
+                                            </span>
+                                        </div>
+                                        <div class="col-auto pl-5 pr-2 p-0"> 
+                                            <button (click)="setSelectedFlight(flight,flight?.Price,columnIndex,flightList)" class="btn w-100 srch_btn">
+                                              {{'Select'}}
+                                            </button>
+                                        </div>
+                                        <div class="col-auto pl-2 pr-0 p-0"> 
+                                            <button (click)="ViewFareRule(flight?.ResultToken,flight?.booking_source,false)" class="btn w-100 srch_btn">
+                                                <!-- {{'View Fare Rule'}} -->
+                                                <!-- <i class="fa fa-ticket-alt"></i> -->
+                                                {{'Fare Rule'}}
+                                                  </button>
+                                        </div>
+                                    </div>
+                                    <ng-container *ngIf="!flight?.isMorePriceVisible">
+                                        <div class="d-flex addLeftBorder justify-content-center" *ngFor="let exchangePrice of flight?.MorePrice; let jj = index">
+                                            <div class="col-auto pl-2 pr-2 p-0">
+                                                <ng-template #popTemplate>
+                                                    <app-retail-summary [exchangePrice]="exchangePrice">
+                                                    </app-retail-summary>
+                                                </ng-template>
+                                    
+                                                <span [tooltip]="popTemplate" placement="left" class="tooltip-300 width120 amnFont row">
+                                                    <span class="corp_f float-left">{{exchangePrice?.PriceBreakup?.FareType | slice:0:1}}</span>
+                                                    {{exchangePrice.Currency}} &nbsp; {{exchangePrice.TotalDisplayFare | number:'1.0-0'}}
+                                                </span>
+                                                <span *ngIf="showFareDetails && flight.Price.AgentNetFare" class="tooltip-300 amnFont row"
+                                                    style="color: #252c40;">
+                                                    {{ (flight.Price.AgentNetFare) | number:'1.0-0' }}
+                                                </span>
+                                            </div>
+                                            <div class="col-auto pl-5 pr-2 p-0">
+                                                <button (click)="setSelectedFlight(flight,exchangePrice,columnIndex,flightList)" class="btn w-100 srch_btn">
+                                                    {{'Select'}}
+                                                  </button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!-- <a (click)="toggleMorePriceVisibility(flight)" *ngIf="flight?.MorePrice && flight.MorePrice.length > 0"
+                                        [attr.aria-expanded]="!flight?.isMorePriceVisible" 
+                                        aria-controls="collapseExample" class="More_fare">
+                                        {{ !flight?.isMorePriceVisible ? '- Less Fare' : '+ More Fare' }}
+                                    </a> -->
+                                    <h6 class="non-refund bl-clr" (click)="openModal(i,flight,flightList,columnIndex)" *ngIf="flight?.MorePrice && flight.MorePrice.length > 0"> + More Fare</h6>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <app-flight-details [flight]="flight"></app-flight-details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+            <div *ngIf="!flights.length && !loading" class="row">
+                <div class="col-md-12 col-lg-12 pr-0 no_flight_section">
+                    <div class="card-body pb-0 text-center" style="height: 100%;
+                    background: #fff;">
+                        <img class="no_flight_found" src="assets/images/no_flight_found.jpg" alt="" />
+                        <p>No Flights Found!!!</p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ngx-loading [show]="loading || searchingFlight"
+        [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+        [template]="loadingTemplate"></ngx-loading>
+</section>
+
+
+<div class="fixincrmnt fixed" id="multi-flight-summary-container" *ngIf="selectedFlight && selectedFlight.length>0">
+    <div class="insidecurent">
+        <div class="d-flex">
+      <div class="col-xl-10 nopad"  >
+        <div class="d-flex" style="overflow: auto;">
+            <ng-container *ngFor="let flight of selectedFlight">
+                <div class="nopad divd" [ngClass]="{
+                    'col-xl-6': selectedFlight.length === 2, 'col-xl-4': selectedFlight.length === 3,
+                    'width_220': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                }"
+                 *ngFor="let selectedFromFlight of flight?.FlightDetails?.Details">
+                    <div class="selctarln colorretn">
+                        <div class="d-flex">
+                            <div class="col-xl-3 nopad flightimage">
+                                <div class="fligthsmll">
+                                    <img class="departure-flight-icon"
+                                        [src]="[airline_logo + selectedFromFlight[0].OperatorCode + '.gif']" alt="">
+                                </div>
+                                <div class="airlinename departure-flight-name"> {{ selectedFromFlight[0].OperatorName}}</div>
+                            </div>
+                            <div class="col-xl-9 nopad listfull">
+                                <div class="sidenamedesc">
+                                    <div class="celhtl width80">
+                                        <div class="waymensn">
+                                            <div class="flitruo">
+                                                <div class="outbound-details">
+                                                    <div class="topnavi">
+                                                        <div class="d-flex">
+                                                            <div class="col-xl-3 padflt widftysing" [ngClass]="{'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                            }">
+                                                                <span class="flitrlbl elipsetool"> {{
+                                                                    selectedFromFlight[0].Origin.AirportCode }}</span>
+                                                            </div>
+                                                            <div class="col-xl-3 padflt nonefitysing" [ngClass]="{'d-none': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                            }">
+                                                                <span
+                                                                    class="flect stop-count text-info">{{selectedFromFlight.length-1}}
+                                                                    stop</span>
+                                                                <div style="position: relative">
+                                                                    <div class="route"></div>
+                                                                    <div class="stopsWrapper">
+                                                                        <div class="stop"></div>
+                                                                        <div class="stop"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-3 padflt widftysing" [ngClass]="{
+                                                                'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                            }">
+                                                                <span class="flitrlbl elipsetool text_algn_rit"> {{
+                                                                    selectedFromFlight[stops(selectedFromFlight)].Destination.AirportCode
+                                                                    }}</span>
+                                                            </div>
+            
+                                                            <div class="col-xl-3 padflt widftysing" [ngClass]="{
+                                                                'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                            }">
+                                                                <span class="flitrlbl elipsetool text-center">
+                                                                    <span
+                                                                        class="corp_f">{{flight?.Price?.PriceBreakup?.FareType
+                                                                        | slice:0:1}}</span>
+                                                                </span>
+                                                            </div>
+            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="detlnavi outbound-timing-details">
+                                                    <div class="d-flex">
+                                                        <div class="col-xl-3 padflt widfty" [ngClass]="{
+                                                            'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                        }">
+                                                            <span class="timlbl departure"> {{ selectedFromFlight[0].Origin.DateTime
+                                                                | date: 'HH:mm' }}</span>
+                                                        </div>
+                                                        <div class="col-xl-3 padflt nonefity" [ngClass]="{
+                                                            'd-none': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                        }">
+                                                            <div class="lyovrtime">
+                                                                <span *ngIf="selectedFromFlight?.Attr?.DurationList"
+                                                                    class="flect duration">{{selectedFromFlight?.Attr?.DurationList[0]}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3 padflt widfty" [ngClass]="{
+                                                            'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                        }">
+                                                            <span class="timlbl arrival text_algn_rit"> {{
+                                                                selectedFromFlight[stops(selectedFromFlight)].Destination.DateTime |
+                                                                date:
+                                                                'HH:mm'}}</span>
+                                                        </div>
+            
+                                                        <div class="col-xl-3 padflt widfty" [ngClass]="{
+                                                            'col-xl-4': selectedFlight.length >= 4 && selectedFlight.length <= 5
+                                                        }">
+                                                            <span class="timlbl arrival text-center">
+                                                                <span class="tooltip-300 amnFont row"
+                                                                    placement="left">{{flight?.Price?.TotalDisplayFare |
+                                                                    number:'1.0-0'}}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        
+      </div>
+      <div class="col-xl-2 nopad">
+        <div class="sidepricewrp">
+          <div class="col-xs-12 nopad">
+            <div class="sidepricebig">
+              <strong class="currency">{{flights[0]?.Price?.Price?.Currency}} </strong>
+              <span class="f-p">{{totalDisplayFare | number:'1.0-0'}}</span>
+            </div>
+          </div>
+          <div class="col-xs-12 nopad">
+            <div class="bookbtn">
+              <form id="multi-flight-form">
+                <div class="hide" id="trip-way-wrapper"></div>
+                <button class="btn-flat booknow" *ngIf="!sendEnquiryArr" type="submit" id="multi-flight-booking-btn" (click)="onBookNow()">Book</button>
+              </form>
+            </div>
+        </div>
+       
+        </div>
+        </div>
+        </div>
+
+        <div class="row" *ngIf="sendEnquiryArr">
+            <div class="col-md-12">
+                <div class="form-group reason_for_travel_cothers mt-3">
+                    <div class="col-md-12 nopad">
+                        <label class="text-left text-dark"> Please mention the reason for choosing this fare which is beyond your eligibility level
+                            !!</label>
+                    </div>
+                    <div class="col-md-12 nopad">
+                        <textarea class="form-control reason_for_travel_others" [(ngModel)]="beyond_limit_reason"
+                            class="form-control" rows="2" cols="40"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+  </div> 
+
+  <div class="modal" tabindex="-1" [ngClass]="{'show': isModalOpen && selectedFlights?.MorePrice.length>0}" [ngStyle]="{'display': isModalOpen ? 'block' : 'none'}">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title headclr">{{selectedFlights?.MorePrice.length}} FARE OPTIONS available on your trip</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex align-items-center bodyhdclr">
+                <ng-container *ngIf="flightService?.formFilled?.tripType!='Multi-city'">
+                    <div class="d-flex mx-2">
+                        <p class="mb-0">{{flightService?.formFilled?.departureCity}}</p>
+                        <i class="fa fa-arrow-right mx-2"></i>
+                        <p class="mb-0">{{flightService?.formFilled?.destinationCity}}</p>
+                    </div>
+                    <div class="d-flex mx-2">
+                        <img style="border-radius: 4px;margin-right: 5px;" width="20" [src]="[airline_logo + selectedFlights?.FlightDetails?.Details[0][0].OperatorCode + '.gif']">
+                        {{selectedFlights?.FlightDetails?.Details[0][0]?.OperatorName}}
+                    </div>
+                    <div class="mx-2">Departure Date: {{flightService?.formFilled?.departureDate | date: 'MMM d y'}}</div>
+                    <div class="mx-2" *ngIf="flightService?.formFilled?.returnDate">Return Date :{{flightService?.formFilled?.returnDate | date: 'MMM d y'}}</div>
+                </ng-container>
+                <ng-container *ngIf="flightService?.formFilled?.tripType=='Multi-city'">
+                    <div class="d-flex mx-2" *ngFor="let f of flightService?.formFilled?.cities">
+                        <p class="mb-0">{{f?.mDepartureCity}}</p>
+                        <i class="fa fa-arrow-right mx-2"></i>
+                        <p class="mb-0">{{f?.mDestinationCity}}</p>
+                    </div>
+                    <div class="d-flex mx-2">
+                        <img style="border-radius: 4px;margin-right: 5px;" width="20" [src]="[airline_logo + selectedFlight?.FlightDetails?.Details[0][0].OperatorCode + '.gif']">
+                        {{selectedFlights?.FlightDetails?.Details[0][0]?.OperatorName}}
+                    </div>
+                </ng-container>
+            </div>
+            <div class="fare-options" *ngIf="selectedFlights?.MorePrice.length>0">
+                <div class="width-30" *ngFor="let exchangePrice of selectedFlights?.MorePrice; let jj = index">
+                    <div class="fare-header">
+                        <h3>{{exchangePrice?.PriceBreakup?.FareType}}</h3>
+                        <h5> {{exchangePrice.Currency}} {{exchangePrice.TotalDisplayFare | number:'1.0-0'}} </h5>
+                    </div>
+                    <div class="fare-body" >
+                    <h6 *ngIf="exchangePrice?.CabinBaggage || exchangePrice?.Baggage">Baggage</h6>
+                    <ul>
+                        <li *ngIf="exchangePrice?.CabinBaggage">{{exchangePrice?.
+                            CabinBaggage}} Cabin Baggage</li>
+                        <li *ngIf="exchangePrice?.Baggage">{{exchangePrice?.
+                            Baggage}} Check-in Baggage</li>
+                    </ul>
+                    <button class="select_btn active" (click)="setSelectedFlight(selectedFlights,exchangePrice,coloumnIndex,flightList)">Select</button>
+                    <div style="margin-top: 10px;">
+                        <button class="select_btn active" (click)="ViewFareRule(exchangePrice?.ResultToken,selectedFlights?.booking_source,true)">Fare Rule</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+</div>
+<!-- Modal end -->
+<app-flight-fare-rule 
+[showFareRule]="showFareRule" 
+[fareRuleData]="fareRuleData" [moreFare]="moreFare"
+[noData]="noData"
+(hideModal)="onHide()" (hideMoreFare)="hide()">
+</app-flight-fare-rule>

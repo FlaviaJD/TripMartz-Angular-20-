@@ -1,0 +1,8 @@
+<app-home-page-header></app-home-page-header>
+<div class="static-wrapper" *ngIf="staticData">
+    <div class="container">
+    <h5 *ngIf="staticData">{{staticData.page_title}}</h5>
+    <div [innerHTML]="staticData.page_description"></div>
+    </div>
+</div>
+<app-home-page-footer ></app-home-page-footer>

@@ -1,0 +1,194 @@
+<div class="card-header text-uppercase bg-dark text-white">
+    <h5 style="border-bottom: 0;">
+        <i class="fa fa-edit"></i>
+        Download Bus MIS Report
+    </h5>
+</div>
+<div class="mb-3 btop">
+    <div class="card-body bg-white">
+        <form [formGroup]="regConfig" autocomplete="off">
+            <div class="form-row">
+                <!-- <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="corporate">Corporate Name</label>
+                        <div>
+                            <mat-form-field class="full-width" appearance="fill" style="padding-left: 0; width: 100%;">
+                                <div class="autocomplete-container">
+                                    <input type="text" placeholder="-Select Corporate-" class=" nrm_input" matInput
+                                        formControlName="corporate" [matAutocomplete]="auto">
+                                    <button mat-button *ngIf="regConfig.get('corporate').value" matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="regConfig.get('corporate').setValue('')">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+                                    <mat-option [value]="corp" *ngFor="let corp of filteredCorp | async">
+                                        {{ corp }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="filter_type">Choose Date Type
+                        </label>
+                        <select formControlName="filter_type" class="form-control">
+                            <option *ngFor="let date_type of date_type" [value]="date_type.code">
+                                {{date_type.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="busFromDate">Booked From Date</label>
+                        <input type="text" id="busFromDate" autocomplete="off" formControlName="busFromDate"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="busToDate">Booked To Date</label>
+                        <input type="text" id="busToDate" autocomplete="off" formControlName="busToDate"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            <!-- <hr />
+            <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                        <label for="checkBoxExcel">Export To Excel</label>
+                        <div class="col-12 p-0">
+                            <div class="row">
+                            <div class="col-md-3">
+                                <label for="checkBoxExcel">
+                                    <input type="checkbox" id="checkBoxExcel" name="checkBoxExcel" value="All" formControlName="checkBoxExcel" (change)="checkBoxSelection($event,'Select All')" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Select All</span>
+                                </label>  
+                            
+                            </div>
+                            <div class="col-md-3">
+                                <label for="checkBoxExcel1">
+                                    <input type="checkbox" id="checkBoxExcel1" name="checkBoxExcel" value="All" formControlName="checkBoxExcel" (change)="checkBoxSelection($event,'De-Select All')" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">De-Select All</span>
+                                </label> 
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+
+            <!-- <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                        
+                            <p style="font-weight: bold;">Billing - &nbsp;&nbsp;</p>
+                            <div class="row">
+                            <div class="col-md-2" *ngFor="let item of billingColumnName">
+                                <label for="item">
+                                    <input type="checkbox" id="item" name="item" value="item" formControlName="checkBoxExcel" (change)="checkBoxBillingSelection($event,item)" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">{{item}}</span>
+                                </label> 
+
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+            <!-- <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                        
+                            <p style="font-weight: bold;">Itinerary - &nbsp;&nbsp;</p>
+                            <div class="row">
+                            <div class="col-md-2" *ngFor="let item of itineraryColumnName">
+                                <label for="item">
+                                    <input type="checkbox" id="item" name="item" value="item" formControlName="checkBoxExcel" (change)="checkBoxItineraySelection($event,item)" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">{{item}}</span>
+                                </label> 
+                          </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+            <!-- <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                        
+                            <p style="font-weight: bold;">Passenger - &nbsp;&nbsp;</p>
+                            <div class="row">
+                            <div class="col-md-2" *ngFor="let item of passengerColumnName">
+                                <label for="item">
+                                    <input type="checkbox" id="item" name="item" value="item" formControlName="checkBoxExcel" (change)="checkBoxPassengerSelection($event,item)" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">{{item}}</span>
+                                </label> 
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+            <!-- <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                       
+                            <p style="font-weight: bold;">Price - &nbsp;&nbsp;</p>
+                            <div class="row">
+                            <div class="col-md-2" *ngFor="let item of pricingolumnName">
+                               
+                                <label for="item">
+                                    <input type="checkbox" id="item" name="item" value="item" formControlName="checkBoxExcel" (change)="checkBoxPricingSelection($event,item)" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">{{item}}</span>
+                                </label>
+
+                         </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+            <!-- <div class="form-row">
+                <div class="col-12 pr-0">
+                    <div class="form-group">
+                       
+                            <p style="font-weight: bold;">Others - &nbsp;&nbsp;</p>
+                            <div class="row">
+                            <div class="col-md-2" *ngFor="let item of othersColumnName">
+                               
+                                <label for="item">
+                                    <input type="checkbox" id="item" name="item" value="item" formControlName="checkBoxExcel" (change)="checkBoxOtherSelection($event,item)" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">{{item}}</span>
+                                </label>
+
+                         </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <hr /> -->
+            <div class="btncontainer">
+                <button type="submit" class="btnStyle" (click)="onDownloadMISReport()">Download MIS Report</button>
+                &nbsp;
+                <!-- <button type="button" class="btnStyle" (click)="onViewMISAsGraph()">View MIS as Graph</button> -->
+            </div>
+        </form>
+    </div>
+</div>

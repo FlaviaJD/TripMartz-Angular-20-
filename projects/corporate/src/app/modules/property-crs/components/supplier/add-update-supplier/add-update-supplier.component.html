@@ -1,0 +1,180 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Supplier</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+                <form [formGroup]="regConfig" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>Supplier Information</h3>
+                    </div>
+                    <div class="form-group required row">
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="ownerName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Owner Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="ownerName" 
+                                formControlName="ownerName" placeholder="Owner Name">
+                        </div>
+                        </div>
+                   
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="mobileNumber " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Mobile Number
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="mobileNumber" 
+                                formControlName="mobileNumber" placeholder="Mobile Number">
+                        </div>
+                    
+                        </div>
+
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="NoOfProperty " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">No. Of Property
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="NoOfProperty" 
+                                formControlName="NoOfProperty" placeholder="No. Of Property">
+                        </div>
+                        </div>
+                    
+
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="propertyName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Property Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="propertyName" 
+                                formControlName="propertyName" placeholder="Property Name">
+                        </div>
+                        </div>
+                    
+                        <div class="col-md-12 mb-2 p-0 required">
+                        <label for="propertyAddress " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Property Address
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <textarea name="" style="width: 100%;" id="propertyAddress" cols="66" rows="5" formControlName="propertyAddress">
+                            </textarea>
+                        </div>
+                        </div>
+                   
+                        <div class="col-md-3 mb-2 p-0 required">
+                        <label for="noOfRooms " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">No. Of Rooms
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="noOfRooms" 
+                                formControlName="noOfRooms" placeholder="No. Of Rooms">
+                        </div>
+                        </div>
+                   
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="clientName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Client Name</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="clientName" 
+                                formControlName="clientName" placeholder="Client Name">
+                        </div>
+                        </div>
+                    
+                        <div class="col-md-5 mb-2 p-0 required">
+                        <label for="uploadDoc " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">
+                            Upload Documents(Property License,Registration)</label>
+                        <div class="col-sm-12">
+                            <div class='file-input'>
+                            
+                                <input formControlName="uploadDoc" type="file" (change)="uploadFile($event)">
+                                
+                              </div>
+                        </div>
+                        </div>
+                   
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="hotelEmail " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Hotel Email
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="hotelEmail" 
+                                formControlName="hotelEmail" placeholder="Hotel Email">
+                        </div>
+                        </div>
+                    
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="hotelMobileNo " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Hotel Mobile No.
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="hotelMobileNo" 
+                                formControlName="hotelMobileNo" placeholder="Hotel Email">
+                        </div>
+                        </div>
+                    
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="contactPerson " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Contact Person
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="contactPerson" 
+                                formControlName="contactPerson" placeholder="Contact Person">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+            <!-- <div class="col-md-12 text-center mt-5">    
+                <div class="title pl-30 or_cd">
+                    <h3>OR</h3>
+                </div>
+            </div> -->
+            <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+                <form class="" [formGroup]="fileUploadForm" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>CSV Upload - <a (click)="onSampleDownload()">(Download CSV Sample)</a> </h3>
+                    </div>
+                    <div class="form-group row">
+                        <label for="uploadFile" class="required" class="col-sm-12 col-form-label">File Upload<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <div class='file-input'>
+                            
+                                <input formControlName="upload_file" type="file" (change)="uploadFile($event)" accept="image/*">
+                                
+                              </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onFileSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onFileReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="header">
+    <div class="container p-0">
+        <div class="d-flex justify-content-end" style="justify-content:space-between!important;">
+            <div class="app-logo mb-2"></div>
+            <nav class="menu">
+                <div class="menu-header">
+                  <button class="hamburger" (click)="toggleMenu()">
+                    <span>&#9776;</span>
+                  </button>
+                </div>
+                <ul [ngClass]="{ 'menu-open': isMenuOpen }" class="menu-items">
+                  <li><a routerLink="/">Home</a></li>
+                  <li style="padding:5px 0px;" *ngFor="let content of staticContentData" >
+                    <a style="cursor: pointer;" *ngIf="content.page_title !== 'Terms and conditions' && content.page_title !== 'Privacy policy' &&  content.page_title !== 'Careers' && content.page_title !== 'Terms' && content.page_title !== 'Disclaimer'" (click)="onStaticContent(content)">{{content.page_title}}</a>
+                </li>
+                  <li><a style="cursor:pointer;" (click)="scrollToSection('faq')">FAQ</a></li>
+                  <li><a class="loginlk" href="http://54.198.46.240/tripmartz/corporate/#/auth/login" target="_blank">Corporate Login</a></li>
+                  <!-- <li><a href=""><img src="assets/images/help.svg" alt="" /> Help & support</a></li> -->
+                  <li><a class="loginlk" (click)="open(login)">Login</a></li>
+                </ul>
+              </nav>
+
+            <!-- <div class="log_menu">
+                <ul class="menubar">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="rit_menu">
+                <ul class="ritbar">
+                    <li><a href=""><img src="assets/images/help.svg" alt="" /> Help & support</a></li>
+                    <li><a class="loginlk" (click)="open(login)">Login</a></li>
+                     <li><a href=""><img src="assets/images/menu-bar.svg" alt="" /></a></li>
+                </ul>
+            </div> -->
+
+        </div>
+    </div>
+</div>
+
+<ng-template #login let-modal class="">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Student Login</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body login_modal">
+      <div class="d-flex mobile_block">
+        <div class="col-md-6 col-12 p-0 mobile_pad">
+            <div class="empimg"><img src="assets/images/empl.svg" alt="" /></div>
+        </div>
+        <div class="col-md-6 col-12 pl-0 mobile_pad">
+        <div class="login-content">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)" *ngIf="!isDCBLogin">
+                <div class="justify-content-center" *ngIf="!showOtpComponent">
+                <mat-form-field>
+                    <label class="font-weight-bold">Login ID</label>
+                    <input class="input_t" matInput formControlName="employeeid" placeholder="Employee ID">
+                    <mat-error *ngIf="loginForm.controls.employeeid.hasError('required')">
+                        Please Enter Login Id
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <label class="font-weight-bold">Email ID</label>
+                    <input class="input_t" matInput formControlName="email" placeholder="Email Address">
+                    <mat-error *ngIf="loginForm.controls.email.hasError('required')">
+                        Please Enter Email Id
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!loginForm.controls.email.hasError('required') && loginForm.controls.email.hasError('email')">
+                        Please Enter Valid Email Id
+                    </mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field>
+                    <label class="font-weight-bold">Password</label>
+                    <input class="input_t" matInput formControlName="password" type="password"
+                        placeholder="Password">
+                     <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+                        Please Enter Password
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!loginForm.controls.password.hasError('required') && loginForm.controls.password.hasError('password')">
+                        Please Enter Valid Password
+                    </mat-error>
+                </mat-form-field> -->
+                <mat-form-field class="example-full-width">
+                    <label class="font-weight-bold">Password</label>
+                    <input class="input_t" matInput [type]="hidePassword ? 'password' : 'text'"  formControlName="password" 
+                      placeholder="Password">
+                    <a (click)="hidePassword = !hidePassword" *ngIf="!hidePassword">
+                        <i class="fa fa-eye-slash"
+                            style="cursor: pointer; position: absolute; right: 10px; top: 64%; transform: translateY(-50%);">
+                        </i>
+                    </a>
+                    <a (click)="hidePassword = !hidePassword" *ngIf="hidePassword">
+                        <i class="fa fa-eye"
+                            style="cursor: pointer; position: absolute; right: 10px; top: 64%; transform: translateY(-50%);">
+                        </i>
+                    </a>
+                    <!-- Error Messages -->
+                    <mat-error *ngIf="loginForm.controls.password.hasError('required')">
+                      Please Enter Password
+                    </mat-error>
+                    <mat-error 
+                      *ngIf="!loginForm.controls.password.hasError('required') && loginForm.controls.password.hasError('password')">
+                      Please Enter Valid Password
+                    </mat-error>
+                  </mat-form-field>
+                <div class="mt-3">
+                     <!-- <button type="submit" class="btn w-100 srch_btn">Login</button> -->
+                      <button type="submit" class="btn w-100 srch_btn" [disabled]="isLoading">
+                        <i *ngIf="isLoading" class="fa fa-spin fa-spinner"></i> 
+                        <span *ngIf="!isLoading">Login</span>
+                      </button>
+                </div>
+                <div class="">
+                    <div class="forgot-password">
+                        <a style="background: none !important; color:#000 !important;" class="c-pointer" (click)="openDialog()">Forgot Password ?</a>
+                    </div>
+                    <div class="f-12 font-weight-light mt-2 text-danger text-capitalize" *ngIf="errorMessage"> {{errorMessage}}</div>
+                </div>
+                <!-- <div class="mb-3 login-footer">
+                    <button class="btn w-100 srch_btn" (click)="showDCBLogin()">For DCB Employees, click here to login</button>
+                </div> -->
+
+            </div>
+        </form>
+        <!-- <form [formGroup]="loginForm" (ngSubmit)="onDCBLogin(loginForm.value)" *ngIf="isDCBLogin && !showOtpComponent">
+            <div class="justify-content-center">
+            <mat-form-field>
+                <label class="font-weight-bold">Login ID</label>
+                <input class="input_t" matInput formControlName="employeeid" placeholder="Employee ID">
+                <mat-error *ngIf="loginForm.controls.employeeid.hasError('required')">
+                    Please Enter Login Id
+                </mat-error>
+            </mat-form-field>
+            <div class=" mt-3">
+                <button type="submit" class="btn w-100 srch_btn">Login</button>
+            </div>
+            <div class="forgot-password">
+                <a style="background: none !important; color:#000 !important;" class="c-pointer" (click)="goBack()">Back</a>
+            </div>
+            <div class="f-12 font-weight-light mt-2 text-danger text-capitalize" *ngIf="errorMessage"> {{errorMessage}}</div>
+        </div>
+    </form>
+    <form [formGroup]="VerifyOtpForm" (ngSubmit)="otpverify(VerifyOtpForm.value)" *ngIf="showOtpComponent">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-6 col-lg-4" style="min-width: 500px;">
+            <div class="card bg-white mb-5 mt-5 border-0" style="box-shadow: 0 12px 15px rgba(0, 0, 0, 0.02);">
+              <div class="card-body p-5 text-center">
+                <h4>Verify</h4>
+                <p>Your code was sent to you via email</p>
+                <div class="otp-field mb-4">
+                  <ng-otp-input #ngOtpInput  (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Verify</button>
+                <p class="resend text-muted mb-0">
+                  Didn't receive code? <a (click)="requestAgain()" style="cursor: pointer;">Request again</a>
+                </p>
+                <div class="mb-3 login-footer">
+                    <a class="btn w-100" (click)="back()">Back</a>
+                </div>
+                <div class="f-12 font-weight-light mt-2 text-danger text-capitalize" *ngIf="errorMessage"> {{errorMessage}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form> -->
+        </div>
+        </div>
+        </div>
+
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div> -->
+  </ng-template>

@@ -1,0 +1,20 @@
+
+.labelAlign{
+    text-align: right;
+    @media(max-width: 767px){
+        text-align: unset;
+        text-align: left !important;
+    }
+}
+
+th, td, .customHeader {
+    border: 1px solid #e5dbdb; 
+    padding: 8px; 
+}
+
+.sidePadding{
+    padding-left: 17%;
+    @media(max-width: 767px){
+        padding-left: unset;
+    }
+}

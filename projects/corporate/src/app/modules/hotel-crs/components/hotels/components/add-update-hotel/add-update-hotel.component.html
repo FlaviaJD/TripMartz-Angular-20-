@@ -1,0 +1,1145 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="stepsBar">
+                    <li id="step1" [ngClass]="{active: isHotelActive, current: isHotelDetail}">
+                        <a>
+                            <i class="fas fa-hotel"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Hotel Details</h5>
+                        </a>
+                    </li>
+                    <li id="step2" [ngClass]="{active: isHotelImageActive, current: isHotelImage}">
+                        <a>
+                            <i class="fas fa-user"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Hotel Image</h5>
+                        </a>
+                    </li>
+                    <li id="step3" [ngClass]="{active: isRoomActive, current: isRoomDetail}">
+                        <a>
+                            <i class="fas fa-bed"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Room Details</h5>
+                        </a>
+                    </li>
+                    <li id="step4" [ngClass]="{active: isRoomImageActive, current: isRoomImage}">
+                        <a>
+                            <i class="fas fa-images"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Room Image</h5>
+                        </a>
+                    </li>
+                    <li id="step5" [ngClass]="{active: isSeasonActive, current: isSeason}">
+                        <a>
+                            <i class="fas fa-tree"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Season</h5>
+                        </a>
+                    </li>
+                    <li id="step6" [ngClass]="{active: isPriceActive, current: isPrice}">
+                        <a>
+                            <i class="fas fa-dollar-sign"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Price</h5>
+                        </a>
+                    </li>
+                    <li id="step7" [ngClass]="{active: isCancellationActive, current: isCancellation}">
+                        <a>
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <i class="icon-Check-Circle"></i>
+                            <h5>Cancellation</h5>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="isHotelDetail == true">
+    <div class="container">
+        <form [formGroup]="hotelForm" (ngSubmit)="onSubmitHotelDetail()">
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Hotel Details</div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Hotel Type
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="hotel_hotel_type_id" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_hotel_type_id.errors }">
+                            <option value="" disabled selected>Select Hotel Type</option>
+                            <option *ngFor="let hotelType of hotelTypeList" [value]="hotelType.id">
+                                {{hotelType.hotel_type_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.hotel_hotel_type_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_hotel_type_id.errors.required">Hotel Type is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Hotel Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="hotel_name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_name.errors }" />
+                        <div *ngIf="submittedHotel && hotel.hotel_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_name.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Contract Expiry Date
+                            <span class="text-danger">*</span>
+                        </label>
+                        <span class="date btn btn-success" (click)="isOpen=!isOpen">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" id="contract_expiry_date" formControlName="contract_expiry_date"
+                            class="form-control" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Star Rating
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="star_rating" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.star_rating.errors }">
+                            <option value="" disabled selected>Select Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.star_rating.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.star_rating.errors.required">Star Rating is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Hotel Description
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="hotel_description" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_description.errors }"></textarea>
+                        <div *ngIf="submittedHotel && hotel.hotel_description.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_description.errors.required">Hotel Description is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Amenities
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-multiselect-dropdown #multiSelect formControlName="hotel_hotel_amenities_ids"
+                            [placeholder]="'Select Amenities'" [data]="hotelAmenityList"
+                            [settings]="dropdownSettingsForHotel">
+                        </ng-multiselect-dropdown>
+                        <div *ngIf="submittedHotel && hotel.hotel_hotel_amenities_ids.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_hotel_amenities_ids.errors.required">Amenities are required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Country
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="core_country_id" class="form-control" (change)="getStateList($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.core_country_id.errors }">
+                            <option value="" disabled selected>Select Country</option>
+                            <option *ngFor="let coreCountry of coreCountryList" [value]="coreCountry.id">
+                                {{coreCountry.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.core_country_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.core_country_id.errors.required">Country is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            State
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="core_state_id" class="form-control" (change)="getCityList($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.core_state_id.errors }">
+                            <option value="" disabled selected>Select State</option>
+                            <option *ngFor="let coreState of coreStateList" [value]="coreState.id">
+                                {{coreState.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.core_state_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.core_state_id.errors.required">State is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="control-label">
+                            City
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="core_city_id" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.core_city_id.errors }">
+                            <option value="" disabled selected>Select City</option>
+                            <option *ngFor="let coreCity of coreCityList" [value]="coreCity.id">
+                                {{coreCity.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.core_city_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.core_city_id.errors.required">City is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="control-label">
+                            Hotel Map
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div #mapContainer id="map"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Hotel Address
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="address" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.address.errors }"></textarea>
+                        <div *ngIf="submittedHotel && hotel.address.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.address.errors.required">Hotel Address is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Latitude
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input id="lat" type="text" formControlName="latitude" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.latitude.errors }" />
+                        <div *ngIf="submittedHotel && hotel.latitude.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.latitude.errors.required">Latitude is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Longitude
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input id="lng" type="text" formControlName="longitude" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.longitude.errors }" />
+                        <div *ngIf="submittedHotel && hotel.longitude.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.longitude.errors.required">Longitude is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Postal Code
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="postal_code" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.postal_code.errors }" />
+                        <div *ngIf="submittedHotel && hotel.postal_code.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.postal_code.errors.required">Postal Code is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Phone Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="phone_number" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.phone_number.errors }" />
+                        <div *ngIf="submittedHotel && hotel.phone_number.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.phone_number.errors.required">Phone Number is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Fax Number
+                        </label>
+                        <input type="text" formControlName="fax_number" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Email
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="email" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.email.errors }" />
+                        <div *ngIf="submittedHotel && hotel.email.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.email.errors.required">Email is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Image
+                            <span class="text-danger">*</span>
+                        </label>
+                        <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input formControlName="image" #file type="file" accept='image/*' (change)="preview($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.image.errors }">
+                        <div *ngIf="submittedHotel && hotel.image.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.image.errors.required">Image is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-primary mr-1">Continue</button>
+                    <button class="btn btn-sm btn-secondary" type="reset">Cancel</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<div class="" *ngIf="addedHotelDetail">
+    <h2 class="">{{addedHotelDetail['hotel_name']}}, {{addedHotelDetail['coreCity']['name']}}</h2>
+</div>
+<ng-container *ngIf="isHotelImage == true">
+    <div class="container">
+        <form [formGroup]="hotelImageForm" (ngSubmit)="onSubmitHotelImage()" class="needs-validation btop pt-4"
+            novalidate>
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Hotel Images</div>
+                <img [src]="hotelImageList" height="100" width="100" class="m-3">
+                &nbsp; &nbsp;
+                <div class="form-group">
+                    <input #file type="file" accept='image/*'
+                        (change)="previewHotelImage($event)" class="btn btn-sm" multiple>
+                    <div *ngIf="submittedHotelImage && hotelImage.image_url.errors" class="invalid-feedback">
+                        <div *ngIf="hotelImage.image_url.errors.required">Images are required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type=" submit" class=" btn btn-sm btn-success">Upload Hotel
+                            Images
+                        </button>
+                        &nbsp; &nbsp;
+                        <button type="reset" class=" btn btn-sm btn-primary" (click)="goToHotelRooms()">
+                            Go to Rooms
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<ng-container *ngIf="isRoomDetail == true">
+    <div class="container" *ngIf="showRoomList">
+        <div class="form_legend">Room List</div>
+        <div class="text-right m-2">
+            <button class="btn btn-sm btn-primary mr-1" (click)="onClickAddRoom()">Add Room</button>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/hotels/hotel-crs-list']">Hotel List</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-left text-nowrap">Sl No.</th>
+                        <th class="text-left text-nowrap">Room Name</th>
+                        <th class="text-left text-nowrap">Maximum Adult Capacity</th>
+                        <th class="text-left text-nowrap">Maximum Child Capacity</th>
+                        <th class="text-left text-nowrap">Status</th>
+                        <th class="text-left text-nowrap">Actions</th>
+                    </tr>
+                </thead>
+                <p>{{noDataMessage}}</p>
+                <tbody *ngIf="roomList">
+                    <tr *ngFor="let rooms of roomList; let i=index;">
+                        <td class="text-left text-muted">{{i+1}}.</td>
+                        <td class="text-left">{{rooms.room_name}}</td>
+                        <td class="text-left">{{rooms.max_adult_capacity}}</td>
+                        <td class="text-left">{{rooms.max_child_capacity}}</td>
+                        <td>
+                            <span title="Slide for Active/Deactive">
+                                <mat-slide-toggle readonly class="example-margin" [color]="''"
+                                    [checked]="rooms['status']" [(ngModel)]="rooms['status']" name="status{{i}}">
+                                </mat-slide-toggle>
+                            </span>
+                        </td>
+                        <td class="text-left">
+                            <a title="Edit" class="p-1">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a title="Seasons" class="p-1">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                            <a title="Price Info List" class="p-1">
+                                <i class="fa fa-cart-plus"></i>
+                            </a>
+                            <a title="Cancellation Policy List" class="p-1">
+                                <i class="fa fa-handshake"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" *ngIf="showRoomForm">
+        <form [formGroup]="roomDetailForm" (ngSubmit)="onSubmitRoomDetail()" class="needs-validation btop pt-4"
+            novalidate>
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Hotel Room Details</div>
+                <input type="text" formControlName="hotel_id" hidden />
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Hotel Room Type
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="hotel_room_type_id" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.hotel_room_type_id.errors }">
+                            <option value="" disabled selected>Select Room Type</option>
+                            <option *ngFor="let roomType of roomTypeList" [value]="roomType.id">
+                                {{roomType.room_type_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedRoom && hotelRoom.hotel_room_type_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.hotel_room_type_id.errors.required">Room Type is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Maximum Passengers Capacity
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="max_passanger_capacity" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.max_passanger_capacity.errors }">
+                            <option value="" disabled selected>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="submittedRoom && hotelRoom.max_passanger_capacity.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.max_passanger_capacity.errors.required">Please Select maximum
+                                passengers
+                                capacity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Maximum Adult Capacity
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="max_adult_capacity" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.max_adult_capacity.errors }">
+                            <option value="" disabled selected>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="submittedRoom && hotelRoom.max_adult_capacity.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.max_adult_capacity.errors.required">Please Select maximum adult
+                                capacity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Maximum Child Capacity
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="max_child_capacity" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.max_child_capacity.errors }">
+                            <option value="" disabled selected>Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="submittedRoom && hotelRoom.max_child_capacity.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.max_child_capacity.errors.required">Please Select maximum child
+                                capacity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Extra Bed Availability
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="extra_bed_availability" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.extra_bed_availability.errors }">
+                            <option [value]="true" selected>Available</option>
+                            <option [value]="false">Not Available</option>
+                        </select>
+                        <div *ngIf="submittedRoom && hotelRoom.extra_bed_availability.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.extra_bed_availability.errors.required">Please Select this field
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Room Description
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="room_description" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.room_description.errors }"></textarea>
+                        <div *ngIf="submittedRoom && hotelRoom.room_description.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.room_description.errors.required">Please enter room description</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Room Policy
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="room_policy" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoom && hotelRoom.room_policy.errors }"></textarea>
+                        <div *ngIf="submittedRoom && hotelRoom.room_policy.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.room_policy.errors.required">Please enter room policy</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Room Amenities
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-multiselect-dropdown #multiSelect formControlName="hotel_room_amenity_ids"
+                            [placeholder]="'Select Amenities'" [data]="roomAmenityList"
+                            [settings]="dropdownSettingsForRoom">
+                        </ng-multiselect-dropdown>
+                        <div *ngIf="submittedRoom && hotelRoom.hotel_room_amenity_ids.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoom.hotel_room_amenity_ids.errors.required">Room Amenities are required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="status">
+                        Status
+                        <span class="text-danger">*</span>
+                    </label>
+                    <span title="Slide for Active/Deactive">
+                        <mat-slide-toggle class="example-margin" formControlName="status" [color]="''">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-primary mr-1">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<ng-container *ngIf="isRoomImage == true">
+    <div class="container">
+        <form [formGroup]="roomImageForm" (ngSubmit)="onSubmitRoomImage()" class="needs-validation btop pt-4"
+            novalidate>
+            <fieldset form="roomImage">
+                <div class="form_legend">Add Room Images</div>
+                <div class="form-group">
+                    <input formControlName="image_url" #file type="file" accept='image/*'
+                        (change)="previewImage($event)" class="btn btn-sm" multiple>
+                    <div *ngIf="submittedRoomImage && hotelRoomImage.image_url.errors" class="invalid-feedback">
+                        <div *ngIf="hotelRoomImage.image_url.errors.required">Images are required</div>
+                    </div>
+                </div>
+                <img [src]="imgURL" height="100" width="100" *ngIf="imgURL">
+                &nbsp; &nbsp;
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type=" submit" id="user_submit" class=" btn btn-sm btn-success">
+                            Upload Room Images
+                        </button>
+                        &nbsp; &nbsp;
+                        <button type="reset" id="user_reset" class=" btn btn-sm btn-primary" (click)="goToRoomSeason()">
+                            Go to Season
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<ng-container *ngIf="isSeason == true">
+    <div class="container p-0" *ngIf="showSeasonList">
+        <div class="form_legend bg-info">Season List</div>
+        <div class="text-right m-2">
+            <button class="btn btn-sm btn-primary mr-1" (click)="onClickAddSeason()">Add Season</button>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/hotels/hotel-crs-list']">Hotel List</button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-left text-nowrap">Sl No.</th>
+                        <th class="text-left text-nowrap">Seasons</th>
+                        <th class="text-left text-nowrap">From Date</th>
+                        <th class="text-left text-nowrap">To Date</th>
+                        <th class="text-left text-nowrap">Status</th>
+                        <th class="text-left text-nowrap">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rooms of roomList; let i=index;">
+                        <td class="text-left text-muted">{{i+1}}.</td>
+                        <td class="text-left">{{rooms.room_name}}</td>
+                        <td class="text-left">{{rooms.max_adult_capacity}}</td>
+                        <td class="text-left">{{rooms.max_child_capacity}}</td>
+                        <td>
+                            <span title="Slide for Active/Deactive">
+                                <mat-slide-toggle readonly class="example-margin" [color]="''"
+                                    [checked]="rooms['status']" [(ngModel)]="rooms['status']" name="status{{i}}">
+                                </mat-slide-toggle>
+                            </span>
+                        </td>
+                        <td class="text-left">
+                            <a title="Edit" class="p-1">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a title="Seasons" class="p-1">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                            <a title="Price Info List" class="p-1">
+                                <i class="fa fa-cart-plus"></i>
+                            </a>
+                            <a title="Cancellation Policy List" class="p-1">
+                                <i class="fa fa-handshake"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" *ngIf="showSeasonForm">
+        <form [formGroup]="roomSeasonForm" (ngSubmit)="onSubmitSeason()">
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Season</div>
+                <input formControlName="status" hidden>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Season Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="season_name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomSeason && hotelRoomSeason.season_name.errors }" />
+                        <div *ngIf="submittedRoomSeason && hotelRoomSeason.season_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeason.season_name.errors.required">Season Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Season Date Start
+                            <span class="text-danger">*</span>
+                        </label>
+                        <span class="date btn btn-success" (click)="isOpenFromDate=!isOpenFromDate">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" id="from_date" formControlName="from_date" class="form-control" bsDatepicker
+                            [bsConfig]="bsDateConf" [isOpen]="isOpenFromDate" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Season Date End
+                            <span class="text-danger">*</span>
+                        </label>
+                        <span class="date btn btn-success" (click)="isOpenToDate=!isOpenToDate">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" id="to_date" formControlName="to_date" class="form-control" bsDatepicker
+                            [bsConfig]="bsDateConf" [isOpen]="isOpenToDate" readonly>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-primary mr-1">Add Season</button>
+                    <button class="btn btn-sm btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<ng-container *ngIf="isPrice == true">
+    <div class="container" *ngIf="showPriceList">
+        <div class="form_legend bg-info">Room Price List</div>
+        <div class="text-right m-2">
+            <button class="btn btn-sm btn-primary mr-1" (click)="onClickAddPrice()">Add Room Price</button>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/hotels/hotel-crs-list']">Hotel List</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-left text-nowrap">Sl No.</th>
+                        <th class="text-left text-nowrap">Season</th>
+                        <th class="text-left text-nowrap">From Date</th>
+                        <th class="text-left text-nowrap">To Date</th>
+                        <th class="text-left text-nowrap">Adult 1 Price</th>
+                        <th class="text-left text-nowrap">Adult 2 Price</th>
+                        <th class="text-left text-nowrap">Adult 3 Price</th>
+                        <th class="text-left text-nowrap">Child Price</th>
+                        <th class="text-left text-nowrap">Status</th>
+                        <th class="text-left text-nowrap">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" *ngIf="showPriceForm">
+        <form [formGroup]="roomPriceForm" (ngSubmit)="onSubmitPrice()">
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Room Price Info</div>
+                <input formControlName="hotel_room_season_id" type="text" hidden />
+                <input formControlName="status" hidden>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Season
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="hotel_room_season_id" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.hotel_room_season_id.errors }">
+                            <option value="" disabled selected>Select Season</option>
+                            <option *ngFor="let season of seasonList" [value]="season.id">
+                                {{season.season_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.hotel_room_season_id.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.hotel_room_season_id.errors.required">Hotel Type is
+                                required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            1 Adult Price(AED)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="one_adult_price" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.one_adult_price.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.one_adult_price.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.one_adult_price.errors.required">Postal Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            2 Adult Price(AED)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="two_adult_price" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.two_adult_price.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.two_adult_price.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.two_adult_price.errors.required">Postal Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            3 Adult Price(AED)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="three_adult_price" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.three_adult_price.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.three_adult_price.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.three_adult_price.errors.required">Postal Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Child Age From
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="child_from_age" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.child_from_age.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.child_from_age.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.child_from_age.errors.required">Postal Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Child Age To
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="child_to_age" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.child_to_age.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.child_to_age.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.child_to_age.errors.required">Postal Code is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Child Price (AED)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="child_price" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.child_price.errors }" />
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.child_price.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.child_price.errors.required">Postal Code is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            1 Adult Breakfast (include/exclude)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleInputOne()"></mat-slide-toggle>
+                        <input type="text" formControlName="one_adult_breakfast_price" class="form-control"
+                            *ngIf="showInputOne" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            2 Adult Breakfast (include/exclude)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleInputTwo()"></mat-slide-toggle>
+                        <input type="text" formControlName="two_adult_breakfast_price" class="form-control"
+                            *ngIf="showInputTwo" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            3 Adult Breakfast (include/exclude)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleInputThree()"></mat-slide-toggle>
+                        <input type="text" formControlName="three_adult_breakfast_price" class="form-control"
+                            *ngIf="showInputThree" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Minimum Stay
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="minimum_stay" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.minimum_stay.errors }">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.minimum_stay.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.minimum_stay.errors.required">Star Rating is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Extra Bed Count
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="extra_bed_count" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomPrice && hotelRoomSeasonPrice.extra_bed_count.errors }">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                        <div *ngIf="submittedRoomPrice && hotelRoomSeasonPrice.extra_bed_count.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomSeasonPrice.extra_bed_count.errors.required">Star Rating is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Extra Bed Price
+                        </label>
+                        <input type="text" formControlName="extra_bed_price" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Child Adult Breakfast (include/exclude)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleChildInput()"></mat-slide-toggle>
+                        <input type="text" formControlName="child_breakfast_price" class="form-control"
+                            *ngIf="showChildInput" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            VAT(%)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleVAT()"></mat-slide-toggle>
+                        <input type="text" formControlName="vat" class="form-control" *ngIf="showVat" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Service Charge(%)
+                        </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <mat-slide-toggle (click)="toggleServiceCharge()"></mat-slide-toggle>
+                        <input type="text" formControlName="service_charge" class="form-control"
+                            *ngIf="showServiceCharge" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="status">
+                        Status
+                        <span class="text-danger">*</span>
+                    </label>
+                    <span title="Slide for Active/In-Active">
+                        <mat-slide-toggle class="example-margin" formControlName="status" [color]="''">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-primary mr-1">Save</button>
+                    <button class="btn btn-sm btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>
+<ng-container *ngIf="isCancellation == true">
+    <div class="container" *ngIf="showCancelPolicyList">
+        <div class="form_legend bg-info">Room Cancellation Policy List</div>
+        <div class="text-right m-2">
+            <button class="btn btn-sm btn-primary mr-1" (click)="onClickAddCancelPolicy()">Add Cancellation Policy</button>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/hotels/hotel-crs-list']">Hotel List</button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-left text-nowrap">Sl No.</th>
+                        <th class="text-left text-nowrap">Room</th>
+                        <th class="text-left text-nowrap">From the booking (Days)</th>
+                        <th class="text-left text-nowrap">Booking confirm day before (Days)</th>
+                        <th class="text-left text-nowrap">Penality Type</th>
+                        <th class="text-left text-nowrap">Penality</th>
+                        <th class="text-left text-nowrap">Status</th>
+                        <th class="text-left text-nowrap">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let price of priceList; let i=index;">
+                        <td class="text-left text-muted">{{i+1}}</td>
+                        <td class="text-left">{{price.room_name}}</td>
+                        <td class="text-left">{{price.max_adult_capacity}}</td>
+                        <td class="text-left">{{price.max_child_capacity}}</td>
+                        <td>
+                            <span title="Slide for Active/Deactive">
+                                <mat-slide-toggle readonly class="example-margin" [color]="''"
+                                    [checked]="rooms['status']" [(ngModel)]="rooms['status']" name="status{{i}}">
+                                </mat-slide-toggle>
+                            </span>
+                        </td>
+                        <td class="text-left">
+                            <a title="Edit" class="p-1">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a title="Seasons" class="p-1">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                            <a title="Price Info List" class="p-1">
+                                <i class="fa fa-cart-plus"></i>
+                            </a>
+                            <a title="Cancellation Policy List" class="p-1">
+                                <i class="fa fa-handshake"></i>
+                            </a>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" *ngIf="showCancelPolicyForm">
+        <form [formGroup]="roomCancellationPolicyForm" (ngSubmit)="onSubmitCancelPolicy()">
+            <fieldset form="hotelImage">
+                <div class="form_legend">Add Cancellation Policy</div>
+                <!-- <input [value]="addedRoomDetail.id" formControlName="hotel_room_ids" type="text" hidden /> -->
+                <input formControlName="status" hidden>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Booking confirm day before (Days)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="cancel_to" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomCancelPolicy && hotelRoomCancelPolicy.cancel_to.errors }" />
+                        <div *ngIf="submittedRoomCancelPolicy && hotelRoomCancelPolicy.cancel_to.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomCancelPolicy.cancel_to.errors.required">Field is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Penalty Type
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="penalty_type" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomCancelPolicy && hotelRoomCancelPolicy.penalty_type.errors }">
+                            <option value="amount" selected>Amount</option>
+                            <option value="percentage">Percentage</option>
+                        </select>
+                        <div *ngIf="submittedRoomCancelPolicy && hotelRoomCancelPolicy.penalty_type.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomCancelPolicy.penalty_type.errors.required">Field is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Penalty
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="penalty" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomCancelPolicy && hotelRoomCancelPolicy.penalty.errors }" />
+                        <div *ngIf="submittedRoomCancelPolicy && hotelRoomCancelPolicy.penalty.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomCancelPolicy.penalty.errors.required">Field is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Cancellation Description
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="cancel_description" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomCancelPolicy && hotelRoomCancelPolicy.cancel_description.errors }">
+                        </textarea>
+                        <div *ngIf="submittedRoomCancelPolicy && hotelRoomCancelPolicy.cancel_description.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomCancelPolicy.cancel_description.errors.required">Field is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class=" control-label">
+                            Refund Policy
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="refund_policy" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedRoomCancelPolicy && hotelRoomCancelPolicy.refund_policy.errors }">
+                        </textarea>
+                        <div *ngIf="submittedRoomCancelPolicy && hotelRoomCancelPolicy.refund_policy.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="hotelRoomCancelPolicy.refund_policy.errors.required">Field is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="status">
+                        Status
+                        <span class="text-danger">*</span>
+                    </label>
+                    <span title="Slide for Active/In-Active">
+                        <mat-slide-toggle class="example-margin" formControlName="status" [color]="''">
+                        </mat-slide-toggle>
+                    </span>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-primary mr-1">Save</button>
+                    <button class="btn btn-sm btn-secondary" type="reset" (click)="onReset()">Back</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>

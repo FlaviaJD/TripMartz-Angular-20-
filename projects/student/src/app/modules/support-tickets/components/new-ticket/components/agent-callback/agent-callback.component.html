@@ -1,0 +1,59 @@
+<div class="row card">
+    <div class="mb-3">
+        <div class="card-header-tab card-header">
+            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <span class="my-color"  style="color:#000; font-size:21px; font-weight:500;">
+                    {{'Call Back Support'}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="offset-md-1 col-md-10">
+        <form class="p-3 clearfix" [formGroup]="regConfig" autocomplete="off">
+            <div class="form-group row">
+                <label for="requestType" class="col-sm-3 col-form-label ">Contact No <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <input formControlName="phone_number" (keypress)="numberOnly($event)" maxlength="50" type="text"
+                        class="form-control " id="phone_number">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="requestType" class="col-sm-3 col-form-label" >Email Id <sup
+                        class="f-16 text-danger">*</sup>
+                </label>
+                <div class="col-sm-5">
+                    <input formControlName="email_id" type="email" maxlength="150" class="form-control " id="email_id">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="paymentType" class="col-sm-3 col-form-label ">Reference ID/ Booking ID <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <input formControlName="reference_id" type="text" class="form-control" id="reference_id" maxlength="150">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="paymentType" class="col-sm-3 col-form-label ">Ticket Number <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <input formControlName="ticket_number" (keypress)="numberOnly($event)" type="text"
+                        class="form-control " id="ticket_number" maxlength="150">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="remarks" class="col-sm-3 col-form-label ">Remarks<sup
+                        class="f-16 text-danger">*</sup></label>
+                <div class="col-sm-5">
+                    <textarea formControlName="remarks" rows="3" class="form-control " id="remarks"
+                        placeholder="Remarks" maxlength="500">
+                </textarea>
+                </div>
+            </div>
+            <div class="form-group row pull-right mr-0">
+                <button class="btn btn-lg btn-primary mr-1" style="background: #0A5081 !important; border:1px solid #0A5081 !important;" (click)="onSubmit()">Send</button>
+                <button class="btn btn-lg btn-primary" style="background: #333 !important; border:1px solid #333 !important;" (click)="onReset()">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

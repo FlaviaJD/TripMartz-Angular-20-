@@ -1,0 +1,58 @@
+<div class="rangebox">
+    <button data-target="#collapse503" data-toggle="collapse" class="collapsebtn" type="button">Star Rating</button>
+    <!-- <a  style="cursor: pointer;font-size: 12px;" class="float-right" (click)="clearRatingFilter()">Clear</a> -->
+    <form [formGroup]="ratingForm" style="clear: both;">
+        <div id="collapse503" class="collapse show">
+            <div class="boxins marret" id="departureTimeWrapper">
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin cusromGrey">
+                               &nbsp; &nbsp; 1<div class="fas fa-star" style="padding-bottom: 15px;"></div><br>
+                                <mat-checkbox formControlName="rating1" class="time-category hidecheck"
+                                (change)="filterByStar('rating1',$event.checked)"></mat-checkbox>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin cusromGrey">
+                                &nbsp; &nbsp; 2<div class="fa fa-star" style="padding-bottom: 15px;"></div><br>
+                                <mat-checkbox formControlName="rating2"
+                                (change)="filterByStar('rating2',$event.checked)"></mat-checkbox>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin cusromGrey">
+                                &nbsp; &nbsp; 3<div class="fas fa-star" style="padding-bottom: 15px;"></div><br>
+                                <mat-checkbox formControlName="rating3"
+                                (change)="filterByStar('rating3',$event.checked)"></mat-checkbox>
+                               
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin cusromGrey">
+                                &nbsp; &nbsp; 4<div class="fas fa-star" style="padding-bottom: 15px;"></div><br>
+                                <mat-checkbox formControlName="rating4"
+                                (change)="filterByStar('rating4',$event.checked)"></mat-checkbox>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="grid-item">
+                        <a class="timone toglefil time-wrapper enabled">
+                            <div class="starin cusromGrey">
+                                &nbsp; &nbsp; 5<div class="fas fa-star" style="padding-bottom: 15px;"></div><br>
+                                <mat-checkbox formControlName="rating5"
+                                (change)="filterByStar('rating5',$event.checked)"></mat-checkbox>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

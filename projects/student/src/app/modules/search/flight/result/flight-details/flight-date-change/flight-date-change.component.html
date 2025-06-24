@@ -1,0 +1,114 @@
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card pb-0 mb-2" style="box-shadow: none;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            border-radius: 5px;">
+                <div class="card-body p-0">
+                    <table class="mb-0 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Time frame
+                                    (From Scheduled flight departure)
+                                </th>
+                                <th>Airline Fee + Fare difference
+                                    (Per passenger)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container >
+                                <th>
+                                    Retailer Fare
+                                </th>
+                                <tr>
+                                    <td>0 hours to 3 hours
+                                    </td>
+                                    <td>No Show
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td >Before 3 hours of  Departure
+                                    </td>
+                                    <td>₹ 3750
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+                                    <td>2 hours prior
+                                    </td>
+                                    <td>₹ 3750
+                                    </td>
+                                </tr> -->
+                            </ng-container>
+                            <ng-container >
+                                <th>
+                                    Corporate Fare
+                                </th>
+                                <tr>
+                                    <td>0 hours to 3 hours
+                                    </td>
+                                    <td>No Show
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+                                    <td>2 hours prior
+                                    </td>
+                                    <td
+                                        *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='6E'|| flight.FlightDetails.Details[0][0].OperatorCode=='SG'">
+                                        ₹ 300 </td>
+                                    <td
+                                        *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='UK' || flight.FlightDetails.Details[0][0].OperatorCode=='AI'">
+                                        ₹ 500</td>
+                                </tr> -->
+                                <tr>
+                                    <td>3-24 Hrs of Department
+                                    </td>
+                                    <td
+                                        *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='UK'|| flight.FlightDetails.Details[0][0].OperatorCode=='AI' || flight.FlightDetails.Details[0][0].OperatorCode=='6E' || flight.FlightDetails.Details[0][0].OperatorCode=='SG'">
+                                        Nill </td>
+                                    <td
+                                        *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='I5' || flight.FlightDetails.Details[0][0].OperatorCode=='QP'">
+                                        ₹ 499 </td>
+                                </tr>
+                                <tr>
+                                    <td>Beyond 24 Hrs of Departure
+                                    </td>
+                                    <td
+                                    *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='UK'|| flight.FlightDetails.Details[0][0].OperatorCode=='AI' || flight.FlightDetails.Details[0][0].OperatorCode=='6E' || flight.FlightDetails.Details[0][0].OperatorCode=='SG'">
+                                    Nill </td>
+                                <td
+                                    *ngIf="flight.FlightDetails.Details[0][0].OperatorCode=='I5' || flight.FlightDetails.Details[0][0].OperatorCode=='QP'">
+                                    ₹ 499 </td>
+                                </tr>
+                            </ng-container>
+                            <ng-container>
+                                <th>
+                                    SME Fare
+                                </th>
+                                <tr>
+                                    <td>0 hours to 3 hours
+                                    </td>
+                                    <td>No Show
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2 hours prior
+                                    </td>
+                                    <td>₹ 1750<br />
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <tr>
+                                <td >Before 3 hours of  Departure
+                                </td>
+                                <td >₹ 1750
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

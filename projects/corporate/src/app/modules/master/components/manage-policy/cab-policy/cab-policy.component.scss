@@ -1,0 +1,16 @@
+
+.labelAlign{
+    text-align: right;
+    @media(max-width: 767px){
+        text-align: unset;
+        text-align: left !important;
+    }
+}
+
+.sidePadding{
+    padding-left: 17%;
+    @media(max-width: 767px){
+        padding-left: unset;
+    }
+}
+.custom-inline-form label { margin-bottom: 0px !important;}

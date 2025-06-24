@@ -1,0 +1,414 @@
+<div class="container">
+    <div class="table-responsive">
+        <form class="feedform" [formGroup]="feedBackForm">
+            <table class="table" style="font-size: 14px;font-family: 'verdana';width: 950px;margin: 10px auto;">
+                <tbody>
+                    <tr>
+                        <td style="background-color: #F99D1C;padding: 35px 60px 0; border: none;">
+                            <table style="width: 100%;background: none;border-radius: 3px 3px 0 0;">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="padding: 15px 20px; border: none;">
+                                            <img style="width: 280px; margin-bottom: 30px;"
+                                                src="assets/images/login-images/l-logo1.png" alt="image/png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table style="width: 100%;border-radius: 3px 3px 0 0;">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 0px 0px 0px;width: 100%;vertical-align: top; border: none;">
+                                            <h3 class="feed_head text-center">Hotel Stay and Service Feedback</h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f3f4f8;padding: 0 60px 0px;border: none;">
+                            <table style="width: 100%; padding:0px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: center;text-align: center;padding-top: 200px;padding:0px"
+                                            colspan="2">
+                                            <div class="dear_txt">
+                                                <table class="table" style="margin: 0px; background: #fff;">
+                                                    <thead>
+                                                        <tr style="background: #e1f1f2;">
+                                                            <th>Your Experience</th>
+                                                            <th class="text-center">Excellent</th>
+                                                            <th class="text-center">Good</th>
+                                                            <th class="text-center">Average</th>
+                                                            <th class="text-center">Dissatisfied</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">Hotel
+                                                                Property</td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio"
+                                                                            formControlName="hotelProperty"
+                                                                            id="excellent_hotel_property" value="1">
+                                                                        <label for="excellent_hotel_property"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_hotel_property"
+                                                                            formControlName="hotelProperty" value="2">
+                                                                        <label for="good_hotel_property"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_hotel_property"
+                                                                            formControlName="hotelProperty" value="3">
+                                                                        <label for="average_hotel_property"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio"
+                                                                            id="dissatisfied_hotel_property"
+                                                                            formControlName="hotelProperty" value="4">
+                                                                        <label
+                                                                            for="dissatisfied_hotel_property"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">Food
+                                                                Quality</td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="excellent_food_quality"
+                                                                            formControlName="foodQuality" value="1">
+                                                                        <label for="excellent_food_quality"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_food_quality"
+                                                                            formControlName="foodQuality" value="2">
+                                                                        <label for="good_food_quality"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_food_quality"
+                                                                            formControlName="foodQuality" value="3">
+                                                                        <label for="average_food_quality"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio"
+                                                                            id="dissatisfied_food_quality"
+                                                                            formControlName="foodQuality" value="4">
+                                                                        <label for="dissatisfied_food_quality"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">
+                                                                Hygiene/Cleanliness</td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="excellent_hygiene"
+                                                                            formControlName="cleanliness" value="1">
+                                                                        <label for="excellent_hygiene"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_hygiene"
+                                                                            formControlName="cleanliness" value="2">
+                                                                        <label for="good_hygiene"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_hygiene"
+                                                                            formControlName="cleanliness" value="3">
+                                                                        <label for="average_hygiene"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="dissatisfied_hygiene"
+                                                                            formControlName="cleanliness" value="4">
+                                                                        <label for="dissatisfied_hygiene"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">Services
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="excellent_services"
+                                                                            formControlName="services" value="1">
+                                                                        <label for="excellent_services"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_services"
+                                                                            formControlName="services" value="2">
+                                                                        <label for="good_services"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_services"
+                                                                            formControlName="services" value="3">
+                                                                        <label for="average_services"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="dissatisfied_services"
+                                                                            formControlName="services" value="4">
+                                                                        <label for="dissatisfied_services"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">Proximity
+                                                                from office</td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="excellent_proximity"
+                                                                            formControlName="proximity_from_office"
+                                                                            value="1">
+                                                                        <label for="excellent_proximity"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_proximity"
+                                                                            formControlName="proximity_from_office"
+                                                                            value="2">
+                                                                        <label for="good_proximity"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_proximity"
+                                                                            formControlName="proximity_from_office"
+                                                                            value="3">
+                                                                        <label for="average_proximity"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="dissatisfied_proximity"
+                                                                            formControlName="proximity_from_office"
+                                                                            value="4">
+                                                                        <label for="dissatisfied_proximity"></label>
+
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left; background: #e1f1f2;">Value for
+                                                                Money</td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio"
+                                                                            id="excellent_value_for_money"
+                                                                            formControlName="value_for_money" value="1">
+                                                                        <label for="excellent_value_for_money"></label>
+
+                                                                        <div class="check"></div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="good_value_for_money"
+                                                                            formControlName="value_for_money" value="2">
+                                                                        <label for="good_value_for_money"></label>
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio" id="average_value_for_money"
+                                                                            formControlName="value_for_money" value="3">
+                                                                        <label for="average_value_for_money"></label>
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <ul>
+                                                                    <li>
+                                                                        <input type="radio"
+                                                                            id="dissatisfied_value_for_money"
+                                                                            formControlName="value_for_money" value="4">
+                                                                        <label
+                                                                            for="dissatisfied_value_for_money"></label>
+                                                                        <div class="check">
+                                                                            <div class="inside"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:0px;">
+                                            <h3 class="feed_head text-center">Any comments/suggestions for improvement
+                                            </h3>
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="5" id="comment"
+                                                    formControlName="comments" placeholder="Write here..."></textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="submit" [disabled]="!feedBackForm.valid" value="Submit"
+                                                    id="submitButton" class="btn_class" (click)="submit()">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

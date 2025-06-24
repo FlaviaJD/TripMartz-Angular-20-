@@ -1,0 +1,74 @@
+.logo-src {
+    // height: $logo-height;
+    // width: $logo-width;
+    // background: url('~/assets/images/logo-inverse.png');
+    //   height: 50px;
+    //   width: -webkit-fill-available;
+    //   background: url(~/assets/images/logo-inverse.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+  }
+  .balance-dropdown .dropdown-toggle{
+      text-transform: none;
+  }
+.nav-item .active::after{ position: absolute;
+  content: "";
+  background: #065081;
+  height: 3px;
+  width: auto;
+  right: 15px;
+  left: 15px;
+  bottom: -24px;}
+  .logo-src {padding-right: 10px; display: inline-block;
+    width: 100px;} 
+  .menu-logo { opacity: 0;}
+  ::ng-deep .closed-sidebar .menu-logo {opacity: 1; }
+  .main-menu li a { color: #333d54; position: relative;
+    font-size: 16px;
+    padding: 0px 22px; }
+
+  .main-menu li a i { font-size: 20px; display: none;
+    padding-right: 5px;
+    line-height: 16px;}
+ 
+    .main-menu li a.active { color: #065081}
+
+  .user_name { color: #333d54 !important; font-size: 15px;}
+.pro-btn{ border-radius: 0px;
+    text-align: left;
+    border-bottom: 1px solid #ebebeb;
+    color: #333d54;
+    font-weight: 100;}
+ .pro-btn:hover { color: #065081 }  
+//   ::ng-deep .dropdown-menu.show {-webkit-animation: fade-in2 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+//     animation: fade-in2 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+//     top: 100% !important;
+//     min-width: 250px !important;
+//     right: -15px !important;
+//     left: inherit !important;
+//     top: 160% !important; transform: inherit !important;}
+
+  .text-blink {
+    background-color: #F99D1C; position: relative; color: #fff; padding: 5px 10px; border-radius: 5px; margin-bottom: 0px; font-size: 15px; margin-right: 30px;
+  }
+.bell_icon { position: absolute;
+    right: -13px;
+    top: -8px;
+    background: #cc801f;
+    padding: 2px 5px;
+    border-radius: 50%;
+    color: #ffc070;}  
+.text-blink:after { display: none;}
+.blink-soft {
+    animation: blinker 1.5s linear infinite;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0.2;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+   .app-header__menu{padding: 0px!important;}
+   .header-btn-lg .dropdown-toggle::after{display: none;}
+   .nav-item .active::after{background: none!important;}
+  }

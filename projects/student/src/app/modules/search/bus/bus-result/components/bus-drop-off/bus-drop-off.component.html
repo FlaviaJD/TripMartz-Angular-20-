@@ -1,0 +1,32 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Dropoff Details</h4>
+      <button (click)="hide()" type="button" class="btn btn-close"><i style="font-size: 20px;" class="fs-4 fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="bus-info-modal-content" class="ssssbuswrap">
+        <table *ngIf="busDetails?.droppingTimes && busDetails?.droppingTimes.length>0"
+          class="booktblebus tblbooktblebus table table-bordered table-responsive"
+          style="width:100%;margin-top:12px; display: table;">
+          <tbody>
+            <tr style="background-color: #dcdfdf;">
+              <th style="width:33.333333333%">S No.</th>
+              <th style="width:33.333333333%">Drop </th>
+              <th style="width: 33.333333333%">Time</th>
+            </tr>
+            <tr *ngFor="let dropoffs of busDetails?.droppingTimes;let i=index;">
+              <td>{{i+1}}</td>
+              <td>{{dropoffs?.bpName}}</td>
+              <td>{{dropoffs?.time | date: 'dd MMM yyyy,H:mm'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h6 *ngIf="busDetails?.Dropoffs && busDetails?.Dropoffs.length==0">No Data Found</h6>
+      </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" (click)="hide()" class="btn btn-default">Close</button>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,350 @@
+<div *ngIf="!isCSVUploaded" class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Employee Details</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+                <form class="" [formGroup]="employeeForm" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>Employee Details </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="employeeId " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Employee Id
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="employeeId" 
+                                formControlName="employeeId" placeholder="Employee Id">
+                        </div>
+                     </div>   
+                     <div class="col-md-4 mb-2 p-0 required">
+                        <label for="title " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Title
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <select formControlName="title"
+                                class="form-control" id="title">
+                                <option [value]="''" selected disabled>Please Select</option>
+                                <option *ngFor="let item of titleList"  [ngValue]="item.id">
+                                    {{item.title}}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="firstName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">First Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="firstName"  (keypress)="omitSpecialCharacters($event)"
+                                formControlName="firstName" placeholder="First Name">
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="lastName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Last Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="lastName"  (keypress)="omitSpecialCharacters($event)"
+                                formControlName="lastName" placeholder="Last Name">
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="positionName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Designation Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <select formControlName="positionName"
+                                class="form-control" id="positionName">
+                                <option [value]="''" selected disabled>Please Select</option>
+                                <option *ngFor="let item of positionList"  [value]="item?.position_name">
+                                    {{item?.position_name}}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="departmentName " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Department Name
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <select formControlName="departmentName"
+                                class="form-control" id="departmentName">
+                                <option [value]="''" selected disabled>Please Select</option>
+                                <option *ngFor="let item of departmentList"  [value]="item?.department_name">
+                                    {{item?.department_name}}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required" *ngIf="currentUser?.auth_role_id==7">
+                            <label for="costCenter " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Cost Center
+                                <sup class="text-danger f-16"> * </sup> </label>
+                            <div class="col-sm-12">
+                                <select formControlName="costCenter" class="form-control" id="costCenter">
+                                    <option [value]="''" selected disabled>Please Select</option>
+                                    <option *ngFor="let item of costCenterList" [value]="item?.cost_center_name">
+                                        {{item?.cost_center_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="phoneNo" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Phone Number
+                            <sup class="text-danger f-16"> * </sup> </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="phoneNo" 
+                                formControlName="phoneNo" placeholder="Phone Number" maxlength="16">
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required form-group">
+                            <label for="gender" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Gender
+                                <sup class="text-danger f-16"> * </sup></label>
+                            <div class="col-sm-12 d-flex align-items-center">
+                                    <div class="col-auto pl-0">
+                                    <label for="male">
+                                    <input type="radio" id="male" checked
+                                    name="gender" value="Male" formControlName="gender">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Male</span>
+                                    </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <label for="female">
+                                        <input type="radio" id="female" 
+                                        name="gender" value="Female" formControlName="gender">
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;">Female</span>
+                                        </label>
+                                     </div>
+                            </div>
+                            </div>
+                    
+                        <div class="col-md-12 mb-2 p-0 required">
+                        <label for="address" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Address <sup class="text-danger f-16"> * </sup></label>
+                        <div class="col-sm-12">
+                                <textarea name="" class="form-control" style="width: 100%;" id="address" cols="47" rows="5" formControlName="address">
+                                </textarea>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="city" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">City <sup class="text-danger f-16"> * </sup></label>
+                        <div class="col-sm-12">
+                            <input 
+                            type="text" 
+                            formControlName="city" autocomplete="off"
+                            class="form-control" 
+                            id="city" 
+                            maxlength="250" 
+                            list="cityList" 
+                            placeholder="Start typing a city name">
+                          <datalist id="cityList" class="cityList">
+                            <option *ngFor="let city of cityList" [value]="city?.city_name">
+                                {{city?.city_name}}
+                            </option>
+                          </datalist>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                            <label for="locality " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Locality
+                              </label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="locality" 
+                                    formControlName="locality" placeholder="Locality">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="state" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">State <sup class="text-danger f-16"> * </sup></label>
+                        <div class="col-sm-12">
+                            <input formControlName="state" type="text" class="form-control"
+                                placeholder="State" id="appReference"
+                                (keyup)="getAutoCompleteState($event,'from')" list="dynamicLocationsOrigin">
+                            <ul class="droplocations" id="dynmicLocations">
+                                <li *ngFor="let state of statesList" (click)="onStateSelect(state)">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    {{state?.state_code}}-{{state?.name}}
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="country" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Country<sup class="text-danger f-16"> * </sup></label>
+                        <div class="col-sm-12">
+                            <select formControlName="country"
+                                class="form-control" id="country">
+                                <option [value]="''" selected disabled>Please Select</option>
+                                <option *ngFor="let item of countryList"  [ngValue]="item?.id">
+                                    {{item?.name}}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="pinCode" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Pin Code</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="pinCode" 
+                                formControlName="pinCode" placeholder="Pin Code" minlength="6" maxlength="8">
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="userStatus " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">User Status
+                            <sup class="text-danger f-16"> * </sup> </label>
+                            <div class="col-sm-12 d-flex align-items-center">
+                            <ng-container *ngFor="let option of userStatusOptions">
+                                <div class="col-auto pl-0">
+                                <label [for]="option.label">
+                                <input type="radio" [id]="option.label" [formControlName]="'userStatus'" 
+                                [name]="'userStatus'" [value]="option.id">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{ option.label }}</span>
+                                </label>
+                               </div>
+                            </ng-container>
+                        </div>
+                        </div>
+                    
+                        <!-- <div class="col-md-4 mb-2 p-0 required">
+                        <label for="xlproClientCode " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Xlpro Client Code
+                          </label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="xlproClientCode" 
+                                formControlName="xlproClientCode" placeholder="Xlpro Client Code">
+                        </div>
+                        </div> -->
+                        <div class="col-md-4 mb-2 p-0 form-group required" *ngIf="currentUser?.auth_role_id==7" >
+                            <label for="access" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Access
+                                <sup class="text-danger f-16"> * </sup> </label>
+                            <div class="col-sm-12 d-flex align-items-center">
+                                <div class="col-auto pl-0" *ngFor="let item of accessList;let index=index">
+                                    <input type="checkbox" id="item{{index}}" value="item.value" [checked]="item.isChecked" formControlName="access"
+                                        (change)="checkBoxSelection($event,item.value)" style="margin-right: 5px;">
+                                    <label for="item{{index}}" style="margin-right: 5px;">{{item.name}}</label>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                    <hr>
+                    <ng-container *ngIf="currentUser?.auth_role_id==7">
+                        <div class="title pl-30">
+                            <h3>Approver Status</h3>
+                        </div>
+                        <div class="form-group required row">
+                            <div class="col-md-4 mb-2 p-0 required">
+                                <label for="approvarRequired" class="required"
+                                    class="col-sm-12 col-form-label font-weight-bold labelAlign">Approver
+                                </label>
+                                <div class="col-sm-12 d-flex align-items-center">
+                                    <div class="col-auto pl-0">
+                                        <label for="yes_approve">
+                                            <input type="radio" id="yes_approve" checked formControlName="is_approvar" [value]="true">
+                                            <span class="design"></span>
+                                            <span class="text" style="margin-left: 4px;">True</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <label for="no_approve">
+                                            <input type="radio" id="no_approve" formControlName="is_approvar" [value]="false">
+                                            <span class="design"></span>
+                                            <span class="text" style="margin-left: 4px;">False</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2 p-0 required">
+                                <label for="approvarRequired" class="required"
+                                    class="col-sm-12 col-form-label font-weight-bold labelAlign">Approvar Required <sup
+                                        class="text-danger f-16"> * </sup>
+                                </label>
+                                <div class="col-sm-12">
+                                    <select formControlName="approvarRequired" class="form-control" id="approvarRequired">
+                                        <option [ngValue]="null" disabled selected>Please Select</option>
+                                        <option [ngValue]="true">Yes</option>
+                                        <option [ngValue]="false">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2 p-0 required" *ngIf="employeeForm.get('approvarRequired').value">
+                                <label for="approvar" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Approvar
+                                    Name
+                                </label>
+                                <div class="col-sm-12">
+                                    <select formControlName="approvar_id" class="form-control" id="approvar">
+                                        <option [value]="null" selected disabled>Please Select</option>
+                                        <option *ngFor="let item of approvarList" [ngValue]="item?.id">
+                                            {{item?.first_name}} {{item.last_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <hr>
+                        <div class="title pl-30">
+                            <h3>Login Details</h3>
+                        </div>
+                        <div class="form-group required row">
+                            <label for="email " class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Email ID
+                                <sup class="text-danger f-16"> * </sup> </label>
+                            <div class="col-sm-6">
+                                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+            <hr>
+            <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+                <form class="" [formGroup]="fileUploadForm" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>CSV Upload - <a href="#" (click)="onSampleDownload($event)" [ngClass]="{'clicked': isClicked}">(Download CSV Sample)</a></h3>
+                    </div>
+                    <div class="form-group row">
+                        <label for="uploadFile" class="required" class="col-sm-12 col-form-label">File Upload<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <div class='file-input'>
+                                <input formControlName="upload_file" type="file" (change)="uploadFile($event)" accept="image/*" accept=".csv">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4 sec-col"
+                                    (click)="onCSVUpload()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onFileReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="isCSVUploaded">
+    <app-csv-uploaded-data></app-csv-uploaded-data>
+</div>
+<ngx-loading [show]="loading"
+[config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+[template]="loadingTemplate"></ngx-loading>

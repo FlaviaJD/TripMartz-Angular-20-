@@ -1,0 +1,46 @@
+
+.hide {
+    // display: none;
+    color: red;
+  }
+  
+  .myImage:hover + .hide {
+    display: block;
+    color: red;
+  }
+
+.downloadImage {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 9px;
+    cursor: pointer;
+  }
+  
+  /* Darker background on mouse-over */
+  .downloadImage:hover {
+    background-color: RoyalBlue;
+  }
+
+  .wrapper1,
+.wrapper2 {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.wrapper1 {
+  height: 20px;
+}
+
+.div1 {
+  width: 1800px;
+  height: 20px;
+}
+.div2 {
+  width: 1800px;
+  overflow: hidden;
+}
+.div2 .table-responsive {overflow: inherit;}
+.invisible-scrollbar::-webkit-scrollbar {
+    display: none;
+  }

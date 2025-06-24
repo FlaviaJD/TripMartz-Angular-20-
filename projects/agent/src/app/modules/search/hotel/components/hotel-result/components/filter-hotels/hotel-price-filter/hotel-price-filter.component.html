@@ -1,0 +1,14 @@
+<div class="rangebox">
+    <button data-target="#collapse514" data-toggle="collapse" class="collapsebtn"
+        type="button">Price </button>
+        <!-- <a style="cursor: pointer;font-size: 12px;" class="float-right" (click)="clearPriceFilter()">Clear</a> -->
+    <div id="collapse514" class="collapse show" style="clear: both;">
+        <div class="price_slider1">
+            <span class="lable-slider">
+                <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+                (valueChange)="valueChange($event)"
+                (highValueChange)="highValueChange($event)"></ngx-slider>
+            </span>
+        </div>
+    </div>
+</div>

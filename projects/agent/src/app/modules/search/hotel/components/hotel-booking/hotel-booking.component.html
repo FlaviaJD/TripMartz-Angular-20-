@@ -1,0 +1,74 @@
+<app-hotel-booking-steps [rooms]="true"></app-hotel-booking-steps>
+<div class="my-2">
+    <div class="card-body pb-3">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 p-0">
+                <div class="card shadow-none p-0 mb-15">
+                  <div class="card shadow-none mb-0 mt-0">
+                    <div class="card-body pb-3 py-0">
+                        <app-hotel-detail-images [hotel]="hotel" [traveller]="traveller" ></app-hotel-detail-images>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-8 pl-0">
+                <div class="card p-0 shadow-none">
+                    <div class="card shadow-none mb-0 mt-0">
+                        <div class="card-body pb-3">
+                         <app-hotel-room-detail [hotel]="hotel" (roomSelectionChange)="onRoomSelectionChange($event)" [traveller]="traveller" id="roomDetail"></app-hotel-room-detail>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 mt-0 p-0">
+                <div class="card p-3 stickytop border">
+                <app-hotel-detail [hotel]="hotel" [traveller]="traveller"></app-hotel-detail>
+
+                <div class="col-md-12 nopad room_list1" style="text-align: center;" *ngIf="hotel?.RoomDetails && hotel?.RoomDetails.length>0">
+                    <div class="sticky-top">
+                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                            <ng-container *ngFor="let rooms of roomList;">
+                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                <div class="room_selected"><span>Room {{index+1}}:</span> {{rooms?.SelectedRoom?.Description}}</div>
+                            </div>
+                            </ng-container>
+                        </ng-container>
+                        <div class="bottom_button">
+                        <ng-container *ngFor="let roomList of hotel?.RoomDetails; let index=index">
+                            <ng-container *ngFor="let rooms of roomList;">
+                            <div class="rooms_selection" *ngIf="rooms?.SelectedRoom">
+                                <div class="selected_price" *ngIf="index==0">
+                                    {{rooms?.SelectedRoom?.Price?.Currency}} 
+                                    {{ (rooms?.SelectedRoom?.Price?.Amount + totalPrice) | number:'1.0-0' }}
+                                </div>
+                            </div>
+                            </ng-container>
+                        </ng-container>
+                        <br />
+                        <button (click)="onBookNow(hotel,true)" [disabled]="!allRoomsSelected" class="btn btn-lg btn-success booknowroom">
+                            {{'Book Now'}}
+                        </button>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <ngx-loading [show]="loading"
+        [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+        [template]="loadingTemplate"></ngx-loading>
+</div>
+<!-- <div class="row">
+    <div class="col-md-8 col-lg-8">
+        
+    </div>
+    <div class="col-md-4 col-lg-4 pl-0">
+        <div class="card mb-2 mt-2">
+            <div class="card-body pb-3">
+                <app-similar-hotels></app-similar-hotels>
+            </div>
+        </div>
+    </div>
+</div> -->

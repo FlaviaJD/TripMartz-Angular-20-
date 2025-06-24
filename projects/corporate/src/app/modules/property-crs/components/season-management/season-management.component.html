@@ -1,0 +1,56 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form d-flex">
+            <div class="col-md-12 p-0"> 
+                <div>
+                    <h3>Add Season</h3>
+                </div>
+                <form class="" [formGroup]="regConfig" autocomplete="off">
+                    <div class="row mb-4">
+                    <div class="col-4 p-0">
+                        <label for="seasonName" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Season Name</label>
+                        <div class="col-sm-12">
+                            <input type="text"  name="seasonName" id="seasonName"
+                            class="form-control" formControlName="seasonName" placeholder="Season Name">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="startDate" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Season Start Date</label>
+                        <div class="col-sm-12">
+                            <input formControlName="startDate" type="text" id="startDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                            bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="endDate" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Season End Date</label>
+                        <div class="col-sm-12">
+                            <input formControlName="endDate" type="text" id="endDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                            bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="status" class="required" class="col-sm-12 col-form-label font-weight-bold labelAlign">Season Status</label>
+                        <div class="col-sm-12">
+                            <select formControlName="status"
+                            class="form-control" id="status">
+                            <option [value]="'0'" selected>{{'Inactive'}}</option>
+                            <option [value]="'1'">{{'Active'}}</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onBack()">Back</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg" (click)="onAddSeason()">Add Season</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

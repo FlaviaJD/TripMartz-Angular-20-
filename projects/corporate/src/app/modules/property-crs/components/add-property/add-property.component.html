@@ -1,0 +1,150 @@
+<div class="custom-inline-form bg-white card mb-2">
+    <div class="col-md-12" style="font-weight: bolder;">
+        <h3>{{'Add Property'}}</h3>
+    </div>
+    <div class="col-md-12">
+        <!-- <h5>{{'Property Information'}}</h5> -->
+        <div class="col-12 p-0">
+            <form [formGroup]="regConfig" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group ">
+                            <label for="propertyType" class="required" class="col-form-label font-weight-bold labelAlign">Property Type </label>
+                            <select formControlName="propertyType"
+                                class="form-control" id="propertyType">
+                                <option [value]="''" selected>Please Select</option>
+                                <option *ngFor="let item of propertyTypeList"  [value]="item">
+                                    {{item}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="propertyName" class="col-form-label font-weight-bold labelAlign">Property Name</label>
+                            <input type="text" id="propertyName" autocomplete="off" formControlName="propertyName"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Property Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="starRating" class="col-form-label font-weight-bold labelAlign">Start Rating</label>
+                            <input type="text" id="starRating" autocomplete="off" formControlName="starRating"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Star Rating">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="amenities" class="col-form-label font-weight-bold labelAlign">Amenities</label>
+                            <input type="text" id="amenities" autocomplete="off" formControlName="amenities"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Amenities">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="contractExpiryDate" class="col-form-label font-weight-bold labelAlign">Contract Expiry Date</label>
+                                <input formControlName="contractExpiryDate" type="text" id="contractExpiryDate" autocomplete="off"
+                                    class="form-control form-control-sm " placement="bottom left" placeholder="dd-mm-yyyy"
+                                    bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="country" class="col-form-label font-weight-bold labelAlign">Country</label>
+                            <input type="text" id="country" autocomplete="off" formControlName="country"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Country">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="city" class="col-form-label font-weight-bold labelAlign">City</label>
+                            <input type="text" id="city" autocomplete="off" formControlName="city"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="cityCode" class="col-form-label font-weight-bold labelAlign">City Code</label>
+                            <input type="text" id="cityCode" autocomplete="off" formControlName="cityCode"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="City Code">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="email" class="col-form-label font-weight-bold labelAlign">Email</label>
+                            <input type="text" id="email" autocomplete="off" formControlName="email"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="hotelContactNo" class="col-form-label font-weight-bold labelAlign">Hotel Contact No</label>
+                            <input type="text" id="hotelContactNo" autocomplete="off" formControlName="hotelContactNo"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Hotel Contact No">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="latitude" class="col-form-label font-weight-bold labelAlign">Latitude</label>
+                            <input type="text" id="latitude" autocomplete="off" formControlName="latitude"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Latitude">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="longitude" class="col-form-label font-weight-bold labelAlign">Longitude</label>
+                            <input type="text" id="longitude" autocomplete="off" formControlName="longitude"
+                                class="form-control form-control-sm " placement="bottom left" placeholder="Longitude">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 pr-0">
+                        <div class="form-group">
+                            <label for="address" class="col-form-label p-0 col-sm-12 font-weight-bold labelAlign">Address</label>
+                                <textarea name="address" class="form-control form-control-sm " style="width: 100%;" id="address" cols="77" rows="5"></textarea>
+                        </div>
+                    </div>
+              
+                    <div class="col-md-6 pr-0">
+                        <div class="form-group">
+                            <label for="description" class="col-form-label p-0 font-weight-bold labelAlign">Description</label>
+                                <textarea name="description" class="form-control form-control-sm " id="description" style="width: 100%;" cols="90" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-row">
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="status" class="col-form-label font-weight-bold labelAlign">Status</label>
+                                <select formControlName="status"
+                                    class="form-control" id="status">
+                                    <option [value]="'0'" selected>{{'Inactive'}}</option>
+                                    <option [value]="'1'">{{'Active'}}</option>
+                                </select>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="image" class="col-form-label font-weight-bold labelAlign">Image</label>
+                            <input type="file" formControlName="image" class="form-control form-control-sm "
+                            (change)="uploadImage($event)">
+                        </div>
+                    </div>
+                    <div class="col-md-4 pr-0">
+                        <div class="form-group">
+                            <label for="thumbnails" class="col-form-label font-weight-bold labelAlign">Thumbnails</label>
+                            <input type="file" formControlName="thumbnails" class="form-control form-control-sm "
+                            (change)="uploadThumbnail($event)">
+                        </div>
+                    </div>
+                </div>
+                <div class="btncontainer">
+                    <button type="submit" class="btnStyle" (click)="onSearchSubmit()">Search</button> &nbsp;
+                    <button type="reset" class="btnStyle" (click)="onReset()">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

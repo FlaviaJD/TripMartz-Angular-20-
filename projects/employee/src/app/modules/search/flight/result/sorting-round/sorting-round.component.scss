@@ -1,0 +1,21 @@
+.sortul { margin-bottom: 4px; border-radius: 5px;}
+.sorta strong { font-size: 11px !important;}
+.sorta { padding-left: 8px !important;}
+.sorta.des::after {
+    content: "\f0d8";
+    color: #999;
+    font-family: "FontAwesome";
+    margin-right: 2px !important;
+    float: right;
+    font-weight: 700;
+}
+
+.sorta.asc::after {
+    content: "\f0d8";
+    color: #999;
+    font-family: "FontAwesome";
+    margin-right: 5px !important;
+    float: right;
+    font-weight: 700;
+}
+

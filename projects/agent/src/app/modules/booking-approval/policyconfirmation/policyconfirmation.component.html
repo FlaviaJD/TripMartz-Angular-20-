@@ -1,0 +1,35 @@
+<table style="font-size:14px;font-family:'Arial';width:100%;margin:0px auto">
+    <tbody>
+        <tr>
+            <td style="" class="paddinginc">
+                <table style="width:100%;background:none;border-radius:3px 3px 0 0">
+                    <tbody>
+                        <tr>
+                            <td align="center" style="padding:15px 20px; background-color:#fff;"><img style="width:280px;margin-bottom:0px"
+                                [src]="currentUser.domain_logo || 'assets/images/login-images/l-logo.png'"
+                                    alt="image/png" class="CToWUd" data-bit="iit"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width:100%;background:#fff;border-radius:3px 3px 0 0">
+                    <tbody>
+                        <tr>
+                            <td  *ngIf='showAprove' style="padding:20px 20px 0px;font-size:21px; text-align: center;">
+                                <img class="failed" src="assets/images/success.png" alt="" />
+                                <br/>
+                                <h4><strong>Request has been approved successfully.</strong></h4>
+                                <br/>
+                            </td>
+                            <td  *ngIf='!showAprove' style="padding:20px 20px 0px;font-size:21px; text-align: center;">
+                                <img class="failed" src="assets/images/failed.png" alt="" />
+                                <br/>
+                                <h4><strong>Request has been rejected successfully.</strong></h4>
+                                <br/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

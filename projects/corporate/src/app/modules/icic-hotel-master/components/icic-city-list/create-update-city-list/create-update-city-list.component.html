@@ -1,0 +1,117 @@
+
+<!-- New design -->
+
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">City List</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+                <form class="" autocomplete="off" [formGroup]="citylistform">
+                    <div class="title">
+                        <h3>City List</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-2 p-0 ">
+                        <label   class="col-sm-12 col-form-label">City Name<span
+                                class="text-danger px-0 py-5">*</span></label>
+                        <div class="col-sm-12 form-group">
+                            <input type="text" name="cityname" id="cityname" 
+                            class="form-control" formControlName="cityname" placeholder="City Name">
+                        </div>          
+                    </div>
+                    <div class="col-md-4 mb-2 p-0">  
+                        <label   class="col-sm-12 col-form-label">City Code<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-12 form-group">
+                            <input type="text"  name="citycode" id="citycode" formControlName="citycode"
+                            class="form-control"  placeholder="City Code">
+                        </div>
+                </div>
+                <div class="col-md-4 mb-2 p-0">
+                    <label for="type" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign" >Tier</label>
+                    <div class="col-sm-6 d-flex align-self-center mt-3">
+                        <div class="cols mr-4">
+                        <label for="typeYes">
+                            <input type="radio" id="typeYes" [value]="0" formControlName="tier" style="margin-right: 5px;">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">0</span>
+                        </label>
+                        </div>
+
+                        <div class="cols mr-4">
+                            <label for="typeNo">
+                                <input type="radio" id="typeNo"  [value]="1" formControlName="tier" style="margin-right: 5px;">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">1</span>
+                            </label>
+                        </div>
+                        <div class="cols">
+                            <label for="type">
+                                <input type="radio" id="type" [value]="2" formControlName="tier" style="margin-right: 5px;">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">2</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button  type="submit"class="btn-sm btn-primary lg mr-4" (click)="onSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+         
+            <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+                <form class="" [formGroup]="fileUploadForm" autocomplete="off">
+                    <div class="title pl-30">
+                        <h3>CSV Upload - <a (click)="onSampleDownload($event)" href="#">(Download CSV Sample)</a>
+                        </h3>
+                    </div>
+                    <div class="form-group row">
+                        <label for="uploadFile" class="required" class="col-sm-12 col-form-label">File Upload<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <div class='file-input'>
+                                <input formControlName="upload_file" (change)="uploadFile($event)"type="file"  accept="image/*" accept=".csv">
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" (click)="onCSVUpload()" class="btn-sm btn-primary lg mr-4">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

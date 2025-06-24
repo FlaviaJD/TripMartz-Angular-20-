@@ -1,0 +1,74 @@
+<div class="modal-header">
+	<h4 class="modal-title">Car Details</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+	<div class="card p-0">
+		<div class="card-body p-0">
+          <table class="table table-bordered mb-0">
+           <tr>
+            <th style="width: 35%;">Sl No.</th>
+            <td>1</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Application Reference
+            </th>
+            <td>{{details?.AppReference}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Booking Status
+            </th>
+            <td>{{details?.CarDetails?.BookingStatus | map: getFormtedStatus}} </td>
+           </tr>
+            <tr>
+            <th style="width: 35%;">Approvar Status
+            </th>
+            <td>{{details?.CarDetails?.BookingStatus | map: getFormtedStatus}} </td>
+           </tr>
+            <tr>
+            <th style="width: 35%;">Departure City
+            </th>
+            <td class="">{{details?.CarDetails?.City}} </td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Pickup Address</th>
+            <td class="">{{details?.CarDetails?.PickupAddress}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Drop Address</th>
+            <td class="">{{details?.CarDetails?.DropAddress}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Pickup Date</th>
+            <td>{{details?.CarDetails?.PickupDate  | date: 'dd MMM yyyy'}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Pickup Time</th>
+            <td>{{details?.CarDetails?.PickupTime}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Drop Date
+            </th>
+            <td>{{details?.CarDetails?.DropDate  | date: 'dd MMM yyyy'}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Drop Time
+            </th>
+            <td>{{details?.CarDetails?.DropTime}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">No. of Passengers
+            </th>
+            <td>{{details?.NoOfPasseneger}}</td>
+           </tr>
+           <tr>
+            <th style="width: 35%;">Vehicle Type
+            </th>
+            <td>{{details?.CarDetails?.VehicleType}}</td>
+           </tr>
+          </table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+.card {
+  .card-body {
+    .nav-tabs {
+      border-bottom: unset;
+
+      .nav-item {
+        .active {
+          color: #fff !important;
+          cursor: default;
+          background-color: #ff9800 !important;
+          border: 1px solid #ff9800 !important;
+          border-bottom-color: transparent;
+        }
+
+        .nav-link {
+          &:hover {
+            color: #fff !important;
+            background-color: #ff9800 !important;
+            border: 1px solid #ff9800 !important;
+            border-bottom-color: transparent;
+          }
+
+          margin-right: 2px;
+          line-height: 1.42857143;
+          border: 1px solid transparent;
+          border-radius: 4px 4px 0 0;
+          background: #f4f4f4;
+          color: #3c8dbc;
+        }
+      }
+    }
+  }
+}

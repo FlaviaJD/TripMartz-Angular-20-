@@ -1,0 +1,236 @@
+<div class="theme_bg" *ngIf="bookSeatResponse">
+  <div class="hotel_review_booking nopad mt-4">
+    <div class="card my-2 ">
+      <div class="card-body pb-3">
+        <div class="col-xs-12 nopad">
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+
+              <h5 class="mt-0">Thank you for Booking !!!!!</h5>
+                <h3 class="font-weight-bold" style=" font-size: 18px;">This is an auto message to inform you that a travel <span style="color: green;">Request ID: {{bookSeatResponse?.BookingDetails?.app_reference}}</span> has been generated and sent for approval. </h3>
+                <ul class="list-unstyled mt-4" style="font-size: initial;">
+                  <li>
+                      <i class="fa fa-check" aria-hidden="true"></i>&nbsp;
+                      Mail has been sent to the approver for approval.
+                  </li>
+                  <li>
+                      <i class="fa fa-check" aria-hidden="true"></i>&nbsp; <strong>Please note</strong>, confirmation of this booking will be done only on receipt of the approval. 
+                  </li>
+                  <li>
+                      <i class="fa fa-check" aria-hidden="true"></i>&nbsp; Confirmation on this booking, is subject to room availability at the time of booking.  
+                  </li>
+              </ul>
+              <h5>Your booking from <span
+                style="color:#3e4d5d;">{{bookSeatResponse?.BookingItineraryDetails?.departure_from}} to
+                {{bookSeatResponse?.BookingItineraryDetails?.arrival_to}}</span> is <span
+                [innerHTML]="getFormtedStatus(bookSeatResponse?.BookingDetails?.status)"></span>.</h5>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    <div class="row mobile_row">
+      <div class="col-md-8 col-lg-8">
+        <form>
+          <div class="col-md-12 col-lg-12 nopad">
+            <div class="wrappay leftboks">
+             
+
+
+
+              <div class="comon_backbg mt-2">
+                <h5 class="inpagehed p-2">Booking Details</h5>
+                <div class="sectionbuk">
+                  <div id="tdetails">
+                    <div class="onedept">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="paylabel">Travel Name : <span
+                              class="text-uppercase">{{bookSeatResponse?.BookingItineraryDetails?.operator}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="paylabel">Bus Type : <span
+                              class="text-uppercase">{{bookSeatResponse?.BookingItineraryDetails?.bus_type}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="paylabel">Ticket Booking :
+                            <span>{{bookSeatResponse?.BookingItineraryDetails?.departure_from}} To
+                              {{bookSeatResponse?.BookingItineraryDetails?.arrival_to}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="paylabel">Travel Date Time :
+                            <span>{{bookSeatResponse?.BookingItineraryDetails?.journey_datetime | date:'d MMM
+                              y'}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="paylabel">Boarding Point :
+                            <span>{{bookSeatResponse?.BookingItineraryDetails?.boarding_from}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="paylabel">Dropping Point :
+                            <span>{{bookSeatResponse?.BookingItineraryDetails?.dropping_at}}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-12 nopad">
+              <div class="wrappay leftboks">
+                <!-- <h3>Contact Details</h3> -->
+                <div class="comon_backbg">
+                  <h5 class="inpagehed p-2">Contact Details (For E-Ticket/Voucher)</h5>
+                  <div class="sectionbuk">
+                    <div id="tdetails">
+                      <div class="onedept">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="paylabel">Customer Name
+                            </div>
+                            <span class="text-uppercase"
+                              *ngIf="bookSeatResponse?.BookingPaxDetails">{{bookSeatResponse?.BookingPaxDetails[0]?.name}}</span>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Email Address
+                            </div>
+                            <span class="">{{bookSeatResponse?.BookingDetails?.email}}</span>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Phone Code
+                            </div>
+                            <span>
+                              {{bookSeatResponse?.BookingDetails?.phone_code}}
+                            </span>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Contact
+                            </div>
+                            <span>
+                              {{bookSeatResponse?.BookingDetails?.phone_number}}</span>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wrappay leftboks">
+              <!-- <h3>Your Information</h3> -->
+              <div class="comon_backbg">
+                <h5 class="inpagehed p-2">Passenger Information</h5>
+                <div class="sectionbuk" *ngFor="let passengerInfo of bookSeatResponse?.BookingPaxDetails">
+                  <div id="tdetails">
+                    <div class="onedept">
+                      <div class="guest_div">
+                        <div class="row parl">
+                          <div class="col-md-2 downsrt pr-0">
+                            <div class="lokter">
+                              <span class="whoare">&nbsp;</span>
+                              <span class="whoare">Seat No {{passengerInfo?.seat_no}} </span>
+                            </div>
+                          </div>
+                          <div class="col-md-2 p-0 mpad">
+                            <div class="paylabel">Title 
+                            </div>
+                            <div class="text-uppercase">
+                              {{passengerInfo?.title}}
+                            </div>
+                          </div>
+                          <div class="col-md-3 pr-0">
+                            <div class="paylabel">Name </div>
+                            <div class="text-uppercase">
+                              {{passengerInfo?.name}}
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Gender
+                            </div>
+                            {{passengerInfo?.gender}}
+                          </div>
+                          <div class="col-md-2">
+                            <div class="paylabel">Age
+                            </div>
+                            {{passengerInfo?.age}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <div class="clearfix"></div>
+        <!-- <div class="payrowsubmt">
+          <div class="col-md-3 col-sm-12 fulat500 nopad">
+            <button type="submit" (click)="onSubmit()" class="paysubmit">View Voucher</button>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="col-md-4 col-lg-4 pl-0 mobile_pad mobile_top mt-2"
+        style="position: sticky;top: 20px; margin-top: 50px; align-self: start;">
+        <div class="topsticky">
+          <div class="fsBorder card" style="box-shadow: 0px 1px 16px #ddd;">
+            <h4 class="text-muted"> Fare Summary </h4>
+            <div class="bg-gradient px-0 pt-2 pb-1">
+              <div>
+                <div class="row m-0 text-muted">
+                  <div class="col-md-12 col-lg-12 f-14 ng-star-inserted">
+                    <div class="float-left">
+                      <div class="customColor">Total Seat(s)
+                      </div>
+                    </div>
+                    <div class="float-right customColor" *ngIf="bookSeatResponse?.BookingPaxDetails">
+                      {{bookSeatResponse?.BookingPaxDetails.length}} </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12">
+                    <div class="float-left  customColor"> Base Fare </div>
+                    <div class="float-right customColor ng-star-inserted"
+                      *ngIf="bookSeatResponse?.BookingPaxDetails"> {{bookSeatResponse?.BookingDetails?.currency }}
+                      {{bookSeatResponse?.BookingDetails?.total_fare}}
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12">
+                    <div class="float-left  customColor"> Convenience Fee </div>
+                    <div class="float-right customColor ng-star-inserted"
+                      *ngIf="bookSeatResponse?.BookingPaxDetails"> {{bookSeatResponse?.BookingDetails?.currency }}
+                      0
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12 f-16">
+                    <div class="float-left text-uppercase grand_tot customColor"> Grand Total </div>
+                    <div class="float-right text-warning ng-star-inserted customColor" style="color: #189AD3 !important;"
+                      *ngIf="bookSeatResponse?.BookingPaxDetails"> {{bookSeatResponse?.BookingDetails?.currency }}
+                      {{bookSeatResponse?.BookingDetails?.total_fare}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

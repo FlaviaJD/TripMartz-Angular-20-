@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group reason_for_travel_cothers">
+            <div class="col-md-12 nopad">
+                <label> Please mention the reason for choosing this fare which is beyond your eligibility level
+                    !!</label>
+            </div>
+            <div class="col-md-12 nopad">
+                <textarea class="form-control reason_for_travel_others" [(ngModel)]="beyond_limit_reason"
+                    class="form-control" rows="2" cols="40"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-12 sm_pad">
+    <button class="btn btn-primary fare_msg" (click)="onSubmit()" type="submit" [disabled]="beyond_limit_reason==''">Send Request ->
+        {{selectedPrice?.PriceBreakup?.FareType}} Fare</button>
+</div>

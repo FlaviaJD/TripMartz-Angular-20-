@@ -1,0 +1,74 @@
+label{
+    color: #363636;
+}
+.btn{
+    font-size: 14px;
+}
+.card{
+    font-family: 'Asap';
+}
+label{
+    font-size: 14px;
+}
+.my-color{
+    font-size: 14px;
+}
+// for hiding increment for input type number start
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+    border-radius: 0;
+    box-shadow: none;
+    content: "";
+    height: 16px;
+    left: 0px;
+    position: absolute;
+    top: 2px;
+    width: 16px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+}
+
+// .squaredThree [type="checkbox"]:not(:checked) + label:before,
+// [type="checkbox"]:checked + label:before {
+//     left: -1px;
+//     top: -1px;
+// }
+
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: "\f00c";
+    font-family: "FontAwesome";
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    font-size: 12px;
+    color: #fff;
+    transition: all 0.2s;
+    background: #041e37;
+    right: 0px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    border-radius: 1px !important;
+    line-height: 15px;
+    border: 1px solid #041e37;
+    border-radius: 4px !important;
+}
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 0rem;
+  }
+// end
+.nopad{padding: 0px!important;}

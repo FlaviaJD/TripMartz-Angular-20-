@@ -1,0 +1,14 @@
+.cabinBaggage {
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.cabinBaggage:hover {
+  width: 100%;
+}
+.baggage_col{
+    flex: 1;
+  padding: 10px;
+}
+
+.deemFont strong { color:#000; font-weight: 500 !important;}

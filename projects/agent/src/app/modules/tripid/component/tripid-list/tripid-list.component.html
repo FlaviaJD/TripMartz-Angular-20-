@@ -1,0 +1,90 @@
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+<div class="card">
+    <div class="card-body">
+        <div class="mb-3">
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-hover" matSort
+                    (matSortChange)="sortData($event)" id="agent-callback-list">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left text-nowrap" *ngFor="let header of displayColumn;"
+                                mat-sort-header="{{header.key}}">
+                                {{header.value }} </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="!noData && !respData.length">
+                            <td colspan="11">
+                                <h4 class="text-muted text-center">
+                                    No Data Found!
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr *ngIf="noData">
+                            <td colspan="11">
+                                <mat-spinner [diameter]="30" style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+                            </td>
+                        </tr>
+                        <tr
+                            *ngFor="let data of respData | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+                            <td style="text-align: center;">{{i+1}}.</td>
+                            <td class="text-left overflow-hidden">
+                                <div ngbDropdown container="body"><button class="btnStyle" ngbDropdownToggle>
+                                        {{'Action'}}
+                                    </button>
+                                    <div ngbDropdownMenu>
+                                        <button (click)="update(data)" ngbDropdownItem>Update</button>
+                                        <!-- <button (click)="delete(data)" ngbDropdownItem>Delete</button> -->
+                                    </div>
+                                </div>
+                            </td>
+                            <td> {{data?.TripID || 'N/A'}}</td>
+                            <td>{{data?.TripName || 'N/A'}}</td>
+                            <td>{{(data?.FromDate | date: 'dd MMM yyyy')|| 'N/A'}}</td>
+                            <td>{{(data?.ToDate | date: 'dd MMM yyyy')|| 'N/A'}}</td>
+                            <!-- <td>{{data?.ServiceList || 'N/A'}}</td> -->
+                            <td>{{(data?.CreatedAt | date: 'dd MMM yyyy')|| 'N/A'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer pb-0">
+                <div class="d-flex w-100 justify-content-between">
+                    <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true"
+                        [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize">
+                    </ngb-pagination>
+                    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                        <option [ngValue]="10">10 items per page</option>
+                        <option [ngValue]="50">50 items per page</option>
+                        <option [ngValue]="100">100 items per page</option>
+                        <option [ngValue]="500">500 items per page</option>
+                        <option [ngValue]="1000">1000 items per page</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true"
+    [style.display]="showConfirm ? 'block' : 'none'">
+    <div class="modal-dialog  modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="paymentModalLabel">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete?</p>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn btn-success" (click)="deleteRequest()">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

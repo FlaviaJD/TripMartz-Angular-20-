@@ -1,0 +1,6 @@
+<app-home-page-header></app-home-page-header>
+<div class="static-wrapper" *ngIf="staticData">
+    <h5 *ngIf="staticData">{{staticData.page_title}}</h5>
+    <div [innerHTML]="staticData.page_description"></div>
+</div>
+<app-home-page-footer (changeContent)="getContent($event)"></app-home-page-footer>

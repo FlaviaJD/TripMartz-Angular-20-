@@ -1,0 +1,39 @@
+
+.elgible_tab li a { padding: 10px 17px !important;
+    font-size: 25px;
+    line-height: 22px;
+    background: #eef2f6 !important;
+    border-radius: 7px !important;}
+
+.elgible_tab li a.active { background:#065081 !important; color: #fff !important; border:none !important;} 
+.eligibility {
+    font-size: 14px; max-height: 250px; overflow: auto;
+    color: #333;
+}
+.eligibility .cont_in{padding-right: 7px; float: left; width: 100%; padding-top: 12px; padding-bottom: 12px; border-bottom: 2px solid #ddd;} 
+.eligibility .card-body {
+    padding: 2px 0px !important; 
+}
+
+.eligibility h4 { font-size: 20px; text-transform: capitalize; font-weight: 600;}
+
+.eligibility label {
+    width: 100%;
+    float: left;
+    padding: 3px 0px; text-transform: capitalize;
+    font-weight: 500;
+    margin-bottom: 0px; font-size: 15px;
+    line-height: 25px;
+}
+.eligibility label strong { font-weight: 500;}
+.eligibility span {
+    float: right;
+    background: #f79e2a;
+    padding: 3px 10px; font-size: 14px;
+    margin: 1px 0px;
+    line-height: normal;
+    border-radius: 5px;
+    color: #fff;
+}
+.tab-content { width: 100%;}
+.limit th { font-size: 12px; background: #ddd;}

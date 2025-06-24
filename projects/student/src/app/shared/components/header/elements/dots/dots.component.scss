@@ -1,0 +1,44 @@
+::ng-deep {
+  .nav-justified .nav-item {
+      display:flex;
+    flex-grow: unset !important;
+  }
+  .nav-justified .nav-item .nav-link   {
+        display: none;
+    }
+}
+
+
+.notification-count {
+    font-size: 15px;
+    margin-top: 3px;
+    margin-left: -7px;
+    line-height: normal;
+    position: absolute; color: #0A5081 !important;
+}
+
+.bx-tada, .bx-tada-hover:hover {
+    animation: tada 1.5s ease infinite;
+}
+
+@keyframes tada {
+    0% {
+        transform: scaleZ(1)
+    }
+
+    10%,20% {
+        transform: scale3d(.95,.95,.95) rotate3d(0,0,1,-10deg)
+    }
+
+    30%,50%,70%,90% {
+        transform: scaleZ(1) rotate3d(0,0,1,10deg)
+    }
+
+    40%,60%,80% {
+        transform: rotate3d(0,0,1,-10deg)
+    }
+
+    to {
+        transform: scaleZ(1)
+    }
+}

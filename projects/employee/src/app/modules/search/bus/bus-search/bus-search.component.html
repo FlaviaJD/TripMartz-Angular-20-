@@ -1,0 +1,64 @@
+<div class="custom-small-navtabs res_Pad">
+    <form [formGroup]="regConfig" class="">
+        <div class="res_Block1" [ngClass]="{'custom-form':isResultScreen}">
+        <div class="form-row mt-0 pt-0">
+            <div class="form-group col-md-3 pr-0 mpr-0 mobile_nopad">
+                <span class="icon fi-rr-map-marker-check"></span>
+                <label>From</label>
+                <input placeholder="Departure City" type="text"
+                    class="validate form-control form-control-sm nrm_input bsdep"
+                    (keyup)="getAutoCompleteLocations($event,'departureCity')" for="dynmicLocations"
+                    formControlName="departureCity" #departureCity>
+                <small class="invalid-feedback" style="display: block;" *ngIf="hasError('departureCity', 'required');">
+                    Departure City is required* </small>
+
+                <ul class="droplocations" id="departureLocations">
+                    <li *ngFor="let location of departureLocations"
+                        (click)="selectedLocation('departureCity',location)">
+                        {{location.cityName}}
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group col-md-3 p-0 mpr-0">
+                <span class="icon fi-rr-map-marker-check"></span>
+                <label>To</label>
+                <input placeholder="Desitnation City" type="text"
+                    class="validate form-control form-control-sm nrm_input"
+                    (keyup)="getAutoCompleteLocations($event,'destinationCity')" for="dynmicLocations"
+                    formControlName="destinationCity" #destinationCity>
+                <small class="invalid-feedback" style="display: block;"
+                    *ngIf="hasError('destinationCity', 'required');">
+                    Destination City is required* </small>
+                 <ul class="droplocations" id="desitnationLocations">
+                    <li *ngFor="let location of desitnationLocations"
+                        (click)="selectedLocation('destinationCity',location)">
+                        {{location.cityName }}
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group col-md-3 p-0 mpr-0">
+                <span class="icon fi-rr-calendar-days"></span>
+                <label>Departure Date</label>
+                <input type="text" id="checkin" formControlName="checkinDate" class="validate form-control form-control-sm nrm_input depd" placement="auto"
+                    placeholder="dd/mm/yyyy" bsDatepicker [bsConfig]="bsDateConf" [readonly]="true"
+                    (ngModelChange)="onCheckIn($event)" [minDate]="minDate" #checkinDate>
+                <small class="invalid-feedback" style="display: block;" *ngIf="hasError('checkinDate', 'required');">
+                    Departure Date is required* </small>
+            </div>
+            <div class="col-md-3 col-12 nopad">
+                <div class="valign-wrapper field-outer ai-fs">
+                    <div class="col-md-12 pr-0 mpr-0 mobile_pl-0">
+                        <label style="margin-bottom: 5px;">&nbsp;</label>
+                        <div class="all-btn shwroombtn float-right w-100">
+                            <button id="bus-form-submit" class="srch_btn float-right w-100" (click)="onSubmit()"
+                                value="Go to Result Screen" [disabled]="!isCorporateSelected">
+                                Search Buses
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+</div>

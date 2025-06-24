@@ -1,0 +1,105 @@
+
+<!-- New design -->
+
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Location List</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+                <form class="" autocomplete="off" [formGroup]="locationlistform">
+                    <div class="title pl-30">
+                        <h3>Location List</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-2 p-0 required">
+                        <label for="costCenterName" class="required" class="col-sm-12 col-form-label">City Name<span
+                                class="text-danger">*</span></label>
+                                <div class="col-sm-12 form-group">
+                                    <input formControlName="cityname" type="text" class="form-control"
+                                placeholder="City Name" id="appReference"
+                                (keyup)="getSearchedList($event)" list="dynamicLocationsOrigin">
+                            <ul class="droplocations" id="dynmicCity">
+                                <li *ngFor="let city of cityList" (click)="onCitySelect(city)" >
+                                    <i class="fal fa-map-marker-alt"></i>
+                                  {{city?.City}}
+                                </li>
+                            </ul>
+                                </div>
+                     </div>
+                    <div class="col-md-4 mb-2 p-0 required">
+                        <label for="costCenterName" class="required" class="col-sm-12 col-form-label">Location Name<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-12 form-group">
+                            <input type="text"  name="locationname" id="locationname"
+                            class="form-control"formControlName="locationname" placeholder="Location Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2 p-0 required">
+                        <label for="costCenterName" class="required" class="col-sm-12 col-form-label">Location Code<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-12 form-group">
+                            <input type="text"  name="locationcode" id="locationcode"
+                            class="form-control" formControlName="locationcode"placeholder="Location Code">
+                        </div>
+                        </div>
+                </div>
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"(click)="onSubmit()">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>   
+         
+            <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+                <form class="" autocomplete="off"[formGroup]="fileUploadForm">
+                    <div class="title pl-30">
+                        <h3>CSV Upload - <a (click)="onSampleDownload($event)"href="#">(Download CSV Sample)</a>
+                        </h3>
+                    </div>
+                    <div class="form-group row">
+                        <label for="uploadFile" class="required" class="col-sm-12 col-form-label">File Upload<span
+                                class="text-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <div class='file-input'>
+                                <input formControlName="upload_file" (change)="uploadFile($event)"type="file"  accept="image/*" accept=".csv">
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" (click)="onCSVUpload()"class="btn-sm btn-primary lg mr-4">Save</button>
+                                <button type="reset" class="btn btn-sm btn-primary lg mr-4">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

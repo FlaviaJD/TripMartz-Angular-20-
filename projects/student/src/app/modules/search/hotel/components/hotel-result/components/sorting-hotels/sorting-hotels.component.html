@@ -1,0 +1,38 @@
+<div class="filterforall" id="top-sort-list-wrapper">
+    <div class="topmisty" id="top-sort-list-1">
+        <div class="row">
+        <div class="col-md-12">
+            <!-- chakri changes ---- added row class for edges alignment -->
+            <div class="divinsidefltr">
+                <div class="insidemyt col-xs-12 nopad">
+                    <ul class="sortul">
+                        <li class="sortli hide_lines" style="width:33.33%;">
+                            <a (click)="sortByName()" class="sorta name-l-2-h loader"
+                                [ngClass]="byName && active == 'byName' ? 'des active' :(active == 'byName' ? 'asc active' : 'asc')">
+                                <i class="fas fa-sort-alpha-down"></i>
+                                <strong>Hotel Name</strong>
+                            </a>
+                        </li>   
+
+                        <li class="sortli hide_lines" style="width: 33.33%;">
+                            <a (click)="sortByStars()" class="sorta name-l-2-h loader"
+                                [ngClass]="byStars && active == 'byStars' ? 'des active' :(active == 'byStars' ? 'asc active' : 'asc')">
+                                <i class="fas fa-star"></i>
+                                <strong>Star</strong>
+                            </a>
+                        </li>
+
+                        <li class="sortli hide_lines" style="width: 33.33%;">
+                            <a (click)="sortByPrice()" class="sorta name-l-2-h loader"
+                                [ngClass]="byPrice && active == 'byPrice' ? 'des active' :(active == 'byPrice' ? 'asc active' : 'asc')">
+                                <i class="fa fa-tag"></i>
+                                <strong>Price</strong>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

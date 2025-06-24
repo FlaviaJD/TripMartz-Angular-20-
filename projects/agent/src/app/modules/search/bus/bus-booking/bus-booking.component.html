@@ -1,0 +1,347 @@
+<div class="theme_bg">
+  <app-bus-booking-steps></app-bus-booking-steps>
+  <div class="col-12 hotel_review_booking nopad mt-4">
+    <!-- <h3>Review Your Booking</h3> -->
+    <div class="clearfix"></div>
+    <div class="row mobile_row">
+      <div class="col-md-8 col-lg-8">
+        <div class="moreflt boksectn mb-3">
+          <div class="ontyp border bg-white">
+            <div class="labltowr arimobold">{{bookingBusData?.BusData?.busRoutes}}
+              <strong *ngIf="bookingBusData?.BusData?.duration">({{bookingBusData?.BusData?.duration}})</strong>
+            </div>
+            <div class="allboxflt d-flex">
+              <div class="col-md-6 nopadding full_fiftys">
+                <div class="alldiscrpo">{{bookingBusData?.BusData?.travels}}
+                    <br/>
+                    {{bookingBusData?.BusData?.busType}}
+                     <div class="clearfix"></div>
+                  <div class="sgsmalbus col-xs-12 col-md-12 nopad">
+                    <strong>Pickup : </strong>
+                    <div class="pikuplokndt">
+                      <span class="pikuptm">{{bookingBusData?.PickUp?.bpName}}, {{bookingBusData?.PickUp?.time | date: 'dd MMM yyyy,H:mm'
+                        }}</span>
+                    </div>
+                  </div>
+                  <div class="sgsmalbus col-xs-12 col-md-12 nopad">
+                    <strong>Drop : </strong>
+                    <div class="droplokndt">
+                      <span class="pikuptm">{{bookingBusData?.DropOff?.bpName}},
+                        {{bookingBusData?.DropOff?.time | date: 'dd MMM yyyy,H:mm'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 nopadding qurter_wdth">
+                <div class="d-flex">
+                  <div class="col-md-5 nopad">
+                    <span class="airlblxl">{{bookingBusData?.BusData?.departureTime }}</span>
+                    <!-- <span class="portnme1">{{bookingBusData?.BusData?.From }}</span> -->
+                  </div>
+                  <div class="col-md-2 nopad">
+                    <span style="font-size:20px;">→</span>
+                  </div>
+                  <div class="col-md-5 nopad">
+                    <span class="airlblxl">{{bookingBusData?.BusData?.arrivalTime}}</span>
+                    <!-- <span class="portnme1">{{bookingBusData?.BusData?.To}}</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 nopadding smal_width_hr">
+                <span class="portnme textcntr" style="color:#000">{{bookingBusData?.BusData?.duration}}</span>
+                <span data-stop-number="0" class="portnme textcntr">Seat ({{bookingBusData?.SeatCount}}) :
+                  <ng-container *ngFor="let seat of bookingBusData?.SeatsData; let index = index;">
+                    <span>{{ seat?.name }}</span>
+                    <ng-container *ngIf="index !== bookingBusData?.SeatsData.length - 1">, </ng-container>
+                  </ng-container>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <form [formGroup]="contactForm">
+          <div class="col-md-12 col-lg-12 nopad">
+            <!-- <div class="wrappay leftboks" formGroupName="Contact">
+              <h3>Contact Details</h3>
+              <div class="comon_backbg">
+                <h5 class="inpagehed p-2">Contact Details (For E-Ticket/Voucher)</h5>
+                
+              </div>
+            </div> -->
+            <div class="wrappay leftboks">
+              <!-- <h3>Your Information</h3> -->
+              <div class="comon_backbg" formArrayName="passengers">
+                <h5 class="inpagehed">Guest Information</h5>
+                <div class="sectionbuk">
+                  <div id="tdetails">
+                    <div class="onedept" *ngFor="let item of contactForm.get('passengers')['controls']; let i = index;">
+                      <div class="guest_div" [formGroupName]="i">
+                        <!-- <div *ngIf="travellerList && travellerList.length>0">
+                          <label class="textWeight">Select Traveler</label>
+                          <mat-form-field class="col-md-3 f-16 ml-1" appearance="fill">
+                            <mat-label>Select</mat-label>
+                            <mat-select formControlName="PassengerSelection" id="matselectAdult{{i}}">
+                              <mat-option class="text-uppercase" value="" disabled>Select</mat-option>
+                              <mat-option class="text-uppercase" *ngFor="let option of travellerList"
+                                [value]="option.first_name" (click)="setDetails(option,i)">
+                                {{option.first_name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <a class="passengerClear" (click)="clearDetails(i)">
+                            Clear</a>
+                        </div> -->
+                        <div class="valign-wrapper row mb-2" *ngIf="!isSelfBooking">
+                        <ng-container *ngIf="currentUser?.corporate_details?.business_name!='DCB Bank'"> 
+                        <div class="col-md-5 mb-2">
+                        <div class="paylabel">Select Traveller <b class="text-danger">*</b> </div>
+                        <input type="text" formControlName="selectedEmployee" id="State" style="border-radius: 9px !important;"
+                        class="form-control form-control-sm nrm_input" placeholder="Search Traveller" (keyup)="getTravellersList($event,i)"
+                        (focus)="setCurrentInput('selectedEmployee')" autocomplete="off" #state>
+                        <div *ngIf="item.get('selectedEmployee').valid && isCurrentInput('selectedEmployee') && slectededIndex==i">
+                            <app-employee-list (whichEmployee)="setEmployee($event,item)" [getEmployee]="respData" [inputFor]="'selectedEmployee'" #employeeList>
+                            </app-employee-list>
+                        
+                            </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="currentUser?.corporate_details?.business_name=='DCB Bank'">
+                          <div class="col-md-4">
+                              <div class="mb-3">
+                                  <div class="input-group-prepend">
+                                      <span class="">Search By HRMS <b class="text-danger">*</b></span>
+                                  </div>
+                                  <div class="d-flex">
+                                      <input type="text" formControlName="selectedEmployee" id="State" style="border-radius: 0px !important;"
+                                          class="form-control form-control-sm nrm_input" placeholder="Enter HRMS"
+                                          (focus)="setCurrentInput('selectedEmployee')" autocomplete="off" #infantControl>
+                                      <button class="btn btn-outline-secondary btnstyle" type="button"
+                                          (click)="findEmployeeId(infantControl.value,item,i)">Search</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </ng-container>
+                      </div>
+                        <div class="row parl">
+                          <div class="col-md-2 downsrt pr-0">
+                            <div class="lokter">
+                              <span class="whoare">&nbsp;</span>
+                              <span class="whoare">Seat No {{ item.get('SeatIndex').value }}</span>
+                            </div>
+                          </div>
+                          <div class="col-md-2 p-0 mpad">
+                            <div class="paylabel">Title <b class="text-danger">*</b>
+                            </div>
+                            <div class="selectedwrap">
+                              <select class="flpayinput text-uppercase" name="a_gender290[0]" id="a_gender_0"
+                                formControlName="Title" aria-required="true" required>
+                                <option value="" disabled>-Select-</option>
+                                <ng-container *ngFor="let t of titles">
+                                  <option [value]="t.title">
+                                    {{t.title}}
+                                  </option>
+                                </ng-container>
+                              </select>
+                            </div>
+                            <small class="error text-danger" *ngIf="hasError('Title', 'required', 'passengers', i);">
+                              Please Select Title* <br>
+                            </small>
+                          </div>
+
+                          <div class="col-md-3 pr-0">
+                            <div class="paylabel">Name <b class="text-danger">*</b> </div>
+                            <input placeholder="First Name" name="first_name290[0]" type="text"
+                              class="payinput mytextbox text-uppercase" formControlName="Name" value=""
+                              id="flight-adult-first-0" aria-required="true" required pattern="[a-zA-Z\s]+" />
+                            <div class="">
+                              <small class="error text-danger" *ngIf="hasError('Name', 'required', 'passengers', i);">
+                                Please Enter Name* <br>
+                              </small>
+                              <small class="error text-danger" *ngIf="hasError('Name', 'pattern', 'passengers', i);">
+                                Enter Only Characters * <br>
+                              </small>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Gender <b class="text-danger">*</b>
+                            </div>
+                            <div class="selectedwrap">
+                            <select class="payinput mytextbox" name="gender" id="gender" required
+                              formControlName="Gender">
+                              <option value="" disabled selected>-Select-</option>
+                              <option value="male">Male</option>
+                              <option value="female">FeMale</option>
+                            </select>
+                        </div>
+                            <div class="">
+                              <small class="error text-danger" *ngIf="hasError('Gender', 'required', 'passengers', i);">
+                                Please Select Gender* <br>
+                              </small>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="paylabel">Age <b class="text-danger">*</b>
+                            </div>
+                            <div class="selectedwrap">
+                            <select class="payinput mytextbox" name="age" id="age" required formControlName="Age">
+                              <option value="" disabled selected>-Select-</option>
+                              <option *ngFor="let age of ageOptions" [ngValue]="age">{{ age }}</option>
+                            </select>
+                            </div>
+                            <div class="">
+                              <small class="error text-danger" *ngIf="hasError('Age', 'required', 'passengers', i);">
+                                Please Select Age* <br>
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+
+                        
+                              <div class="row">
+                                <div class="col-md-2 pr-0 mpad"> </div>
+                               
+                                <div class="col-md-2 p-0">
+                                  <div class="paylabel">Phone Code <b class="text-danger">*</b>
+                                  </div>
+                                  <div class="selectedwrap">
+                                    <select #selectedCountry class="newslterinput nputbrd _numeric_only flpayinput"
+                                      id="before_country_code" formControlName="Phone_Code">
+                                      <option [value]="p.phone_code" [selected]="p.phone_code == 91"
+                                        *ngFor="let p of phoneCodes">
+                                        {{p.name}}({{ p.phone_code }}) </option>
+                                    </select>
+                                    <div class="">
+                                      <small class="error text-danger"
+                                      *ngIf="hasError('Phone_Code', 'required', 'passengers', i);">
+                                        Please Enter Country Code* <br>
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-3 pr-0">
+                                  <div class="paylabel">Contact <b class="text-danger">*</b>
+                                  </div>
+                                  <input type="text" id="mobile" placeholder="Mobile Number" name="mobile" class="payinput"
+                                    data-mask="000000000000" value="7406689854" aria-required="true" formControlName="Mobile"
+                                    required (keypress)="numberOnly($event)" />
+                                  <div class="">
+                                    <small class="error text-danger" *ngIf="hasError('Mobile', 'required', 'passengers',i);">
+                                      Please Enter Contact Number* <br>
+                                    </small>
+                                    <small class="error text-danger" *ngIf="hasError('Mobile', 'maxlength', 'passengers',i);">
+                                      Maximum Characters Exceeded* <br>
+                                    </small>
+                                    <small class="error text-danger" *ngIf="hasError('Mobile', 'minlength', 'passengers',i);">
+                                      At Least 8 Characters Required* <br>
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                  <div class="paylabel">Email Address <b class="text-danger">*</b>
+                                  </div>
+                                  <input type="email" id="email" name="email" placeholder="Email Address" class="payinput"
+                                    formControlName="Email" required />
+                                  <div class="">
+                                    <small class="error text-danger" *ngIf="hasError('Email', 'required', 'passengers',i);">
+                                      Please Enter Email Address* <br>
+                                    </small>
+                                    <small class="error text-danger" *ngIf="hasError('Email', 'pattern', 'passengers',i);">
+                                      Enter a Valid Email* <br>
+                                    </small>
+                                    <small class="error text-danger" *ngIf="hasError('Email', 'email', 'passengers',i);">
+                                      Enter a Valid Email* <br>
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            
+
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="clearfix"></div>
+        <div class="col-md-12 nopad">
+          <div class="col-md-12 nopad">
+            <div class="checkcontent d-flex" style="overflow: inherit;">
+              <div class="customSquaredThree">
+                <input type="checkbox" value="0" name="confirm" class="filter_airline" id="squaredThree1"
+                  aria-required="true" required [checked]="terms" (click)="onTerms($event.target.checked)" />
+                <label for="squaredThree1"></label>
+              </div>
+              <label for="squaredThree1" class="lbllbl" style="display: inline; font-size: 14px;">
+                By booking this item , you agree to our
+                <a data-toggle="modal" (click)="openStaticPage('terms-conditions')" class="colorbl">Terms and
+                  Conditions</a>,
+                <a data-toggle="modal" (click)="openStaticPage('privacy-policy')" class="colorbl">Privacy Policy</a>
+                and <a data-toggle="modal" (click)="openStaticPage('refund-policy')" class="colorbl">Refund Policy</a>
+              </label>
+            </div>
+            <div class="text-danger" *ngIf="!terms"> <small> Please accept Terms and
+                Conditions/Privacy
+                Policy.
+              </small> </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="payrowsubmt">
+            <div class="col-md-3 col-sm-12 fulat500 nopad">
+              <button type="submit" (click)="onSubmit()" class="paysubmit" name="continue" id="continue"
+                value="Continue">Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-4 pl-0 mobile_pad mobile_top pl40"
+        style="position: sticky;top: 100px; margin-top: 0px; align-self: start;">
+        <div class="topsticky">
+          <div class="fsBorder card" style="box-shadow: 0px 4px 12px 0px #0000001A;">
+            <h4 class="text-muted"> Fare Summary </h4>
+            <div class="bg-white br-8">
+              <div>
+                <div class="row m-0 text-muted">
+                  <div class="col-md-12 col-lg-12 f-14  ng-star-inserted">
+                    <div class="float-left">
+                      <div class="customColor" style="font-size: 18px;font-weight: 400;color: #1d1d1d;">Total Seat(s)
+                      </div>
+                    </div>
+                    <div class="float-right customColor" style="font-size: 18px;font-weight: 400;color: #1d1d1d;"> {{ bookingBusData?.SeatCount}}</div>
+                  </div>
+                  <div class="col-md-12 col-lg-12 f-14">
+                    <div class="float-left  customColor"> Base Fare </div>
+                    <div class="float-right ng-star-inserted customColor"> {{
+                      bookingBusData?.BusData?.currency_code}}
+                      {{bookingBusData?.Totalfare | number:'1.0-0'}} </div>
+                  </div>
+                  <!-- <div class="col-md-12 col-lg-12 f-14 mb-3 bbottom">
+                    <div class="float-left  grand_tot"> Convenience Fee </div>
+                    <div class="float-right ng-star-inserted" style="color: #001D46;"> {{
+                      bookingBusData?.BusData?.BusStatus?.CurrencyCode}}
+                      0 </div>
+                  </div> -->
+                  <div class="col-md-12 col-lg-12 f-18" style="background-color: #F5FBFF;border-radius:0px 0px 12px 12px;">
+                    <div class="float-left grand_tot customColor"> Grand Total </div>
+                    <div class="float-right customColor ng-star-inserted " style="color: #065081!important;font-size: 22px;font-weight: 500;"> {{
+                      bookingBusData?.BusData?.currency_code}}
+                      {{bookingBusData?.Totalfare | number:'1.0-0'}} </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"
+  [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+  [template]="loadingTemplate"></ngx-loading>

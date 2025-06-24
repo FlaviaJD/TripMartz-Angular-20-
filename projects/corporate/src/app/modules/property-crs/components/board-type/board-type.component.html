@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="addBoardType">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Add Board Type'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-add-board-type></app-add-board-type>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="boardTypeList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Board Type List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-board-type-list></app-board-type-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

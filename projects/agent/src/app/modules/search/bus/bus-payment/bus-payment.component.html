@@ -1,0 +1,281 @@
+<div class="theme_bg" style="min-height: 770px;">
+  <app-bus-booking-steps [review]="true" [payment]="false"></app-bus-booking-steps>
+  <div class="hotel_review_booking nopad mt-4" *ngIf="busBookingPaxDetails">
+    <h3>Review Your Booking</h3>
+    <div class="clearfix"></div>
+    <div class="row mobile_row">
+      <div class="col-md-8 col-lg-8">
+        <div class="moreflt boksectn mb-3">
+          <div class="ontyp border bg-white">
+            <div class="labltowr arimobold">{{busBookingPaxDetails?.BookingItineraryDetails?.departure_from}} to
+              {{busBookingPaxDetails?.BookingItineraryDetails?.arrival_to}}
+              <strong
+                *ngIf="busBookingPaxDetails?.BookingItineraryDetails?.duration">({{busBookingPaxDetails?.BookingItineraryDetails?.duration}})</strong>
+            </div>
+            <div class="allboxflt d-flex">
+              <div class="col-md-6 nopadding full_fiftys">
+                <div class="alldiscrpo">
+                    {{busBookingPaxDetails?.BookingItineraryDetails?.operator}} <div
+                    class="clearfix"></div>
+
+                    {{busBookingPaxDetails?.BookingItineraryDetails?.bus_type}} 
+                  <div class="sgsmalbus col-xs-12 col-md-12 nopad">
+                    <strong>Pickup : </strong>
+                    <div class="pikuplokndt">
+                      <span class="pikuptm">
+                        {{busBookingPaxDetails?.BookingItineraryDetails?.boarding_from}}
+                        {{busBookingPaxDetails?.BookingItineraryDetails?.departure_datetime | date: 'dd MMM yyyy,H:mm'}}</span>
+                    </div>
+                  </div>
+                  <div class="sgsmalbus col-xs-12 col-md-12 nopad">
+                    <strong>Drop : </strong>
+                    <div class="droplokndt">
+                      <span class="pikuptm">{{busBookingPaxDetails?.BookingItineraryDetails?.dropping_at}}
+                        {{busBookingPaxDetails?.BookingItineraryDetails?.arrival_datetime | date: 'dd MMM yyyy,H:mm'}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 nopadding qurter_wdth">
+                <div class="d-flex">
+                  <div class="col-md-5 nopad">
+                    <span class="airlblxl">{{busBookingPaxDetails?.BookingItineraryDetails?.departure_datetime | date:
+                      'HH:mm'}}</span>
+                    <!-- <span class="portnme1">{{busBookingPaxDetails?.BookingItineraryDetails?.departure_from}}</span> -->
+                  </div>
+                  <div class="col-md-2 nopad">
+                    <span class="icons fi-rr-arrow-alt-right textcntr"></span>
+                  </div>
+                  <div class="col-md-5 nopad">
+                    <span class="airlblxl">{{busBookingPaxDetails?.BookingItineraryDetails?.arrival_datetime | date:
+                      'HH:mm'}}</span>
+                    <!-- <span class="portnme1">{{busBookingPaxDetails?.BookingItineraryDetails?.arrival_to}}</span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 nopadding smal_width_hr">
+                <span class="portnme textcntr"
+                  *ngIf="busBookingPaxDetails?.BookingItineraryDetails?.duration">{{busBookingPaxDetails?.BookingItineraryDetails?.duration}}</span>
+                <span data-stop-number="0" class="portnme textcntr">Seat
+                  ({{busBookingPaxDetails?.BookingPaxDetails.length}}) :
+                  <ng-container *ngFor="let seat of busBookingPaxDetails?.BookingPaxDetails; let index = index;">
+                    <span>{{seat?.seat_no}}</span>
+                    <ng-container *ngIf="index !== busBookingPaxDetails?.BookingPaxDetails.length - 1">, </ng-container>
+                  </ng-container>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form>
+          <div class="col-md-12 col-lg-12 nopad">
+            <!-- <div class="wrappay leftboks">
+              <h3>Contact Details</h3>
+              <div class="comon_backbg">
+                <h5 class="inpagehed p-2">Contact Details (For E-Ticket/Voucher)</h5>
+                <div class="sectionbuk" style="padding-bottom: 15px;">
+                  <div id="tdetails">
+                    <div class="onedept">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="paylabel">Customer Name <b class="text-danger">*</b>
+                          </div>
+                          <span class="text-uppercase">{{busBookingPaxDetails?.BookingPaxDetails[0]?.name}}</span>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="paylabel">Email Address <b class="text-danger">*</b>
+                          </div>
+                          <span class="">{{busBookingPaxDetails?.BookingDetails?.email}}</span>
+                        </div>
+                        <div class="col-md-3 d-none">
+                          <div class="paylabel">Phone Code <b class="text-danger">*</b>
+                          </div>
+                          <span>
+                            {{busBookingPaxDetails?.BookingDetails?.phone_code}}
+                          </span>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="paylabel">Contact <b class="text-danger">*</b>
+                          </div>
+                          <span>
+                            {{busBookingPaxDetails?.BookingDetails?.phone_number}}</span>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="wrappay leftboks">
+              <!-- <h3>Your Information</h3> -->
+              <div class="comon_backbg">
+                <h5 class="inpagehed">Guest Information</h5>
+                <div class="sectionbuk" *ngFor="let passengerInfo of busBookingPaxDetails?.BookingPaxDetails">
+                  <div id="tdetails">
+                    <div class="onedept">
+                      <div class="guest_div">
+                        <div class="row parl">
+                          <div class="col-md-2 downsrt pr-0">
+                            <div class="lokter">
+                              <span class="whoare">Seat No</span>
+                              <span class="whoare">S.No {{passengerInfo?.seat_no}} </span>
+                            </div>
+                          </div>
+                          <div class="col-md-2 p-0 mpad">
+                            <div class="paylabel">Title <b class="text-danger">*</b>
+                            </div>
+                            <div class="text-uppercase">
+                              {{passengerInfo?.title}}
+                            </div>
+                          </div>
+                          <div class="col-md-3 pr-0">
+                            <div class="paylabel">Name <b class="text-danger">*</b> </div>
+                            <div class="text-uppercase">
+                              {{passengerInfo?.name}}
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="paylabel">Email <b class="text-danger">*</b>
+                            </div>
+                            {{passengerInfo?.email}}
+                          </div>
+                          <div class="col-md-2">
+                          </div>
+                          <div class="col-md-2 p-0 mpad">
+                            <div class="paylabel">Phone <b class="text-danger">*</b>
+                            </div>
+                            {{passengerInfo?.phone_code}}-{{passengerInfo?.phone}}
+                          </div>
+                          <div class="col-md-3">
+                            <div class="paylabel">Gender <b class="text-danger">*</b>
+                            </div>
+                            {{passengerInfo?.gender}}
+                          </div>
+                          <div class="col-md-2">
+                            <div class="paylabel">Age <b class="text-danger">*</b>
+                            </div>
+                            {{passengerInfo?.age}}
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="clearfix"></div>
+        <div class="payrowsubmt">
+          <div class="col-md-6 col-sm-12 fulat500 nopad">
+            <button type="submit" (click)="proceedPayment()" class="paysubmit" name="continue" id="continue"
+              value="Continue">Proceed To Pay</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-4 pl-0 mobile_pad mobile_top pl40"
+      style="position: sticky;top: 100px; margin-top: 0px; align-self: start;">
+        <div class="topsticky">
+          <div class="fsBorder card" style="box-shadow: 0px 4px 12px 0px #0000001A;">
+            <h4 class="text-muted"> Fare Summary </h4>
+            <div class="px-0 ">
+              <div>
+                <div class="row m-0 text-muted">
+                  <div class="col-md-12 col-lg-12 f-14 ng-star-inserted">
+                    <div class="float-left">
+                      <div class="customColor" style="font-size: 18px;font-weight: 400;color: #1d1d1d;">Total Seat(s)
+                      </div>
+                    </div>
+                    <div class="float-right customColor" style="font-size: 18px;font-weight: 400;color: #1d1d1d;"> {{busBookingPaxDetails?.BookingPaxDetails.length}}</div>
+                  </div>
+                  <div class="col-md-12 col-lg-12 f-14">
+                    <div class="float-left  customColor"> Base Fare </div>
+                    <div class="float-right  ng-star-inserted customColor" style="color: #001D46 !important;">
+                      {{busBookingPaxDetails?.BookingDetails?.currency }}
+                      {{busBookingPaxDetails?.BookingDetails?.total_fare | number:'1.0-0'}}
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-12 col-lg-12 f-14 mb-3 bbottom">
+                    <div class="float-left  grand_tot"> Convenience Fee </div>
+                    <div class="float-right text-warning ng-star-inserted" style="color: #001D46 !important;">
+                      {{busBookingPaxDetails?.Totalfare}} 0
+                    </div>
+                  </div> -->
+                  <div class="col-md-12 col-lg-12 f-14" style="background-color: #F5FBFF;border-radius:0px 0px 12px 12px;">
+                    <div class="float-left  grand_tot customColor"  style="background-color: #F5FBFF;border-radius:0px 0px 12px 12px;"> Grand Total </div>
+                    <div class="float-right ng-star-inserted customColor" style="color: #065081!important;font-size: 22px;font-weight: 500;">
+                      {{busBookingPaxDetails?.BookingDetails?.currency }}
+                      {{busBookingPaxDetails?.BookingDetails?.total_fare | number:'1.0-0'}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Payment modal -->
+<div class="modal" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true"
+  [style.display]="showPaymentDetails ? 'block' : 'none'">
+  <div class="modal-dialog modal-lg" role="document" style="max-width: 590px;top: 47px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Payment methods</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="paymentForm">
+          <div class="cc-selector-2">
+            <div class="row">
+              <div class="col-md-3 col-4" *ngFor="let paymentMethod of paymentGateways">
+                <div *ngIf="(paymentMethod?.remarks | lowercase)==='wallet'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'wallet'}">
+                  <label style="width: 46px;" class="drinkcard-cc wallet" for="wallet">
+                  </label>
+                  <span class="payment_label" >
+                  <input id="wallet" type="radio" name="paymentMethod" value="wallet" formControlName="paymentMethod" 
+                  /> {{paymentMethod?.remarks}}
+                  </span>
+                  </div>
+                <div *ngIf="(paymentMethod?.remarks | lowercase)==='razorpay'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'razorpay'}">
+                  <label style="width: 100%;" class="drinkcard-cc razorpay" for="razorpay"></label>
+                  <span class="payment_label">
+                    <input id="razorpay" type="radio" name="paymentMethod" value="razorpay" formControlName="paymentMethod" />
+                    {{paymentMethod?.remarks}}
+                  </span>
+                </div>
+                <div *ngIf="(paymentMethod?.remarks | lowercase)==='cashfree'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'cashfree'}">
+                  <label style="width: 100%;" class="drinkcard-cc cashfree" for="cashfree"></label>
+                  <span class="payment_label">
+                    <input id="cashfree" type="radio" name="paymentMethod" value="cashfree" formControlName="paymentMethod" />
+                    {{paymentMethod?.remarks}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small class="error text-danger col-xs-12 col-12" style="margin-bottom:10px; display:block;"
+            *ngIf="hasError('paymentMethod', 'required');">
+            Please select the payment type* <br>
+          </small>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="paymentConfirm()">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"
+  [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+  [template]="loadingTemplate"></ngx-loading>

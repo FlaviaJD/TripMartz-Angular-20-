@@ -1,0 +1,40 @@
+<div class="modal-header">
+	<h4 class="modal-title">Pax Details</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+	<div class="card p-0">
+		<div class="card-body p-0">
+          <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Mobile No</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>EmployeeBand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let paxDetail of paxDetails;let i=index;">
+                    <td class="text-left"> {{i+1}}.</td>
+                    <td class="text-left text-uppercase"> {{paxDetail?.FirstName}}</td>
+                    <td class="text-left"> {{paxDetail?.LastName}}</td>
+                    <td class="text-left"> {{paxDetail?.MobileNo}}</td>
+                    <td class="text-left"> {{paxDetail?.Email}}</td>
+                    <td class="text-left"> {{paxDetail?.Gender}}</td>
+                    <td class="text-left"> {{paxDetail?.Age}}</td>
+                    <td class="text-left"> {{paxDetail?.Department}}</td>
+                    <td class="text-left"> {{paxDetail?.EmployeeBand}}</td>
+                </tr>
+            </tbody>
+        </table>
+		</div>
+	</div>
+</div>

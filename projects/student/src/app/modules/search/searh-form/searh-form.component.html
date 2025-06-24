@@ -1,0 +1,199 @@
+<div _ngcontent-hhl-c18="" class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+
+<div *ngIf="visible" class="text-info clearfix marque"
+    style="margin: 0;background:rgba(37,44,64,0.6);width: 100%; padding: 0px 18px;">
+    <marquee
+        style="margin: 0;color: #fff;padding: 10px 10px;font-size: 14px;max-width: 100%;margin: 0 auto;font-weight: 600;"
+        scrollamount="4">Our working hours is 9am to 7pm, For out of office hours emergency please call us on 022 6147
+        5786. This portal will not support oldest version of internet explorer. Kindly use Google
+        chrome/Mozilla/Microsoft Edge. </marquee>
+</div>
+
+<div class="position-relative">
+    <div class="custom-navtabs search_form">
+        <div class="float-left">
+            <ul ngbNav #nav="ngbNav" class="nav-pills m-0 mb-2" orientation="horizontal" [(activeId)]="activeIdString">
+                <li ngbNavItem="flight" (click)="onSearchTypeChange('Flight')">
+                    <a *ngIf="showModuleSearchName && !hideOther  && isFlight" ngbNavLink #flight><i class="fi  fi-rr-plane"></i>
+                        Flight</a>
+                    <ng-template ngbNavContent *ngIf="!noFlightPolicyEnabled">
+                        <app-flight></app-flight>
+                    </ng-template>
+                    <ng-template ngbNavContent *ngIf="noFlightPolicyEnabled">
+                        <app-no-policy></app-no-policy>
+                    </ng-template>
+                </li>
+                <li *ngIf="showModuleSearchName && !hideOther && isHotel" ngbNavItem="hotels"
+                    (click)="onSearchTypeChange('hotels')">
+                    <a ngbNavLink #hotels> <i class="fi  fi-rr-bed-alt"></i> Hotel</a>
+                    <ng-template ngbNavContent *ngIf="!noHotelPolicyEnabled">
+                        <app-hotel></app-hotel>
+                    </ng-template>
+                    <ng-template ngbNavContent *ngIf="noHotelPolicyEnabled">
+                        <app-no-policy></app-no-policy>
+                    </ng-template>
+                </li>
+                <!-- <li *ngIf="showModuleSearchName && !hideOther && isBus" ngbNavItem="buses" (click)="onSearchTypeChange('buses')">
+                    <a ngbNavLink #buses> <i class="fi fi-rr-bus"></i> Bus</a>
+                    <ng-template ngbNavContent>
+                        <app-bus-search></app-bus-search>
+                    </ng-template>
+                </li> -->
+                <!-- <li *ngIf="showModuleSearchName && !desableTrain || !hideOther" ngbNavItem="trains"
+                    (click)="onSearchTypeChange('trains')">
+                    <a ngbNavLink #trains> <i class="fi fi-rr-train"></i> Train</a>
+                    <ng-template ngbNavContent *ngIf="!noTrainPolicyEnabled">
+                        <app-train></app-train>
+                    </ng-template>
+                    <ng-template ngbNavContent *ngIf="noTrainPolicyEnabled">
+                        <app-no-policy></app-no-policy>
+                    </ng-template>
+                </li>
+                <li *ngIf="showModuleSearchName && !hideOther" ngbNavItem="cars" (click)="onSearchTypeChange('cars')">
+                    <a ngbNavLink #cars> <i class="fi fi-rr-car"></i>Car</a>
+                    <ng-template ngbNavContent *ngIf="!noCarPolicyEnabled">
+                        <app-car></app-car>
+                    </ng-template>
+                    <ng-template ngbNavContent *ngIf="noCarPolicyEnabled">
+                        <app-no-policy></app-no-policy>
+                    </ng-template>
+                </li>
+                <li *ngIf="showModuleSearchName && !desableHotel || !hideOther" ngbNavItem="raiserequest"
+                    (click)="onSearchTypeChange('raiserequest')">
+                    <a ngbNavLink #raiserequest> <i class="fi fi-rr-form"></i>Hotel Request</a>
+                    <ng-template ngbNavContent>
+                        <app-raise-request></app-raise-request>
+                    </ng-template>
+                </li> -->
+            </ul>
+        </div>
+        <div class="float-right" *ngIf="visible">
+            <div class="book_con">Booking confirmation turn around time is 12 hours.</div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row nav-pills nav selecttr" style="margin-bottom: 16px;" *ngIf="loggedInUser?.auth_role_id==2 && !hideOther">
+            <div ngbDropdown class="dropdown ">
+                <button ngbDropdownToggle class="btn btn-secondary" type="button" id="tripId" style="padding: 12px 20px"
+                    aria-expanded="false">
+                 {{selectTripId}}
+                </button>
+                <ul ngbDropdownMenu aria-labelledby="tripId" >
+                    <li *ngFor="let trip of tripList"><a ngbDropdownItem (click)="setTrip(trip)">{{trip?.TripName}} ({{trip?.TripID}})</a></li>
+                </ul>
+            </div>
+            <span *ngIf="tripErrorMessage" class="alert alert-danger" style="margin-right:4px;">{{ tripErrorMessage }}</span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-row mb-1 res_Pad" *ngIf="!noHotelPolicyEnabled || !noCarPolicyEnabled || !noTrainPolicyEnabled">
+            <ng-container *ngIf="loggedInUser?.auth_role_id==2 && !hideOther">
+                <div class="col-auto mt-2 pr-3">
+                    <label for="self">
+                        <input type="radio" id="self" name="trip" checked value="Self"
+                            (change)="setBookingType($event.target.value)">
+                        <span class="design"></span>
+                        <span class="text" style="margin-left: 4px; font-size: 16px; color: #404040;">Self</span>
+                    </label>
+                </div>
+                <div class="col-auto mt-2 pr-3">
+                    <label for="behalf">
+                        <input type="radio" id="behalf" name="trip" value="Behalf"
+                            (change)="setBookingType($event.target.value)">
+                        <span class="design"></span>
+                        <span class="text" style="margin-left: 4px; font-size: 16px; color: #404040;">On Behalf</span>
+                    </label>
+                </div>
+                <div class="col-auto mt-2 pr-3">
+                    <label for="personal">
+                        <input type="radio" id="personal" name="trip" value="Personal"
+                            (change)="setBookingType($event.target.value)">
+                        <span class="design"></span>
+                        <span class="text" style="margin-left: 4px; font-size: 16px; color: #404040;">Personal</span>
+                    </label>
+                </div>
+                <div class="col-auto pr-3">
+                    <div ngbDropdown class="dropdown">
+                        <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1"
+                            aria-expanded="false">
+                            {{searchSelector}}
+                        </button>
+                        <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+                            <li><a ngbDropdownItem (click)="ngDropDwonClick('Business')">Business</a></li>
+                            <li><a ngbDropdownItem (click)="ngDropDwonClick('HR Training')">HR Training</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-auto pr-3 row" style="margin-left: 1px;" *ngIf="loggedInUser?.auth_role_id==3 && !hideOther">
+                <div ngbDropdown class="dropdown">
+                    <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1"
+                        aria-expanded="false">
+                        {{selectedCorporate}}
+                    </button>
+                    <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1" *ngIf="loggedInUser?.auth_role_id!=2">
+                        <li *ngFor="let corporate of corporateList"><a ngbDropdownItem
+                                (click)="setSelectedCorporate(corporate)">{{corporate?.business_name}}</a></li>
+                    </ul>
+                </div>
+                <div ngbDropdown class="dropdown" *ngIf="activeIdString=='flight'">
+                    <form [formGroup]="stateForm">
+                        <input formControlName="state" placeholder="Select State" type="text" id="State" class="stateControl" (keyup)="getSearchedList($event)"
+                            autocomplete="off" #state>
+                        <app-state-list (whichCity)="getDynamicCity($event)" [getCity]="searchedList">
+                        </app-state-list>
+                        <small class="error text-danger" *ngIf="stateNotSelected">
+                            Select State From Dropdown* <br>
+                        </small>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- <div class="col-md-12 p-0 mt-3 justify-content-end text-white" *ngIf="hideOther && activeIdString=='raiserequest'" style="align-items: center;">
+            <p>For Band III, IV & V, request created for check-in prior to 7 days for below given cities will required an approval from Band II. </p>
+            <p>Tier 1 : – Mumbai, Ahmedabad, Pune, Hyderabad, Bangalore, Kolkata, Delhi, Chennai </p>
+            <p>Tier 2 : – Chandigarh, Lucknow, Coimbatore, Jaipur, Amritsar/ Bhopal / Bhubaneshwar / Chandigarh/ Faridabad / Ghaziabad / Jamshedpur / Kochi / Nagpur / Kanpur / Patna / Raipur / Surat / Vishakhapatnam / Agra/ Ajmer / Mysuru / Srinagar</p>
+           </div> -->
+           <div class="clearfix"></div>
+        <div class="show_training_div" *ngIf="showtraining">
+            <div class="clearfix"></div>
+            <div class="tabspl hrtraining">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="head_row">
+                            <th style="width:5%;text-align: center;">SL No.</th>
+                            <th style="width:20%;">Training Name</th>
+                            <th style="width:10%;">Date</th>
+                            <th style="width:5%;">Time</th>
+                            <th style="width:15%;">Trainer</th>
+                            <th style="width:15%;">Venue</th>
+                            <th style="width:15%;">Status</th>
+                            <th style="width:25%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="white-space: nowrap;" *ngFor="let data of trainingList; let i=index;"
+                            [class.selected]="data?.isSelected">
+
+                            <td style="text-align: center;">{{i+1}}.</td>
+                            <td> {{data['TrainingName']}}</td>
+                            <td>{{data['TrainingDate']}}</td>
+                            <td>{{data['TrainingTime']}}</td>
+                            <td>{{data['Trainer']}}</td>
+                            <td>{{data['Venue']}}</td>
+                            <td><span class="badge badge-info">Pending</span></td>
+                            <td>
+                                <button class="particpan" (click)="setSelectedTrainingId(data)">Book Now</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+        <div [ngbNavOutlet]="nav" class="mt-2 tab_div"></div>
+    </div>
+</div>

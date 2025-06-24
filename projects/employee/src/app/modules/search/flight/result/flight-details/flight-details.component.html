@@ -1,0 +1,52 @@
+ <div class="d-flex">
+    <div class="col-md-12 col-lg-12">
+        <div class="flight_det_button py-1 px-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="flightDetailsBtn" href="javascript:void(0);" (click)="flight?.FlightDetails.Details[0][0]['isFlightDetailsCollapsed'] = !flight.FlightDetails.Details[0][0]['isFlightDetailsCollapsed']" [attr.aria-expanded]="!flight.FlightDetails.Details[0][0]['isFlightDetailsCollapsed']"
+                        aria-controls="collapseBasic"> 
+                         Flight Details&nbsp;&nbsp;
+                         <i class="fa fa-angle-down"></i>
+                    </a>  
+                    <div class="pull-right"> 
+                    </div>
+                    <span class="d-none">
+                        <i class="deemFont"> {{ flight?.Price?.Fare_Type }} </i>
+                    </span> 
+                </div>
+            </div>
+            <div class="row" style="margin: 0px 0px;">
+                <div class="col-md-12 col-lg-12 p-0">
+                    <div [collapse]="flight?.FlightDetails?.Details[0][0]['isFlightDetailsCollapsed']" [isAnimated]="true">
+                        <div class="bg-white mt-2" style="padding:0px; border-radius: 6px;">
+                            <div class="col-md-12 mt-2 p-0 text-justify">
+                                <h1 class="bbottom flight_sector" mat-dialog-title>
+                                    {{ flight?.FlightDetails.Details[0][0].Origin?.CityName + '(' + flight?.FlightDetails?.Details[0][0].Origin?.AirportCode + ')' }}
+                                    <i class="{{ tripType == 'Roundtrip' ? 'fi-rr-exchange' : 'lnr-arrow-right'}}"></i> {{ flight.FlightDetails.Details[0][stops(flight)].Destination.CityName + '(' + flight.FlightDetails.Details[0][stops(flight)].Destination.AirportCode
+                                    + ')' }}
+                                </h1>
+                                <ngb-tabset>
+                                    <ngb-tab title="Itinerary">
+                                        <ng-template ngbTabContent>
+                                            <app-flight-details-itinerary [flight]="flight"></app-flight-details-itinerary>
+                                        </ng-template>
+                                    </ngb-tab>
+                                    <ngb-tab title="Baggage Rules">
+                                        <ng-template ngbTabContent>
+                                           <app-flight-details-baggage [flight]="flight"></app-flight-details-baggage>
+                                        </ng-template>
+                                    </ngb-tab>
+                                    <ngb-tab title="Fare Breakup">
+                                        <ng-template ngbTabContent>
+                                         <app-flight-details-fare [flight]="flight"></app-flight-details-fare>
+                                        </ng-template>
+                                    </ngb-tab>
+                                </ngb-tabset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

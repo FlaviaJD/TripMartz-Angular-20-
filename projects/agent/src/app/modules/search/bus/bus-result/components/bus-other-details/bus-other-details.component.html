@@ -1,0 +1,51 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Boarding and Dropping Point</h4>
+      <button (click)="hide()" type="button" class="btn btn-close"><i style="font-size: 20px;" class="fs-4 fa fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="bus-info-modal-content" class="ssssbuswrap">
+        <div
+          >
+          <table class="booktblebus tblbooktblebus table table-bordered table-responsive"
+            style="width:100%;margin-top:12px; display: table;" *ngIf="busDetails?.boardingTimes && busDetails?.boardingTimes.length>0">
+            <tbody>
+                <tr style="background-color: #dcdfdf;">
+                <th style="width: 33.333%">Boarding Point</th>
+                <th style="width: 33.333%">Address</th>
+                <th style="width: 33.333%">Time</th>
+              </tr>
+              <tr *ngFor="let pickups of busDetails?.boardingTimes;">
+                <td>{{pickups?.bpName}}</td>
+                <td>{{pickups?.address}}</td>
+                <td>{{pickups?.time | date: 'dd MMM yyyy,H:mm'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="booktblebus tblbooktblebus table table-bordered table-responsive"
+            style="width:100%;margin-top:12px; display: table;" *ngIf="busDetails?.droppingTimes && busDetails?.droppingTimes.length>0">
+            <tbody>
+                <tr style="background-color: #dcdfdf;">
+                <th style="width: 33.333%">Dropping Point </th>
+                <th style="width: 33.333%">Address</th>
+                <th style="width: 33.333%">Time</th>
+              </tr>
+              <tr *ngFor="let dropoffs of busDetails?.droppingTimes;">
+                <td>{{dropoffs?.bpName}}</td>
+                <td>{{dropoffs?.address}}</td>
+                <td>{{dropoffs?.time | date: 'dd MMM yyyy,H:mm'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h6
+          *ngIf="busDetails?.boardingTimes && busDetails?.boardingTimes.length==0 && busDetails?.droppingTimes && busDetails?.droppingTimes.length==0">
+          No Data Found</h6>
+      </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" (click)="hide()" class="btn btn-default">Close</button>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="custom-inline-form d-flex bg-white card">
+    <div class="col-md-2"  style="font-weight: bolder;">
+        <h3>{{'Add Room'}}</h3>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <form [formGroup]="regConfig" autocomplete="off">
+                <div formArrayName="roomDetails">
+                    <div *ngFor="let room of roomDetails.controls; let i = index;">
+                        <div [formGroupName]="i">
+                            <div class="form-row">
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group ">
+                                        <label for="roomType" class="required" class="col-form-label font-weight-bold labelAlign">Room Type </label>
+                                        <select formControlName="roomType"
+                                            class="form-control" id="roomType">
+                                            <option [value]="''" selected>Please Select</option>
+                                            <option *ngFor="let item of roomTypes"  [value]="item">
+                                                {{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="roomName" class="col-form-label font-weight-bold labelAlign">Room Name</label>
+                                        <input type="text" id="roomName" autocomplete="off" formControlName="roomName"
+                                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Room Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="occupency" class="col-form-label font-weight-bold labelAlign">Occupancy</label>
+                                        <input type="text" id="occupency" autocomplete="off" formControlName="occupency"
+                                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Occupancy">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="roomAmeneties" class="col-form-label font-weight-bold labelAlign">Room Ameneties</label>
+                                        <input type="text" id="roomAmeneties" autocomplete="off" formControlName="roomAmeneties"
+                                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="Room Ameneties">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="boardType" class="col-form-label font-weight-bold labelAlign">Board Type</label>
+                                        <div *ngFor="let item of boardType">
+                                            <input type="checkbox" id="item" name="item" value="item" formControlName="boardType" (change)="boardTypeSelection($event,item)" style="margin-right: 5px;">
+                                            <label for="item" style="margin-right: 5px;">{{item}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="mealType" class="col-form-label font-weight-bold labelAlign">Meal Type</label>
+                                        <div *ngFor="let item of mealType">
+                                            <input type="checkbox" id="item" name="item" value="item" formControlName="mealType" (change)="mealTypeSelection($event,item)" style="margin-right: 5px;">
+                                            <label for="item" style="margin-right: 5px;">{{item}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="roomStatus" class="col-form-label font-weight-bold labelAlign">Room Status</label>
+                                        <select formControlName="roomStatus"
+                                            class="form-control" id="roomStatus">
+                                            <option [value]="'0'" selected>{{'Inactive'}}</option>
+                                            <option [value]="'1'">{{'Active'}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-0">
+                                    <div class="form-group">
+                                        <label for="noOfRooms" class="col-form-label font-weight-bold labelAlign">No. of Rooms</label>
+                                        <input type="text" id="noOfRooms" autocomplete="off" formControlName="noOfRooms"
+                                            class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="No. of Rooms">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 pr-0">
+                                    <div class="form-group">
+                                        <label for="roomDescription" class="col-form-label font-weight-bold labelAlign">Room Description</label>
+                                            <textarea name="roomDescription" class="form-control form-control-sm nrm_input" id="roomDescription" formControlName="roomDescription" cols="117" rows="7"></textarea>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-6 pr-0">
+                                    <div class="form-group">
+                                        <label for="cancellationPolicy" class="col-form-label font-weight-bold labelAlign">Cancellation Policy</label>
+                                            <textarea name="cancellationPolicy" class="form-control form-control-sm nrm_input" id="cancellationPolicy" formControlName="cancellationPolicy" cols="117" rows="7"></textarea>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div *ngIf="removeButton" style="text-align: end;">
+                                <button type="button" class="btnStyle" (click)="removeRoomDetails(i)">Remove Room</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btnStyle" (click)="addNewRoom('yes')">Add More Room <i class="fa fa-plus"></i></button>
+                </div>
+                <div style="text-align: center;">
+                    <button type="button" class="btnStyle" (click)="onSumbit()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

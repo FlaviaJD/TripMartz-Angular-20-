@@ -1,0 +1,132 @@
+.feedform .container ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+  }
+  .feedform ul{width: 100%;
+      float: left;
+      margin: 0px;
+      padding: 0px;}
+  .feedform ul li {
+    color: #aaaaaa;
+    float: left;
+    position: relative; list-style: none;
+    width: 100%;
+  }
+  .feedform ul li input[type=radio]{
+    visibility: hidden; position: absolute;
+  }
+  .feedform ul li label {
+    cursor: pointer;
+    display: block;
+    font-size: 1.35em;
+    font-weight: 300;
+    margin: 0 auto; height: 25px;
+    padding: 0 25px 0 80px;
+    position: relative;
+    transition: all 0.25s linear 0s;
+    z-index: 9;
+  }
+  .feedform ul li:hover label{
+    color: #FFFFFF;
+  }
+  .feedform ul li .check {
+    border: 3px solid #aaaaaa;
+    border-radius: 100%;
+    display: block;
+    height: 25px;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: border 0.25s linear 0s;
+    width: 25px;
+    z-index: 5;
+  }
+  .feedform ul li .check::before {
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 15px;
+    left: 2px;
+    margin: auto; 
+    position: absolute;
+    top: 2px;
+    transition: background 0.25s linear 0s;
+    width: 15px;
+  }
+  .feedform input[type="radio"]:checked ~ .check {
+    border: 3px solid #4da0b9;
+  }
+  .feedform input[type="radio"]:checked ~ .check::before {
+    background: #5bb9d6 none repeat scroll 0 0;
+  }
+  .feedform input[type=radio]:checked ~ label{
+    color: #0DFF92;
+  }
+  .feed_head {
+    background-color: #065081;
+    color: #ffffff;
+    margin: 0;  font-size: 20px;
+    padding: 14px 10px;
+  }
+  .feedform {
+    font-family: calibri;
+    font-size: 18px;
+    margin: 15px auto;
+  }
+  .dear_txt {
+    color: #555555;
+    padding: 0px 0 0;
+    overflow: auto;
+  }
+  .dear_txt > span {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .feedright img {
+    display: table;
+    float: none;
+    margin: 0 auto;
+    max-width: 200px;
+  }
+  .feedright {
+    position: relative;
+  }
+  .feed_in {
+    left: 0;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 200px;
+    position: absolute;
+    right: 0;
+    top: 170px;
+  }
+  .feedform button {
+    background-color: #0047a1;
+    border: 0 none;
+    color: #ffffff;
+    float: right;
+    font-size: 17px;
+    padding: 5px 20px;
+  }
+  .feed_in p {
+    color: #0047a1;
+    font-family: Comic Sans MS;
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 600;
+  }
+  .btn_class{
+      border-radius: 5px;
+      background-color: #252c40;
+      border: 0 none;
+      color: #ffffff;
+      display: table;
+      margin: 0px auto;
+      font-size: 17px;
+      padding: 10px 30px;
+  }

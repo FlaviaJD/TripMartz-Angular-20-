@@ -1,0 +1,133 @@
+a.changeFlight {
+    color: #fff !important;
+}
+a {
+    color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    background: #333;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: -4px !important;
+}
+
+.changeFlight { color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    background: #065081 !important;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: -4px !important;}
+a:hover {
+    color: #fff !important;
+}
+.fa-plus--lineHeight {
+    line-height: 30px;
+}
+
+
+
+.flt_in .form-group {
+    position: relative;
+}
+//chakri changes
+.depart {
+    // background-position: -19px -252px;
+    // background-size: 650px;
+}
+
+.return {
+    // background-position: -80px -252px;
+    // background-size: 650px;
+}
+.fas,
+.fa, .fal{
+    color: #252c40;
+}
+.row pb-3 {
+}
+
+.cardMargin {
+    margin-bottom: 25px;
+}
+.cardList {
+    padding: 2px 0px;
+}
+.cardList b {
+    padding: 0px 7px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #001d46;
+}
+.customStyle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #001d46;
+}
+.f-14 {
+    font-weight: 500;
+    color: #001d46;
+    font-size: 14px;
+    width: 100%;
+    float: left;
+    padding: 6px 2px 10px 15px;
+}
+.f-18 {
+    font-weight: 600;
+    color: #001d46;
+}
+.text-info {
+    color: #252c40;
+}
+
+#boxes {
+    padding: 15px 15px; float: left; width: 100%;
+}
+.card { border-radius: 8px !important;}
+.h4 {
+    padding: 0px 15px !important;
+    color: #001d46 !important;
+}
+#leftbox {
+    float: left;
+    width: 70%;
+}
+
+#rightbox {
+    float: right;
+    width: 30%;
+}
+.travellerSpace{
+    padding: 0px 2px;    padding: 0px 2px;
+    font-size: 16px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.mob_show { display: none;}
+.booking_detail h4 {color: #001d46;padding-left: 0px;}
+::ng-deep .theme-dark .theme_bg .booking_detail h4 {color: #fff;padding-left: 0px;}
+::ng-deep .theme-dark .theme_bg .cardList b { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .f-14 { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .colTimeStyle { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .colImgStyle { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .colImgStyle span { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .cellStyles { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .cellStyles span { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .mobile_details_bagg { color: #fff !important;}
+::ng-deep .theme-dark .theme_bg .mobile_details_bagg h5 { color: #fff !important;}
+@media only screen and (max-width: 767px) {
+ 
+  .padlt { padding-left: 0px !important; padding-right: 0px !important;}
+  .mobile_left { text-align: left !important;}
+  .mobile_right { text-align: right !important;}
+  .mobile_row { margin: 0px;}
+  .mobile_nopad { padding: 0px !important;}
+  
+  .mob_show { display: inline;}
+  .mob_hide { display: none;}
+  #leftbox { width: 100% !important;}
+  #leftbox .cardList b { padding: 0px !important;}
+  #leftbox .cardList .fa-plane { display: none;}
+  .f-14 { padding: 0px !important;}
+}

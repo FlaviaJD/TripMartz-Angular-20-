@@ -1,0 +1,443 @@
+<div class="text-center ng-star-inserted" style="margin-bottom: 10px;"><a 
+    [routerLink]="['/booking/approval']" [queryParams]="{ sector: 'hotels' }"><button 
+            class="text-white btn btn-sm btn-primary m-1">Back</button></a></div>
+<table style="width: 100%;
+    max-width: 900px;
+    margin: 0% auto;
+    border-collapse: collapse;
+    background: #f5f5f5;
+    border-radius: 15px;
+    font-family: arial;
+    font-size: 12px;">
+    <tbody>
+        <tr>
+            <td style="background-color: #F99D1C;padding: 35px 60px 0;">
+
+                <table style="
+                           width: 100%;
+                           background: none;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                    <tbody>
+                        <tr>
+                            <!-- <td align="center" style="
+                                    padding: 15px 20px; 
+                                    "><img style="width: 280px; margin-bottom: 30px;"
+                                    src="http://misba.in/HyperMiles/student/assets/images/login-images/l-logo1.png"
+                                    alt="image/png"></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table style="
+                           width: 100%;
+                           background: #fff;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                    <tbody>
+                        <tr>
+                            <td style="
+                                    padding: 20px 20px 0px; font-size: 23px;
+                                    "><strong style="
+                                       font-size: 16px;
+                                       padding-bottom: 0px;
+                                       line-height: 30px;
+                                       ">Dear {{data?.BookingDetails?.approvar_name}},</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+
+            <td style="background-color: #f3f4f8;padding: 0 60px 60px;border: none;">
+
+
+                <table style="width:100%; padding: 0px; background: #fff;">
+                    <tbody>
+                        <tr>
+                            <td style="border-collapse:collapse; padding: 0px 20px 0px;">
+                                <table style="
+                           width: 100%;
+                           background: #fff;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                                    <tbody>
+
+                                        <tr>
+                                            <td style="padding-bottom:10px;line-height:20px;font-size: 14px;"><span>This
+                                                    is an auto-mail to inform you that a travel request ID:
+                                                    {{mail_data?.icicId}} has been generated for {{mail_data?.name}}.
+                                                    </span><br><br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;border-radius: 6px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="5"
+                                                                style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">
+                                                                <span style="margin-bottom: 0px;">Request Details</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            style="font-size:14px;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Request ID</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Request Type</span>
+                                                            </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Requested By</span>
+                                                            </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Request Date</span>
+                                                            </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Company Name</span>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr style="font-size:14px;text-align: left;color:#343a40;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.requestId}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.requestType}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.requestedBy}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.requestDate}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.companyName}}</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="6"
+                                                                style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">
+                                                                <span style="margin-bottom: 0px;">Guest Details</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            style="font-size:14px;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Emp Code</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Emp Name</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Gender</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Email ID</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Number</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Band</span></td>
+                                                        </tr>
+
+                                                        <tr style="font-size:14px;text-align: left; color: black;"
+                                                            *ngFor="let emp of mail_data?.guestDetails">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empCode}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empName}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empGender}} </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empEmailId}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empNumber}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{emp?.empBand}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <td _ngcontent-idh-c28="">
+                                            <table _ngcontent-idh-c28=""
+                                                style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                                <tbody _ngcontent-idh-c28="">
+                                                    <tr _ngcontent-idh-c28=""
+                                                        style="font-size:14px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Travel to City </span>
+                                                        </td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Reason for Travel</span>
+                                                        </td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Check In</span></td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Check Out</span></td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Total Number of
+                                                                Nights</span></td>
+                                                    </tr>
+                                                    <tr _ngcontent-idh-c28=""
+                                                        style="font-size:14px;text-align: left;color: black;">
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{mail_data?.toCity}} </td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{mail_data?.reasonForTravel}}</td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{mail_data?.checkIn}}, {{mail_data?.checkInTime}}</td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{mail_data?.checkOut}}, {{mail_data?.checkOutTime}}</td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                            {{mail_data?.totalNumberOfNights}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- </td> -->
+                                            <!-- <td _ngcontent-idh-c28=""> -->
+                                            <table _ngcontent-idh-c28=""
+                                                style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                                <tbody _ngcontent-idh-c28="">
+                                                    <tr _ngcontent-idh-c28=""
+                                                        style="font-size:14px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Room Type</span></td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Room Name</span></td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            <span style="margin-bottom: 0px;">Room Price</span></td>
+                                                    </tr>
+                                                    <tr _ngcontent-idh-c28=""
+                                                        style="font-size:14px;text-align: left;color: black;"
+                                                        *ngFor="let roomDetails of mail_data?.roomDetails">
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{roomDetails?.roomType}} </td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{roomDetails?.roomName}}</td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                            {{roomDetails?.roomPrice}}</td>
+                                                    </tr>
+
+                                                    <tr _ngcontent-idh-c28="" style="font-size:14px;text-align: left;">
+                                                        <td _ngcontent-idh-c28="" colspan="2"
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;">
+                                                            Total Fare</td>
+                                                        <td _ngcontent-idh-c28=""
+                                                            style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;color:#000">
+                                                            {{mail_data?.totalRoomPrice }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="4"
+                                                                style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">
+                                                                Policy Limit</td>
+                                                        </tr>
+                                                        <tr
+                                                            style="font-size:13px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6; white-space:nowrap">
+                                                                Eligibility Limit</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                Selected Tariff</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                Eligibility Check</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                Beyond Eligibility Reason</td>
+                                                        </tr>
+                                                        <tr style="font-size:13px;text-align:left;color:#000"
+                                                            *ngFor="let policies of mail_data?.Policies">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{policies?.Eligible}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{policies?.Selected}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{policies?.EligibilityCheck}} </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                {{policies.Remark}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px; line-height: 16px;">
+                                                    <tbody>
+                                                        <tr style="border:1px solid #c6c6c6">
+                                                            <td colspan="4"
+                                                                style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">
+                                                                Remarks
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="font-size:13px">
+                                                            <td colspan="4"
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;width:25%">
+                                                                {{mail_data?.remarks}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px; white-space: nowrap;">
+                                                    <tbody>
+
+                                                        <tr
+                                                            style="font-size:14px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Supervisor Id</span>
+                                                            </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Guest
+                                                                    House/Hotel</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Cost Center</span>
+                                                            </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Department</span></td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">
+                                                                <span style="margin-bottom: 0px;">Designation</span>
+                                                            </td>
+
+
+                                                        </tr>
+                                                        <tr style="font-size:14px;text-align: left;color: black;">
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.supervisorId}} </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.guestHouse}} </td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.costCenter}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.department}}</td>
+                                                            <td
+                                                                style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">
+                                                                {{mail_data?.designation}} </td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="line-height: 10px">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table
+                                                    style="width:100%;border:none;border-collapse:collapse; line-height: 16px;">
+                                                    <tbody>
+                                                        <tr style="border:none">
+                                                            <td style="font-size:13px"><strong
+                                                                    style="display:block;margin-bottom:5px">Best
+                                                                    Regards,</strong><br>
+                                                                <span style="display:block;margin-bottom:5px">
+                                                                    <strong>Team TripMartz</strong>
+                                                                </span><br>
+                                                                <span style="display:block"><strong>For Booking Support
+                                                                        : </strong> 022 4141 1909 /
+                                                                    hotel1@TripMartz.com</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

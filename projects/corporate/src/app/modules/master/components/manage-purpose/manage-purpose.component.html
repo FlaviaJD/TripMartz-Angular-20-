@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="create/update_purpose">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Purpose'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-create-update-purpose (purposeUpdate)="triggerTab($event)"></app-create-update-purpose>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="purposeList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Purpose List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-purpose-list (purposeUpdate)="triggerTab($event)"></app-purpose-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

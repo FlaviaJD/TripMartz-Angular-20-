@@ -1,0 +1,344 @@
+<div class="card-body">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="hotelPolicyForm" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="hotelDomestic" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Hotel Domestic
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+
+                            <div class="col-auto p-0 mr-3">
+                                <label for="hotelDomesticYes">
+                                    <input type="radio" id="hotelDomesticYes" name="hotelDomestic" value="true" formControlName="hotelDomestic" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="hotelDomesticNo">
+                                    <input type="radio" id="hotelDomesticNo" name="hotelDomestic" value="false" formControlName="hotelDomestic"style="margin-right: 5px;">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="hotelInternational" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Hotel International
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+
+                            <div class="col-auto p-0 mr-3">
+                                <label for="hotelInternationalYes">
+                                    <input type="radio" id="hotelInternationalYes" name="hotelInternational" value="true" formControlName="hotelInternational" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="hotelInternationalNo">
+                                    <input type="radio" id="hotelInternationalNo" name="hotelInternational" value="false" formControlName="hotelInternational" style="margin-right: 5px;">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="starCategory" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Star Category
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 align-self-center" style="display: flex;">
+                            <div class="col-3 p-0" *ngFor="let item of starCategoryList;let index=index">
+                                <input type="checkbox" id="item{{index}}" value="item.name" [checked]="item.isChecked"  formControlName="starCategory" (change)="checkBoxSelection($event,item.name)" style="margin-right: 5px;">
+                                <label for="item{{index}}" style="margin-right: 15px;">{{item.name}}<sup class="f-16"> * </sup></label>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="form-group required row">
+                        <label for="beyondTheLimit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Beyond The Limit(Star Category)
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+
+                            <div class="col-auto p-0 mr-3">
+                                <label for="beyondTheLimitYes">
+                                    <input type="radio" id="beyondTheLimitYes" name="beyondTheLimit" value="true" formControlName="beyondTheLimit" style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="beyondTheLimitNo">
+                                    <input type="radio" id="beyondTheLimitNo" name="beyondTheLimit" value="false" formControlName="beyondTheLimit" style="margin-right: 5px;">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group required row">
+                        <label for="generic_budget_limit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Generic Budget Limit
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 align-self-center" style="display: flex;">
+                                <input type="text" formControlName="generic_budget_limit"  class="form-control">
+                        </div> 
+                    </div>
+                    <div class="form-group required row" [formGroup]="hotelPolicyForm.get('cities')">
+                        <label for="cities" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Cities</label>
+                        <div class="col-sm-6">
+                            <table style="width: 92%;">
+                                <tbody>
+                                    <tr>
+                                        <td>Metro</td>
+                                        <td colspan="2">
+                                            <ng-multiselect-dropdown formControlName="metro" [placeholder]="'Select Metro'" [settings]="dropdownSettings"
+                                                [data]="citiesNameList" [(ngModel)]="selectedMetroCities"  (onSelect)="onMetroSelect($event)" (onDeSelect)="onMetroDeselect($event)">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        <td>Mini Metro</td>
+                                        <td colspan="2">
+                                            <ng-multiselect-dropdown formControlName="miniMetro" [placeholder]="'Mini Metro'" [settings]="dropdownSettings"
+                                                [data]="citiesNameList" [(ngModel)]="selectedMiniCities" (onSelect)="onMiniSelect($event)" (onDeSelect)="onMiniDeselect($event)">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non Metro</td>
+                                        <td colspan="2">
+                                            <ng-multiselect-dropdown formControlName="nonMetro" [placeholder]="'Mini Metro'" [settings]="dropdownSettings"
+                                                [data]="citiesNameList" [(ngModel)]="selectedNonMetroCities" (onSelect)="onNonMetroSelect($event)" (onDeSelect)="onNonMetroDeselect($event)">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group required row" [formGroup]="hotelPolicyForm.get('limit')">
+                        <label for="limit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Limit</label>
+                        <div class="col-sm-6">
+                            <table style="width: 92%;">
+                                <thead>
+                                    <th>Metro Type</th>
+                                    <th colspan="2">Limit</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Metro</td>
+                                        <td colspan="2"><input type="text" id="metro" class="form-control" formControlName="metro" style="width: 100%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mini Metro</td>
+                                        <td colspan="2"><input type="text" id="miniMetro" class="form-control" formControlName="miniMetro" style="width: 100%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non Metro</td>
+                                        <td colspan="2"><input type="text" id="nonMetro" class="form-control" formControlName="nonMetro" style="width: 100%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Display Beyound Limit</td>
+                                        <td>
+                                            <label for="displayBeyondLimitYes">
+                                                <input type="radio" id="displayBeyondLimitYes" name="displayBeyondLimit" [value]="true" formControlName="displayBeyondLimit" style="margin-right: 5px;">
+            
+                                                <span class="design"></span>
+                                                <span class="text" style="margin-left: 4px;">Yes</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label for="displayBeyondLimitNo">
+                                                <input type="radio" id="displayBeyondLimitNo" name="displayBeyondLimit" [value]="false" formControlName="displayBeyondLimit" style="margin-right: 5px;">
+                                                <span class="design"></span>
+                                                <span class="text" style="margin-left: 4px;">No</span>
+                                            </label>
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group required row" style="display: none;">
+                        <label for="isDayToDeparture" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Is Day To Departure
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+
+                            <div class="col-auto p-0 mr-3">
+                                <label for="isDayToDepartureYes">
+                                    <input type="radio" id="isDayToDepartureYes" name="isDayToDeparture" value="true" formControlName="isDayToDeparture" style="margin-right: 5px;" (click)="setValidation('true')">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto p-0">
+                                <label for="isDayToDepartureNo">
+                                    <input type="radio" id="isDayToDepartureNo" name="isDayToDeparture" value="false" formControlName="isDayToDeparture" style="margin-right: 5px;" (click)="setValidation('false')">
+
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+
+                          
+                        </div>
+                    </div>
+                    <div class="form-group required row" *ngIf="hotelPolicyForm.get('isDayToDeparture').value=='true';">
+                        <label for="isSector" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Days to Departure
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6">
+                            <div class="col-sm-12 p-0" >
+                                <table>
+                                    <tbody>
+                                        <tr formArrayName="departInfo" style="display: inline-grid;">
+                                            <td style="padding: 0px; border: none;" *ngFor="let item of departInfo.controls; let i = index;"  [formGroupName]="i">
+                                                <tr>
+                                                    <td>
+                                                        Department
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <select
+                                                        class="form-control" id="" formControlName="departmentName">
+                                                        <option [value]="''" selected>Please Select</option>
+                                                        <option *ngFor="let item of positionList" [value]="item?.position_name">{{item?.position_name}}</option>
+                                                    </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Days to Departure</td>
+                                                    <td>No. of Days</td>
+                                                    <td><input type="text" class="form-control" name="daysToDepart" id="daysToDepart" formControlName="daysToDepart"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Display beyond Days of Departure</td>
+                                                    <td>
+                                                        <label for="beyoundDaysToDepartYes">
+                                                            <input type="radio" id="beyoundDaysToDepartYes" name="beyoundDaysToDepart" value="true" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                            <span class="design"></span>
+                                                            <span class="text" style="margin-left: 4px;">Yes</span>
+                                                        </label>
+                                                        
+                                                    <td>
+                                                        <label for="beyoundDaysToDepartNo">
+                                                            <input type="radio" id="beyoundDaysToDepartNo" name="beyoundDaysToDepart" value="false" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                            <span class="design"></span>
+                                                            <span class="text" style="margin-left: 4px;">No</span>
+                                                        </label>
+                                                        </td>
+                                                        
+                                                </tr>
+                                                <tr *ngIf="departDateApprove(i)">
+                                                    <td>{{'>'}} {{noOfDays}}</td>
+                                                    <td colspan="2">
+                                                        <select
+                                                            class="form-control" id="" formControlName="departmentNameForGr">
+                                                            <option [value]="''" selected>Please Select</option>
+                                                            <option *ngFor="let item of positionList" [value]="item?.position_name">{{item?.position_name}}</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr *ngIf="departDateApprove(i)">
+                                                    <td>{{'<'}} {{noOfDays}}</td>
+                                                    <td colspan="2">
+                                                        <select
+                                                            class="form-control" id="" formControlName="departmentNameForSm">
+                                                            <option [value]="''" selected>Please Select</option>
+                                                            <option *ngFor="let item of positionList" [value]="item?.position_name">{{item?.position_name}}</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr *ngIf="i !=0">
+                                                    <button class="btnStyle" style="position: absolute; right: 10px; bottom: 7px;" (click)="removeFormField(i)"><i class=" fa fa-trash"></i></button>
+                                                </tr>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr *ngIf="i !=0">
+                                            <button class="btnStyle" (click)="removeFormField(i)"><i class=" fa fa-trash"></i></button>
+                                        </tr> -->
+                                        <!-- <tr>
+                                            <td>
+                                                Department
+                                            </td>
+                                            <td colspan="2">
+                                                <select
+                                                class="form-control" id="" formControlName="departmentName">
+                                                <option [value]="''" selected>Please Select</option>
+                                                <option *ngFor="let item of positionList" [value]="item">{{item}}</option>
+                                            </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Days to Departure</td>
+                                            <td>No. of Days</td>
+                                            <td><input type="text" name="daysToDepart" id="daysToDepart" formControlName="daysToDepart"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Display beyond Days of Departure</td>
+                                            <td><input type="radio" id="beyoundDaysToDepartYes" name="beyoundDaysToDepart" value="1" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                <label for="beyoundDaysToDepartYes" style="margin-right: 5px;">Yes</label></td>
+                                            <td><input type="radio" id="beyoundDaysToDepartNo" name="beyoundDaysToDepart" value="no" formControlName="beyoundDaysToDepart" style="margin-right: 5px;">
+                                                <label for="beyoundDaysToDepartNo" style="margin-right: 5px;">No</label></td>
+                                        </tr>
+                                        <tr *ngIf="departDateApprove()">
+                                            <td>{{'>'}} {{noOfDays}}</td>
+                                            <td colspan="2">
+                                                <select
+                                                    class="form-control" id="" formControlName="departmentNameForGr">
+                                                    <option [value]="''" selected>Please Select</option>
+                                                    <option *ngFor="let item of positionList" [value]="item">{{item}}</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="departDateApprove()">
+                                            <td>{{'<'}} {{noOfDays}}</td>
+                                            <td colspan="2">
+                                                <select
+                                                    class="form-control" id="" formControlName="departmentNameForSm">
+                                                    <option [value]="''" selected>Please Select</option>
+                                                    <option *ngFor="let item of positionList" [value]="item">{{item}}</option>
+                                                </select>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-12" >
+                                <button style="position: absolute; right: -50px; top: -50px;" class="btnStyle" (click)="addFormField('yes')"><i class=" fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group required row">
+                        <label for="beyondTheLimit" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Department</label>
+                        <div class="col-sm-6">
+                            <select
+                                class="form-control" id="" formControlName="departmentName">
+                                <option [value]="''" selected>Please Select</option>
+                                <option *ngFor="let item of positionList" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="col-sm-8" style="text-align: end;">
+                        <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="goToPreviousPage()">Prev</button>
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

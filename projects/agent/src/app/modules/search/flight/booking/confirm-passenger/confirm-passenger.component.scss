@@ -1,0 +1,76 @@
+::ng-deep {
+    .mat-dialog-actions{
+        display: flex !important;
+        flex-flow: row-reverse !important;
+    }
+}
+
+::ng-deep .form-group label {
+    font-size: 13px;
+    // line-height: 0px;
+    font-weight: 600;
+    padding-left: 6px;}
+
+ 
+    ::ng-deep btn-success.disabled, .btn-success:disabled {
+        color: #fff;
+        background: #252c40 linear-gradient(180deg, #252c40, #252c40) repeat-x !important;
+    border-color: #252c40 !important;
+    }
+
+    .modal {
+        transform: translate(0,-50%);
+        top: 60%;
+        margin: 0 auto;
+    }
+    
+.nagad {
+    background-image: url('../../../../../../assets/images/nagad-logo.png');
+    width           : 130px;
+}
+
+.bKash {
+    background-image: url('../../../../../../assets/images/bKash-logo.png');
+    width           : 130px;
+}
+
+.wallet {
+    background-image: url('../../../../../../assets/images/wallet.png');
+    width           : 130px;
+}
+
+.sslCommerz {
+    background-image: url('../../../../../../assets/images/ssl-commerz-logo.jpg');
+    width           : 130px;
+}
+.drinkcard-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 70px;
+    transition: all .1s ease-in;
+}
+
+.cc-selector-2 .payment_label {
+    display: table;
+    margin: 0 auto;
+}
+.razorpay {
+    background-image: url('../../../../../../assets/images/razorpay.jpeg');
+    width: 130px;
+}
+
+.cashfree {
+    background-image: url('../../../../../../assets/images/cashfree.png');
+    width: 130px;
+}
+
+.active {
+    background-color: #e0f7fa; /* Light blue background */
+    border: 2px solid #00796b; /* Green border */
+    }
+    .highlight {
+    box-shadow: 0 0 10px rgba(0, 150, 136, 0.5); /* Add a glow effect */
+    transform: scale(1.05); /* Slightly enlarge the element */
+    }

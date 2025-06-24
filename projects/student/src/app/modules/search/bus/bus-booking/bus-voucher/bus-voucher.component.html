@@ -1,0 +1,428 @@
+<div class="pt-3" style="width:100%; position:relative;">
+    <div class="text-center action_btns" style="margin-bottom: 10px;">
+
+        
+                <a [routerLink]="['/reports/bus-booking-details']"><button
+                    class="text-white btn btn-sm btn-primary m-1" 
+                    style="font-size: 12px; border: 1px solid #0A5081; background: #0A5081; -webkit-print-color-adjust: exact; padding:4px 8px; border-radius: 0.2rem; color: #fff;  margin-left: 10px;">Back</button></a>
+
+                <a href="javascript:void(0);" (click)="downloadA4('pdf', 'potrait')"  class="text-white btn btn-sm btn-primary m-1"
+                    style="font-size: 12px; border: 1px solid #0A5081; background: #0A5081; -webkit-print-color-adjust: exact; padding: 4px 8px; border-radius: 0.2rem; color: #fff;  margin-left: 10px;">
+                    PDF
+                </a>
+                <a onclick="window.print()" href="javascript:void(0);"  class="text-white btn btn-sm btn-primary m-1"
+                    style="font-size: 12px; border: 1px solid #0A5081; background: #0A5081; -webkit-print-color-adjust: exact; padding:4px 8px; border-radius: 0.2rem; color: #fff;  margin-left: 10px;">
+                    Print
+                </a>
+           
+       
+            </div>
+</div>
+
+<div class="container" style="margin:30px auto;">
+    <div style="margin:0px auto;">
+        <div class="table-responsive" id="tickect_bus">
+            <table
+                style="font-size:12px;  border-radius: 5px; margin:0px auto;background-color:#fff; border: 1px solid #ddd; padding:20px;border-collapse:separate; color: #414141;"
+                width="100%" cellpadding="0" cellspacing="0" border="0" id="print_voucher">
+                <tbody>
+                    <tr>
+                        <td style="border-collapse: collapse; padding:0px">
+                            <table width="100%" style="border-collapse: collapse;" cellpadding="0" cellspacing="0"
+                                border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 0px;">
+                                            <table cellpadding="0" cellspacing="0" border="0" width="100%"
+                                                style="border-collapse: collapse;">
+                                                <tbody>
+                                                    <!-- <tr>
+                        <td
+                        style="font-size: 22px; line-height: 30px; width: 100%; display: block; font-weight: 600; text-align: center">
+                        E-Ticket</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        </tr> -->
+                                                    <tr>
+                                                        <td>
+                                                            <table style="width: 100%;">
+                                                                <tr>
+                                                                    <td style="padding-bottom:10px">
+                                                                        <img 
+                                                                        [src]="loggedInUser.domain_logo || 'assets/images/login-images/l-logo.png'"
+                                                                        [style.width]="loggedInUser.domain_logo ? '160px' : '280px'"
+                                                                        [style.height]="loggedInUser.domain_logo ? '58px' : 'auto'">
+                                                                    </td>
+                                                                    <td style="padding: 0px; vertical-align: top; background-color: transparent; background: none;" align="right">
+                                                                        <table border="0" cellspacing="0" cellpadding="0" style="font-size:13px;border-collapse: collapse;text-align: right;line-height:15px;" width="100%">
+                                                                            <tr>
+                                                                                <td align="right" style="padding-bottom:10px;line-height:26px; font-size: 15px;">
+                                                                                    <span>
+                                                                                        <strong>Booked on : </strong>
+                                                                                        <span>{{voucherResponse?.BookingDetails?.created_at
+                                                                                            | date:'d MMM y'}} </span>
+                                                                                    </span>
+                                                                                    <br>
+
+                                                                                    <span>
+                                                                                        <strong>Booking Reference : </strong>
+                                                                                        <span
+                                                                                        >{{voucherResponse?.BookingDetails?.app_reference
+                                                                                        }}</span>
+                                                                                    </span>
+                                                                                   <br>
+
+                                                                                    
+                                                                                  
+
+                                                                                    <span>
+                                                                                        <strong>Booking Status : </strong>
+                                                                                        <span><span [innerHTML]="getFormtedStatus(voucherResponse?.BookingDetails?.status)">
+                                                                                        </span></span>
+                                                                                    </span>
+                                                                                    <br>
+                                                                                    <span style="color: #0A5081;" *ngIf="voucherResponse?.BookingDetails?.pnr && voucherResponse?.BookingDetails?.pnr!='null'">
+                                                                                        <strong>PNR No : </strong>
+                                                                                        <span
+                                                                                        *ngIf="voucherResponse?.BookingDetails?.pnr && voucherResponse?.BookingDetails?.pnr!='null'">{{voucherResponse?.BookingDetails?.pnr}}</span>
+
+                                                                                    </span>
+
+                                                                                </td>
+                                                                                
+                                                                            </tr>
+
+                                                                            
+
+                                                                            
+                                                                            
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+            <tr>
+                <td style="padding: 9px 15px;
+border-bottom: 1.5px solid #4b4b4b; font-weight: 600; 
+background-color: #fff; font-size: 18px;
+color: #0A5081;">
+                    Reservation Ticket
+                    ({{voucherResponse?.BookingItineraryDetails?.departure_from}}
+                    To {{voucherResponse?.BookingItineraryDetails?.arrival_to}})
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style=" border-radius: 0px 0px 10px 10px; background: #fff;">
+
+
+                    
+                    <table width="100%" cellpadding="5"
+                        style="padding: 10px; font-size: 14px;">
+                        <tbody>
+
+                            <tr >
+                                <td style="background-color:#fff;padding:9px 15px;color: #0A5081;">
+                                  <b>Bus Operator</b>
+                                </td>
+                                <td style="padding: 9px 15px; background-color:#fff; color: #0A5081; ">
+                                    <b>Operator Contact</b>
+                                  </td>
+                                <td style="background-color:#fff;padding:9px 15px;color: #0A5081;">
+                                  <b>Bus Type</b>
+                                </td>
+                                <td style="padding: 9px 15px; background-color:#fff; color: #0A5081;">
+                                  <b>Travel Date</b>
+                                </td>
+                                
+                                <td style="padding: 9px 15px; background-color:#fff; color: #0A5081; ">
+                                    <b>Total No. of Seat(s)	</b>
+                                  </td>
+                              </tr>
+
+                              <tr class="gst_dtl_contnt" style="font-size:15px;">
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.operator}}</td>
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingDetails?.contactNumber}} </td>
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.bus_type}}</td>
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.journey_datetime
+                                    | date:'d MMM y'}} </td>
+                                    <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;">  {{voucherResponse?.BookingPaxDetails.length}} </td> 
+                              </tr>
+
+                              <tr >
+                                
+                                <td style="background-color:#fff; padding:9px 15px;color: #0A5081;">
+                                  <b >Boarding Point</b>
+                                </td>
+                                <td style="padding: 9px 15px; background-color:#fff; color: #0A5081; ">
+                                  <b>Dropping Point</b>
+                                </td>
+
+                                
+
+                                <td style="padding: 9px 15px; background-color:#fff; color: #0A5081; ">
+                                  <b >Boarding Time</b>
+                                </td>
+                                <td colspan="2" style="padding: 9px 15px; background-color:#fff; color: #0A5081; ">
+                                  <b >Arrival Time</b>
+                                </td>
+                  
+                              </tr>
+
+                              <tr class="gst_dtl_contnt" style="font-size:15px;">
+                               
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff;  border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.boarding_from}} </td>
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3;color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.dropping_at}}</td>
+                                <td style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3;; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.departure_datetime
+                                    | date:'d MMM y'}}
+                                    -
+                                    {{voucherResponse?.BookingItineraryDetails?.departure_datetime
+                                    | date:
+                                    'HH:mm'}} </td>
+
+                               <td colspan="2"  style="padding: 9px 15px; border-top: 1px solid #fff; border-bottom: 1px solid #d3d3d3; color: #414141;"> {{voucherResponse?.BookingItineraryDetails?.arrival_datetime
+                                | date:'d MMM y'}}
+                                -
+                                {{voucherResponse?.BookingItineraryDetails?.arrival_datetime
+                                | date:
+                                'HH:mm'}}</td>   
+                              </tr>
+
+                            
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td
+                                                            style="padding: 9px 15px;
+                                                            border-bottom: 1.5px solid #4b4b4b;
+                                                            font-weight: 600;
+                                                            background-color: #fff;
+                                                            font-size: 18px;
+                                                            color: #0A5081;">
+                                                            Travelers
+                                                            Information</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border-radius:0px 0px 10px 10px; background:#fff;">
+                                                            <table width="100%" cellpadding="15"
+                                                                style="padding: 15px; font-size: 15px;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="background-color:#fff; color: #0A5081;padding: 9px 15px;"><strong>Passenger Name</strong></td>
+                                                                        <td style="background-color:#fff; color: #0A5081;padding: 9px 15px;"><strong>Gender</strong></td>
+                                                                        <td style="background-color:#fff; color: #0A5081;padding: 9px 15px;"><strong>Age</strong></td>
+                                                                        <td style="background-color:#fff; color: #0A5081;padding: 9px 15px;"><strong>Seat No</strong></td>
+                                                                    </tr>
+                                                                    <tr
+                                                                        *ngFor="let passengerInfo of voucherResponse?.BookingPaxDetails">
+                                                                        <td class="text-uppercase" style="color: #414141;padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">
+                                                                            {{passengerInfo?.title}}.
+                                                                            {{passengerInfo?.name}}</td>
+                                                                        <td style="color: #414141;padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">{{passengerInfo?.gender}}</td>
+                                                                        <td style="color: #414141;padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">{{passengerInfo?.age}}</td>
+                                                                        <td style="color: #414141;padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">{{passengerInfo?.seat_no}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 100%;">&nbsp;</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="4" style=" padding:0; border-radius:7px; overflow: hidden; background: #fff;">
+                                                          <table cellpadding="5" cellspacing="0" style="font-size:12px; padding:0;" width="100%">
+                                                            <tbody>
+                                                              <tr>
+                                                                <td colspan="4" style="padding: 9px 15px;
+                                                                border-bottom: 1.5px solid #4b4b4b;
+                                                                font-weight: 600;
+                                                                background-color: #fff;
+                                                                font-size: 18px;
+                                                                color: #0A5081;">
+                                                                  <span class="customer_contact_details" style="vertical-align:middle;font-size:18px; font-weight:600;">Contact Details</span>
+                                                                </td>
+                                                              </tr>
+                                                              <tr class="cstmr_email_cnt" style="font-size:15px;">
+                                                                <td style="background-color:#fff; font-weight: 500; padding:9px 15px; color:#0A5081">
+                                                                  <span>
+                                                                    <strong>E-mail</strong>
+                                                                  </span>
+                                                                </td>
+                                                                <td style="background-color:#fff; font-weight: 500; padding:9px 15px; color:#0A5081">
+                                                                  <span>
+                                                                    <strong>Contact No</strong>
+                                                                  </span>
+                                                                </td>
+                                                              </tr>
+                                                              
+                                                              <tr class="cstmr_email_cnt" style="color:#414141; font-size:15px;">
+                                                                <td style="padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">
+                                                                  <span> {{voucherResponse?.BookingDetails?.email}}</span>
+                                                                </td>
+                                                                <td style="padding: 9px 15px;border-bottom: 1px solid #d3d3d3;">
+                                                                  <span> +{{voucherResponse?.BookingDetails?.phone_code}} {{voucherResponse?.BookingDetails?.phone_number}} </span>
+                                                                </td>
+                                                              </tr>
+                                                            </tbody>
+                                                          </table>
+                                                        </td>
+                                                      </tr>
+
+                                                      <tr>
+                                                        <td style="width: 100%;">&nbsp;</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td
+                                                            style="padding: 9px 15px;
+                                                            border-bottom: 1.5px solid #4b4b4b;
+                                                            font-weight: 600;
+                                                            background-color: #fff;
+                                                            font-size: 18px;
+                                                            color: #0A5081;">
+                                                            Payment
+                                                            Information</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="background: #fff; border-radius: 0px 0px 10px 10px;color: #414141;">
+                                                            <table width="100%" cellpadding="5"
+                                                                style="padding: 10px; font-size: 14px;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="padding-left: 15px;border-top: 1px solid #e9ecef;">Total</td>
+                                                                        <td style="border-top: 1px solid #e9ecef;"> {{voucherResponse?.BookingDetails?.currency
+                                                                            }}
+                                                                            {{(voucherResponse?.BookingPaxDetails[0]?.fare
+                                                                            * voucherResponse?.BookingPaxDetails.length)
+                                                                            | number:'1.0-0'}}</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td style="padding-left: 15px;border-top: 1px solid #e9ecef;">Convinence Fees</td>
+                                                                        <td style="border-top: 1px solid #e9ecef;"> {{voucherResponse?.BookingDetails?.currency
+                                                                            }} 0</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-left: 15px;border-top: 1px solid #e9ecef;">Discount</td>
+                                                                        <td style="border-top: 1px solid #e9ecef;">{{voucherResponse?.BookingDetails?.currency
+                                                                            }}
+                                                                            {{voucherResponse?.BookingDetails?.discount
+                                                                            }}</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td style="padding-left: 15px;border-top: 1.5px solid #4b4b4b;"><strong>Total Price</strong></td>
+                                                                        <td style="border-top: 1.5px solid #4b4b4b;"><strong>{{voucherResponse?.BookingDetails?.currency
+                                                                                }}
+                                                                                {{(voucherResponse?.BookingPaxDetails[0]?.fare
+                                                                                *
+                                                                                voucherResponse?.BookingPaxDetails.length)
+                                                                                | number:'1.0-0'}}</strong></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="4" style="line-height:12px;">&nbsp;</td>
+                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td colspan="4" style="background-color: #fff;color:#393939;padding: 9px 15px; border-top:transparent;">
+                                                                            <span class="trm_cndt" style="vertical-align:middle;font-size:18px; font-weight:600;">Terms
+                                                                                &amp; Condition:</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="lylt_cr" colspan="4" style="line-height:30px; padding: 0px 15px 15px 15px; font-size:14px; color:#555;border-top:transparent">
+                                                                            <ul style="list-style-type: none; padding: 0; line-height: 25px; font-size: 15px;">
+                                                                                <li>1. Use the Reference Number for all correspondence with us.
+                                                                                </li>
+                                                                                <li>2. Use the PNR for all correspondence directly with the Bus.
+                                                                                </li>
+
+                                                                                <li>3. All Passengers must carry a Valid Photo Identity Proof at the time of Check-in.
+
+                                                                                </li>
+                                                                                <li>4. This can include: Driving License, Passport, PAN Card, Voter ID Card or any other ID issued by the Government of India
+
+                                                                                </li>
+                                                                                <li>5. Reach the location at least 30mins prior to the departure for bus
+                                                                                </li>
+
+                                                                                <li>6. Cancellation of this ticket is NOT allowed after bus departure time.
+                                                                                </li>
+                                                                  
+                                                                            </ul>
+                                                                        </td>
+                                                                    </tr>
+
+
+                                                                                    <tr>
+                                                                                        <td colspan="4" style="background-color: #fff;color:#393939;padding: 9px 15px; border-top:transparent;">
+                                                                                            <span class="trm_cndt" style="vertical-align:middle;font-size:18px; font-weight:600;">Cancellation
+                                                                                                &amp; Policies:</span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="lylt_cr" colspan="4" style="line-height:30px; padding: 0px 15px 15px 15px; font-size:14px; color:#555;border-top:transparent">
+                                                                                            <table class="table table-bordered" style="width: 100%;">
+                                                                                             <tr>
+                                                                                                <th style="text-align: left; background: #fafafa;">Cancellation Time</th>
+                                                                                                <th style="text-align: right; background: #fafafa;">Charges</th>
+                                                                                            </tr>
+
+                                                                                            <tr *ngFor="let cancelInfo of voucherResponse?.BookingDetails?.cancellationPolicies">
+                                                                                                <td style="text-align: left;">{{cancelInfo?.fromTime}}Hrs to {{cancelInfo?.toTime}}Hrs</td>
+                                                                                                <td style="text-align: right;">{{cancelInfo?.cancellationRate}}%</td>
+                                                                                            </tr>
+
+                                                                                            <!-- <tr>
+                                                                                                <td style="text-align: left;"><strong>Between</strong> 2/21/25 6:00 AM and 2/21/25 6:00PM</td>
+                                                                                                <td style="text-align: right;">100%</td>
+                                                                                            </tr>
+
+                                                                                            <tr>
+                                                                                                <td style="text-align: left;"><strong>Between</strong> 2/21/25 6:00 AM and 2/21/25 6:00PM</td>
+                                                                                                <td style="text-align: right;">100%</td>
+                                                                                            </tr> -->
+
+                                                                                            </table>    
+                                                                                        </td>
+                                                                                    </tr>
+
+
+                                                                    <tr style="background:#0A5081">
+                                                                        <td style="padding:10px 10px; font-size: 14px; text-align: center; color: #fff;">Thank you for booking with us<br>For Queries Please feel free to contact us on : 8142411666                                                      </td>
+                                                                      </tr>    
+
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

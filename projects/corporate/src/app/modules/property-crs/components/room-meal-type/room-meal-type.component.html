@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="addMealType">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Add Meal Type'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-add-room-meal-type></app-add-room-meal-type>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="roomMealTypeList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Meal Type List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-room-meal-type-list></app-room-meal-type-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

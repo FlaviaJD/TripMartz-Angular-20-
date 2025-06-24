@@ -1,0 +1,145 @@
+<div class="update-profile-section main-card mb-3 card">
+    <div class="card-body p-0">
+        <div class="card-title align-items-center d-flex px-3">
+            <div class="card-profile">
+                <img *ngIf="userImage" height="50" width="50" class="rounded" [src]="logoUri+userImage" alt="logo">
+                <img *ngIf="!userImage" height="50" width="50" class="rounded" [src]="profile_logo" alt="logo">
+            </div>
+            <div class="d-flex flex-column ml-3">
+                <span class="title">Employee Id : {{ currentUser.business_number }}<br>Email : {{ currentUser.email }}</span>
+            </div>
+            <div class=" ml-auto">
+                <h5 class="title cust-fs">Update Profile</h5>
+            </div>
+        </div>
+        <form [formGroup]="profileForm" autocomplete="off" class="needs-validation px-4" novalidate
+            (ngSubmit)="onSubmit(profileForm,profileForm.value)">
+            <div class="form-row">
+
+                 <div class="col-3 p-0">
+                    <div class="position-relative form-group">
+                        <h5 class="title">Company Name</h5>
+                        <div class="col-12 p-0"><h6 class="font-weight-500">{{ currentUser.corporate_details.business_name }}</h6></div>
+                    </div>
+                 </div>
+
+                 <div class="col-3 p-0">
+                    <div class="position-relative form-group">
+                        <h5 class="title">Position</h5>
+                        <div class="col-12 p-0"><h6>{{ currentUser.position_name }}</h6></div>
+                    </div>
+                 </div>
+
+
+                 <div class="col-3 p-0">
+                    <div class="position-relative form-group">
+                        <h5 class="title">Department</h5>
+                        <div class="col-12 p-0"><h6>{{ currentUser.department_name }}</h6></div>
+                    </div>
+                 </div>
+
+                 <div class="col-3 p-0">
+                    <div class="position-relative form-group">
+                        <h5 class="title">Cost Center</h5>
+                        <div class="col-12 p-0"><h6>{{ currentUser.cost_center }}</h6></div>
+                    </div>
+                 </div>
+        
+                 
+                 </div>
+
+        <div class="form-row">
+           <div class="col-3">
+            <div class="position-relative form-group">
+                <label for="title" class="col-form-label">Title</label>
+                <select formControlName="title" class="form-control text-uppercase">
+                    <option *ngFor="let t of userTitleList" [value]=t.id>{{t.title}}</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="col-3">
+            <div class="position-relative form-group">
+
+                <label for="first_name" class="col-form-label">First Name</label>
+                <input formControlName="first_name" placeholder="First Name" type="text" class="form-control"
+                    (keypress)="omitSpecialCharacters($event)" maxlength="100">
+            </div>
+            </div>
+
+            <div class="col-3">
+            <div class="position-relative form-group">
+                <label for="last_name" class="col-form-label">Last Name</label>
+                <input formControlName="last_name" placeholder="Last Name" type="text" class="form-control"
+                    (keypress)="omitSpecialCharacters($event)" maxlength="100">
+            </div>
+            </div>
+          
+
+            <div class="col-3">
+            <div class="position-relative form-group">
+                <label for="address" class="col-form-label">Address</label>
+                <textarea maxlength="250" formControlName="address" class="form-control"></textarea>
+            </div>
+            </div>
+            
+            <div class="col-3">
+                <div class="position-relative form-group">
+                    <label for="date_of_birth" class="col-form-label">Date Of Birth</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="picker" [max]="maxDate" readonly formControlName="date_of_birth"
+                            placeholder="Date Of Birth" (click)="picker.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                </div>
+
+                <div class="col-3">
+                <div class="position-relative form-group">
+                    <label for="country_code" class="col-form-label">Country</label>
+                    <select formControlName="country" class="form-control">
+                        <option value="" disabled>-Select-</option>
+                        <option *ngFor="let country of countries" [value]="country.id">
+                            {{country.name}}</option>
+                    </select>
+                </div>
+                </div>
+
+                <div class="col-3">
+            <div class="position-relative form-group">
+                <label for="phone" class="col-form-label">Phone</label>
+                <input formControlName="phone" placeholder="phone" type="text" class="form-control" maxlength="100"
+                    (keypress)="numberOnly($event)">
+            </div>
+            </div>
+            <!-- <div class="position-relative form-group">
+                <label for="business_phone" class="col-form-label">Business Phone</label>
+                <input formControlName="business_phone" placeholder="Business Phone" type="text" class="form-control"
+                    maxlength="100" (keypress)="numberOnly($event)">
+            </div> -->
+           
+            <div class="col-3">
+            <div class="position-relative form-group custom-file-section">
+                <label for="image" class="col-form-label">Upload Profile</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" accept=".png, .jpg, .jpeg" formControlName="importFile"
+                        id="importFile" (change)="onFileChange($event.target.files)">
+                    <label class="custom-file-label" #labelImport for="importFile">Upload Your profile Image</label>
+                </div>
+            </div>
+            </div>
+
+            
+        </div>
+
+        <div class="position-relative form-group text-center">
+            <div class="update-btn d-flex align-items-center">
+                <button type="submit" class="btn btn-secondary">Confirm</button>
+                <alert></alert>
+            </div>
+        </div>
+
+        </form>
+    </div>
+</div>

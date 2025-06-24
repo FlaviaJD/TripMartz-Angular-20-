@@ -1,0 +1,1254 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+    .header {
+        background: #fff;
+        padding: 15px 0px;
+    }
+
+    .getstarted{ padding: 60px 0px; background: #fff; float: left; position: relative; width: 100%;}
+    .gets { width: 100%; float: left; position: relative; text-align: center;}
+    .gets h3 { font-size: 28px; color: #2B2B2B; font-weight: 500;}
+    .gets .start { padding: 5px 25px;
+    border: 2px solid #CCCCCC;
+    cursor: pointer;
+    display: table;
+    margin: auto;
+    margin-top: 15px;
+    font-size: 23px;
+    border-radius: 5px;}
+    mat-label {
+        font-size: 17px !important;
+        font-weight: 500;
+        color: #000;
+        transform: none !important;
+        top: 0px !important;
+    }
+
+    ::ng-deep .mat-form-field-label {
+        transform: none !important;
+        top: 0px !important;
+        font-size: 13px !important;
+    }
+
+    ::ng-deep .mat-form-field-underline {
+        background-color: transparent !important;
+        height: 0px !important;
+    }
+
+    ::ng-deep .mat-form-field-ripple {
+        height: 0px !important;
+    }
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+        color: rgb(0 0 0);
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+
+    ::ng-deep .carousel-indicators {
+        display: none;
+    }
+
+    ::ng-deep .mat-form-field-label-wrapper {
+        top: -20px;
+    }
+
+    .input_t {
+        height: 57px !important;
+        padding: 5px 14px !important;
+        border: none;
+        width: 100%;
+        border: 1px solid #606060 !important;
+        border-radius: 5px !important;
+        background: none !important;
+        margin-bottom: 0px;
+        font-weight: 600;
+        color: #000;
+    }
+
+    :ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+        color: rgb(90 89 89) !important;
+    }
+
+    .input_t:focus {
+        background: none !important;
+    }
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+        margin-top: 17px;
+    }
+   .footer { background: #001C4B; padding: 30px 0px; float: left; width: 100%;}
+    .srch_btn {
+        border-radius: 6px;
+        background: #065081;
+        /* width: 183px; */
+        height: 48px;
+        color: #fff;
+        transition: 0.3s;
+        font-size: 18px;
+        line-height: 21px;
+        font-weight: 400;
+        /* width: 200px !important; */
+        /* box-shadow: 0px 1px 11px 5px #cae7e4; */
+    }
+
+    .log_menu {
+        padding: 0px;
+    }
+
+    .log_menu .menubar {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .log_menu .menubar li {
+        float: left;
+        list-style: none;
+    }
+
+    .log_menu .menubar li a {
+        padding: 0px 15px;
+        font-size: 15px;
+        float: left;
+        color: #252A31;
+        line-height: 63px;
+    }
+
+    .log_menu .menubar li a:hover {
+        text-decoration: none;
+        color: #252A31;
+    }
+
+    .rit_menu {
+        padding: 0px;
+    }
+
+    .rit_menu .ritbar {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .rit_menu .ritbar li {
+        float: left;
+        list-style: none;
+        padding: 15px 0px;
+    }
+
+    .rit_menu .ritbar li a {
+        padding: 0px 20px;
+        font-size: 15px;
+        float: left;
+        color: #252A31;
+        line-height: 33px;
+    }
+
+    .rit_menu .ritbar li a:hover {
+        text-decoration: none;
+        color: #252A31;
+    }
+
+    .loginlk {
+        background: #F99D1C;
+        color: #fff;
+        border-radius: 8px; cursor: pointer;
+        color: #fff !important;
+    }
+
+    ::ng-deep .mat-form-field-label {
+        display: none !important;
+    }
+
+    .clides {
+        float: left;
+        width: 100%;
+        position: relative;
+        height: 580px;
+    }
+
+    .clides:after {
+        position: absolute;
+        z-index: 1;
+        background: rgba(4, 41, 85, 0.8);
+        content: '';
+        top: 0px; left: 0px; right: 0px;;
+        width: 100%;
+        height: 100%;
+    }
+
+    .clides img {
+        height: 100%; width: 100%;
+    }
+
+    .foot_m{ padding: 10px 0px 30px; float: left; width: 100%; border-bottom: 1px solid #C0C0C0;}
+    .foot_m ul { padding: 0px; margin: 0px;}
+    .foot_m ul li { float: left;}
+    .foot_m ul li a { color: #fff; padding: 5px 15px; font-size: 15px; }
+
+    .foot_r { float: right; }
+
+    .foot_r ul { padding: 0px; margin: 0px;}
+    .foot_r ul li { float: left;}
+    .foot_r ul li a { color: #fff; padding: 5px 15px; font-size: 15px; }
+
+    .copyr{ float: left; width: 100%; padding-top: 21px;}
+    .copyr span { color: #fff; font-size: 15px;}
+    .clide_caption {
+        font-family: "Space Grotesk", sans-serif;
+        z-index: 9;
+        position: absolute;
+        top: 220px;
+        left: 0px;
+        right: 0px;
+        text-align: center;
+        font-optical-sizing: auto;
+        max-width: 70%;
+        margin: auto;
+        color: #fff;
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    .clide_caption span {
+        color: #f99d1c
+    }
+
+    .ourprod {
+        position: relative;
+        width: 100%;
+        background: #fff;
+        padding: 50px 0px;
+    }
+
+    .titleprod {
+        text-align: center;
+    }
+
+    .titleprod h3 {
+        font-size: 32px;
+        color: #2D2D2D;
+    }
+
+    .titleprod1 {
+        text-align: center;
+    }
+
+    .titleprod1 h3 {
+        font-size: 37px;
+        color: #2D2D2D;
+        font-weight: 500;
+        margin-bottom: 30px;
+    }
+
+
+    .titleprod span {
+        color: #444444;
+        font-size: 18px;
+    }
+
+    .plistsection {
+        position: relative;
+        padding: 55px 0px 0px 0px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .listruled {
+        width: 32%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 1px 2px 10px -1px #c0c0c0;
+        border: 1px solid transparent;
+        border-radius: 18px;
+    }
+
+    .listruled:hover {
+        border: 1px solid #70A0FF;
+    }
+
+    .listcirc {
+        padding: 15px;
+        width: 80px;
+        height: 80px;
+        box-shadow: 0px 0px 10px #ddd;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    .list_content {
+        padding-left: 20px;
+    }
+
+    .list_content h5 {
+        margin-bottom: 10px;
+        font-size: 19px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .features {
+        background: #eff5fe;
+        float: left;
+        width: 100%;
+        position: relative;
+        padding: 50px 0px;
+    }
+
+    .featurescontent {
+        float: left;
+    }
+
+    .featurescontent h3 {
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .featurescontent span {
+        font-size: 20px;
+    }
+
+    .feat_block {
+        float: left;
+    }
+
+    .feat_block .fet_li {
+        background: #fff;
+        border: 1px solid transparent;
+        padding: 16px 8px;
+        box-shadow: 0px 2px 3px #ddd;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    .feat_block .fet_li:hover {
+        border: 1px solid #70A0FF;
+    }
+
+    .fet_c {
+        font-size: 14px;
+        color: #231F20;
+        padding-left: 6px;
+    }
+
+    .partner_slide {
+        max-width: 70%;
+        margin: 0px auto;
+        display: table;
+    }
+
+    .partner_slide img {
+        max-width: 100%;
+    }
+
+    .wrapper_partner {
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 50px 0px;
+    }
+
+    .why_partner {
+        width: 100%;
+        float: left;
+        position: relative;
+        padding: 50px 0px;
+    }
+
+    .why_slider {
+        float: left;
+        width: 100%;
+    }
+
+    .listchoose {
+        width: 32%;
+        margin: 15px 0.60%;
+        padding: 30px;
+        color: #212529;
+        text-align: center;
+        float: left;
+        box-shadow: 1px 1px 1px -1px #c0c0c0;
+        border: 1px solid #D1D1D1;
+        border-radius: 7px;
+    }
+
+    .listchoose img {
+        text-align: center;
+        height: 62px;
+    }
+
+    .listchoose h3 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 12px;
+    }
+
+    .listchoose p {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .faqs {
+        background: #eff5fe;
+        float: left;
+        width: 100%;
+        position: relative;
+        padding: 50px 0px;
+    }
+    .faq_card { text-align: left;  }
+    .faq_card h3 {font-size: 24px; font-weight: 600; margin-bottom: 15px;}
+    ::ng-deep .owl-stage {
+        display: flex;
+        align-items: center;
+    }
+::ng-deep .accordion.accd .card{ margin-bottom: 15px; border: 1px solid #70A0FF !important;}
+  ::ng-deep .accordion.accd .card h5 { margin-bottom: 0px; font-weight: 400;}
+ .login_modal.modal-body{ padding: 0px 15px 15px 0px  !important;}
+ .login_modal.modal-body img { width: 100%; margin-top: 25px;}
+ ::ng-deep .modal-dialog{ max-width: 800px;padding: 15px!important;}
+
+.modal-header, .modal-footer {
+    background: none;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    display: block;
+    font-weight: 600;
+}
+.close {position: absolute;
+    right: 25px;
+    top: 10px;
+    font-size: 37px;
+    color: #000;}
+.modal-header .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.loadlog{ position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 99;
+    background: rgba(255, 255, 255, 0.8);}
+
+    .loader--spinner {
+    display: inline-block;
+    position: absolute;
+    color: #000;
+    height: 60px;
+    width: 60px;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+}
+
+.loader--spinner div {
+    animation: loader--spinner 1.2s linear infinite;
+    transform-origin: 30px 30px;
+}
+
+.loader--spinner div:after {
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 27px;
+    border-radius: 20%;
+    content: " ";
+    height: 10px; background: #000;
+    width: 5px;
+}
+
+.loader--spinner div:nth-child(1) {
+    animation-delay: -1.1s;
+    transform: rotate(0deg);
+}
+
+.loader--spinner div:nth-child(2) {
+    animation-delay: -1s;
+    transform: rotate(30deg);
+}
+
+.loader--spinner div:nth-child(3) {
+    animation-delay: -0.9s;
+    transform: rotate(60deg);
+}
+
+.loader--spinner div:nth-child(4) {
+    animation-delay: -0.8s;
+    transform: rotate(90deg);
+}
+
+.loader--spinner div:nth-child(5) {
+    animation-delay: -0.7s;
+    transform: rotate(120deg);
+}
+
+.loader--spinner div:nth-child(6) {
+    animation-delay: -0.6s;
+    transform: rotate(150deg);
+}
+
+.loader--spinner div:nth-child(7) {
+    animation-delay: -0.5s;
+    transform: rotate(180deg);
+}
+
+.loader--spinner div:nth-child(8) {
+    animation-delay: -0.4s;
+    transform: rotate(210deg);
+}
+
+.loader--spinner div:nth-child(9) {
+    animation-delay: -0.3s;
+    transform: rotate(240deg);
+}
+
+.loader--spinner div:nth-child(10) {
+    animation-delay: -0.2s;
+    transform: rotate(270deg);
+}
+
+.loader--spinner div:nth-child(11) {
+    animation-delay: -0.1s;
+    transform: rotate(300deg);
+}
+
+.loader--spinner div:nth-child(12) {
+    animation-delay: 0s;
+    transform: rotate(330deg);
+}
+
+@keyframes loader--spinner {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+::ng-deep.accordion.accd .card{border-radius: 8px!important;}
+::ng-deep.accordion .card:first-of-type{border-radius: 8px!important;}
+::ng-deep.accordion>.card:not(:last-of-type){border-radius: 8px!important;}
+
+/* Menu container */
+.menu {
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  /* background-color: #333; */
+  color: #000000;
+  padding: 10px;
+}
+
+/* Header with logo and hamburger */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hamburger button */
+.hamburger {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Menu items (hidden by default on small screens) */
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  flex-direction: column;
+}
+
+/* Menu items when open */
+.menu-items.menu-open {
+  /* display: flex; */
+    display: block;
+    background: #ffffff;
+    position: absolute;
+    z-index: 99;
+    top: 95px;
+    padding: 0px 0px 15px 0px;
+}
+.menu-items li{padding: 5px 10px;}
+
+/* Menu links */
+.menu-items li a {
+  color: #000000;
+  text-decoration: none;
+  padding: 5px 15px;
+  display: block;
+}
+::ng-deep.modal-content{border-radius: 8px!important;}
+
+/* Responsive: show menu as horizontal for larger screens */
+@media (min-width: 768px) {
+  .menu {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .menu-header {
+    flex: 1;
+  }
+
+  .menu-items {
+    display: flex;
+    /* flex: 2; */
+    justify-content: space-around;
+    flex-direction: row;
+  }
+
+  .hamburger {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+.plistsection{display: block;padding-top: 30px;}
+.listruled{width: 100%;margin-bottom: 10px;}
+.mobile_block{display: block!important;}
+.listchoose{width: 100%;}
+.feat_block .fet_li{margin-bottom: 10px;}
+.mobile_mt-0{margin-top: 0px!important;}
+.clide_caption{font-size: 30px;}
+.mobile_pad{padding: 0px 15px!important;}
+.titleprod h3{font-size: 24px;font-weight: 600;}
+.featurescontent h3{font-size: 24px;font-weight: 600;}
+.titleprod1 h3{font-size: 24px;font-weight: 600;}
+.faq_card h3{font-size: 24px;font-weight: 600;}
+.gets h3{font-size:20px;font-weight: 500;}
+.titleprod span{font-size: 16px;}
+.featurescontent span{font-size: 16px;margin-bottom: 30px;}
+.gets .start{font-size: 16px;}
+.feat_block{width: 100%;}
+.listchoose{margin: 5px 0px;}
+.list_content h5{font-size: 16px;}
+.mb-30{margin-bottom: 30px;}
+.accordion.accd .card h5 {font-size: 16px!important;}
+.foot_r ul li{list-style: none;}
+.foot_m ul li{list-style: none;}
+.mobile_mr-0{margin: 0px!important;}
+.login_modal.modal-body img{width: 50%;margin: 0px auto; display: block;}
+.login_modal.modal-body{padding: 15px!important;}
+.close{    right: 12px;
+    top: 4px;
+    font-size: 28px;
+    font-weight: 400;}
+}
+.modal-header .modal-title{ font-size: 20px;}
+.input_t{height: 48px !important;}
+
+</style>
+
+<!-- <div class="loadlog" *ngIf="loadingLogin">
+    <div class="loader--spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div> -->
+
+<div class="h-100" *ngIf="pageLoad">
+    <app-home-page-header></app-home-page-header>
+
+    <div class="no-gutters h-100">
+
+        <ngb-carousel *ngIf="showCarousel" #carousel [interval]="5000">
+            <ng-template ngbSlide>
+                <div class="clides">
+                    <img src="assets/images/slide1.jpg">
+                    <h1 class="clide_caption">Welcome to our trusted <span>B2E travel portal</span>, where reliability
+                        meets innovation!</h1>
+                </div>
+            </ng-template>
+
+        </ngb-carousel>
+
+        <div class="clearfix"></div>
+
+        <div class="ourprod">
+            <div class="container p-0 mobile_pad">
+                <div class="titleprod">
+                    <h3>Our Products</h3>
+                    <span>
+                        One app for corporate travel, expense management and corporate card solution.
+                       </span>
+                </div>
+
+                <div class="plistsection">
+                    <div class="listruled">
+                        <div class="listcirc">
+                            <img src="assets/images/fp.svg" alt="" />
+                        </div>
+                        <div class="list_content">
+                            <h5>Flights</h5>
+                        </div>
+                    </div>
+
+
+                    <div class="listruled">
+                        <div class="listcirc">
+                            <img src="assets/images/hp.svg" alt="" />
+                        </div>
+                        <div class="list_content">
+                            <h5>Hotels</h5>
+                        </div>
+                    </div>
+
+
+                    <div class="listruled">
+                        <div class="listcirc">
+                            <img src="assets/images/bp.svg" alt="" />
+                        </div>
+                        <div class="list_content">
+                            <h5>Buses</h5>
+                        </div>
+                    </div>
+
+                   
+                </div>
+
+                <div class="plistsection">
+                <div class="listruled">
+                    <div class="listcirc">
+                        <img src="assets/images/visa.svg" alt="" />
+                    </div>
+                    <div class="list_content">
+                        <h5>Visa</h5>
+                    </div>
+                </div>
+
+
+                <div class="listruled">
+                    <div class="listcirc">
+                        <img src="assets/images/forex.svg" alt="" />
+                    </div>
+                    <div class="list_content">
+                        <h5>Forex</h5>
+                    </div>
+                </div>
+
+
+                <div class="listruled">
+                    <div class="listcirc">
+                        <img src="assets/images/cab.svg" alt="" />
+                    </div>
+                    <div class="list_content">
+                        <h5>Cab Services</h5>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="features">
+            <div class="container p-0">
+                <div class="d-flex align-items-center mobile_block">
+                    <div class="col-md-6">
+                        <div class="featurescontent mb-30">
+                            <h3>Our Features</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 pl-0">
+                        <div class="d-flex mobile_block">
+                            <div class="col-md-6">
+                                <div class="feat_block">
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/instant.svg" alt="" /></div>
+                                        <div class="fet_c">Instant Booking & Rescheduling</div>
+                                    </div>
+
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/secure.svg" alt="" /></div>
+                                        <div class="fet_c">Advanced Search Filters</div>
+                                    </div>
+
+                                  
+
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/automate.svg" alt="" /></div>
+                                        <div class="fet_c">Automated Back-End System</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="feat_block mt-5 mobile_mt-0">
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/ticket.svg" alt="" /></div>
+                                        <div class="fet_c">Multi-Payment Options</div>
+                                    </div>
+
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/report.svg" alt="" /></div>
+                                        <div class="fet_c">Detailed Financial Report</div>
+                                    </div>
+
+                                    <div class="fet_li">
+                                        <div><img src="assets/images/booking.svg" alt="" /></div>
+                                        <div class="fet_c">Reliable & Scalable Infrastructure</div>
+                                    </div>
+
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="wrapper_partner">
+            <div class="container p-0 mobile_pad">
+
+                <div class="titleprod1">
+                    <h3>Our Partnerships</h3>
+                </div>
+
+                <!-- <div class="brand-section mx-screen-1186">
+                    <ngx-slick-carousel class="slick-slider slick-dotted" #slickModal="slick-carousel"
+                        [config]="airlineSlideConfig">
+                        <div ngxSlickItem *ngFor="let slide of airlinePartners">
+                            <div class="banner-section">
+                                <img src="{{ sliderUri+slide.logo }}" alt="brands"
+                                    style="margin: 0 auto; max-width: 190px !important; width: auto !important;">
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </div> -->
+
+                <div class="partner_slider">
+                    <owl-carousel-o [options]="customOptions">
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/tp.jpeg" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/iata.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/indigo.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/ai.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/emirates.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/alliance.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                        <ng-container>
+                            <ng-template class="slide" carouselSlide>
+                                <div class="partner_slide"><img src="assets/images/AirAsia.png" alt="" /></div>
+                            </ng-template>
+                        </ng-container>
+
+                    </owl-carousel-o>
+                </div> 
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="why_partner">
+            <div class="container p-0 mobile_pad">
+
+                <div class="titleprod1">
+                    <h3>Why Choose Us?</h3>
+                </div>
+
+                <div class="why_slider">
+
+                    <div class="listchoose">
+                        <img src="assets/images/special-fare.svg">
+                        <h3>Industry-Leading Travel Discounts</h3>
+                        <p>Access unbeatable fares and maximize profitability.</p>
+                    </div>
+
+                    <div class="listchoose">
+                        <img src="assets/images/agent-commission.svg">
+                        <h3>Strong Global Network</h3>
+                        <p>Multi-GDS & NDC integration for the best travel deals worldwide</p>
+                    </div>
+
+
+                    <div class="listchoose">
+                        <img src="assets/images/travel-experts.svg">
+                        <h3>Hassle-Free Cancellations & Rescheduling</h3>
+                        <p>Minimize losses with flexible policies</p>
+                    </div>
+
+                    <div class="listchoose">
+                        <img src="assets/images/global-presence.svg">
+                        <h3>Seamless Ticket Management</h3>
+                        <p>Effortlessly block, issue, and modify<br>bookings.</p>
+                    </div>
+
+                    <div class="listchoose">
+                        <img src="assets/images/24-7-support.svg">
+                        <h3>Dedicated 24/7 Support</h3>
+                        <p>Always available for travel agents and corporate clients.</p>
+                    </div>
+
+                    <div class="listchoose">
+                        <img src="assets/images/Booking-Reliability.svg">
+                        <h3>Credit & Payment Flexibility</h3>
+                        <p>Improve cash flow with customized credit options.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="faqs" id="faq">
+            <div class="container p-0 mobile_pad">
+                <div class="faq_card">
+                    <h3>Frequently Asked Questions (FAQs)</h3>
+                </div>
+
+                <ngb-accordion #acc="ngbAccordion" class="accd">
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">1. How do I Login?</h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                To log in to the Tripmartz Corporate Employee portal, follow these steps:
+<ul>
+<li>You have to contact your Administrator or Travel desk department to obtain User ID and Password.</li>
+<li>Once you receive ID and Password, Please Visit the Tripmartz Corporate Employee portal login page.(URL)</li>
+<li>Enter your registered email ID and password and Login ID.</li>
+<li>Click Login.</li>
+</ul>
+
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">2. How do I reset my password for the Corporate Employee portal?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                If you forgot your password, follow these steps:
+                                <ul>
+                                <li>Go to the Corporate Employee portal login page.</li>
+                                <li>Click on the Forgot Password?</li>
+                                <li>Enter your registered email ID and click Submit.</li>
+                                <li>You will receive an email with a password reset link. Click on it.</li>
+                                <li>Set a new password and confirm it.</li>
+                                <li>Log in with your new password.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">3. Who do I contact if I face issues with booking?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                <ul>
+                                <li>Phone: [8142411666]</li>
+                                <!-- <li>Email: [ bookings@hypermiles.com]</li> -->
+                                <li>Live Chat: Available on our website [coming soon…]</li>
+                              
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">4. How do I update my profile details?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                To update your profile details:                                <ul>
+                                <li>Log in to the  Corporate Employee portal.</li>
+                                <li>Go to the Profile section.</li>
+                                <li>Click Edit Profile and update your details.</li>
+                                <li>Click Save Changes to confirm.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">5. To book tickets:
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                <ul>
+                                <li>Log in to the Tripmartz Corporate Employee portal.</li>
+                                <li>Select the category: Flights, Hotels.</li>
+                                <li>Enter travel details (destination, dates, passengers, etc.).</li>
+                                <li>Click Search and choose your preferred option.</li>
+                                <li>Complete the booking.</li>
+                                <li>You will receive a confirmation email and booking reference number.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">6. Can I do my personal bookings in the portal? 
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                To Book for Personal Travel?
+                                <ul>
+                                <li>Log in to the Tripmartz Corporate Employee portal.</li>
+                                <li>Choose the booking category (Flights, Hotels,etc.).</li>
+                                <li>Select "Personal" as the travel type.</li>
+                                <li>Enter travel details (destination, date, passenger info).</li>
+                                <li>Select a suitable option from the available choices.</li>
+                                <li>Fill in passenger/guest details.</li>
+                                <li>Choose your payment option and confirm  the booking.</li>
+                                <li>Receive booking confirmation via email/SMS.</li>
+                                <li>Manage your booking from the "REPORTS" section.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">7. Can I modify or cancel my booking?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                <ul>
+                                <li><strong>Hotels:</strong> Some hotels offer free cancellations, while others may have a cancellation fee.
+                                </li>
+                                <li><strong>Flights:</strong> Airlines have specific rules for modifications and cancellations, which may involve fees.
+                                </li>
+                                <li><strong>Other Services:</strong> For any other bookings, please refer to the cancellation policy mentioned during booking.</li>
+                                <li>You can directly click on the cancel button for the cancellation and your booking will be cancelled. </li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">8. How do I add special requests (meals, seat preferences, wheelchair assistance)?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                You can request special services while booking:
+                                <ul>
+                                <li>At the time of booking you will be given the option to add SSR services (Seats, extra baggage, Meals and all) at the time of Booking.
+                                </li>
+                                <li>Or else, You can contact our support team to add requests manually.
+                                </li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">9. How do I check my booking status?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                To check the status of your booking:
+
+                                <ul>
+                                <li>Log in to the Tripmartz Corporate Employee portal.</li>
+                                <li>Go to REPORTS.</li>
+                                <li>Select the booking reference number to view status (Confirmed, Pending, or Canceled)</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">10. Will I get a full refund if I cancel my trip?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                Refunds depend on the cancellation policy:
+                                <ul>
+                                <li>If canceled within the free cancellation period, you may get a full refund.</li>
+                                <li>Some bookings may have partial refunds based on airline/hotel rules.</li>
+                                <li>Refunds may take 5-7 business days to process.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">11. How do I reschedule my flight/hotel booking?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                If you forgot your password, follow these steps:
+                                <ul>
+                                <li>Reach out to our customer support for assistance with rescheduling.</li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <div>
+                                <h5 class="title">12. Are there cancellation charges for changing travel plans?
+                                </h5>
+                            </div>
+                        </ng-template>
+
+                        <ng-template ngbPanelContent>
+                            <div class="my-2 bg-white" style="height: 100px; text-align: left; font-size: 16px; padding: 0px 20px;">
+                                Yes, cancellation charges vary based on the airline, hotel, or package provider:
+                                <ul>
+                                <li>Some bookings may allow free cancellations within a time frame.
+                                </li>
+
+                                <li>Others may have charges based on the cancellation date.
+
+                                </li>
+
+                                <li>Check the cancellation policy before booking.
+                                </li>
+                                </ul>                            </div>
+                        </ng-template>
+                    </ngb-panel>
+
+                </ngb-accordion>
+
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+<!-- 
+        <div class="getstarted">
+            <div class="container p-0 mobile_pad">
+                <div class="d-flex">
+                    <div class="col-md-6 p-0">
+                        <div class="gets" style="border-right: 1px solid #393939;">
+                            <h3>Work With Us</h3>
+                            <a class="start">Get Started</a>
+                        </div>
+                    </div> 
+                    
+                    <div class="col-md-6 p-0">
+                        <div class="gets">
+                            <h3>Get In Touch</h3>
+                            <a class="start">Contact Us</a>
+                        </div>
+                    </div> 
+                </div>    
+            </div>    
+        </div>  
+        
+        <div class="clearfix"></div> -->
+
+        <app-home-page-footer></app-home-page-footer>
+
+    </div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

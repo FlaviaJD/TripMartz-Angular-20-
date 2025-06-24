@@ -1,0 +1,153 @@
+<div mat-dialog-content *ngIf="!isDomesticFlightSelected">
+    <div *ngFor="let iList of flight.FlightDetails.Details" class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 pb-0 mb-2" style="box-shadow: none;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            border-radius: 5px;">
+                <div class="card-body pb-0">
+                    <div *ngFor="let list of iList" class="row pb-2 bbottom">
+
+                        <div class="col-md-4 pr-0 baggage_col">
+                            <div class="float-left p-0">
+                                <img width="30" class="rounded" [src]="[airline_logo + list.OperatorCode + '.gif']"
+                                    alt="">
+                            </div>
+                            <div class="float-left pl-2" style="line-height: 19px;">
+                                <strong>{{ list.Origin.AirportCode + ' - ' + list.Destination.AirportCode }}</strong>
+                                <br>
+                                {{ list.OperatorName }}
+                            </div>
+                           
+                        </div>
+
+                        <!-- <div class="col-md-3 pr-0">
+                           
+                        </div> -->
+                        <div class="col-md-3 col-xl-4 pr-0 baggage_col">
+                            <span>
+                                <div class="d-flex flex-column text-muted">
+                                    <div class="deemFont">
+                                        <!-- <small> {{ list.OperatorName }} </small> -->
+                                        <strong>Flight Number</strong>
+                                    </div>
+                                    <div class="">
+                                        <!-- <small> {{ list.FlightNumber }} </small> -->
+                                        {{ list.FlightNumber }}
+                                    </div>
+
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col-md-3 col-xl-4 pr-0 baggage_col">
+                            <div class="d-flex flex-column">
+                                <div class="deemFont">
+                                    <strong>Cabin</strong>
+                                </div>
+                                <div class="">
+                                    <span><i class="fi-rr-luggage-rolling"></i> {{list.Attr.CabinBaggage}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xl-4 pr-0 baggage_col">
+                            <div class="d-flex flex-column">
+                                <div class="deemFont">
+                                    <strong>Check In</strong>
+                                </div>
+                                <div class="">
+                                    <span><i class="fi-rr-suitcase-alt"></i> {{list.Attr.Baggage}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-3 pr-0">
+                            <div class="d-flex flex-column">
+                                <div class="c-pointer text-center">
+                                    <span><i class="fa fa-suitcase"></i> {{list.Attr.CabinBaggage}} </span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div mat-dialog-content *ngIf="isDomesticFlightSelected">
+    <div *ngFor="let iList of flight.FlightDetails.Details" class="row">
+        <div class="col-md-12">
+            <div class="card mt-2 pb-0 mb-2" style="box-shadow: none;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            border-radius: 5px;">
+                <div class="card-body pb-0">
+                    <div *ngFor="let list of iList">
+                      <div class="row pb-2 bbottom">
+                        <div class="col-md-12 pr-0 baggage_col">
+                            <div class="float-left p-0">
+                                <img width="30" class="rounded" [src]="[airline_logo + list.OperatorCode + '.gif']"
+                                    alt="">
+                            </div>
+                            <div class="float-left pl-2" style="line-height: 19px;">
+                                <strong>{{ list.Origin.AirportCode + ' - ' + list.Destination.AirportCode }}</strong>
+                                <br>
+                                {{ list.OperatorName }}
+                            </div>
+                           
+                        </div>
+                        </div>
+
+                        <!-- <div class="col-md-3 pr-0">
+                           
+                        </div> -->
+                        <div class="row pb-2 bbottom">
+                        <div class="col-md-3 col-xl-4 pr-0 baggage_col">
+                            <span>
+                                <div class="d-flex flex-column text-muted">
+                                    <div class="deemFont">
+                                        <!-- <small> {{ list.OperatorName }} </small> -->
+                                        <strong>Flight Number</strong>
+                                    </div>
+                                    <div class="">
+                                        <!-- <small> {{ list.FlightNumber }} </small> -->
+                                        {{ list.FlightNumber }}
+                                    </div>
+
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col-md-3 col-xl-4 pr-0 baggage_col">
+                            <div class="d-flex flex-column">
+                                <div class="deemFont">
+                                    <strong>Cabin</strong>
+                                </div>
+                                <div class="">
+                                    <span><i class="fi-rr-luggage-rolling"></i> {{list.Attr.CabinBaggage}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xl-4 pr-0 baggage_col">
+                            <div class="d-flex flex-column">
+                                <div class="deemFont">
+                                    <strong>Check In</strong>
+                                </div>
+                                <div class="">
+                                    <span><i class="fi-rr-suitcase-alt"></i> {{list.Attr.Baggage}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-3 pr-0">
+                            <div class="d-flex flex-column">
+                                <div class="c-pointer text-center">
+                                    <span><i class="fa fa-suitcase"></i> {{list.Attr.CabinBaggage}} </span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

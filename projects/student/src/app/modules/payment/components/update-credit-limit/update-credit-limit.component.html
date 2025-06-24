@@ -1,0 +1,27 @@
+<div class="">
+    <div class="row col-lg-12 col-md-12 pt-3 m-0">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow w-100" (tabChange)="onSelect($event)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="Deposit_Request">
+                <ng-template ngbTabTitle>
+                    <span><i class=""></i> &nbsp; Credit History </span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <div class="row card custom-font" style="margin-left: 1px !important;">
+                        <app-sent-credit-limit></app-sent-credit-limit>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <!-- <ngb-tab id="updateCreditLimit">
+                <ng-template ngbTabTitle>
+                    <span><i class=""></i> &nbsp; Update Credit Limit</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <div class="card col-md-12 col-lg-12">
+                        <app-new-credit-limit (showList)="setActiveTab($event)"></app-new-credit-limit>
+                    </div>
+                </ng-template>
+            </ngb-tab> -->
+        </ngb-tabset>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+th {
+    color: #252c40;
+}
+
+.move-right {
+    position: absolute;
+    right: 22px;
+}
+
+.modal {
+    -webkit-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    top: 60%;
+    margin: 0 auto;
+}
+
+.fs-1 {font-size: 14px;
+    padding: 4px 10px !important;}
+
+.btnStyle {
+    border: none;
+    background: #252c40;
+    color: #fff;
+    padding: 4px 7px;
+    border-radius: 5px;
+}
+
+
+.div1 {
+    width: 1500px !important;
+    overflow: hidden;
+}
+
+.div2 {
+    width: 1500px !important;
+    overflow: hidden;
+}
+
+::ng-deep .page-item.active .page-link,
+::ng-deep .pagination .active.page-number .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #F99D1C !important;
+    border-color: #F99D1C !important;
+}
+
+.modal-header {
+    background: #F99D1C;
+}
+
+.modal-header h4 {
+    color: #fff;
+}
+
+.modal-header .close {
+    color: #fff;
+}
+
+.modal-dialog {
+    max-width: 600px;
+}
+
+.invalidFeedback {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #C71C22;
+}
+.change{
+    color: #007bff!important;
+    cursor: pointer;
+}
+.dropdown-menu{padding: 0px 0px;}

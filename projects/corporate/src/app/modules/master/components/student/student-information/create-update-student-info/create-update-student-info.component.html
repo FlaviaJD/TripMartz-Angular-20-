@@ -1,0 +1,544 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px">
+  <div class="add-traveller">
+    <div class="custom-inline-form">
+      <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+        <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+          <div class="col-auto p-0">
+            <label for="airportdetails">
+              <input
+                type="radio"
+                id="airportdetails"
+                (change)="
+                  showDiv.Details = !showDiv.Details; showDiv.Csv = false
+                "
+                name="studentdetails"
+                checked
+                type="radio"
+              />
+              <span class="design"></span>
+              <span class="text" style="margin-left: 4px"
+                >Student Information</span
+              >
+            </label>
+          </div>
+          <div class="col-auto"><label>/</label></div>
+          <div class="col-auto p-0">
+            <label for="csvupload">
+              <input
+                type="radio"
+                id="csvupload"
+                (change)="showDiv.Csv = !showDiv.Csv; showDiv.Details = false"
+                name="studentdetails"
+                type="radio"
+              />
+              <span class="design"></span>
+              <span class="text" style="margin-left: 4px">CSV File Upload</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 p-0" *ngIf="showDiv.Details">
+        <form class="" [formGroup]="studentInformationForm" autocomplete="off">
+          <div class="title pl-30">
+            <h3>Student Information</h3>
+          </div>
+          <div class="row ml-2">
+            <div class="col-md-4 mb-2 p-0 required pl-0">
+              <label
+                for="title "
+                class="required"
+                class="pl-0 col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Title <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <select formControlName="title" class="form-control" id="title">
+                  <option [value]="''" selected disabled>Please Select</option>
+                  <option *ngFor="let item of titleList" [ngValue]="item.id">
+                    {{item.title}}
+                </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="first_name "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                (keypress)="omitSpecialCharacters($event)" >First Name <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first_name"
+                  formControlName="first_name"
+                  placeholder="First name"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="last_name "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                (keypress)="omitSpecialCharacters($event)" >Last Name <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last_name"
+                  formControlName="last_name"
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required pl-0">
+              <label
+                for="college "
+                class="required"
+                class="pl-0 col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Select College <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <select
+                  formControlName="college"
+                  class="form-control"
+                  id="college"
+                >
+                  <option [value]="''" selected disabled>Please Select</option>
+                  <option *ngFor="let item of universityList" [value]="item?.uni_name">
+                    {{ item?.uni_name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required pl-0">
+              <label
+                for="course_type "
+                class="required"
+                class="pl-0 col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Select College Type <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <select
+                  formControlName="course_type"
+                  class="form-control"
+                  id="course_type"
+                >
+                  <option [value]="''" selected disabled>Please Select</option>
+                  <option *ngFor="let item of courseTypeList" [value]="item?.course_type_name">
+                    {{ item?.course_type_name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required pl-0">
+              <label
+                for="course_name "
+                class="required"
+                class="pl-0 col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Select Course Name <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <select
+                  formControlName="course_name"
+                  class="form-control"
+                  id="course_name"
+                >
+                  <option [value]="''" selected disabled>Please Select</option>
+                  <option
+                    *ngFor="let item of courseList"
+                    [value]="item?.course_name"
+                  >
+                    {{ item?.course_name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="phone "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Phone Number <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  formControlName="phone"
+                  placeholder="Phone number"
+                  (keypress)="numberOnly($event)"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="email "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Email <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                  placeholder="Email"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="gender"
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Gender <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 d-flex align-items-center">
+                <div class="col-auto pl-0">
+                  <label for="male">
+                    <input
+                      type="radio"
+                      id="male"
+                      checked
+                      formControlName="gender"
+                      [value]="1"
+                    />
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px">Male</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <label for="female">
+                    <input
+                      type="radio"
+                      id="female"
+                      formControlName="gender"
+                      [value]="0"
+                    />
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px">Female</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mb-2 p-0 required">
+              <label
+                for="address"
+                class="required"
+                class="col-sm-12 pl-0 col-form-label font-weight-bold labelAlign"
+                >Address <sup class="text-danger f-16"> * </sup></label
+              >
+              <div class="col-sm-12 pl-0">
+                <textarea
+                  name=""
+                  placeholder="Address"
+                  class="form-control"
+                  style="width: 100%"
+                  id="address"
+                  cols="47"
+                  rows="5"
+                  formControlName="address"
+                >
+                </textarea>
+              </div>
+            </div>
+          
+           
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="country"
+                class="required"
+                class="col-sm-12 pl-0 col-form-label font-weight-bold labelAlign"
+                >Country<sup class="text-danger f-16"> * </sup></label
+              >
+              <div class="col-sm-12 pl-0">
+                <select
+                  formControlName="country"
+                  class="form-control"
+                  id="country"
+                >
+                  <option [value]="''" selected disabled>Please Select</option>
+                  <option *ngFor="let item of countryList" [ngValue]="item?.id">
+                    {{ item?.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="state"
+                class="required"
+                class="col-sm-12 pl-0 col-form-label font-weight-bold labelAlign"
+                >State <sup class="text-danger f-16"> * </sup></label
+              >
+              <div class="col-sm-12 pl-0">
+                <input
+                  formControlName="state"
+                  type="text"
+                  class="form-control"
+                  placeholder="State"
+                  id="appReference"
+                  (keyup)="getAutoCompleteState($event, 'from')"
+                  list="dynamicLocationsOrigin"
+                />
+                <ul class="droplocations" id="dynmicLocations">
+                  <li
+                    *ngFor="let state of statesList"
+                    (click)="onStateSelect(state)"
+                  >
+                    <i class="fal fa-map-marker-alt"></i>
+                    {{ state?.state_code }}-{{ state?.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="city"
+                class="required"
+                class="col-sm-12 pl-0 col-form-label font-weight-bold labelAlign"
+                >City <sup class="text-danger f-16"> * </sup></label
+              >
+              <div class="col-sm-12 pl-0 city-list">
+                <mat-form-field appearance="fill" class="city-list-input col-12 ">
+                  <!-- <mat-label>Select City</mat-label> -->
+                  <mat-select required formControlName="city" (openedChange)="onDropdownOpen()">
+                    <mat-option disabled>
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="Search City"
+                        [(ngModel)]="searchText"
+                        (click)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()"
+                        (keyup)="filteredCities($event)"
+                        style="width: 100%; border: none; outline: none;"
+                        [ngModelOptions]="{standalone: true}" />
+                    </mat-option>
+                    <mat-option *ngFor="let city of filterCityList" [value]="city">
+                        {{ city.city_name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="locality "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Locality <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="locality"
+                  formControlName="locality"
+                  placeholder="Locality"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="zip_code "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Zip Code <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zip_code"
+                  (keypress)="numberOnly($event)"
+                  maxlength="6"
+                  formControlName="zip_code"
+                  placeholder="Zip Code"
+                />
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="status"
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign"
+                >Status <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 d-flex align-items-center">
+                <div class="col-auto pl-0">
+                  <label for="active_staus">
+                    <input
+                      type="radio"
+                      id="active_staus"
+                      checked
+                      formControlName="status"
+                      [value]="1"
+                    />
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px">Active</span>
+                  </label>
+                </div>
+                <div class="col-auto">
+                  <label for="in_active_staus">
+                    <input
+                      type="radio"
+                      id="in_active_staus"
+                      formControlName="status"
+                      [value]="0"
+                    />
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px">In Active</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="sales_executive "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Sales Executive <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0 city-list">
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  id="sales_executive"
+                  formControlName="sales_executive"
+                  placeholder="Sales Executive"
+                /> -->
+                <mat-form-field appearance="fill" class="city-list-input col-12 ">
+                  <!-- <mat-label>Select City</mat-label> -->
+                  <mat-select required formControlName="sales_executive" panelClass="custom-panel" (openedChange)="onSalesExecutiveDropdownOpen()">
+                    <!-- <mat-option disabled>
+                      <input
+                        class="form-control city-list-input"
+                        type="text"
+                        placeholder="Search Executive"
+                        [(ngModel)]="searchedExecutive"
+                        (click)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()"
+                        (keyup)="filteredSalesExecutive($event)"
+                        style="width: 100%; border: none; outline: none;"
+                        [ngModelOptions]="{standalone: true}" />
+                    </mat-option> -->
+               
+                        <mat-option  *ngFor="let sales of respData"[value]="sales">{{ sales?.first_name }} {{ sales?.last_name }}</mat-option>
+          
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-2 p-0 required">
+              <label
+                for="travel_credit_limit "
+                class="required"
+                class="col-sm-12 col-form-label font-weight-bold labelAlign pl-0"
+                >Travel Credit Limit <sup class="text-danger f-16"> * </sup>
+              </label>
+              <div class="col-sm-12 pl-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="travel_credit_limit"
+                  formControlName="travel_credit_limit"
+                  placeholder="Travel Credit Limit"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <div class="form-group required row">
+              <div class="col-12 d-flex">
+                <button
+                  type="submit"
+                  class="btn-sm btn-primary lg mr-4 sec-col"
+                  (click)="onSubmit()"
+                >
+                  Save
+                </button>
+                <button
+                  type="reset"
+                  class="btn btn-sm btn-primary lg"
+                  (click)="onReset()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-12 p-0" *ngIf="showDiv.Csv">
+        <form class="" [formGroup]="fileUploadForm" autocomplete="off">
+          <div class="title pl-30">
+            <h3>
+              CSV Upload -
+              <a
+                href="#"
+                (click)="onSampleDownload($event)"
+                [ngClass]="{ clicked: isClicked }"
+                >(Download CSV Sample)</a
+              >
+            </h3>
+          </div>
+          <div class="form-group row">
+            <label
+              for="file_upload"
+              class="required"
+              class="col-sm-12 col-form-label"
+              >File Upload<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-8">
+              <div class="file-input">
+                <input
+                  formControlName="file_upload"
+                  type="file"
+                  (change)="uploadFile($event)"
+                  accept=".csv"
+                />
+              </div>
+            </div>
+          </div>
+          <hr />
+
+          <div class="btn-group">
+            <div class="form-group required row">
+              <div class="col-12 d-flex">
+                <button
+                  type="submit"
+                  class="btn-sm btn-primary lg mr-4 sec-col"
+                  (click)="onCSVUpload()"
+                >
+                  Save
+                </button>
+                <button
+                  type="reset"
+                  class="btn btn-sm btn-primary lg mr-4"
+                  (click)="onFileReset()"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

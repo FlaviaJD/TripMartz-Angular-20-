@@ -1,0 +1,351 @@
+.w-35 {
+    width: 35%;
+}
+.link{
+    color: #3c8dbc;
+    cursor: pointer;
+}
+.link:hover {
+    color: darken($color: #3c8dbc, $amount: 10) ;
+
+}
+
+.card-over-data {
+    position: absolute;
+    width: 100%;
+}
+
+::ng-deep .fc th, ::ng-deep .fc td { font-weight: 400 !important; padding: 4px !important;}
+::ng-deep .fc-toolbar h2 { font-size: 19px !important;}
+::ng-deep .fc-button {padding: 0.4em 0.35em !important;}
+.chart_mod canvas { height: auto !important; position: absolute; bottom: 0px;}
+.w-20{ flex: 0 0 20%;
+    max-width: 20%;}
+
+.w-33{ flex: 0 0 33.3333%;
+        max-width: 33.3333%;}
+
+.icon-service {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-primary-transparent {
+    background-color: rgba(0, 82, 204, .1);
+}
+
+.text-primary {
+    color: #0052cc !important;
+}
+
+.recent th { background: #e9ecf3 !important; border-bottom: none !important;}
+.recent i { font-size: 18px;
+    padding: 6px;
+    width: 35px;
+    height: 35px;
+    float: left;
+    background: #f3f2f7;
+    border-radius: 5px;
+    color: #7b8499;}
+.sales-1 canvas{
+    top: 45px;
+    position: relative;
+    width: 100%!important;
+}
+
+.float-end {
+    float: right!important;
+}
+
+.flight-destination-section {border-radius: 10px;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(0,0,0,.03), 0 0.9375rem 1.40625rem rgba(0,0,0,.03), 0 0.25rem 0.53125rem rgba(0,0,0,.05), 0 0.125rem 0.1875rem rgba(0,0,0,.03);}
+.customCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}.flight-destination-section .destination-slider .banner-section { width: 100% !important;}
+.booking-cards1{
+    width: 100%; background: #fff;
+}
+.content i { font-size: 33px; 
+    color: #065081;
+    line-height: 20px;
+    padding-right: 20px;}
+.booking-cards .content .textStyle{
+font-size: 10px;
+line-height: 2px;
+}
+.booking-cards {
+    border-radius: 5px !important;
+}
+
+::ng-deep .slick-slide {
+	margin: 0 15px !important;
+}
+/* the parent */
+::ng-deep .slick-list {
+	margin: 0 -15px !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .page-header-image{ height: 310px !important;}
+    .d-flex, .bookings-section { display: block !important;}
+    .bookings-section .left-section { max-width: 100% !important; flex-basis:100% !important;}
+    .bookings-section .right-section { max-width: 100% !important; flex-basis:100% !important; margin-top: 15px !important; margin-left: 0px !important;}
+    .recent-transaction .d-flex .left-section { margin-right: 0px !important; margin-bottom: 10px !important;}
+    }
+
+.hide{
+    display: none;
+}
+
+
+
+h3, .h3 {
+    font-size:22px;
+    line-height: 1.4em;
+    margin: 20px 0 10px;
+}
+
+.card-header { display:block; height: auto;}
+
+.card .card-header-warning .card-icon, .card .card-header-warning .card-text, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card.bg-warning, .card.card-rotate.bg-warning .front, .card.card-rotate.bg-warning .back {
+    background: linear-gradient(60deg, #ffa726, #F99D1C);
+}
+
+
+.card .card-header-warning .card-icon, .card .card-header-warning:not(.card-header-icon):not(.card-header-text), .card .card-header-warning .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
+}
+
+
+.card [class*=card-header-] .card-icon, .card [class*=card-header-] .card-text {
+    border-radius: 3px;
+    background-color: #999999;
+    padding: 15px;
+    margin-top: -20px;
+    margin-right: 0px;
+    float: left;
+}
+
+
+.card-stats .card-header .card-icon + .card-title, .card-stats .card-header .card-icon + .card-category {
+    padding-top: 10px;
+}
+
+
+.card-stats .card-header.card-header-icon .card-title, .card-stats .card-header.card-header-text .card-title, .card-stats .card-header.card-header-icon .card-category, .card-stats .card-header.card-header-text .card-category {
+    margin: 0;
+}
+
+
+.card-stats .card-header .card-category:not([class*=text-]) {
+    color: #999999;
+    font-size: 13px;
+}
+
+
+.card-stats .card-header.card-header-icon, .card-stats .card-header.card-header-text {
+    text-align: right; height: auto; border-bottom: none !important;
+}
+
+.card-icon { width: 60px; height: 60px;}
+
+
+.card-stats .card-header.card-header-icon i {
+    font-size: 30px;
+    line-height: 40px;
+    color: #fff; display: block;
+    text-align: center;
+}
+
+.card .card-footer {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+}
+
+
+.card .card-body + .card-footer, .card .card-footer {
+    padding: 0;
+    padding-top: 10px;
+    margin: 0 15px 10px;
+    border-radius: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-stats .card-header + .card-footer {
+    border-top: 1px solid #eee;
+    margin-top: 14px;
+}
+
+.card-category { margin-bottom: 0px;}
+
+
+.card-chart .card-body + .card-footer, .card-product .card-body + .card-footer {
+    border-top: 1px solid #eee;
+}
+
+.card .card-header-success .card-icon, .card .card-header-success .card-text, .card .card-header-success:not(.card-header-icon):not(.card-header-text), .card.bg-success, .card.card-rotate.bg-success .front, .card.card-rotate.bg-success .back {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+
+.card .card-header-primary .card-icon, .card .card-header-primary:not(.card-header-icon):not(.card-header-text), .card .card-header-primary .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+}
+
+.card .card-header-primary .card-icon, .card .card-header-primary .card-text, .card .card-header-primary:not(.card-header-icon):not(.card-header-text), .card.bg-primary, .card.card-rotate.bg-primary .front, .card.card-rotate.bg-primary .back {
+    background: linear-gradient(60deg, #065081, #58bff1); color: #fff;
+}
+
+
+.card .card-header-primary1 .card-icon, .card .card-header-primary1 .card-text, .card .card-header-primary1:not(.card-header-icon):not(.card-header-text), .card.bg-primary1, .card.card-rotate.bg-primary1 .front, .card.card-rotate.bg-primary1 .back {
+    background: linear-gradient(60deg, #FF9800, #ebaa40); color: #fff;
+}
+
+
+
+
+.card .card-header-success .card-icon, .card .card-header-success:not(.card-header-icon):not(.card-header-text), .card .card-header-success .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
+}
+
+
+
+.card .card-header-danger .card-icon, .card .card-header-danger .card-text, .card .card-header-danger:not(.card-header-icon):not(.card-header-text), .card.bg-danger, .card.card-rotate.bg-danger .front, .card.card-rotate.bg-danger .back {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+}
+
+
+.card .card-header-danger .card-icon, .card .card-header-danger:not(.card-header-icon):not(.card-header-text), .card .card-header-danger .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(244, 67, 54, 0.4);
+}
+
+
+
+.card .card-header-info .card-icon, .card .card-header-info .card-text, .card .card-header-info:not(.card-header-icon):not(.card-header-text), .card.bg-info, .card.card-rotate.bg-info .front, .card.card-rotate.bg-info .back {
+    background: linear-gradient(60deg, #065081, #00acc1);
+}
+
+
+
+.card .card-header-info .card-icon, .card .card-header-info:not(.card-header-icon):not(.card-header-text), .card .card-header-info .card-text {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
+}
+
+
+
+.page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    width: 100%; background-image: url('../../../assets/images/header.jpg'); transform: translate3d(0px, 0px, 0px);
+    height:310px; left: 0px; right: 0px; top:0px;
+}
+
+.h-title { z-index: 99; color: #fff; position: relative;      margin-bottom: 30px;}
+
+.mt180 { margin-top: 80px !important;}
+
+
+.page-header-image::after{ position: absolute; content: ''; width: 100%; height: 100%; left: 0px;; right: 0px;
+    background: rgba(44,44,44,.2);
+    background: linear-gradient(0deg, rgb(44 44 44 / 50%), rgb(51 61 84));
+}
+
+.card-chart { margin-top: 30px;}
+
+
+.card [class*=card-header-]:not(.card-header-icon):not(.card-header-text):not(.card-header-image) {
+    border-radius: 3px;
+    margin-top: -20px;
+    padding: 15px;
+}
+
+.card [class*=card-header-] {
+    margin: 0px 15px 0;
+    padding: 0;
+    position: relative;
+}
+
+.w-35 {
+    width: 35%;
+}
+.link{
+    color: #3c8dbc;
+    cursor: pointer;
+}
+.link:hover {
+    color: darken($color: #065081, $amount: 10) ;
+
+}
+.booking_li strong { color: #065081}
+.customCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking_list_data { padding:15px; float:left; width:100%; border: 1px solid #ddd; max-height: 509px; overflow: auto;}
+
+.booking_li { float: left; position: relative; font-weight: 400; width: 100%; text-transform: capitalize; border-bottom:1px solid #ddd;padding: 12px 10px; border-radius: 10px; background: #f5f5f5; margin-bottom:13px;   }
+.module_list { position: absolute; right: 10px; top: 10px; }
+.module_list i { font-size: 30px; color: #3c8dbc;}
+
+.c-pointer{
+color: #065081 !important;
+font-size: 14px; font-weight: 600;
+}
+.fa-copy{
+    color: #333;
+}
+.stats{
+    cursor: pointer;
+}
+
+.elgible_tab li{ margin: 0px 10px;}
+.elgible_tab li a { padding: 10px 17px !important;
+    font-size: 25px;
+    line-height: 22px;
+    background: #eef2f6 !important;
+    border-radius: 7px !important;}
+
+.elgible_tab li a.active { background:#065081 !important; color: #fff !important; border:none !important;} 
+.eligibility {
+    font-size: 14px; max-height: 250px; overflow: auto;
+    color: #333;
+}
+.eligibility .cont_in{padding-right: 7px; float: left; width: 100%; padding-top: 12px; padding-bottom: 12px; border-bottom: 2px solid #ddd;} 
+.eligibility .card-body {
+    padding: 2px 0px !important; 
+}
+
+.eligibility h4 { font-size: 20px; text-transform: capitalize; font-weight: 600;}
+
+.eligibility label {
+    width: 100%;
+    float: left;
+    padding: 3px 0px; text-transform: capitalize;
+    font-weight: 500;
+    margin-bottom: 0px; font-size: 15px;
+    line-height: 25px;
+}
+.eligibility label strong { font-weight: 500;}
+.eligibility span {
+    float: right;
+    background: #f79e2a;
+    padding: 3px 10px; font-size: 14px;
+    margin: 1px 0px;
+    line-height: normal;
+    border-radius: 5px;
+    color: #fff;
+}
+.tab-content { width: 100%;}
+.limit th { font-size: 12px; background: #ddd;}

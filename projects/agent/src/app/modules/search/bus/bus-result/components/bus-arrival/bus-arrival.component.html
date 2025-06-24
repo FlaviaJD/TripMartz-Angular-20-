@@ -1,0 +1,69 @@
+<div class="rangebox">
+    <button data-target="#collapse507" data-toggle="collapse" class="collapsebtn" type="button">Arrival</button>
+    <form *ngIf="busCopy.length" [formGroup]="arrivalTimeForm" style="clear:both;">
+        <div id="collapse507" class="collapse show">
+            <!-- <a style="cursor: pointer;font-size: 12px;" class="float-right" (click)="clearBusArrivalFilter()">Clear</a> -->
+            <div class="boxins" id="allairlines">
+                <ul class="locationul">
+                    <li>
+                        <div class="squaredThree">
+                            <input formControlName="arrivalEarlyMorning" type="checkbox"
+                                (change)="filterByArrivalTime('arrivalEarlyMorning',$event.currentTarget.checked)"
+                                name="check" class="airlinecheckbox" id="arr1">
+                            <label for="arr1"></label>
+                        </div>
+                        <label for="arr1" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Early Morning
+                            </span>
+                            <span class="htlcount">5-9AM</span>
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input formControlName="arrivalMidDay" type="checkbox"
+                                (change)="filterByArrivalTime('arrivalMidDay',$event.currentTarget.checked)"
+                                name="check" class="airlinecheckbox" id="arr2">
+                            <label for="arr2"></label>
+                        </div>
+                        <label for="arr2" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Mid-Day
+                            </span>
+
+                            <span class="htlcount">9-5PM</span>
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input formControlName="arrivalEvening" type="checkbox"
+                                (change)="filterByArrivalTime('arrivalEvening',$event.currentTarget.checked)"
+                                name="check" class="airlinecheckbox" id="arr3">
+                            <label for="arr3"></label>
+                        </div>
+                        <label for="arr3" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Evening
+                            </span>
+                            <span class="htlcount">5-9PM</span>
+                        </label>
+                    </li>
+                    <li>
+                        <div class="squaredThree">
+                            <input formControlName="arrivalNight"
+                                (change)="filterByArrivalTime('arrivalNight',$event.currentTarget.checked)"
+                                type="checkbox" name="check" class="airlinecheckbox" id="arr4">
+                            <label for="arr4"></label>
+                        </div>
+                        <label for="arr4" class="row justify-content-between" style="margin-bottom: 0px;">
+                            <span class="col-auto m-0 p-0 word-wrap" style="word-break: break-word;">
+                                Night
+                            </span>
+                            <span class="htlcount">9PM-5AM</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>

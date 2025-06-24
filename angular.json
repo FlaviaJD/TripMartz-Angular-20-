@@ -1,0 +1,712 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "employee": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/employee",
+            "sourceRoot": "projects/employee/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "antrip/employee",
+                        "index": "projects/employee/src/index.html",
+                        "main": "projects/employee/src/main.ts",
+                        "polyfills": "projects/employee/src/polyfills.ts",
+                        "tsConfig": "projects/employee/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/employee/src/favicon.ico",
+                            "projects/employee/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/leaflet/dist/images",
+                                "output": "assets/"
+                              }
+                        ],
+                        "styles": [
+                            "projects/employee/src/assets/css/owl.carousel.min.css",
+                            "projects/employee/src/assets/css/owl.theme.default.min.css",
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/sweetalert2/src/sweetalert2.scss",
+                            "projects/employee/src/styles.scss",
+                            "./node_modules/font-awesome/scss/font-awesome.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
+                            "node_modules/particles.js/particles.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/employee/src/environments/environment.ts",
+                                    "with": "projects/employee/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "6mb",
+                                    "maximumError": "10mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "employee:build",
+                        "proxyConfig": "proxy.conf.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "employee:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "employee:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/employee/src/test.ts",
+                        "polyfills": "projects/employee/src/polyfills.ts",
+                        "tsConfig": "projects/employee/tsconfig.spec.json",
+                        "karmaConfig": "projects/employee/karma.conf.js",
+                        "assets": [
+                            "projects/employee/src/favicon.ico",
+                            "projects/employee/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/font-awesome/css/font-awesome.css",
+                            "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+                            "projects/employee/src/styles.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.css"
+                        ],
+                        "scripts": [
+                            "node_modules/@fortawesome/fontawesome-free/js/all.js"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/employee/tsconfig.app.json",
+                            "projects/employee/tsconfig.spec.json",
+                            "projects/employee/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/employee/e2e/protractor.conf.js",
+                        "devServerTarget": "employee:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "employee:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+          "student": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/student",
+            "sourceRoot": "projects/student/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "antrip/student",
+                        "index": "projects/student/src/index.html",
+                        "main": "projects/student/src/main.ts",
+                        "polyfills": "projects/student/src/polyfills.ts",
+                        "tsConfig": "projects/student/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/student/src/favicon.ico",
+                            "projects/student/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/leaflet/dist/images",
+                                "output": "assets/"
+                              }
+                        ],
+                        "styles": [
+                            "projects/student/src/assets/css/owl.carousel.min.css",
+                            "projects/student/src/assets/css/owl.theme.default.min.css",
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/sweetalert2/src/sweetalert2.scss",
+                            "projects/student/src/styles.scss",
+                            "./node_modules/font-awesome/scss/font-awesome.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
+                            "node_modules/particles.js/particles.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/student/src/environments/environment.ts",
+                                    "with": "projects/student/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "6mb",
+                                    "maximumError": "10mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "student:build",
+                        "proxyConfig": "proxy.conf.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "student:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "student:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/student/src/test.ts",
+                        "polyfills": "projects/student/src/polyfills.ts",
+                        "tsConfig": "projects/student/tsconfig.spec.json",
+                        "karmaConfig": "projects/student/karma.conf.js",
+                        "assets": [
+                            "projects/student/src/favicon.ico",
+                            "projects/student/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/font-awesome/css/font-awesome.css",
+                            "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+                            "projects/student/src/styles.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.css"
+                        ],
+                        "scripts": [
+                            "node_modules/@fortawesome/fontawesome-free/js/all.js"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/student/tsconfig.app.json",
+                            "projects/student/tsconfig.spec.json",
+                            "projects/student/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/student/e2e/protractor.conf.js",
+                        "devServerTarget": "student:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "student:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "agent": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/agent",
+            "sourceRoot": "projects/agent/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "antrip/agent",
+                        "index": "projects/agent/src/index.html",
+                        "main": "projects/agent/src/main.ts",
+                        "polyfills": "projects/agent/src/polyfills.ts",
+                        "tsConfig": "projects/agent/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/agent/src/favicon.ico",
+                            "projects/agent/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/leaflet/dist/images",
+                                "output": "assets/"
+                              }
+                        ],
+                        "styles": [
+                            "projects/agent/src/assets/css/owl.carousel.min.css",
+                            "projects/agent/src/assets/css/owl.theme.default.min.css",
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/sweetalert2/src/sweetalert2.scss",
+                            "projects/agent/src/styles.scss",
+                            "./node_modules/font-awesome/scss/font-awesome.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
+                            "node_modules/particles.js/particles.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/agent/src/environments/environment.ts",
+                                    "with": "projects/agent/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "6mb",
+                                    "maximumError": "10mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "agent:build",
+                        "proxyConfig": "proxy.conf.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "agent:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "agent:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/agent/src/test.ts",
+                        "polyfills": "projects/agent/src/polyfills.ts",
+                        "tsConfig": "projects/agent/tsconfig.spec.json",
+                        "karmaConfig": "projects/agent/karma.conf.js",
+                        "assets": [
+                            "projects/agent/src/favicon.ico",
+                            "projects/agent/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "./node_modules/font-awesome/css/font-awesome.css",
+                            "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
+                            "projects/agent/src/styles.scss",
+                            "node_modules/@fortawesome/fontawesome-free/css/all.css"
+                        ],
+                        "scripts": [
+                            "node_modules/@fortawesome/fontawesome-free/js/all.js"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/agent/tsconfig.app.json",
+                            "projects/agent/tsconfig.spec.json",
+                            "projects/agent/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/agent/e2e/protractor.conf.js",
+                        "devServerTarget": "agent:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "agent:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "supervision": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/supervision",
+            "sourceRoot": "projects/supervision/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "antrip/supervision",
+                        "index": "projects/supervision/src/index.html",
+                        "main": "projects/supervision/src/main.ts",
+                        "polyfills": "projects/supervision/src/polyfills.ts",
+                        "tsConfig": "projects/supervision/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/supervision/src/favicon.ico",
+                            "projects/supervision/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "projects/supervision/src/styles.scss",
+                            "./node_modules/font-awesome/scss/font-awesome.scss",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "node_modules/sweetalert2/src/sweetalert2.scss"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/apexcharts/dist/apexcharts.min.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/supervision/src/environments/environment.ts",
+                                    "with": "projects/supervision/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "15mb",
+                                    "maximumError": "16mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "10kb",
+                                    "maximumError": "12kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "supervision:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "supervision:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "supervision:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/supervision/src/test.ts",
+                        "polyfills": "projects/supervision/src/polyfills.ts",
+                        "tsConfig": "projects/supervision/tsconfig.spec.json",
+                        "karmaConfig": "projects/supervision/karma.conf.js",
+                        "assets": [
+                            "projects/supervision/src/favicon.ico",
+                            "projects/supervision/src/assets"
+                        ],
+                        "styles": [
+                            "projects/supervision/src/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/supervision/tsconfig.app.json",
+                            "projects/supervision/tsconfig.spec.json",
+                            "projects/supervision/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/supervision/e2e/protractor.conf.js",
+                        "devServerTarget": "supervision:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "supervision:serve:production"
+                        }
+                    }
+                }
+            }
+        },
+        "corporate": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "projects/corporate",
+            "sourceRoot": "projects/corporate/src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "antrip/corporate",
+                        "index": "projects/corporate/src/index.html",
+                        "main": "projects/corporate/src/main.ts",
+                        "polyfills": "projects/corporate/src/polyfills.ts",
+                        "tsConfig": "projects/corporate/tsconfig.app.json",
+                        "aot": false,
+                        "assets": [
+                            "projects/corporate/src/favicon.ico",
+                            "projects/corporate/src/assets"
+                        ],
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "projects/corporate/src/styles.scss",
+                            "./node_modules/font-awesome/scss/font-awesome.scss",
+                            "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+                            "node_modules/sweetalert2/src/sweetalert2.scss"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/slick-carousel/slick/slick.min.js",
+                            "node_modules/apexcharts/dist/apexcharts.min.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/corporate/src/environments/environment.ts",
+                                    "with": "projects/corporate/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "15mb",
+                                    "maximumError": "16mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "10kb",
+                                    "maximumError": "12kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "corporate:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "corporate:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "corporate:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/corporate/src/test.ts",
+                        "polyfills": "projects/corporate/src/polyfills.ts",
+                        "tsConfig": "projects/corporate/tsconfig.spec.json",
+                        "karmaConfig": "projects/corporate/karma.conf.js",
+                        "assets": [
+                            "projects/corporate/src/favicon.ico",
+                            "projects/corporate/src/assets"
+                        ],
+                        "styles": [
+                            "projects/corporate/src/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/corporate/tsconfig.app.json",
+                            "projects/corporate/tsconfig.spec.json",
+                            "projects/corporate/e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/corporate/e2e/protractor.conf.js",
+                        "devServerTarget": "corporate:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "corporate:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "supervision",
+    "cli": {
+        "analytics": "807aaba8-844f-45c3-943b-6ee8c75cfcf0"
+    }
+}

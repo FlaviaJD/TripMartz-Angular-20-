@@ -1,0 +1,10 @@
+.card {
+    border-radius: 8px;
+}
+
+.stickytop { position: sticky; top: 100px;}
+.mb-15{margin-bottom: 15px;}
+@media only screen and (max-width: 767px) {
+    .mobile_pad-15{padding:15px!important;}
+    .mobile_pl-15{padding-left: 15px!important;}
+}

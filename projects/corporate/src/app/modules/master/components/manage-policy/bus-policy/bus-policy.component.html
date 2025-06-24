@@ -1,0 +1,36 @@
+<div class="card-body">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="busPolicyForm" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="isBus" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Bus
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-3">
+                            <label for="isBusYes">
+                                <input type="radio" id="isBusYes" name="isBus" value="true" formControlName="isBus" style="margin-right: 5px;">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Yes</span>
+                            </label>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="isBusNo">
+                                    <input type="radio" id="isBusNo" name="isBus" value="false" formControlName="isBus"style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                                </div>
+                                </div>
+                    </div>
+                    <div class="col-sm-8" style="text-align: end;">
+                        <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="goToPreviousPage()">Prev</button>
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

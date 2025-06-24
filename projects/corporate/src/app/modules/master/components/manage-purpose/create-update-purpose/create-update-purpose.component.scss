@@ -1,0 +1,19 @@
+.actionButton{
+    display: flex;
+    margin-left: 30%;
+    margin-top: 1%;
+}
+
+a {
+    text-decoration: underline;
+    color: blue; 
+}
+
+a:visited {
+    color: purple; 
+}
+
+a.clicked {
+    text-decoration: none; 
+    color: green; 
+}

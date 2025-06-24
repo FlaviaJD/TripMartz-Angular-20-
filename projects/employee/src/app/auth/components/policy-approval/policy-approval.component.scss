@@ -1,0 +1,87 @@
+.paddinginc{ padding:35px 180px 0}
+::ng-deep body {background:#f3f4f8 !important;}
+.submit {background: #065081;
+    border-radius: 5px;
+    width: 165px;
+    height: 59px;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 400; margin-right: 15px;
+}
+
+.cancel {background: #F99D1C;
+    border-radius: 5px;
+    width: 165px;
+    height: 59px;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 600px)  {
+    .paddinginc{ padding:35px 30px 0}
+}
+
+.design {
+    width: 19px !important;
+    height: 19px !important;
+  
+    border: 1px solid #252c40;
+    border-radius: 100%;
+    margin-right: 4px;
+  padding-left: 0px !important;
+    position: relative;
+  }
+
+  .design::before,
+  .design::after {
+    content: "";
+    content: "";
+    width: 11px !important;
+    height: 11px !important;
+    background: #065081;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    transition: all 0.2s ease;
+  }
+  .form-group label{ line-height: inherit !important;}
+  .design:before {
+    background: #252c40;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  
+  .design::after {
+    opacity: 0.4;
+    transition: 0.6s;
+  }
+  
+  /* .text */
+  .text {
+    font: normal normal normal 16px/16px Asap;
+    letter-spacing: 0px;
+    opacity: 1;
+    color: #505050;
+  }
+  
+  /* checked state */
+  input:checked + .design::before {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+  
+  /* other states */
+  input:hover + .design,
+  input:focus + .design {
+    border: 1px solid #707070;
+  }
+  
+  input:hover ~ .text {
+    color:#505050;
+  }

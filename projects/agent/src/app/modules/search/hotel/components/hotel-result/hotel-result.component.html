@@ -1,0 +1,233 @@
+
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+<div class="bbottom">
+    <div class="col-md-12 col-lg-12 p-0">
+        <div id="collapseBasic" style="z-index: 9999;">
+            <div class="bg-none">
+                <div class="col-md-12 p-2 mb-3 mt-3" style="background:none;">
+                    <app-hotel (callResult)="searchResult($event)"></app-hotel>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section for="HotelFoundAndListSearchedResult" class="loading-container">
+    <div class="row rounded">
+        <div class="col-md-3 col-lg-3 nopad">
+            <div class="flteboxwrp">
+               
+                <div class="fltrboxin rounded-bottom"> 
+                    <div class="celsrch">
+                        <div class="rangebox pt-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                               <span class="fltr_txt">Filters</span>
+                               <a (click)="resetFilter()" class="pull-right" style="cursor: pointer;" id="reset_filters">Reset All</a>
+                            </div>
+                            <span class="filterSpan pb-3">showing {{ hotels.length }} Hotels</span>
+
+                        </div>
+                        
+                        <app-filter-hotels></app-filter-hotels>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-9">
+            
+            <div class="row" style="margin-top: 0px;">
+                <div class="col-md-12 col-lg-12">
+                    <app-sorting-hotels></app-sorting-hotels>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 pr-0">
+                    <!-- <app-sorting></app-sorting> -->
+                </div>
+            </div>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div *ngIf="hotels.length > 0" class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div *ngFor="let hotel of hotels | slice: 0: endSlice; let i = index;" infiniteScroll
+                                [infiniteScrollDistance]="1" [infiniteScrollUpDistance]="2"
+                                [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown(i+1)"
+                                class="card mb-15 rounded nopad">
+                                <div class="bbottom" *ngIf="sendEnquiryArr && selectedIndex==i">
+                                <div class="loginform">
+                                    <input type="image" id="close_login_1005" (click)="hideEnquiry(i)" class="close_login" src="assets/images/close.png">
+                                    <!-- <app-enquiry-hotel></app-enquiry-hotel> -->
+                                    <div class="col-md-12 col-xs-12 mr-auto ml-auto  p-0 send_right">
+                                        <!-- <form> -->
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group reason_for_travel_cothers">
+                                                        <div class="col-md-12 nopad" *ngIf="showStarRemark">
+                                                            <label>Please mention the reason for choosing this star hotel which is beyond your eligibility level!</label>
+                                                            <textarea class="form-control reason_for_travel_others" [(ngModel)]="starRatingReason" rows="2" cols="40"></textarea>
+                                                        </div>
+                                                        <div class="col-md-12 nopad" *ngIf="showPriceRemark">
+                                                            <label>Please mention the reason for choosing this fare hotel which is beyond your eligibility level!</label>
+                                                            <textarea class="form-control reason_for_travel_others" [(ngModel)]="priceReason" rows="2" cols="40"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-12 sm_pad">
+                                                <button class="btn btn-primary fare_msg" (click)="onBookNow(hotel,true)" aria-controls="collapseBasic"
+                                                    style="color: #ffffff; cursor: pointer;" [disabled]="(showPriceRemark && priceReason == '') || (showStarRemark && starRatingReason == '')">
+                                                    On Request
+                                                </button>
+                                            </div>
+                                        <!-- </form> -->
+                                    </div>
+                                  </div>
+                                  </div>
+
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                         <div class="col-md-3" *ngIf="hotel.MainImage!=''; else noPhoto">
+                                            <div class="hotel_image">
+                                            <img class="rounded imgStyle" [src]="hotel.MainImage" alt="">
+                                            </div>
+                                        </div>
+                                        <ng-template #noPhoto>
+                                            <div class="col-md-3">
+                                                <div class="hotel_image1">
+                                                <img class="rounded imgStyle" src="assets/images/imgpsh.jpeg" alt="">
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <div class="col-md-9 pb-0 row mobile_row" style="padding: 10px;">
+                                            <div class="col-md-8" style="text-align: left; padding-left: 30px;">
+                                                <h5 class="cusromGrey hotelstyle"><strong>{{hotel.HotelName}}&nbsp;
+                                                    <!-- <a  placement="top" tooltip="Most Frenquently Used Hotels"><i *ngIf="hotel?.Priority == 1"class="fas fa-star most"></i>
+                                                </a>  -->
+                                             </strong> 
+                                            </h5>
+
+                                            <p class="cusromGrey mt-3">
+                                                <i class="fa fa-map-marker-alt cusromGrey" aria-hidden="true"></i>
+                                                &nbsp; {{hotel.HotelAddress}}
+                                            </p>
+
+
+                                          <ng-template *ngIf="(hotel.StarRating === '' || hotel.StarRating === 0) then noStar; else stars">
+                                                </ng-template>
+                                                <ng-template #noStar>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </ng-template>
+                                                <ng-template #stars>
+                                                    <i class="fas fa-star star_rtng_clr cusromBlue"
+                                                        *ngFor="let s of hotel.StarRating | map: getStarArray"></i>
+                                                    <i class="fas fa-star star_rtng_empty"
+                                                        *ngFor="let s of hotel.StarRating | map: getStarArrayRemaining"></i>
+                                                </ng-template>
+                                                <br>
+
+
+                                                <div class="col-md-8 col-8 text-left amelist px-0 py-3"
+                                                *ngIf="hotel.HotelAmenities && hotel.HotelAmenities.length > 0; else noAmenity">
+                                                <a  placement="top" tooltip="Parking"><span class="fi fi-rr-parking"
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Parking')">
+                                                </span></a>
+                                                <a   placement="top" tooltip="Free WiFi"><span class="fi fi-rr-wifi-alt" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Free WiFi')">
+                                                </span></a>
+                                                <a   placement="top" tooltip="Elevator"><span class="fi fi-rr-elevator" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'elevator')">
+                                                </span></a>
+                                                <a   placement="top" tooltip="Free toiletries"><span class="fi fi-rr-toilet-paper-blank" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Free toiletries')">
+                                                </span></a>
+                                                <a placement="top" tooltip="Luggage storage"><span class="fi fi-rr-luggage-cart"
+                                                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Luggage storage')">
+                                                    </span></a>
+                                               <a  placement="top" tooltip="TV"> <span class="fi fi-rr-tv-music" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'TV')">
+                                               </span></a>
+                                                <a   placement="top" tooltip="Safe Toilet"> <span class="fi fi-rr-toilet-paper-blank" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Safe Toilet')">
+                                                </span></a>
+                                            
+                                                <a  placement="top" tooltip="Telephone"><span class="fi fi-rr-phone-office" tooltip="Telephone"
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Telephone')">
+                                                </span></a>
+                                                <a placement="top" tooltip="Air conditioning"><span class="fi fi-rr-air-conditioner"
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Air conditioning')">
+                                                </span></a>
+                                                <a placement="top" tooltip="Attached bathroom"><span class="fi fi-rr-restroom-simpley" 
+                                                    *ngIf="hasAmenities(hotel.HotelAmenities, 'Attached bathroom')">
+                                                </span></a>
+                                            </div>
+                                            <ng-template #noAmenity>
+                                                <div class="col-md-8 col-8 text-left">
+                                                    No Amenities Found 
+                                                </div>
+                                            </ng-template>
+                                                
+                                            </div>
+                                            <div class="col-md-4 nopad" style="text-align: right;border-left:1px solid #C2C7D0;" *ngIf="hotel?.Price?.Amount>0">
+                                                <div class="col-md-12 col-12 nopad">
+                                                 <!-- <p class="p-2 roombrd">2 rooms left</p> -->
+                                                 <!-- <p class="text-line">₹3,010</p> -->
+
+                                                    <h4 class="price_hotel" cusromGrey>{{hotel.Price.Currency}} {{hotel.Price.Amount |
+                                                        number:'1.0-0'}}</h4>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <p class="f-10" style="color: #363636;
+                                                font-size: 12px;font-weight: 400;
+                                                width: 100%;
+                                                margin: 0px!important;
+                                                text-align: right;">Avg Per Room/Night<br>Excluding Taxes</p>
+                                                <div class="col-md-12 col-12 nopad" style="text-align: right;">
+                                                            <a class="hotelDetailsBtn" *ngIf="hotel?.Price?.Amount==0" (click)="showEnquiry(i,hotel?.Price?.Amount,hotel.StarRating,hotel)" aria-controls="collapseBasic"
+                                                                style="color: #ffffff;cursor: pointer;">
+                                                                Book
+                                                            </a>
+                                                            <a class="hotelDetailsBtn" *ngIf="hotel?.Price?.Amount>0" (click)="showEnquiry(i,hotel?.Price?.Amount,hotel.StarRating,hotel)" aria-controls="collapseBasic"
+                                                                style="color: #ffffff;cursor: pointer;">
+                                                                Book
+                                                            </a>
+                                                </div>
+
+                                              
+                                                
+                                            </div>
+                                            <!-- <hr class="solid"> -->
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mappp -->
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="cityframe" style="width: 100%;  height: 100%;">
+                        <div #mapContainer id="toggleMap" style="position: static;"></div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!hotels.length && !searchingHotel" class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card-body pb-0 no-hotels nopad">
+                        <img class="no_hotel_found" src="../../../../../assets/images/no_flight_found.jpg" alt="" />
+                        <p>No Hotels Found!!!</p>
+                    </div>
+                </div>
+            </div>
+            <ngx-loading [show]="loading"
+                [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+                [template]="loadingTemplate"></ngx-loading>
+        </div>
+        <!-- Map View -->
+    </div>
+</section>

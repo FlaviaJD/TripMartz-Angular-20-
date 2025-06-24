@@ -1,0 +1,369 @@
+<div>
+    <form autocomplete="off" [formGroup]="regConfig" class="needs-validation" novalidate #onewaySubmit>
+    <div class="col-12 col-md-12 d-flex p-0">
+
+        <div class="form-row mb-3">
+            <div class="col-auto pr-3">
+                <label for="newbook">
+                    <input type="radio" id="newbook" formControlName="bookingRequestType" (change)="handleBookingTypeChange('NewBooking')"  checked value="NewBooking">
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px; font-size: 16px; top:-3px; position: relative;">New Booking</span>
+                </label>
+            </div>
+        
+            <div class="col-auto pr-3">
+                <label for="extendbook">
+                    <input type="radio" id="extendbook" formControlName="bookingRequestType" (change)="handleBookingTypeChange('ExtendBooking')" value="ExtendBooking">
+                    <span class="design"></span>
+                    <span class="text" style="margin-left: 4px; font-size: 16px; top:-3px; position: relative;">Extend Booking</span>
+                </label>
+            </div>
+        
+        </div>
+        <div class="col-6 p-0" *ngIf="showDiv.extendbook">
+            <div class="form-row">
+                <div class="col-md-6 col-12" style="position: absolute; top:-40px;">
+                    <div class="form-group">
+                        <span class="icon fi-rr-list"></span>
+                        <label for="bookingRequestId" style="color: #fff;"></label>
+                        <input autocomplete="off" class="form-control form-control-sm nrm_input" formControlName="bookingRequestId"
+                             placeholder="Request ID"
+                            style="border-radius: 9px !important;" type="text">
+                    </div>
+                </div>
+                </div>
+        </div>
+
+    </div>
+
+    <div class="col-12 col-md-12 p-0">
+        <h3 class="req_type" *ngIf="bookingRequestData?.BookingType">Request Type: <span>{{bookingRequestData?.BookingType}}</span></h3>
+            <fieldset class="the-fieldset mb-4">
+                <legend class="the-legend">Personal Details</legend>
+                <div class="form-row">
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <span class="icon fi-rr-envelope"></span>
+                            <label for="emailId">Email ID</label>
+                            <input autocomplete="off" class="form-control form-control-sm nrm_input"
+                                formControlName="emailId" placeholder="Email ID"
+                                style="border-radius: 9px 0px 0px 9px !important;" type="email">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <span class="icon fi-rr-list"></span>
+                            <label for="department">Department</label>
+                            <input autocomplete="off" class="form-control form-control-sm nrm_input"
+                                formControlName="department" placeholder="Department" type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <span class="icon fi-rr-check-circle"></span>
+                            <label for="reason">Select Reason</label>
+                            <select class="form-control form-control-sm nrm_input"
+                                formControlName="reason">
+                                <option value="" selected disabled>Select</option>
+                                <option>HR Training</option>
+                                <option>OPS Training</option>
+                                <option>New Employee</option>
+                                <option>Process Training</option>
+                                <option>Branch Meeting</option>
+                                <option>Sales Training</option>
+                                <option>Agent Meeting</option>
+                                <option>Client Meeting</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12" *ngIf="regConfig.get('reason').value === 'Others'">
+                        <div class="form-group">
+                            <label for="otherReason">Reason</label>
+                            <input autocomplete="off" class="form-control form-control-sm nrm_input" formControlName="otherReason"
+                                placeholder="Other Reason" type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <label for="remarks">Remarks</label>
+                            <textarea formControlName="remarks"
+                                class="form-control form-control-sm nrm_input"
+                                style="border-radius: 0px 9px 9px 0px !important; padding-left: 15px !important;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="the-fieldset mb-4">
+                <legend class="the-legend">Contact Details</legend>
+                <ng-container formArrayName="paxDetails">
+                    <ng-container *ngFor="let formGroup of  formArray.controls; let i = index">
+                        <div class="border-bottom pt-3 div_bg" [formGroupName]="i">
+                            <div class="form-group d-none">
+                                <div class="col-md-4 p-0">
+                                <span class="icon fi-rr-user"></span>
+                                <label for="state">Select Employee <b class="text-danger">*</b> </label>
+                                <input type="text" formControlName="selectedEmployee" id="State" style="border-radius: 9px !important;"
+                                class="form-control form-control-sm nrm_input" placeholder="Search Employee" (keyup)="getTravellersList($event,i)"
+                                (focus)="setCurrentInput('selectedEmployee')" autocomplete="off" #state>
+                                <div *ngIf="formGroup?.get('selectedEmployee')?.valid && isCurrentInput('selectedEmployee') && slectededIndex == i">
+                                    <app-employee-list (whichEmployee)="setEmployee($event, formGroup)" [getEmployee]="respData" [inputFor]="'selectedEmployee'">
+                                    </app-employee-list>
+                                  </div>
+                                </div>
+                                </div>
+                                
+                            <div class="form-row row">
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-user"></span>
+                                        <label for="FirstName">First Name</label>
+                                        <input autocomplete="off"
+                                            class="form-control form-control-sm nrm_input"
+                                            formControlName="FirstName" placeholder="First Name"
+                                            style="border-radius: 9px 0px 0px 9px !important;" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-user"></span>
+                                        <label for="LastName">Last Name</label>
+                                        <input autocomplete="off"
+                                            class="form-control form-control-sm nrm_input"
+                                            formControlName="LastName" placeholder="Last Name" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-mobile"></span>
+                                        <label for="MobileNo">Mobile</label>
+                                        <input autocomplete="off" (keypress)="keyPressNumbers($event)"
+                                            class="form-control form-control-sm nrm_input"
+                                            formControlName="MobileNo" placeholder="Mobile No" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-envelope"></span>
+                                        <label for="EmailId">Email ID</label>
+                                        <input autocomplete="off"
+                                            class="form-control form-control-sm nrm_input"
+                                            formControlName="EmailId" placeholder="Email ID" type="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-user"></span>
+                                        <label for="Gender">Gender</label>
+                                        <select class="form-control form-control-sm nrm_input" formControlName="Gender" style="border-radius: 0px 9px 9px 0px !important;"
+                                        (change)="genderCheck($event.target.value)">
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-list"></span>
+                                        <label for="Department">Department</label>
+                                        <input autocomplete="off"
+                                            class="form-control form-control-sm nrm_input"
+                                            formControlName="Department" style="border-radius: 9px 0px 0px 9px !important;"  placeholder="Department" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <span class="icon fi-rr-user"></span>
+                                        <label for="employeeBand">Employee Band</label>
+                                        <input autocomplete="off" class="form-control form-control-sm nrm_input"
+                                            formControlName="EmployeeBand" placeholder="Employee Band"
+                                            style="border-radius: 0px 9px 9px 0px !important;" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-12 p-0" *ngIf="!hideOther">
+                                    <a class="removePax"  *ngIf="i>0"
+                                        (click)="removeFormFromFormArray(i)">  Remove Pax</a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <br/>
+               
+                <a class="addPax" (click)="addFormToFormArray()" *ngIf="!hideOther">Add Pax</a>
+            </fieldset>
+            <fieldset class="the-fieldset mb-4">
+                <legend class="the-legend">Hotel Details</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-3 mb-0">
+                        <span class="icon fi-rr-map-marker-check"></span>
+                        <label for="city">Going to City</label>
+                        <div class="autocomplete-container arrow_after">
+                        <input type="text" formControlName="city" id="city"
+                            style="border-radius: 9px 0px 0px 9px !important;"
+                            class="form-control form-control-sm nrm_input"
+                            formControlName="city" placeholder="Type Departure City ?"
+                            (keyup)="getSearchedList($event)" (focus)="setCurrentInput('city')"
+                            autocomplete="off" #city>
+                            </div>
+                        <div *ngIf="regConfig.controls.city.valid && isCurrentInput('city')">
+                            <ul class="droplocations" >
+                                <li *ngFor="let city of searchedList" (click)="selectedCity(city)">
+                                    {{city.City}}
+                                </li>
+                            </ul>
+                        </div>
+                        <span *ngIf="showCityError && regConfig.controls.city.valid" class="required">
+                            Going to City is required
+                        </span>
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                        <span class="icon fi-rr-map-marker-check"></span>
+                        <label for="location">Going to Location</label>
+                        <div class="autocomplete-container arrow_after">
+                        <input type="text" formControlName="location" id="location"
+                            class="form-control form-control-sm nrm_input" formControlName="location"
+                            placeholder="Type Location ?" autocomplete="off" #location (keyup)="getLocationList($event)"
+                            (click)="getLocationList($event)">
+                           </div>
+                            <div>
+                                <ul class="droplocations" >
+                                    <li *ngFor="let location of locationList" (click)="selectedLocation(location)">
+                                        {{location.LocationName +', '+ cityName}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <span *ngIf="showLocationError && regConfig.controls.location.valid" class="required">
+                                Going to Location is required
+                            </span>
+                    </div>
+                    <div class="col-md-3 col-12 p-0">
+                        <div class="form-group">
+                            <span class="icon fi-rr-hotel"></span>
+                            <label for="guestHouse">Guest House</label>
+                            <div class="autocomplete-container arrow_after">
+                            <input autocomplete="off" class="form-control form-control-sm nrm_input"
+                                name="guestHouse" placeholder="Guest House" formControlName="guestHouse" type="text"
+                                (keyup)="getGuestHouseList($event)" (click)="getGuestHouseList($event)">
+                                </div>
+                                <div>
+                                    <ul class="droplocations" >
+                                        <li *ngFor="let guestHouse of guestHouseList" (click)="selectedGuest(guestHouse)">
+                                            {{guestHouse.GuestHouseName}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span *ngIf="showGuestError && regConfig.controls.guestHouse.valid" class="required">
+                                    Guest House is required
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div class="form-group">
+                            <span class="icon fi-rr-list"></span>
+                            <label for="hotelName">Hotel Name</label>
+                                    <div class="autocomplete-container arrow_after">
+                                        <input autocomplete="off" class="form-control form-control-sm nrm_input"
+                                        name="hotelName" placeholder="Hotel Name" formControlName="hotelName" type="text"
+                                        (keyup)="getHotelList($event)" (click)="getHotelList($event)">
+                                    </div>
+                                    <div>
+                                        <ul class="droplocations" >
+                                            <li *ngFor="let hotel of hotelList" (click)="selectedHotel(hotel)">
+                                                {{hotel.HotelName}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span *ngIf="showHotelError && regConfig.controls.hotelName.valid" class="required">
+                                        Hotel Name is required
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <span class="icon fi-rr-calendar-days"></span>
+                        <label for="checkInDate">CheckIn Date</label>
+                        <input type="text" id="checkInDate" formControlName="checkInDate" placement="bottom left" style="border-radius: 9px 0px 0px 9px !important;"
+                            class="form-control form-control-sm nrm_input" placeholder="Select Date" bsDatepicker
+                            [bsConfig]="bsDateConf" placement="top left" [minDate]="minDate" (ngModelChange)="onCheckIn($event)"
+                            [maxDate]="maxDate" #checkInDate onkeydown="return false">
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <div class="form-group">
+                            <span class="icon fi-rr-check-circle"></span>
+                            <label for="checkInTime">CheckIn Time</label>
+                            <select class="form-control form-control-sm nrm_input" (change)="onChange($event.target.value,'checkIn')"
+                                formControlName="checkInTime">
+                                <option value="" disabled selected>Select</option>
+                                <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                    {{ time }}   
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <span class="icon fi-rr-calendar-days"></span>
+                        <label for="checkOutDate">CheckOut Date</label>
+                        <input type="text" id="checkOutDate" formControlName="checkOutDate" placement="bottom left"
+                            class="form-control form-control-sm nrm_input" placeholder="Select Date" bsDatepicker
+                            [bsConfig]="bsDateConf" placement="top left" [minDate]="minCheckoutDate" 
+                            [maxDate]="maxDate" #checkOutDate onkeydown="return false">
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <div class="form-group">
+                            <span class="icon fi-rr-check-circle"></span>
+                            <label for="checkOutTime">CheckOut Time</label>
+                            <select class="form-control form-control-sm nrm_input" (change)="onChange($event.target.value,'checkOut')"
+                                formControlName="checkOutTime">
+                                <option value="" disabled selected>Select</option>
+                                <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                    {{ time }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        <div class="form-group">
+                            <span class="icon fi-rr-check-circle"></span>
+                            <label for="mealPreference">Meal Preference</label>
+                            <select class="form-control form-control-sm nrm_input"
+                                formControlName="mealPreference">
+                                <option value="" disabled selected>Select</option>
+                                <option value="CP" class="ui-menu-item">
+                                    Bed & Breakfast
+                                </option>
+                                <option value="MAP" class="ui-menu-item">
+                                    Bed, Breakfast/Dinner
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="remark">Remarks</label>
+                        <input type="text" formControlName="remark" id="remark"
+                            style="border-radius: 0px 9px 9px 0px !important; padding-left: 13px !important;"
+                            class="form-control form-control-sm nrm_input" formControlName="remark"
+                            placeholder="Remarks" autocomplete="off" #remark>
+                    </div>
+                    <div class="col-md-2 float-right">
+                        <div class="form-group">
+                            <label class="opacity-0">button</label>
+                            <button class="btn w-100 srch_btn" (click)="onSubmit()">
+                                Send Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        
+        <div>
+        </div>
+    </div>
+</form>
+</div>
+<ngx-loading [show]="loading"
+[config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+[template]="loadingTemplate"></ngx-loading>

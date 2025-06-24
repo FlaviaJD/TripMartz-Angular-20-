@@ -1,0 +1,26 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" #tabs>
+    <ngb-tab id="create/update_cost">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Training Venue'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <!-- <app-flight-api (toUpdate)="triggerTab($event)"></app-flight-api> -->
+            <app-create-update-training-venue></app-create-update-training-venue>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="costCenterList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Training Venue List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <!-- <app-hotel-api (someEvent)="triggerTab($event)"></app-hotel-api> -->
+            <app-training-venue-list></app-training-venue-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

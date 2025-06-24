@@ -1,0 +1,29 @@
+<div class="page-header-image rellax-header"></div>
+<div class="position-relative">
+    <div class="custom-navtabs search_form">
+        <div class="float-left">
+            <ul ngbNav #nav="ngbNav" class="nav-pills m-0 mb-2" orientation="horizontal" [activeId]="selectedTab" >
+                <li ngbNavItem="flight">
+                    <a ngbNavLink #flight><i class="fi  fi-rr-plane"></i>
+                        Flight</a>
+                    <ng-template ngbNavContent>
+                        <app-flight-request></app-flight-request>
+                    </ng-template>
+                </li>
+                <li ngbNavItem="hotels">
+                    <a ngbNavLink #hotels> <i class="fi  fi-rr-bed-alt"></i> Hotels</a>
+                    <ng-template ngbNavContent>
+                        <app-hotel-request></app-hotel-request>
+                    </ng-template>
+                </li>
+                <!-- <li ngbNavItem="bus">
+                    <a ngbNavLink #train> <i class="fi  fi-rr-train"></i>Bus</a>
+                    <ng-template ngbNavContent>
+                        <app-bus-request></app-bus-request>
+                    </ng-template>
+                </li> -->
+            </ul>
+        </div>
+        <div [ngbNavOutlet]="nav" class="mt-2 tab_div"></div>
+    </div>
+</div>

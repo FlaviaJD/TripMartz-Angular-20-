@@ -1,0 +1,55 @@
+<form class="my-3" [formGroup]="regConfig">
+    <div class="card-header-tab card-header thr-col">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>
+            <span class="my-color"> {{'Credit Limit Request Details'}} </span>
+        </div>
+    </div>
+    <div class="offset-md-1 col-md-10 offset-lg-1 col-lg-10" style="margin-top: 15px;">
+        <div class="form-group row">
+            
+            <div class="col-sm-12 p-0">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="agentName" class="col-sm-12 text-left col-form-label "> Name <sup
+                                class="f-16 text-danger">*</sup> </label>
+                            <div class="col-sm-12">
+                                <input formControlName="agentName" type="text" class="form-control input_none text-capitalize"
+                                    placeholder="" id="agentName" readonly="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="agentId" class="col-sm-12 text-left col-form-label text-left">Id <sup
+                                    class="f-16 text-danger">*</sup> </label>
+                            <div class="col-sm-12">
+                                <input formControlName="agentId" type="text" class="form-control input_none" placeholder="" id="agentId" readonly="true"> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="amount" class="col-sm-3 text-right col-form-label"style="font-weight:bold"> Amount(INR) <sup class="f-16 text-danger">*</sup> </label>
+            <div class="col-sm-9 form-group">
+            <input formControlName="amount" type="text" class=" form-control " placeholder="Amount" id="amount"
+            onkeypress="return event.charCode >= 48">
+        </div>
+        </div>
+        <div class=" row mt-2">
+            <label for="remarks" class="col-sm-3 text-right"style="font-weight:bold"> Remarks </label>
+            <div class="col-sm-9 form-group">
+            <textarea formControlName="remarks" rows="3" class="form-control text-capitalize" placeholder="Remarks" id="remarks"> </textarea>
+        </div>
+        </div>
+        <div class="form-group row">
+            <div class="btncontainer">
+                <button type="submit" class="btn btn-lg btn-primary mr-1 sec-col" (click)="onSubmit()"> Save </button>
+                <button type="button" class="btn btn-lg btn-primary"(click)="onReset()"> Reset </button>
+            </div>
+        </div>
+    </div>
+</form>

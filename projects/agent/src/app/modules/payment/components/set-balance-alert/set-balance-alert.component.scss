@@ -1,0 +1,33 @@
+label{
+    color: #363636;
+}
+.btn{
+    font-size: 14px;
+}
+.card{
+    font-family: 'poppins';
+}
+label{
+    font-size: 14px;
+}
+.my-color{
+    font-size: 20px;
+    font-weight: 400;
+    color: #3f3f3f;
+    }
+    // for hiding increment for input type number start
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+    // end
+    .nopad{padding: 0px!important;}
+    .mt-25{margin-top: 25px;}
+    ::ng-deep.btn-primary{background-color: #f99d1c!important;}

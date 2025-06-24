@@ -1,0 +1,9 @@
+<form [formGroup]="regConfig" class="airport_complete" *ngIf="hasViewList">
+    <ul class="arpt_list">
+        <div class="p-0" *ngFor="let item of getCity">
+            <li class="p-3" (click)="onCitySelect(item, inputFor)">
+                <h5 class="include"> {{item.name}} ({{item.state_code}})</h5>
+            </li>
+        </div>
+    </ul>
+</form>

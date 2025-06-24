@@ -1,0 +1,109 @@
+<div class="mt-0 py-0 bg-cl">
+    <div class="d-flex mobile_row p-15" *ngIf="travellers && !review && !ticket">
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{ 'getActive' : travellers}">
+                    <div>
+                        <i class="fa fa-check stepactive" aria-hidden="true"></i> &nbsp;&nbsp;
+                        <span style="color: #fff;">Travellers</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div>
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">2</span> &nbsp; Review
+                </div>
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 2px solid #D2D2D2; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div>
+                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp; Payment
+                </div>
+            </div>
+        </a>
+
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div>
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">3</span> &nbsp; Confirm 
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="d-flex" *ngIf="travellers && review && !ticket">
+        <a href="javascript: void(0);" class="col-sm customleft" >
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getDone': travellers }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i>&nbsp;&nbsp;
+                    <span style="color: #fff;">Travellers</span>
+                </div>
+
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getActive': review }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #fff;">Review</span>
+                </div>
+
+            </div>
+        </a>
+        <a href="javascript: void(0);" class="col-sm customleft" style="border-bottom: 2px solid #2196f3; font-size: 17px;">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getActive': payment }">
+                    <i class="fa fa-eye" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #fff;">Payment</span>
+                </div>
+
+            </div>
+        </a>
+
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div>
+                    <span class="stepinactive" aria-hidden="true" style="color: #7d7c7c;">3</span> &nbsp;Confirm
+                </div>
+
+            </div>
+        </a>
+    </div>
+
+    <div class="d-flex" *ngIf="travellers && review && ticket">
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div [ngClass]="{'getDone': travellers }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #fff;">Travellers</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div class="" [ngClass]="{'getDone': review }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #fff;">Review</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="javascript: void(0);" class="col-sm customleft">
+            <div class="d-flex flex-column">
+                <div class="" [ngClass]="{'getActive': ticket }">
+                    <i class="fa fa-check stepactive" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <span style="color: #fff; font-size: 17px;">Confirm</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="session_time"><i class="fi-rr-time-forward"></i> Session Time {{display}}</div>

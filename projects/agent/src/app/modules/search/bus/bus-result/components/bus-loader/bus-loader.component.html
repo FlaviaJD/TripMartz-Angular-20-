@@ -1,0 +1,26 @@
+
+<div class="trip-modal-container" style="background: #fff; color: #0000; padding: 25px 0px 10px 0px; border-radius: 10px;">
+    <div class="">
+        <!-- <img src="assets/images/bus.png" style="width:110px;" class="load_logo" alt="loader" /> -->
+        <div class="trip-modal-title">
+            <h4>Please wait..! </h4>
+            <p>This will take few seconds, While we search the best fares for you.</p>
+        </div>
+        <br>
+        <div class="progress-bar-container">
+            <div #progressBar class="progress-bar">
+              <span class="progress-text">{{ percent }}%</span>
+            </div>
+          </div>
+          <div style="background-color: #F1F4FD; padding: 13px;font-size: 16px; color: #000;border-radius: 4px;">
+        <div class="destination-section">
+            <div class="dest-from" >
+                <p> {{ busInfo.departureCity}} to {{ busInfo.destinationCity}}</p>
+            </div>
+            <div class="dest-trip" style="color: #333;">
+                <p>{{ busInfo.checkinDate| date }}</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

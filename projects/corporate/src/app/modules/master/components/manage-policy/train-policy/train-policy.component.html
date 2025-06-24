@@ -1,0 +1,35 @@
+<div class="card-body">
+    <div class="sidePadding">
+        <div class="">
+            <div class="custom-inline-form">
+                <form [formGroup]="trainPolicyForm" autocomplete="off">
+                    <div class="form-group required row">
+                        <label for="isTrain" class="required" class="col-sm-2 col-form-label font-weight-bold labelAlign">Train
+                            <span style="color: red;">*</span>
+                        </label>
+                        <div class="col-sm-6 d-flex align-self-center">
+                            <div class="col-3">
+                            <label for="isTrainYes">
+                                <input type="radio" id="isTrainYes" name="isTrain" value="true" formControlName="isTrain" style="margin-right: 5px;">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Yes</span>
+                            </label>
+                            </div>
+                            <div class="col-3">
+                                <label for="isTrainNo">
+                                    <input type="radio" id="isTrainNo" name="isTrain" value="false" formControlName="isTrain"style="margin-right: 5px;">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                                </div>
+                                </div>
+                    </div>
+                    <div class="col-sm-8" style="text-align: end;">
+                        <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="goToPreviousPage()">Prev</button>
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmit()">Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

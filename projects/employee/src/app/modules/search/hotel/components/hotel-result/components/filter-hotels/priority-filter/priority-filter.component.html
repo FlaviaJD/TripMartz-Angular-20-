@@ -1,0 +1,12 @@
+<div class="rangebox mb-3">
+    <button data-target="#collapse515" data-toggle="collapse" class="collapsebtn" type="button">Most Frenquently Used Hotels</button>
+    <!-- <a  style="cursor: pointer;font-size: 12px;" class="float-right" (click)="clearHotelName()">Clear</a> -->
+    <div class="vsm-item">
+        <div class="search-container" id="collapse515">
+           <span title="Slide for Active/Deactive">
+                <mat-slide-toggle class="example-margin" [(ngModel)]="isActive" name="statusToggle" (change)="onStatusUpdate($event)">
+                </mat-slide-toggle>
+            </span>
+        </div>
+    </div>
+</div>

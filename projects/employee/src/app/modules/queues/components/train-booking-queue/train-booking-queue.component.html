@@ -1,0 +1,199 @@
+
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+<form [formGroup]="regConfig" (ngSubmit)="onSearchSubmit()">
+    <div class="card" style="background: none; box-shadow:none; padding: 0px;">
+        <div class="form-row">
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label>Application Reference </label>
+                    <input type="text" formControlName="train_app_reference" class="form-control text-uppercase form-control-sm nrm_input"
+                        placeholder="Application Reference">
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="train_status" id="train_status" formControlName="train_status"
+                        class="form-control form-control-sm nrm_input">
+                        <option value="BOOKING_PENDING">BOOKING PENDING</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <span class="icon fi-rr-calendar-days" (click)="isOpen= !isOpen"></span>
+                    <label for="departureDate">From</label>
+                    <input type="text" id="fromDate" formControlName="train_booked_from_date"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd/mm/yyyy"
+                        bsDatepicker [bsConfig]="bsDateConf"  [readonly]="true"
+                        [isOpen]="isOpen">
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <span class="icon fi-rr-calendar-days" (click)="isOpen= !isOpen"></span>
+                    <label for="departureDate">To</label>
+                    <input type="text" id="toDate" formControlName="train_booked_to_date"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd/mm/yyyy"
+                        bsDatepicker [bsConfig]="bsDateConf" [readonly]="true" [isOpen]="isOpen"
+                        [minDate]="regConfig.controls.train_booked_from_date.value || setMinDate">
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label style="visibility: hidden;">Search button</label>
+                    <button type="submit" class="btn w-100  srch_btn ">
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="col-3 pr-0">
+                <div class="form-group">
+                    <label style="visibility: hidden;">Reset</label>
+                    <button type="button" style="background-color: #252c40;" class="btn w-100 srch_btn" (click)="onReset()">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="card">
+    <div class="card-body">
+        <div class="mb-3">
+            <form>
+                <div class="p-2">
+                    <div class="form-group form-inline mb-0">
+                        Full text search:
+                        <input class="form-control ml-2 text-capitalize" type="text" name="searchTerm"
+                            (keyup)="applyFilter($event.target.value)" />
+
+                        <div class="move-right">
+                            <button class="text-white btn btn-lg btn-primary m-1"
+                                (click)="exportExcel()">Export to Excel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper1" id="notifications-list" (scroll)="scrollTwo.scrollLeft = scrollOne.scrollLeft"
+                    #scrollOne>
+                    <div class="div1"></div>
+                </div>
+                <div class="wrapper2" #scrollTwo (scroll)="scrollOne.scrollLeft = scrollTwo.scrollLeft">
+                    <div class="div2 invisible-scrollbar">
+                        <div class="table-respons">
+                            <table id="b2b-flight-report" class="table table-borderless table-striped table-hover"
+                                matSort (matSortChange)="sortData($event)">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-left text-nowrap"
+                                            *ngFor="let header of displayColumn;" mat-sort-header="{{header.key}}">
+                                            {{header.value }} </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="noData">
+                                        <td colspan="10">
+                                            <mat-spinner [diameter]="30" style="margin:0 auto;"
+                                                mode="indeterminate"></mat-spinner>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        *ngIf="!noData && (!respData.length || (respData | filter:searchText).length === 0)">
+                                        <td colspan="12">
+                                            <h4 class="text-muted text-center">
+                                                No Data Found!
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                    *ngFor="let data of respData | filter:searchText | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+                                        <td class="text-left text-muted">{{i+1}}.</td>
+                                        <td class="text-left overflow-hidden">
+                                            <div ngbDropdown container="body"><button class="btnStyle"
+                                                    ngbDropdownToggle>
+                                                    {{'Action'}}
+                                                </button>
+                                                <div ngbDropdownMenu>
+                                                        <button *ngIf="data?.TrainDetails?.BookingStatus == 'BOOKING_PENDING'"  ngbDropdownItem (click)="confirmDelete(data)">Delete</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-left text-capitalize">{{data?.TrainDetails?.AppReference}} </td>
+                                        <td class="text-left">
+                                            <span *ngIf="data?.TrainDetails?.BookingStatus== 'BOOKING_CONFIRMED'"
+                                                class="badge badge-success text-white">
+                                                Booking Confirmed
+                                            </span>
+                                            <span *ngIf="data?.TrainDetails?.BookingStatus == 'BOOKING_PENDING'"
+                                                class="badge badge-info text-white">
+                                                Booking Pending
+                                            </span>
+                                        </td>
+                                        <td class="text-left">
+                                            <span *ngIf="data?.TrainDetails?.BookingStatus== 'BOOKING_CONFIRMED'"
+                                                class="badge badge-success text-white">
+                                                Booking Confirmed
+                                            </span>
+                                            <span *ngIf="data?.TrainDetails?.BookingStatus == 'BOOKING_PENDING'"
+                                                class="badge badge-info text-white">
+                                                Booking Pending
+                                            </span>
+                                        </td>
+                                        <td class="capitalize">{{data?.PaxDetails[0]?.FirstName}} {{data?.PaxDetails[0]?.LastName}}</td>
+                                        <!-- <td class="text-left"> {{data?.TrainDetails?.BookingType}} </td> -->
+                                        <td class="text-left"> {{data?.TrainDetails?.From}}</td>
+                                        <td class="text-left"> {{data?.TrainDetails?.To}}</td>
+                                        <td class="text-left"> {{data?.TrainDetails?.PreferredClass}}</td>
+                                        <td class="text-left"> {{(data?.TrainDetails?.OnwardDate | date: 'dd MMM yyyy') || 'N/A'}}</td>
+                                        <td class="text-left"> {{(data?.TrainDetails?.OnwardTime) || 'N/A'}}</td>
+                                        <td class="text-left">{{(data?.TrainDetails?.CompanyName!='')?data?.TrainDetails?.CompanyName : 'N/A'}} </td>
+                                        <td class="text-left">{{data?.TrainDetails?.CreatedAt | date: 'dd MMM yyyy'}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer pb-0">
+                    <div class="d-flex w-100 justify-content-between">
+                        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true" [boundaryLinks]="true" [(page)]="page"
+                            [pageSize]="pageSize">
+                        </ngb-pagination>
+                        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                            <option [ngValue]="50">50 items per page</option>
+                            <option [ngValue]="100">100 items per page</option>
+                            <option [ngValue]="200">200 items per page</option>
+                            <option [ngValue]="500">500 items per page</option>
+                            <option [ngValue]="700">700 items per page</option>
+                            <option [ngValue]="1000">1000 items per page</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true"
+    [style.display]="showConfirm ? 'block' : 'none'">
+    <div class="modal-dialog  modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to delete?</p>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn btn-success" (click)="deleteRequest()">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

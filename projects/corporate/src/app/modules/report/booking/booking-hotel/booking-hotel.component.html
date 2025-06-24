@@ -1,0 +1,289 @@
+<div class="card-header text-uppercase bg-dark text-white">
+    <h5 style="border-bottom: 0;">
+        <i class="fa fa-edit"></i>
+        Hotel Booking Report
+    </h5>
+</div>
+<div class="card">
+    <form [formGroup]="regConfig">
+        <div>
+            <div class="row">
+                <div class="col-4 p-0">
+                    <div class="form-group">
+                        <label for="appReference">Application Reference</label>
+                        <input formControlName="app_reference" type="text"
+                            class="form-control form-control-sm nrm_input" placeholder="Application Reference"
+                            id="appReference">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input formControlName="phone_number" type="text" class="form-control form-control-sm nrm_input"
+                            placeholder="Phone" id="phone" (keypress)="numberOnly($event)">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input formControlName="email" type="email" class="form-control form-control-sm nrm_input"
+                            placeholder="Email" id="email">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <div class="form-group">
+                        <label for="bookedBy">Status</label>
+                        <select formControlName="status" name="cars" id="bookedBy"
+                            class="form-control form-control-sm nrm_input">
+                            <option value="ALL">ALL</option>
+                            <option value="BOOKING_CONFIRMED">BOOKING CONFIRMED</option>
+                            <option value="BOOKING_CANCELLED">BOOKING CANCELLED</option>
+                            <option value="BOOKING_REJECTED">BOOKING REJECTED</option>
+                        </select>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <span class="icon depart_date" (click)="isOpen= !isOpen"></span>
+                        <label for="fromDate">Booked From Date</label>
+                        <input formControlName="booked_from_date" type="text" id="fromDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="dd-mm-yyyy" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"
+                            onkeydown="return false">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <span class="icon depart_date" (click)="isOpen= !isOpen"></span>
+                        <label for="toDate">Booked To Date</label>
+                        <input formControlName="booked_to_date" type="text" id="toDate" autocomplete="off"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="dd-mm-yyyy" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"
+                            onkeydown="return false">
+                    </div>
+                </div>
+            </div>
+            <div class="btncontainer">
+                <button type="submit" class="btnStyle" (click)="onSearchSubmit()">Search</button> &nbsp;
+                <button type="button" class="btnStyle" (click)="onReset()">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="card" style="margin-top: 30px;">
+    <div class="card-body p-0">
+        <p>Total {{respData?.length}} Bookings</p>
+        <div style="padding-bottom:15px;">
+            <div class="col-12 p-0">
+                <button class="btnStyle" (click)="exportExcel()">Export to Excel</button>
+                <div class="form-group mb-3 col-sm-3 p-0 float-right has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input class="form-control" type="text" name="Search" [(ngModel)]="searchText" autocomplete="off"
+                        (keyup)="applyFilter($event.target.value)" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <form>
+                <div class="wrapper1" id="notifications-list" (scroll)="scrollTwo.scrollLeft = scrollOne.scrollLeft"
+                    #scrollOne>
+                    <div class="div1"></div>
+                </div>
+                <div class="wrapper2" #scrollTwo (scroll)="scrollOne.scrollLeft = scrollTwo.scrollLeft">
+                    <div class="div2 invisible-scrollbar">
+                        <div class="table-respons">
+                            <table class="table table-borderless table-striped table-hover" matSort
+                                (matSortChange)="sortData($event)" id="b2b-flight-data">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-left text-nowrap"
+                                            *ngFor="let header of displayColumn;" mat-sort-header="{{header.key}}">
+                                            {{header.value }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="noData">
+                                        <td colspan="12">
+                                            <mat-spinner [diameter]="30" style="margin:0 auto;"
+                                                mode="indeterminate"></mat-spinner>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        *ngIf="!noData && (!respData.length || (respData | filter:searchText).length === 0)">
+                                        <td colspan="12">
+                                            <h4 class="text-muted text-center">
+                                                No Data Found!
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        *ngFor="let data of respData | filter:searchText | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+                                        <td class="text-left text-muted">{{i+1}}.</td>
+                                        <td class="text-left overflow-hidden">
+                                            <div ngbDropdown container="body"><button class="btnStyle"
+                                                    ngbDropdownToggle>
+                                                    {{'Action'}}
+                                                </button>
+                                                <div ngbDropdownMenu>
+                                                    <a [routerLink]="['/report/booking/voucher/hotel']"
+                                                        [queryParams]="{appReference: data['BookingDetails']['AppReference']}"><button
+                                                            ngbDropdownItem>View Voucher</button></a>
+                                                    <!-- <a [routerLink]="['/report/booking-hotel/invoice']"
+                                                        [queryParams]="{appReference: data['BookingDetails']['AppReference']}"><button
+                                                            ngbDropdownItem>View Invoice</button>
+                                                    </a> -->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <!-- <td class="text-left">{{data?.BookingDetails?.Type || 'N/A'}}</td> -->
+                                        <td class="text-left"> {{data['BookingDetails']['AppReference']}} </td>
+                                        <td class="text-left" *ngIf="currentUser.auth_role_id!=10">{{data?.BookingDetails?.trip_id || 'N/A'}}</td>
+                                        <td class="text-left" *ngIf="currentUser.auth_role_id!=10">{{data?.BookingDetails?.trip_name || 'N/A'}}</td>
+                                        <!-- <td class="text-left"> {{data.BookingDetails.DomainOrigin || 'N/A'}}
+                                        </td> -->
+                                        <td class="text-left">
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_FAILED'"
+                                                class="badge badge-danger">
+                                                Booking Failed
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_CONFIRMED'"
+                                                class="badge badge-success">
+                                                Booking Confirmed
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_CANCELLED'"
+                                                class="badge badge-info">
+                                                Booking Cancelled
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'CANCELLATION_PENDING'"
+                                                class="badge badge-info">
+                                                Cancellation Pending
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_INPROGRESS'"
+                                                class="badge badge-warning">
+                                                Booking Inprogress
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_INPROGRESS'"
+                                                class="badge badge-warning">
+                                                Booking Inprogress
+                                            </span>
+                                            <span *ngIf="data['BookingDetails']['Status'] == 'BOOKING_PENDING'"
+                                                class="badge badge-warning">
+                                                Booking Pending
+                                            </span>
+                                            {{data['BookingDetails']['Status'] ? '' : 'N/A'}}
+                                        </td>
+                                        <td class="text-left" *ngIf="currentUser.auth_role_id!=10">
+                                            <span class="badge"
+                                                [ngClass]="{'badge-warning' : data?.BookingDetails?.ApprovalStatus!='Approve', 'badge-success' : data?.BookingDetails?.ApprovalStatus=='Approve',  'badge-danger': data?.BookingDetails?.ApprovalStatus=='Reject'}">
+                                                {{data?.BookingDetails?.ApprovalStatus || "PENDING"}}
+                                            </span>
+                                        </td>
+                                        <!-- <td class="text-left">
+                                            <span
+                                                class="badge text-white" [ngClass]="{'badge-warning' : data?.BookingDetails?.approvar_stage_two!='Approve', 'badge-success' : data?.BookingDetails?.approvar_stage_two=='Approve', 'badge-danger': (data?.BookingDetails?.approvar_stage_two=='Not Required' || data?.BookingDetails?.approvar_stage_two=='Reject')}">
+                                                {{data?.BookingDetails?.approvar_stage_two || 'PENDING'}}
+                                            </span>
+                                        </td> -->
+                                        <td class="capitalize" *ngIf="currentUser.auth_role_id!=10">
+                                            {{data?.BookingDetails?.approvar_name || 'N/A'}}
+                                        </td>
+                                        <td class="capitalize">
+                                            {{data?.BookingDetails?.company_name || 'N/A'}}
+                                        </td>
+                                        <!-- <td class="text-left text-capitalize">{{data['BookingDetails']['DomainOrigin']}} </td> -->
+                                        <td class="text-left"> {{data['BookingDetails']['HotelName']}} </td>
+                                        <td class="text-left"> {{data['BookingDetails']['HotelCheckIn'] | date: 'dd MMM
+                                            yyyy'}} </td>
+                                        <td class="text-left"> {{data['BookingDetails']['HotelCheckOut'] | date: 'dd MMM
+                                            yyyy'}} </td>
+                                        <td class="text-left"> {{data?.BookingItineraryDetails[0]?.TotalFare || 0}}</td>
+                                        <td class="text-left text-uppercase">
+                                            <ng-container *ngFor="let item of data['BookingPaxDetails']">
+                                                <span *ngIf="item.LeadPax">
+                                                    {{item['Title']}} {{item['FirstName']}} {{item['LastName']}}
+                                                </span>
+                                            </ng-container>
+                                        </td>
+                                        <!-- <td class="text-left"> {{data['BookingDetails']['HotelAddress']}} </td> -->
+                                        <td class="text-left"> {{data['BookingDetails']['PhoneNumber'] || 'N/A'}} </td>
+                                        <td class="text-left">{{ data['BookingDetails']['Email']!="undefined" ?
+                                            data['BookingDetails']['Email'] : 'N/A' }}</td>
+                                        <td class="text-left"> {{data?.BookingDetails?.PaymentMode || 'N/A'}} </td>
+                                        <td class="text-left"> {{data?.BookingDetails?.admin_cancellation_ts || 'N/A'}} </td>
+                                        <td class="text-left"> {{data?.BookingDetails?.booked_by || 'N/A'}} </td>
+                                        <td class="text-left"> {{(data.BookingDetails.BookedOn | date: 'dd
+                                            MMM yyyy') || 'N/A'}}
+                                        </td>
+                                        <!-- <td class="text-left"> {{data['GTANumber'] || 'N/A'}} </td> -->
+                                        <!-- <td class="text-left"> {{ noOfNights(data['BookingDetails']['HotelCheckIn'],
+                                            data['BookingDetails']['HotelCheckOut']) }} </td> -->
+                                        <!-- <td class="text-left"> {{data['BookingItineraryDetails'].length}} </td>
+                                        <td class="text-left"> {{data['BookingItineraryDetails'][0]['RoomPrice']}} </td>
+                                        <td class="text-left"> {{data['BookingItineraryDetails'][0]['AdminMarkup'] ||
+                                            'N/A'}} </td>
+                                        <td class="text-left"> {{data['BookingItineraryDetails'][0]['AgentMarkup'] ||
+                                            'N/A'}} </td>
+                                        <td class="text-left"> {{data['BookingItineraryDetails'][0]['PromoCodeAmount']
+                                            || 'N/A'}} </td> -->
+                                        <!-- </td> -->
+                                        <!-- <td class="text-left"> {{data['BookingItineraryDetails'][0]['Currency'] }} </td> -->
+                                        <!-- <td class="text-left"> {{data['BookingDetails']['created_at'] | date}} </td> -->
+                                        <!-- <td class="text-left"> {{(data.BookingDetails.admin_cancellation_ts | date: 'dd
+                                            MMM yyyy') || 'N/A'}}
+                                        </td>
+                                        <td class="text-left"> {{(data.BookingDetails.cancellation_charge) || 'N/A'}}
+                                        </td>
+                                        <td class="text-left"> {{data.BookingDetails.cancelled_by_name || 'N/A'}}
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer pb-0">
+                    <div class="d-flex w-100 justify-content-between">
+                        <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true"
+                            [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination>
+                        <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                            <option [ngValue]="50">50 items per page</option>
+                            <option [ngValue]="100">100 items per page</option>
+                            <option [ngValue]="150">150 items per page</option>
+                            <option [ngValue]="200">200 items per page</option>
+                            <option [ngValue]="500">500 items per page</option>
+                            <option [ngValue]="700">700 items per page</option>
+                            <option [ngValue]="1000">1000 items per page</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="paxProfile" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">User Details:</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="hide()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h5>Lead Traveller Information</h5>
+                <p class="">Title : {{paxDetails.Title | uppercase}}</p>
+                <p class="">First Name : {{paxDetails.FirstName | uppercase}}</p>
+                <p class="">Last Name : {{paxDetails.LastName | uppercase}}</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btnStyle" data-dismiss="modal" (click)="hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

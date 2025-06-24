@@ -1,0 +1,30 @@
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+<div class="custom-navtabs" *ngIf="flightIcon">
+    <ul ngbNav #nav="ngbNav" class="nav-pills m-0" orientation="horizontal" [(activeId)]="activeIdString">
+        <li ngbNavItem="flight" (click)="onSearchTypeChange('flight')" *ngIf="!hideOther">
+            <a ngbNavLink><i class="fi-rr-plane"></i> flight</a>
+            <ng-template ngbNavContent>
+                <app-search-form [moduleType]="module" (searchFormEvent)="receiveSearchForm($event)"></app-search-form>
+            </ng-template>
+        </li>
+        <li ngbNavItem="hotel" (click)="onSearchTypeChange('hotel')">
+            <ng-container *ngIf="!hideOther">
+                <a ngbNavLink><i class="fi-rr-bed"></i> hotels</a>
+            </ng-container>
+            <ng-template ngbNavContent>
+                <app-search-form [moduleType]="module" (searchFormEvent)="receiveSearchForm($event)"></app-search-form>
+           
+            </ng-template>
+        </li>
+        <li ngbNavItem="bus" (click)="onSearchTypeChange('bus')" *ngIf="!hideOther">
+            <a ngbNavLink><i class="fi-rr-bus"></i> bus</a>
+        </li>
+        <!-- <li ngbNavItem="train" (click)="onSearchTypeChange('train')" *ngIf="!hideOther">
+            <a ngbNavLink><i class="fi-rr-train"></i> train</a>
+        </li>
+        <li ngbNavItem="car" (click)="onSearchTypeChange('car')"  *ngIf="!hideOther">
+            <a ngbNavLink><i class="fi-rr-car"></i> car</a>
+        </li> -->
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

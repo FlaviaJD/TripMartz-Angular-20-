@@ -1,0 +1,179 @@
+<div *ngIf="hotel" class="row">
+    <div class="col-md-12 col-lg-12">
+     <!-- <div>
+            <div class="d-flex align-items-center">
+                <img src="assets/images/hotel_imgsd.png">
+                <div class="pl-4">
+                    <span class="dealrec">Recommended Deal </span>
+                    <h5 class="roomexp mb-0 mt-2">2 Single Beds 
+                        Standard Truf View</h5> 
+                </div>
+            </div>
+            <ul class="mt-3">
+                <li class="text-danger mb-2"> Cancellation charge apply</li>
+                <li class="text-dark mb-2"> Free WiFi</li>
+            </ul>
+     </div> -->
+        <!-- <h5 class="cusromGrey f-18"><strong>{{hotel.HotelName}} <ng-container *ngIf="hotel.HotelCategory">({{hotel.HotelCategory}})</ng-container></strong> </h5>
+        <ng-template *ngIf="hotel.StarRating === '' then noStar; else stars">
+        </ng-template>
+        <ng-template #noStar>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </ng-template>
+        <ng-template #stars>
+            <i class="fas fa-star star_rtng_clr cusromBlue" *ngFor="let s of getStarArray(hotel.StarRating)"></i>
+            <i class="fas fa-star star_rtng_empty" *ngFor="let s of getStarArrayRemaining(hotel.StarRating)"></i>
+        </ng-template>
+        <br>
+        <p class="cusromGrey mt-2 addr">
+            
+                <i class="fa fa-map-marker-alt cusromGrey" aria-hidden="true"></i>
+                &nbsp; {{hotel.HotelAddress}}
+            
+        </p> -->
+
+        <!-- <hr class="solid"> -->
+        <button type="button" class="btn btn-success btn-lg map_button d-none" data-toggle="modal" data-target="#mapview">
+            <!-- (click)="resizeMap();"> -->
+            View Map
+        </button>
+        <br>
+        <!-- <div class="font-weight-bold">
+            <div class="hotelDetailsBtn">
+                <div class="row mx-auto">
+                    <div class="col-sm-6 p-0" style="color: #252c40;">
+                        <span class="icons fi-rr-calendar-days"></span>
+                        <div class="float-left pl-5">Check In:<br>{{hotel.CheckIn | date: 'dd MMM yyyy'}}</div>
+                    </div>
+                    <div class="col-sm-6 p-0" style="color: #252c40;">
+                        <span class="icons fi-rr-calendar-days"></span>
+                        <div class="float-left pl-5">Check Out:<br>{{hotel.CheckOut | date: 'dd MMM yyyy'}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hotelDetailsBtn">
+            <div class="row mx-auto">
+
+                <div class="col-sm-4 p-0" style="color: #252c40;">
+                    <span class="icons fi-rr-moon"></span>
+                    <div class="float-left pl-5">Nights:<br>{{hotel.NoOfNights}}</div>
+                </div>
+
+                <div class="col-sm-4 p-0" style="color: #252c40;">
+                    <span class="icons fi-rr-person-simple"></span>
+                    <div class="float-left pl-5">Adults:<br>{{travellerAdult}}</div>
+                </div>
+
+                <div class="col-sm-4 p-0" style="color: #252c40;">
+                    <span class="icons fi-rr-child-head"></span>
+                    <div class="float-left pl-5">Children:<br>{{travellerChild}}</div>
+                </div>
+            </div>
+            </div>
+            <div class="mt-3">
+                <div class="row">
+                    <div class="col-sm-3" style="color: #065081;">Amenities:</div>
+                    <div class="col-md-9 col-9 text-left amelist"
+                    *ngIf="hotel.HotelAmenities && hotel.HotelAmenities.length > 0; else noAmenity">
+                    <a   placement="top" tooltip="Parking"><i class="fi fi-rr-parking cusromGrey"
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Parking')">
+                    </i></a>
+                    <a  placement="top" tooltip="Free toiletries"><i class="fas fa-toilet cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Free toiletries')">
+                    </i></a>
+                    <a  placement="top" tooltip="Free WiFi"><i class="fi fi-rr-wifi-alt cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Free WiFi')">
+                    </i></a>
+                    <a  placement="top" tooltip="Elevator"><i class="fi fi-rr-elevator cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'elevator')">
+                    </i></a>
+                    <a  placement="top" tooltip="Luggage storage"><i class="fi fi-rr-luggage-cart cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Luggage storage')">
+                    </i></a>
+                   <a   placement="top" tooltip="TV"> <i class="fa fa-tv cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'TV')">
+                    </i></a>
+                    <a   placement="top" tooltip="Safe Toilet"> <i class="fa fa-toilet cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Safe Toilet')">
+                    </i></a>
+                    <a  placement="top" tooltip="Shower Towels"> <i class="fa fa-shower cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Shower Towels')">
+                    </i></a>
+                    <a  placement="top" tooltip="Telephone"><i class="fas fa-phone cusromGrey" tooltip="Telephone"
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Telephone')">
+                    </i></a>
+                    <a  placement="top" tooltip="Air conditioning"><i class="fas fa-air-conditioner cusromGrey"
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Air conditioning')">
+                    </i></a>
+                    <a placement="top" tooltip="Attached bathroom"><i class="fas fa-bath cusromGrey" 
+                        *ngIf="hasAmenities(hotel.HotelAmenities, 'Attached bathroom')">
+                    </i></a>
+                </div>
+                    <ng-template #noAmenity>
+                        <div class="col-md-8 text-left">
+                            No Amenities Found
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="col-md-12 mt-0">
+        <!-- <div class="text-center d-block">
+        <span class="cusromGrey">
+            <strong> ₹ 5,449  </strong> 
+           
+        </span>
+        <h5 *ngIf="hotel.Price.Amount>0 && hotel?.RoomDetails[0][0]?.Price?.RoomPrice" class="cusromGrey m-0">
+            <span style="font-size: 13px; display: block;
+            font-weight: 400;
+            color: #5b5b5b;"> per night for 1 room</span>
+            <strong>{{hotel.Price.Currency}} {{hotel?.RoomDetails[0][0]?.Price?.Amount | number:'1.0-0'}}</strong> 
+        </h5>
+        +  ₹449 taxes & fees 
+        </div> -->
+
+       
+        
+        <div class="d-block">
+        <!-- <button type="button" class="btn btn-success mt-3 btn-lg rec_dealbtn">Recommended Deal </button> -->
+        <button *ngIf="hotel?.RoomDetails[0] && hotel?.RoomDetails[0][0] && hotel?.RoomDetails[0][0].Rooms.length>0" type="button" class="btn btn-success mt-3 btn-lg vewrooms"
+            (click)="goTo('roomDetail')">
+           View All Rooms
+        </button>
+        <button *ngIf="hotel?.RoomDetails.length==0" type="button" class="btn btn-success btn-lg" (click)="sendRequest(hotel)">
+            On Request
+        </button>
+        </div>
+    </div>
+</div>
+<div class="modal hide fade in" data-backdrop="" id="mapview" tabindex="-1" role="dialog">
+    <div class="modal-dialog room-dialog" role="dialog">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <div class="modal-header" style="padding:15px 0px;">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        <div class="htl-top-detail-col">
+                            <div>
+                                <h2 style="margin-bottom: 0px; font-size:20px; font-weight: 700;">
+                                    {{hotel?.HotelName}}</h2>
+                                <div class="htpreview adreshotle" style="font-size: 15px;">
+                                    {{hotel?.HotelAddress}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div #mapContainer id="map1" style="width: 100%; height:480px;"></div>
+            </div>
+        </div>
+    </div>
+</div>

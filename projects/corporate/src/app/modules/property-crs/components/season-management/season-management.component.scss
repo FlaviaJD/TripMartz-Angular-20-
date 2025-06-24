@@ -1,0 +1,7 @@
+.labelAlign{
+    text-align: left;
+    @media(max-width: 767px){
+        text-align: unset;
+        text-align: left !important;
+    }
+}

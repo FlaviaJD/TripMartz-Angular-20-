@@ -1,0 +1,429 @@
+<div class="page-header-image rellax-header" data-rellax-speed="-7"></div>
+    <div class="bbottom">
+        <div class="col-md-12 col-lg-12 p-0">
+            <div id="collapseBasic" style="z-index: 9999;">
+                <div class="bg-none">
+                    <div class="col-md-12 px-2 mb-3 pt-3">
+                        <app-bus-search (callResult)="searchResult($event)"></app-bus-search>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<section for="FlightFoundAndListSearchedResult" class="loading-container theme_bg">
+  <div class="col-12 p-0">
+    <div class="d-flex">
+      <div class="col-md-3 col-lg-3 nopad mobile_nopad">
+        <div class="flteboxwrp">
+            
+
+          <div class="fltrboxin rounded-bottom">
+            <div class="celsrch">
+              <div class="rangebox pt-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="fltr_txt">Filters</span>
+                <div style="padding:0px;">
+                  <a class="pull-right" style="cursor: pointer;" id="reset_filters" (click)="resetAll()">Reset
+                    All</a>
+                </div>
+              </div>
+              </div>
+              <span class="filterSpan pb-3">Showing {{bus.length}} Bus</span>
+               <app-bus-filter></app-bus-filter>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-lg-9 pl60">
+        <div class="row mobile_row">
+          <div class="col-md-12 col-lg-12 pr-0 mobile_nopad mb-2">
+           
+            <app-bus-sorting></app-bus-sorting>
+          </div>
+        </div>
+        <div class="row mobile_row" *ngIf="bus && bus.length" infiniteScroll [infiniteScrollDistance]="1"
+          [infiniteScrollUpDistance]="2" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()"
+          (scrolledUp)="onScrollUp()">
+          <div class="col-md-12 col-lg-12 pr-0 mobile_nopad">
+            <div *ngFor="let bus of bus | slice: 0: endSlice;let iindex = index">
+              <div class="card-body busrows r-r-i">
+                <div class="d-flex text-center mobile_row removeBtm">
+                  <div class="col-md-10 mobile_nopad d-align">
+                    <div class="row text-center mobile_row">
+                      
+                      <div class="col-md-8 nopad fiftywirdt2 d-align">
+                        <div class="row mobile_row">
+                          <div class="col-md-5 nopad">
+                            <div class="inpadbus cenertext">
+                              <div class="timelabelf">{{bus?.departureTime}}</div>
+                              <a class="poptoup bus-boarding-info-btn" (click)="showPickUp(bus)">Pickups</a>
+                              
+                            </div>
+                          </div>
+                          <div class="col-md-2 nopad ">
+                            <div class="arowwspr">
+                              <!-- <span class="mobile_clock fa fa-clock"></span> -->
+                               <span class="durtnlabls duration">{{bus?.duration}} </span>
+                            </div>
+
+                            
+                          </div>
+                          <div class="col-md-5 nopad">
+                            <div class="inpadbus cenertext">
+                              <div class="timelabelf">{{bus?.arrivalTime}}</div>
+                              <a class="poptoup bus-boarding-info-btn" (click)="showDropoffs(bus)">Dropoffs</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 nopad fiftywirdt1 dflex">
+                        <div class="inpadbus mobile_pad_bus">
+                          <div class="busername  travel-name">{{bus?.travels}}</div>
+                          <div class="bustype">{{bus?.busType}}</div>
+                          
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  <div class="col-md-2 mobile_bornone mobile_nopad">
+
+                    <div class="col-md-12 nopad full_bus_prices d-align">
+                      <div class="col-md-12 col-md-5 nopad mobile_rt">
+                        <div class="inpadbus mobile_rt">
+                          <a class="timeicon timings icseats" title="Seats"></a>
+                          <div class="seatcnt" *ngIf="bus?.availableSeats">{{bus?.availableSeats}}
+                            <span>Available Seats</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 nopad full_bus_prices d-align" *ngIf="bus?.availableSingleSeat>0">
+                      <div class="col-md-12 col-md-5 nopad mobile_rt">
+                        <div class="inpadbus mobile_rt">
+                          <a class="timeicon timings icseats" title="Seats"></a>
+                          <div class="seatcnt" >{{bus?.availableSingleSeat}}
+                            <span>Available Single Seats</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-block">
+                      <p class="text-right mb-0">Starting From</p>
+                    <div class="col-md-12 p-0 bustprice"><strong class="pricesyn">{{bus?.currency_code}}</strong>{{bus?.totalFares
+                      | number:'1.1-2'}}
+                    </div>
+                    
+                    </div>
+                  
+                  </div>
+              
+                </div>
+
+
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center">
+                    <a class="poptoup1" (click)="showCancelPolicy(bus);">Canc.Policy</a>
+                    <a class="poptoup1 viewm" (click)="showViewMore(bus)">View More</a>
+                  </div>
+                   <button class="btn srch_btn" (click)="onclick(bus)">
+                      Select Seat
+                    </button>
+                 </div>
+
+                <ng-container *ngIf="bus?.collapse">
+                  <div class="inner-summary-toggle" style="">
+                    <div class="buseatselct">
+                      <div class="text-center loader-image" *ngIf="bus?.isSeatLayoutLoading">Please Wait 
+                        <br>
+                        <div class="loader" id="loader-4">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                      </div>
+                      <div class="text-center loader-image"
+                        *ngIf="!bus?.isSeatLayoutLoading && (bus?.upperBirth | keyvalue)?.length==0 && (bus?.lowerBirth | keyvalue)?.length==0">
+                        No Data Found
+                      </div>
+                      <div class="room-summ" *ngIf="!bus?.isSeatLayoutLoading">
+                        <form class="booking-form">
+                          <div class="wrapper_tikting">
+                             <!-- side seat type start -->
+                             <div class="col-md-12  padfive"
+                             *ngIf="((bus?.upperBirth | keyvalue)?.length>0) || ((bus?.lowerBirth | keyvalue)?.length>0)">
+                             <div class="wrapper_tikting_secondrow brdre">
+                               <ul class="wrapperseatsbusbew">
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-IG.png">
+                                   <span>Available Seat</span>
+                                 </li>
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-F.png">
+                                   <span>Reserved for ladies</span>
+                                 </li>
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-M.png">
+                                   <span>Reserved for gents</span>
+                                 </li>
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-A.png">
+                                   <span>Selected Seat</span>
+                                 </li>
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-B-F.png">
+                                   <span>Booked By Ladies</span>
+                                 </li>
+                                 <li>
+                                   <img src="assets/images/seats/sleeper-B-M.png">
+                                   <span>Booked By gents</span>
+                                 </li>
+                                 <li class="hide">
+                                   <img src="assets/images/seats/seat_booked.png">
+                                   <span>Booked Seat</span>
+                                 </li>
+                               </ul>
+                             </div>
+                           </div>
+                           <!-- side seat type ends -->
+
+                            <div class="containers col-md-12 d-flex p-0" >
+                              <div class="seatwrapmain col-md-7 nopad">
+                                <!-- upper html start -->
+                                <div class="col-xs-12 col-md-12  padfive seatpadbew" *ngIf="((bus?.upperBirth | keyvalue)?.length>0)"
+                                  >
+                                  <div class="wrapper_tikting_firstrow brdre d-flex">
+                                    <div class="col-md-1 nopad box_text">
+                                      <img src="assets/images/seats/upper.jpg" alt="Upper">
+                                    </div>
+                                    <div class="col-md-11 nopad left_pad rpad">
+                                        <div class="col-md-12 margin_botm nopad"
+                                          *ngFor="let busList of bus?.upperBirth  | keyvalue;let lowerIndex = index">
+                                          <span *ngFor="let upperBus of busList.value">
+                                            <li class="seat_layout_li">
+                                              <!--available-->
+                                              <img
+                                              *ngIf="upperBus?.available === 'true' && !upperBus?.IsSelected && upperBus?.ladiesSeat === 'false' && upperBus?.malesSeat === 'false'"
+                                              [src]="getSeatImage(upperBus.seatType)" title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                              class="wa_senods seat_img select_seat"
+                                              (click)="setSelectedSeat(upperBus, bus)">
+                                              <!--available for ladies-->
+                                              <img
+                                                *ngIf="upperBus?.available=='true'  && !upperBus?.IsSelected && upperBus?.ladiesSeat=='true' && upperBus?.malesSeat=='false'"
+                                                class="wa_senods seat_img select_seat" title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                [src]="getLadiesSeatImage(upperBus.seatType)"  (click)="setSelectedSeat(upperBus,bus)">
+                                              <!--available for  Male-->
+                                              <img
+                                                *ngIf="upperBus?.available=='true'  && !upperBus?.IsSelected && upperBus?.malesSeat=='true' && upperBus?.ladiesSeat=='false'"
+                                                class="wa_senods seat_img select_seat"  title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                [src]="getMaleSeatImage(upperBus.seatType)"   (click)="setSelectedSeat(upperBus,bus)">
+                                                
+                                                <img
+                                                *ngIf="upperBus?.available === 'false' && !upperBus?.IsSelected && upperBus?.ladiesSeat === 'false' && upperBus?.malesSeat === 'false'"
+                                                [src]="getBlockedSeatImage(upperBus.seatType)" title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                class="wa_senods seat_img select_seat"
+                                               >
+                                                <!--available for ladies-->
+                                                <img
+                                                  *ngIf="upperBus?.available=='false'  && !upperBus?.IsSelected && upperBus?.ladiesSeat=='true' && upperBus?.malesSeat=='false'"
+                                                  class="wa_senods seat_img select_seat" title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                  [src]="getBlockedLadiesSeatImage(upperBus.seatType)" >
+                                                <!--available for  Male-->
+                                                <img
+                                                  *ngIf="upperBus?.available=='false'  && !upperBus?.IsSelected && upperBus?.malesSeat=='true' && upperBus?.ladiesSeat=='false'"
+                                                  class="wa_senods seat_img select_seat" title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                  [src]="getBlockedMaleSeatImage(upperBus.seatType)">
+                                              <!-- Selected seats starts-->
+                                              <img *ngIf="upperBus?.IsSelected" class="wa_senods seat_img select_seat"
+                                                title="Seat : {{upperBus?.name}}, Fare : {{upperBus?.fare | number:'1.1-2'}}"
+                                                [src]="getSelectedImage(upperBus.seatType)" (click)="setSelectedSeat(upperBus,bus)"
+                                                >
+                                              <!-- Selected seats starts-->
+                                            </li>
+                                          </span>
+                                          <span *ngIf="busList.value.length === 0">
+                                            <img src="assets/images/seats/plain-icon.jpg" alt="No seats available" class="empty-image" />
+                                          </span>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <!-- upper html ends -->
+                                <!-- lower html start -->
+                                <div class="col-xs-12 col-md-12  padfive seatpadbew" *ngIf="((bus?.lowerBirth | keyvalue)?.length>0)"
+                                  >
+                                  <div class="wrapper_tikting_firstrow brdre d-flex">
+                                    <div class="col-md-1 nopad box_text">
+                                      <img src="assets/images/seats/steering.png" alt="Upper">
+                                      <br>
+                                      <img src="assets/images/seats/lower.jpg" alt="Upper">
+                                    </div>
+                                    <div class="col-md-11 nopad left_pad rpad">
+                                      <div class="col-md-12 margin_botm nopad"
+                                        *ngFor="let busList of bus?.lowerBirth  | keyvalue;let lowerIndex = index">
+                                        <span *ngFor="let lowerbus of busList.value">
+                                          <li class="seat_layout_li">
+                                            <!--available-->
+                                            <img
+                                            *ngIf="lowerbus?.available === 'true' && !lowerbus?.IsSelected && lowerbus?.ladiesSeat === 'false' && lowerbus?.malesSeat === 'false'"
+                                            [src]="getSeatImage(lowerbus.seatType)" title="Seat : {{lowerbus?.name}},Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                            class="wa_senods seat_img select_seat"
+                                            (click)="setSelectedSeat(lowerbus, bus)">
+                                            <!--available for ladies-->
+                                            <img
+                                              *ngIf="lowerbus?.available=='true'  && !lowerbus?.IsSelected && lowerbus?.ladiesSeat=='true' && lowerbus?.malesSeat=='false'"
+                                              class="wa_senods seat_img select_seat" title="Seat : {{lowerbus?.name}}, Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                              [src]="getLadiesSeatImage(lowerbus.seatType)"  (click)="setSelectedSeat(lowerbus,bus)">
+                                            <!--available for  Male-->
+                                            <img
+                                              *ngIf="lowerbus?.available=='true'  && !lowerbus?.IsSelected && lowerbus?.malesSeat=='true' && lowerbus?.ladiesSeat=='false'"
+                                              class="wa_senods seat_img select_seat" title="Seat : {{lowerbus?.name}},Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                              [src]="getMaleSeatImage(lowerbus.seatType)"   (click)="setSelectedSeat(lowerbus,bus)">
+                                            <!-- Selected seats starts-->
+                                           
+                                            <img
+                                            *ngIf="lowerbus?.available === 'false' && !lowerbus?.IsSelected && lowerbus?.ladiesSeat === 'false' && lowerbus?.malesSeat === 'false'"
+                                            [src]="getBlockedSeatImage(lowerbus.seatType)" title="Seat : {{lowerbus?.name}}, Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                            class="wa_senods seat_img select_seat"
+                                            >
+                                            <!--available for ladies-->
+                                            <img
+                                              *ngIf="lowerbus?.available=='false'  && !lowerbus?.IsSelected && lowerbus?.ladiesSeat=='true' && lowerbus?.malesSeat=='false'"
+                                              class="wa_senods seat_img select_seat" title="Seat : {{lowerbus?.name}},  Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                              [src]="getBlockedLadiesSeatImage(lowerbus.seatType)">
+                                            <!--available for  Male-->
+                                            <img
+                                              *ngIf="lowerbus?.available=='false'  && !lowerbus?.IsSelected && lowerbus?.malesSeat=='true' && lowerbus?.ladiesSeat=='false'"
+                                              class="wa_senods seat_img select_seat"  title="Seat : {{lowerbus?.name}},Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                              [src]="getBlockedMaleSeatImage(lowerbus.seatType)">
+                                           
+                                            <img *ngIf="lowerbus?.IsSelected" class="wa_senods seat_img select_seat"
+                                              title="Seat : {{lowerbus?.name}},  Fare : {{lowerbus?.fare | number:'1.1-2'}}"
+                                              [src]="getSelectedImage(lowerbus.seatType)" (click)="setSelectedSeat(lowerbus,bus)"
+                                              >
+
+
+
+                                              
+                                            <!-- Selected seats starts-->
+                                          </li>
+                                        </span>
+                                        <span *ngIf="busList.value.length === 0">
+                                            <img src="assets/images/seats/plain-icon.jpg" alt="No seats available" class="empty-image" />
+                                          </span>
+                                          
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- lower html ends -->
+                              <span id="error_message" class="err_msg" *ngIf="bus?.MaxSeatSelected">You cannot select
+                                more
+                                than {{maxSeats}} seats</span>
+                            </div>
+
+                              <!-- down selection start -->
+                              <div class="col-md-5 padfive "
+                                *ngIf="((bus?.upperBirth | keyvalue)?.length>0) || ((bus?.lowerBirth | keyvalue)?.length>0)">
+                                <div class="wrapper_tikting_thirdtrow brdre">
+                                  <div class="seat-summary"></div>
+                                  <div class="seat-summarywrap d-flex">
+                                    <div class="col-md-6 nopad">
+                                      <h4>Seat(s) <span class="text-danger">*</span> :<br>
+                                        <ng-container *ngFor="let selectedSeat of bus?.SelectedSeats; let i = index;">
+                                          <span id="selected_seats">{{ selectedSeat?.name }}</span>
+                                          <ng-container *ngIf="i !== bus?.SelectedSeats.length - 1">, </ng-container>
+                                        </ng-container>
+                                      </h4>
+                                    </div>
+                                    <div class="col-md-6 nopad">
+                                      <h4>Amount <span class="text-danger">* : </span><br> {{bus?.currency_code}}
+                                        {{
+                                        bus?.Total | number:'1.1-2' }} <span id="selected_amount"></span>
+                                      </h4>
+                                    </div>
+                                  </div>
+                                  <div class="slctdrop">
+                                    <div class="col-xs-12 col-md-12 p-0 float-left">
+                                      <div class="form-group cusfomgrp">
+                                        <label class="bordinglbl">Choose boarding point <span
+                                            class="text-danger">*</span>
+                                        </label>
+                                        <div class="plcetogo selctmark ">
+                                          <select class="form-control boarding-point normalsel" name="pickupId"
+                                            (change)="setPickupPoint(bus,$event.target.value)">
+                                            <option value="" disabled selected>--- boarding points ---</option>
+                                            <option *ngFor="let pickups of seatLayoutResponse?.boardingTimes;" [value]="pickups?.bpId">
+                                              {{pickups?.time | date: 'dd MMM yyyy,H:mm'}}- {{pickups?.bpName}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-12 p-0 float-left">
+                                      <div class="form-group cusfomgrp">
+                                        <label class="bordinglbl">Choose drop point <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="plcetogo selctmark ">
+                                          <select class="form-control drop-point normalsel" name="dropId"
+                                            (change)="setDropPoint(bus,$event.target.value)">
+                                            <option value="" disabled selected>--- drop points ---</option>
+                                            <option *ngFor="let dropoffs of bus?.droppingTimes;"
+                                              [value]="dropoffs?.bpId">
+                                              {{dropoffs?.time | date: 'dd MMM yyyy,H:mm'}}- {{dropoffs?.bpName}}
+                                            </option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="synbtn col-md-12 nopad cusfomgrp float-left">
+                                      <input type="submit"
+                                        [disabled]="!bus?.PickUpID || !bus?.DropOffID ||  bus?.SelectedSeats.length==0"
+                                        class="bookallbtn btn srch_btns busbookbtneasy" (click)="onSubmit(bus)"
+                                        value="Continue">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- down selection ends -->
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!bus.length" class="row">
+          <div class="col-md-12 col-lg-12 pr-0">
+            <div class="card-body pb-0">
+              <img class="no_bus_found" src="assets/images/no-bus-found.png" alt="" />
+              <h3 class="text-center">No Result Found !!! <br />
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal" id="cancellation-wrapper10" [style.display]="enableCancPolicy ? 'block' : 'none'">
+  <app-bus-cancellation [cancelPolicy]="cancelPolicy" (backToBusResult)="hide($event)"></app-bus-cancellation>
+</div>
+<div class="modal" id="more24" [style.display]="enableViewMore ? 'block' : 'none'">
+  <app-bus-other-details [busDetails]="busDetails" (backToBusResult)="hide($event)"></app-bus-other-details>
+</div>
+<div class="modal" [style.display]="enableDropOff ? 'block' : 'none'">
+  <app-bus-drop-off [busDetails]="busDetails" (backToBusResult)="hide($event)"></app-bus-drop-off>
+</div>
+<div class="modal" id="more24" [style.display]="enablePickup ? 'block' : 'none'">
+  <app-bus-pick-up [busDetails]="busDetails" (backToBusResult)="hide($event)"></app-bus-pick-up>
+</div>
+<ngx-loading [show]="loading"
+  [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+  [template]="loadingTemplate"></ngx-loading>

@@ -1,0 +1,179 @@
+<div class="fsBorder card topsticky">
+    <h4 class="text-muted"> Fare Summary
+    </h4>
+    <div class="bg-gradient-light px-2 pb-3 br-8">
+        <div *ngIf="showDetails">
+            <div class="row m-0 text-muted">
+                <ng-container *ngIf="isAdult(flight)">
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left">
+                            <b>Adult Ticket</b>
+                        </div>
+                        <div class="float-right">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.TotalPrice |
+                            number:'1.0-0'}} X {{ adultCount }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            Base Fare
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }}
+                            {{ flight.Price.PassengerBreakup.ADT.BasePrice | number:'1.0-0' }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            Taxes &amp; Fees
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.ADT.Tax | number:'1.0-0'}}
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="isChild(flight)">
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left">
+                            <b>Child Ticket</b>
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD?.TotalPrice }} X {{
+                            childCount }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            Base Fare
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }}
+                            {{ flight.Price.PassengerBreakup.CHD?.BasePrice }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14  mb-2">
+                        <div class="float-left customColor">
+                            Taxes &amp; Fees
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.CHD?.Tax }}
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="isInfant(flight)">
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            <b>Infant Ticket</b>
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF?.TotalPrice }} X {{
+                            infantCount }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            Base Fare
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }}
+                            {{ flight.Price.PassengerBreakup.INF?.BasePrice }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2">
+                        <div class="float-left customColor">
+                            Taxes &amp; Fees
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ flight.Price.PassengerBreakup.INF?.Tax }}
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="col-md-12 col-lg-12 f-14 mb-2"
+                        *ngIf="baggageFee">
+                        <div class="float-left" style="color: #082B3A !important;">
+                            Extra Baggage
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ baggageFee | number:'1.0-0'  }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2" *ngIf="mealFee">
+                        <div class="float-left" style="color: #082B3A !important;">
+                            Extra Meal
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ mealFee | number:'1.0-0' }}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2" *ngIf="seatFee">
+                        <div class="float-left" style="color: #082B3A !important;">
+                            Seat
+                        </div>
+                        <div class="float-right customColor">
+                            {{ flight.Price.Currency }} {{ seatFee | number:'1.0-0' }}
+                        </div>
+                    </div>
+
+                <div class="col-md-12 col-lg-12 f-18 mb-0">
+                    <div class="float-left text-uppercase" style="color: #082B3A !important;font-size: 16px;">
+                        Grand Total
+                    </div>
+                    <div *ngIf="!showTotalDisplayFare" class="float-right text-warning" style="color:#189AD3 !important;">
+                        {{ flight?.Price?.Currency }} {{ totalDisplayFare | number:'1.0-0' }}
+                    </div>
+                    <div *ngIf="showTotalDisplayFare" class="float-right text-warning" style="color:#189AD3 !important;">
+                        {{ flight?.Price?.Currency }} {{ flight?.Price?.TotalDisplayFare | number:'1.0-0' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!showDetails">
+            <div class="col-md-12 col-lg-12  mb-3">
+                <div class="float-left" style="color: #082B3A !important;">
+                    Grand Total
+                </div>
+                <div class="float-right" style="color:#189AD3 !important;">
+                    {{ flight?.Price?.Currency }} {{ flight?.Price?.TotalDisplayFare | number:'1.0-0' }}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-lg-12 f-14 mb-2 mt-2" style="border-bottom: 1px solid #00000029">
+                <div class="float-left" style="color: #082B3A !important;">
+                    Markup
+                </div>
+                <div class="float-right" style="color:#189AD3 !important;">
+                    {{ flight?.Price?.Currency }} {{ flight?.Price?.PriceBreakup?.MarkUpDetails?.AgentMarkup }}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-lg-12 f-14 mb-2 mt-2" style="border-bottom: 1px solid #00000029">
+                <div class="float-left " style="color: #082B3A !important; ">
+                    Commission
+                </div>
+                <div class="float-right" style="color:#189AD3 !important;">
+                    {{ flight?.Price?.Currency }} {{ flight?.Price?.PriceBreakup?.CommissionDetails?.AgentCommission }}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-lg-12 f-14 mb-2 mt-2" style="border-bottom: 1px solid #00000029">
+                <div class="float-left " style="color: #082B3A !important;">
+                    Total Payable
+                </div>
+                <div class="float-right customColor" style="color:#189AD3 !important;">
+                    {{ flight?.Price?.Currency }} {{ flight?.Price?.AgentNetFare | number:'1.0-0' }}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-lg-12 f-14 mb-2 mt-2" style="border-bottom: 1px solid #00000029">
+                <div class="float-left " style="color: #082B3A !important;">
+                    Total Earned
+                </div>
+                <div class="float-right " style="color:#189AD3 !important;">
+                    {{ flight?.Price?.Currency }} {{ (flight?.Price?.PriceBreakup?.CommissionDetails?.AgentCommission
+                    +
+                    flight?.Price?.PriceBreakup?.MarkUpDetails?.AgentMarkup)  | number : '1.2-2'}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

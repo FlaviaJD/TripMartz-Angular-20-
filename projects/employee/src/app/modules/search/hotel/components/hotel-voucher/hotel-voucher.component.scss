@@ -1,0 +1,20 @@
+@media print {
+    body * {
+      display: none;
+    }
+  
+    #print_voucher {
+       
+        width: 100%;
+        position: absolute; border: none !important; -webkit-print-color-adjust: exact !important;
+        print-color-adjust:exact !important; background:#eee;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0px;
+}
+.roomslist{-webkit-print-color-adjust: exact !important;
+    print-color-adjust:exact !important; background-color: #000;}
+}
+.htl_room_img{filter: grayscale(1);}
+.htl_adult_img{filter: grayscale(1);}

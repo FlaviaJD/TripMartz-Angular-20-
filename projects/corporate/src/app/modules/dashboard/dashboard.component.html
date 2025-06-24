@@ -1,0 +1,355 @@
+<div class="d-flex">
+    <div class="col-md-12 m-0 p-0">
+        <div class="col-md-12 d-flex flex-row m-0 p-0" *ngIf="!moduleBookingCountFound; else dnotShow">
+            <div class="text-center">
+                No data found
+            </div>
+        </div>
+        <ng-template #dnotShow>
+            <div class="row">
+            <ng-container *ngFor="let item of moduleBookingCount; let i = index">
+                <div class="col-md-2 m-0"
+                    *ngIf="(item.module!='Flight Booking' && (loggedInUser?.id == 243)) || !(loggedInUser?.id == 243)">
+                    <div class="card" style="border-radius: 15px;">
+                        <ng-container *ngIf="item.module == 'Car Booking' ? false : true">
+                            <div class="text-fade" *ngFor="let report of item.link">
+                                <ng-container *ngIf="report.agent">
+                                    <a [routerLink]="[report.agent]" class="text-gray">
+                            <div class="d-flex">
+                                <div class="w-25 customCenter text-white rounded">
+                                    <i style="background:none !important; color:#065081;" class="{{item.icon}} fa-2x p-3"></i>
+                                </div>
+                                <div class="pl-3">
+                                    <h6 class="font-weight-700 fsize-3">
+                                        {{item.noOfBookings[1].agent}}
+                                    </h6>
+                                    <div class="text-fade"> {{item['subTitle']}} </div>
+                                    
+                                                <span class="badge badge-pill badge-success-light mr-0 pr-1 pl-0"><i
+                                                        class="fa fa-arrow-up"></i></span> {{ 'Report'}}
+                                            
+                                </div>
+                            </div>
+                        </a>
+                    </ng-container>
+                </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- <div class="col-md-2 m-0" >
+                <div class="card" style="border-radius: 15px;">
+                    <div class="d-flex">
+                    <div class="w-25 customCenter text-white rounded">
+                        <i style="background:none !important; color:#065081;" class="fa fa-train fa-2x p-3"></i>
+                    </div>
+                    <div class="pl-3">
+                        <h6 class="font-weight-700 fsize-3">
+                            0
+                        </h6>
+                        <div class="text-fade">  </div>
+                        <div class="text-gray">
+                       
+                                <a class="text-gray">
+                                    <span class="badge badge-pill badge-success-light mr-0 pr-1 pl-0"><i class="fa fa-arrow-up"></i></span> {{ 'Report'}}
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div> -->
+            <ng-container *ngIf="!(loggedInUser?.id == 243)">
+            <!-- <div class="col-md-2 m-0 mt-0">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="d-flex">
+                    <div class="w-25 customCenter text-white rounded">
+                        <i style="background:none !important; color:#065081;" class="fa fa-bus fa-2x p-3"></i>
+                    </div>
+                    <div class="pl-3">
+                        <h6 class="font-weight-700 fsize-3">
+                           0
+                        </h6>
+                        <div class="text-fade">  </div>
+                        <div class="text-gray">
+                       
+                                <a class="text-gray">
+                                    <span class="badge badge-pill badge-success-light mr-0 pr-1 pl-0"><i class="fa fa-arrow-up"></i></span> {{ 'Report'}}
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div> -->
+            <!-- <div class="col-md-2 m-0 mt-0">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="d-flex">
+                    <div class="w-25 customCenter text-white rounded">
+                        <i style="background:none !important; color:#065081;" class="fa fa-car fa-2x p-3"></i>
+                    </div>
+                    <div class="pl-3">
+                        <h6 class="font-weight-700 fsize-3">
+                            10
+                        </h6>
+                        <div class="text-fade">  </div>
+                        <div class="text-gray">
+                                <a class="text-gray">
+                                    <span class="badge badge-pill badge-success-light mr-0 pr-1 pl-0"><i class="fa fa-arrow-up"></i></span> {{ 'Report'}}
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div> -->
+            <!-- <div class="col-md-2 m-0 mt-0">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="d-flex">
+                    <div class="w-25 customCenter text-white rounded">
+                        <i style="background:none !important; color:#065081;" class="fa fa-user fa-2x p-3"></i>
+                    </div>
+                    <div class="pl-3">
+                        <h6 class="font-weight-700 fsize-3">
+                            33
+                        </h6>
+                        <div class="text-fade">  </div>
+                        <div class="text-gray">
+                                <a class="text-gray">
+                                    <span class="badge badge-pill badge-success-light mr-0 pr-1 pl-0"><i class="fa fa-arrow-up"></i></span> Users
+                                </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div> -->
+            </ng-container>
+        </div>
+        </ng-template>
+    </div>
+</div>
+<ng-container *ngIf="!(loggedInUser?.id == 243)">
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card" style="border-radius: 10px;"> 
+            
+            <div class="no-border">
+                <h4 class="box-title font-weight-500">
+                    Feedback
+                </h4>
+            </div>
+            <!-- <div style="display: block;">
+                <canvas baseChart  style="width: 100%; height: 350px; display: block;"
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  [colors]="colors">
+                </canvas>
+              </div> -->
+              <div style="display: block">
+            <canvas baseChart  style="width: 100%; height: 300px; display: block;"
+                        [data]="demodoughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType"
+                        [colors]="donutColors"
+                        [options]="doughnutChartOptions"
+                        (chartClick)="chartClicked($event)"></canvas>
+                        <br>
+                        <p><strong>Few Comments (Only for):  Excellent & Good</strong></p>
+        </div>
+       </div>
+       </div>
+
+       <div class="col-md-6">
+        <div class="card" style="border-radius: 15px;">
+        <highcharts-chart [Highcharts]="highcharts2" [options]="chartOptions2"
+            style="width: 100%; height: 350px; display: block;">
+        </highcharts-chart>
+    </div>
+    </div>
+
+       <div class="col-md-6 d-none">
+        <div class="box">
+            <div class="box-header no-border">
+                <h4 class="box-title">
+                    Top Departments
+                </h4>
+            </div>
+            <div class="box-body pt-0">
+                <div>
+                    <div class="progress mb-5">
+                        <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-primary font-weight-bold">Dubai (DXB) - Bangalore (BLR)</p>
+                        <p class="text-mute">100 Bookings</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="progress mb-5">
+                        <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-primary font-weight-bold">Singapore (SIN) - Bangalore (BLR)</p>
+                        <p class="text-mute">70 Bookings</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="progress mb-5">
+                        <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-primary font-weight-bold">Hyderabad (HYD) - Bangalore (BLR)</p>
+                        <p class="text-mute">50 Bookings</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body pt-4">
+                <div class="d-inline-block">
+                    <a href="#" class="waves-effect waves-light btn btn-outline btn-rounded btn-primarys mb-5 btn-active">Flight</a>
+                    <a href="#" class="waves-effect waves-light btn btn-outline btn-rounded btn-primarys mb-5">Hotel</a>
+                    <a href="#" class="waves-effect waves-light btn btn-outline btn-rounded btn-primarys mb-5">Bus</a>
+                    <a href="#" class="waves-effect waves-light btn btn-outline btn-rounded btn-primarys mb-5">Train</a>
+                    <a href="#" class="waves-effect waves-light btn btn-outline btn-rounded btn-primarys mb-5">Cab</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-md-6">
+    <div class="card" style="border-radius: 10px;"> 
+        
+        <div class="no-border">
+            <h4 class="box-title font-weight-500">
+                Cancelled Booking
+            </h4>
+        </div>
+
+        <div style="display: block">
+            <canvas baseChart  style="width: 100%; height: 350px; display: block;"
+                        [data]="demodoughnut1ChartData"
+                        [labels]="doughnut1ChartLabels"
+                        [chartType]="doughnut1ChartType"
+                        [colors]="donut1Colors"
+                        [options]="doughnut1ChartOptions"
+                        (chartClick)="chart1Clicked($event)"
+                        ></canvas>
+        </div>
+   </div>
+   </div> -->
+</div>
+<hr>
+<div class="row d-none">
+    <div class="col-md-6">
+      <div class="card" style="border-radius: 10px;">  
+        <div class="fc-toolbar">
+            <div class="fc-left">
+                <h2>{{selectedDate | date: 'MMMM'}} {{selectedDate | date: 'yyyy'}}</h2>
+            </div>
+            <div class="fc-center"></div>
+            <div class="fc-right">
+                <button type="button" (click)="setToday()" class="fc-today-button fc-button fc-button-primary">
+                    Today
+                </button>
+                <div class="fc-button-group">
+                    <button type="button" (click)="calenderPrev()" class="fc-prev-button fc-button fc-button-primary">
+                        <span class="fc-icon fc-icon-chevron-left"></span>
+                    </button>
+                    <button type="button" (click)="calenderNext()" class="fc-next-button fc-button fc-button-primary">
+                        <span class="fc-icon fc-icon-chevron-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <full-calendar defaultView="dayGridMonth"  [showNonCurrentDates]="false" [plugins]="calendarPlugins" [events]="calendarEvents" #calender
+        (eventClick)="eventClicked($event)" (dateClick)="handleDateClick($event)">
+        </full-calendar>
+    </div>
+</div>
+    <div class="col-md-6 booking_list_data">
+        <div class="card" >  
+        <h5>Bookings Confirmed On Aug 8, 2023</h5>
+        <div class="booking_li">
+            <span><strong>AppReference:</strong> MHT-08082023-1527 <i class="fa fa-copy"></i></span>&nbsp;
+            <span><strong>PNR.No:</strong> PQTS56</span>&nbsp;
+            <span><strong>GDS PNR:</strong>PQTS56</span>&nbsp;
+            <br/>
+            <div class="row">
+                <div class="col-md-7"> <strong>Name:</strong> Mr. Badri nath nayak</div>
+                <div class="col-md-12">
+                    <a class="d-block c-pointer font-weight-bold float-right" style="color:#495057;">
+                        View Voucher
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="booking_li">
+            <span><strong>AppReference:</strong> MHT-08082023-1527 <i class="fa fa-copy"></i></span>&nbsp;
+            <span><strong>PNR.No:</strong> PQTS56</span>&nbsp;
+            <span><strong>GDS PNR:</strong>PQTS56</span>&nbsp;
+            <br/>
+            <div class="row">
+                <div class="col-md-7" > <strong>Name:</strong> Mr. Badri nath nayak</div>
+                <div class="col-md-12">
+                    <a class="d-block c-pointer font-weight-bold float-right" style="color:#495057;">
+                        View Voucher
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking_li">
+            <span><strong>AppReference:</strong> MHT-08082023-1527 <i class="fa fa-copy"></i></span>&nbsp;
+            <span><strong>PNR.No:</strong> PQTS56</span>&nbsp;
+            <span><strong>GDS PNR:</strong>PQTS56</span>&nbsp;
+            <br/>
+            <div class="row">
+                <div class="col-md-7" > <strong>Name:</strong> Mr. Badri nath nayak</div>
+                <div class="col-md-12">
+                    <a class="d-block c-pointer font-weight-bold float-right" style="color:#495057;">
+                        View Voucher
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="col-md-6 booking_list_data" *ngIf="bookingDetailsFound; else hideMe">
+    <div class="card" >  
+    <h5>Bookings Confirmed On {{selectedDate | date}}</h5>
+    <div class="booking_li" *ngFor="let  booking of bookingDetails">
+        <span *ngIf="booking?.AppReference"><strong>AppReference:</strong> {{ booking?.AppReference}} <i class="fa fa-copy" (click)="copyMessage(booking?.AppReference)"></i></span>&nbsp;
+        <span *ngIf="booking?.Pnr"><strong>PNR.No:</strong> {{booking?.Pnr}}</span>&nbsp;
+        <span *ngIf="booking?.GDS_PNR"><strong>GDS PNR:</strong> {{booking?.GDS_PNR}}</span>&nbsp;
+        <br/>
+        <div class="row">
+            <div class="col-md-7" *ngIf="booking?.Passengers"> <strong>Name:</strong> {{booking?.Passengers[0]?.first_name + ' '+ booking?.Passengers[0]?.last_name}}</div>
+            <div class="col-md-5">
+                <a class="d-block c-pointer float-right" [routerLink]="['/report/b2b/voucher/flight']"
+                    [queryParams]="{appReference: booking?.AppReference}">
+                    View Voucher
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div> -->
+
+    <!-- <ng-template #hideMe>
+        <div class="col-md-6 booking_list_data">
+            <div class="card" style=" min-height: 99%; border-radius: 10px;">  
+            <div class="text-center">
+              <h4> No data found! </h4>
+            </div>
+        </div>
+        </div>
+    </ng-template> -->
+</div>
+
+</ng-container>

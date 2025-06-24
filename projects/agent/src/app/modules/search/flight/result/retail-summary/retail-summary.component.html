@@ -1,0 +1,55 @@
+<div class="fsBorder card topsticky">
+    <h4 class="text-muted"> {{exchangePrice?.PriceBreakup?.FareType}}
+    </h4>
+    <div class="bg-gradient-light px-2 pb-3">
+        <div>
+            <div class="row m-0 text-muted">
+                <div class="col-md-12 col-lg-12 f-14 mb-2"
+                    *ngIf="exchangePrice?.Attr?.Baggage && exchangePrice?.Attr?.Baggage.length">
+                    <div class="float-left customColor">
+                        <b>Baggage</b>
+                    </div>
+                    <div class="float-right customColor">
+                        {{exchangePrice.Attr.Baggage}}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 f-14 bbottom mb-3"
+                    *ngIf="exchangePrice?.Attr?.CabinBaggage && exchangePrice?.Attr?.CabinBaggage.length">
+                    <div class="float-left customColor">
+                        <b>Cabin Baggage</b>
+                    </div>
+                    <div class="float-right customColor">
+                        {{exchangePrice.Attr.CabinBaggage}}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 f-14 bbottom mb-3"
+                    *ngIf="exchangePrice?.Attr?.AvailableSeats && exchangePrice?.Attr?.AvailableSeats.length">
+                    <div class="float-left customColor">
+                        <b>Available Seats</b>
+                    </div>
+                    <div class="float-right customColor">
+                        {{exchangePrice.Attr.AvailableSeats}}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 f-14 bbottom mb-3"
+                    *ngIf="exchangePrice?.Attr?.Meal && exchangePrice?.Attr?.Meal.length">
+                    <div class="float-left customColor">
+                        <b>Meal</b>
+                    </div>
+                    <div class="float-right customColor">
+                        {{exchangePrice.Attr.Meal}}
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 f-14 bbottom mb-3"
+                    *ngIf="exchangePrice?.Attr?.Refundable && exchangePrice?.Attr?.Refundable.length">
+                    <div class="float-left customColor">
+                        <b>Refundable</b>
+                    </div>
+                    <div class="float-right customColor">
+                        {{exchangePrice.Attr.Refundable}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

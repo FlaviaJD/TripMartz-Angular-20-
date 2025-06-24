@@ -1,0 +1,57 @@
+<div class="d-flex card">
+    <div class="mb-3">
+        <div class="card-header-tab card-header">
+            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <span class="my-color"  style="color:#000; font-size:21px; font-weight:500;">
+                    Approve Request
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 p-0">
+        <div class="col-md-12 p-3" *ngIf="approveDetailsList">
+        <p><b>Request Id : {{approveDetailsList.req_id}}</b></p>
+        <p><b>Requested by : {{approveDetailsList.req_by}}</b></p>
+        <p><b>Journey : {{approveDetailsList.journey}}</b></p>
+        <p><b>Total Fare : {{approveDetailsList.total_fare}}</b></p>
+        </div>
+        <form [formGroup]="policyForm">
+    <div class="col-12">
+        <div class="form-group row cust-radio-group">
+            <label class="col-sm-2 col-form-label" style="color: #000;">Status:</label>
+            <div class="col-sm-5 p-0 d-flex align-items-center">
+                <div class="col-auto">
+
+                    <label class="m-0">
+                        <input type="radio" value="Approve" formControlName="status"
+                            (change)="toggleRemarkRequired($event)">
+                        <span class="design"></span>
+                        <span class="text">Approve</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="m-0">
+                        <input type="radio" value="Reject" formControlName="status"
+                            (change)="toggleRemarkRequired($event)">
+                        <span class="design"></span>
+                        <span class="text">Reject</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="selectedPolicy">
+            <label style="color: #000;">Remarks:</label>
+            <textarea formControlName="remarks" class="form-control form-control-sm nrm_input"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn submit" (click)="onSubmit()">Submit</button>
+            <button class="btn cancel" routerLink="">Cancel</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

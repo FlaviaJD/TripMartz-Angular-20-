@@ -1,0 +1,621 @@
+<app-booking-steps [travellers]="true" [review]="true" [payment]="false"></app-booking-steps>
+<div class="row mobile_row" #gotoBaggageProtection>
+    <div class="col-md-8 pr-0 mobile_pr-15">
+        <table cellpadding="0" border-collapse="" cellspacing="0" width="100%"
+            style="font-size:12px;font-family: 'Open Sans', sans-serif;margin:0px auto;background-color:#fff;padding:12px;border-collapse:separate;color: #000; border-radius: 8px;margin: 10px 0;">
+            <tbody>
+
+
+                <tr>
+
+                    <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style=" background-color: #525a62;
+                                    padding: 11px 10px 11px 17px;
+                                   
+                                    color: #ffffff;
+                                    border-radius: 8px 0px 0px 0px;">
+                                        <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                           Flight Details
+                                        </span>
+                                    </td>
+                                    <td align="right" colspan="2" style="background-color: #525a62;
+                                    padding: 11px 10px 11px 17px;
+                                color: #ffffff;
+                                    border-radius: 0px 8px 0px 0px;">
+                                        <span>Request ID: {{flights?.AppReference}}</span>
+                                    </td>
+                                </tr>
+                                
+
+                   
+                                <ng-container
+                                    *ngFor="let flight of flights?.JourneyList?.FlightDetails?.Details; let i = index">
+                                    <ng-container *ngFor="let f of flight; let j = index">
+                                        <tr style="font-size: 15px; line-height: 35px;background-color: #efefef;">
+                                            <td style=" color:#333; padding-left: 10px;">
+                                                <span style="color:#333">Flight - {{ f.FlightNumber }}</span>
+                                            </td>
+                                            <td style=" color:#333">
+                                               <span
+                                                    style="vertical-align:middle">Departing</span>
+                                            </td>
+                                            <td style=" color:#333">
+                                                <span
+                                                    style="vertical-align:middle">Arriving</span>
+                                            </td>
+                                            <td style=" color:#333">&nbsp;</td>
+                                        </tr>
+                                        <tr style="font-size: 15px; line-height: 26px;">
+                                            <td style="vertical-align: top; width: 25%; font-size: 15px; padding-left: 10px;">
+                                                <span>
+                                                    <div class="">
+                                                        <img  class="rounded" style="padding-top: 5px;max-width: 116px;
+                                                        height: 65px;
+                                                        "
+                                                            [src]="[airline_logo + f.OperatorCode + '.gif']" alt="">
+                                                    </div>
+                                                    {{ f.OperatorName }}<br>
+                                                    <ng-container  *ngIf="f.CabinClass"> Cabin: {{ f.CabinClass }}<br></ng-container>
+                                                   <ng-container *ngIf="f.Equipment"> Aircraft: {{ f.Equipment }}</ng-container>
+                                                </span>
+                                            </td>
+                                            <td style="vertical-align: top; width: 25%;">
+                                                <span>
+                                                    <strong>
+                                                        {{( f.Origin.AirportCode )}}</strong> {{ f.Origin.CityName }}
+                                                    <br>
+                                                                                                        
+                                                    {{ f.Origin.DateTime | date:'EEE d, MMM y HH:mm' }}
+                                                    <div class="" *ngIf="f.Origin.Terminal">
+                                                        Terminal : {{ f.Origin.Terminal }}
+                                                    </div>
+                                                </span>
+                                            </td>
+                                            <td style="vertical-align: top; width: 25%;">
+                                                <span>
+                                                    <strong>
+                                                        {{ (f.Destination.AirportCode) }}
+                                                    </strong>{{ f.Destination.CityName }}<br>
+                                                    
+                                                    
+                                                    {{ f.Destination.DateTime | date:'EEE d, MMM y HH:mm' }}
+                                                    <div class="" *ngIf="f.Destination.Terminal">
+                                                        Terminal : {{ f.Destination.Terminal }}
+                                                    </div>
+                                                </span>
+                                            </td>
+                                            <td style="vertical-align: top; width: 25%; border-left:1px solid #ddd;">
+                                                <span
+                                                    style="display:block;padding-left:10%; text-align: center;">
+                                                    Duration<br>
+                                                    {{ f.Duration }}<br>
+                                                    <!-- {{ attr.IsRefundable ? 'Refundable' : 'Non-Refundable' }} -->
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="(f?.LayoverTime)" class="layovertime">
+                                            <td colspan="4">
+                                                <div style="margin-bottom: 10px;">
+                                                    <span style="font-weight:500;">Change of planes:</span> &nbsp;
+                                                    <span style="color:#065081;">{{f?.LayoverTime}}</span> Layover Time
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                
+
+                <tr>
+                    <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                            <tbody>
+                                <tr>
+                                    <td colspan="10" style=" background-color: #525a62; padding: 11px 10px 11px 17px;color: #ffffff;border-radius: 8px 8px 0px 0px;">
+                                        &nbsp;
+                                        <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                            Passenger(s) Details
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="font-size: 15px; line-height: 35px;">
+                                    <td style=" color:#333; font-weight: 600; padding-left: 10px;"><span>Sl No.</span></td>
+                                    <td style=" color:#333; font-weight: 600;"><span>Passenger(s) Name</span>
+                                    </td>
+                                    <!-- <td style=" color:#333; font-weight: 600;"><span>Passport Number</span>
+                                    </td> -->
+                                    <!-- <td style=" color:#333; font-weight: 600;"><span>DOB</span>
+                                    </td> -->
+                                    <td style=" color:#333; font-weight: 600;"><span>Mobile No.</span></td>
+                                    <td style=" color:#333; font-weight: 600;"><span>Email</span></td>
+                                    <td style=" color:#333; font-weight: 600;" *ngIf="isPassportMandatory"><span>DateOfBirth</span></td>
+                                    <td style=" color:#333; font-weight: 600;" *ngIf="isPassportMandatory"><span>Passport Number</span></td>
+                                    <td style=" color:#333; font-weight: 600;" *ngIf="isPassportMandatory"><span>Passport Expiry Date</span></td>
+                                    <td style=" color:#333; font-weight: 600;"><span>Type</span></td>
+                                    <!-- <td style=" color:#333;"><span>Passport</span></td>
+                                    <td style=" color:#333"><span>Visa</span></td> -->
+                                    <td></td>
+                                </tr>
+                                <tr *ngFor="let p of passengers; let i = index" style="font-size: 15px; line-height: 30px; color: #343a40; font-weight: 500;">
+                                    <td style="padding-left: 10px;"><span> {{ i + 1 }}.</span></td>
+                                    <td><span><strong class="capitalize">
+                                                {{p.Title+ '. ' + (p.FirstName + ' ' + p.MiddleName + ' ' + p.LastName |
+                                                uppercase) }}
+                                            </strong></span></td>
+                                    <!-- <td><span>{{ p.PassportNumber || 'N/A' }}</span></td> -->
+                                    <!-- <td><span>{{ p.DateOfBirth | date:'mediumDate'}}</span></td> -->
+                                    <td>
+                                        <span> {{p?.phoneAreaCode}} {{p?.MobileNo}} </span>
+                                    </td>
+                                    <td>
+                                        <span> {{p?.Email}} </span>
+                                    </td>
+                                    <td *ngIf="isPassportMandatory">
+                                        <span> {{p?.DateOfBirth || 'N/A'}} </span>
+                                    </td>
+                                    <td *ngIf="isPassportMandatory">
+                                        <span> {{p?.PassportNumber || 'N/A'}} </span>
+                                    </td>
+                                    <td *ngIf="isPassportMandatory">
+                                        <span> {{p?.PassportExpiryDate || 'N/A'}} </span>
+                                    </td>
+                                    <td>
+                                        <span> {{p.PassengerType}} </span>
+                                    </td>
+<!--                                
+                                    <td>
+                                        <input type="file" style="width: 138px; font-size: 10px;" (change)="uploadPassport($event, p)" accept="image/*" [id]="'passport_'+p.PassengerId" required>
+                                    </td>
+
+                                    <td>
+                                        <input type="file" style="width: 138px; font-size: 10px;" (change)="uploadVisa($event, p)" accept="image/*" [id]="'visa_'+p.PassengerId" required>
+                                    </td>
+                                  
+                                    <td> 
+                                        <button [disabled]="!p.passportDocument && !p.visaDocument"  type="button" class="btn btn-success btn_hover" (click)="uploadPassportVisa(p)">Upload</button>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                
+
+                <ng-container *ngIf="isBaggageInfoNotEmpty">
+                    <tr>
+                        <td style="line-height:15px;padding:0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:15px;padding:0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                            <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="10" style=" background-color: #525a62; padding: 11px 10px 11px 17px;color: #ffffff;border-radius: 8px 8px 0px 0px;">
+                                            &nbsp;
+                                            <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                               Baggage Details
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 15px; line-height: 35px;">
+                                        <td style=" color:#333; padding-left: 10px;"><span>Sl No.</span></td>
+                                        <td style=" color:#333"><span>Passenger Name</span>
+                                        </td>
+                                        <td style=" color:#333"><span>Selected Baggage</span></td>
+                                    </tr>
+                                    <tr *ngFor="let p of passengers; let i = index" style="font-size: 15px; line-height: 30px;">
+                                        <td style="padding-left: 10px;"><span> {{ i + 1 }}.</span></td>
+                                        <td><span><strong class="capitalize">
+                                                    {{p.Title+ '. ' + (p.FirstName + ' ' + p.MiddleName + ' ' + p.LastName |
+                                                    uppercase) }}
+                                                </strong></span></td>
+                                        <td>
+                                            <ng-container *ngFor="let baggage of p?.BaggageInfo; let last = last">
+                                                <span style="">
+                                                    {{ baggage.Description }}-{{ baggage.Currency }} {{ baggage.Price }} ({{
+                                                        baggage.FromAirportCode }}-{{baggage.ToAirportCode}})
+                                                    </span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </ng-container>
+                <ng-container *ngIf="isMealInfoNotEmpty">
+                    <tr>
+                        <td style="line-height:15px;padding:0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:15px;padding:0;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                            <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="10" style=" background-color: #525a62; padding: 11px 10px 11px 17px;color: #ffffff;border-radius: 8px 8px 0px 0px;">
+                                            &nbsp;
+                                            <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                               Meal Details
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 15px; line-height: 35px;">
+                                        <td style=" color:#333; width: 10%; padding-left: 10px;"><span>Sl No.</span></td>
+                                        <td style=" color:#333; width: 30%;"><span>Passenger Name</span>
+                                        </td>
+                                        <td style=" color:#333"><span>Selected Meal</span></td>
+                                    </tr>
+                                    <tr *ngFor="let p of passengers; let i = index" style="font-size: 15px; line-height: 35px;">
+                                        <td style="padding-left: 10px;"><span> {{ i + 1 }}.</span></td>
+                                        <td><span><strong class="capitalize">
+                                                    {{p.Title+ '. ' + (p.FirstName + ' ' + p.MiddleName + ' ' + p.LastName |
+                                                    uppercase) }}
+                                                </strong></span></td>
+                                        <td>
+                                            <ng-container *ngFor="let meal of p?.MealInfo; let last = last">
+                                                <span style="">
+                                                    {{ meal.Description }}-{{ meal.Currency }} {{meal.Price}} ({{
+                                                        meal.FromAirportCode }}-{{meal.ToAirportCode}})
+                                                    </span>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </ng-container>
+                <ng-container *ngIf="isSeatInfoNotEmpty">
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                            <tbody>
+                                <tr>
+                                    <td colspan="10" style="     background-color: #525a62;
+                                    padding: 11px 10px 11px 17px;
+                                    color: #ffffff;
+                                    border-radius: 8px 8px 0px 0px;">
+                                        &nbsp;
+                                        <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                           Seat Details
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr style="font-size: 15px;  line-height: 35px;">
+                                    <td style=" color:#333; padding-left: 10px; width: 10%;"><span>Sl No.</span></td>
+                                    <td style=" color:#333; width: 30%;"><span>Passenger(s) Name</span>
+                                    </td>
+                                    <td style=" color:#333"><span>Selected Seat</span></td>
+                                </tr>
+                                <tr *ngFor="let p of passengers; let i = index" style="font-size: 15px; line-height: 30px;">
+                                    <td style="padding-left: 10px;"><span> {{ i + 1 }}.</span></td>
+                                    <td><span><strong class="capitalize">
+                                                {{p.Title+ '. ' + (p.FirstName + ' ' + p.MiddleName + ' ' + p.LastName |
+                                                uppercase) }}
+                                            </strong></span></td>
+                                    <td>
+                                        <ng-container *ngFor="let seat of p?.SeatInfo; let last = last">
+                                            <span style="">{{ seat.Code }} ({{ seat.FromAirportCode }}-{{seat.ToAirportCode}})</span>
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </ng-container>
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                </tr>
+                
+
+                <!-- Radha -->
+                <!-- Radha -->
+               
+                <tr>
+                    <td colspan="4" style="padding:0;">
+                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                            <tbody>
+                                <!-- <tr>
+                                    <td colspan="4" style="border-bottom: 1px dashed #bebcb8; padding:0; border-radius: 5px;">
+                                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2" style="    background-color: #f5f5f5;
+                                                    padding: 9px 8px;
+                                                    border-bottom: 1px dashed #B1B5C3;
+                                                    color: #000;">
+                                                        <span style="font-size:18px; font-weight:600;color:#000;vertical-align:middle;">
+                                                            Payment Details
+                                                        </span>
+                                                    </td>
+                                                    <td colspan="2" style="    background-color: #f5f5f5;
+                                                    padding: 9px 8px;
+                                                    border-bottom: 1px dashed #B1B5C3;
+                                                    color: #000;">
+                                                        <span style="font-size:18px; font-weight:600;color:#000;vertical-align:middle;">
+                                                            Amount ({{price?.Currency }})
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-top:1px solid #ccc;font-weight: bold;">
+                                                        <span style="font-size:15px;color: #333;">Grand Total</span>
+                                                    </td>
+                                                    <td style="border-top:1px solid #ccc;font-weight: bold;">
+                                                        <span style="font-size:15px">
+                                                            {{ price?.TotalDisplayFare | number:'1.0-0'}}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr> -->
+                                
+                                <!-- {{passengers[0].BaggageDetails}} -->
+                                <tr *ngIf="attr">
+                                    <td colspan="4" style="border-bottom: 1px dashed #bebcb8; border: 1px solid #ddd; padding:0; border-radius: 8px;">
+                                        <table cellspacing="0" cellpadding="5" width="100%" style="font-size:14px; padding:0;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="14" style="     background-color: #525a62;
+                                                    padding: 11px 10px 11px 17px;
+                                                    color: #ffffff;
+                                                    border-radius: 8px 8px 0px 0px;">
+                                                        <span style="font-size:18px; font-weight:600;color:#fff;vertical-align:middle;">
+                                                            Flight Extra Information
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="14" style="font-size: 15px;  line-height: 26px;">
+                                                        <span>
+                                                            Extra Baggage Information
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <ng-container *ngFor="let baggages of attr">
+                                                    <tr *ngFor="let baggage of baggages" style="font-size: 15px;">
+                                                        <td colspan="4">
+                                                            {{ baggage.Origin.AirportCode + ' - ' +
+                                                            baggage.Destination.AirportCode }}
+                                                        </td>
+                                                        <td colspan="4">
+                                                            Flight Number: {{ baggage.FlightNumber }}
+                                                        </td>
+                                                        <td colspan="4">
+                                                            Cabin: {{ baggage.Attr.CabinBaggage }}
+                                                        </td>
+
+                                                        <td colspan="4">
+                                                            Check In: {{ baggage.Attr.Baggage | map: getBaggage }}
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="line-height:15px;padding:0;">&nbsp;</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td colspan="2"
+                                        style="padding-top:10px; vertical-align:top; padding:0; border-radius: 5px; overflow: hidden;">
+                                        <table cellspacing="0" cellpadding="5" width="100%"
+                                            style="border:1px solid #333;font-size:12px; padding:0;">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="84" style="background-color:#333; color:#fff;"><span
+                                                            style="font-size:17px">Customer Contact Details</span></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="8">
+                                                        <p style="color: #000;">E-mail : {{ contact?.Email }}</p>
+                                                        <p style="color: #000;">Contact No : {{ contact?.PhoneExtension
+                                                            }} {{ contact?.Phone }}</p>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr> -->
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="line-height:10px;">&nbsp;</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table cellpadding="0" border-collapse="" cellspacing="0" width="100%"
+            style="font-size:12px;font-family: 'Open Sans', sans-serif;margin:0px auto;background-color:#fff;padding:15px 15px;border-collapse:separate;color: #000;margin: 10px 0;display: block; border-radius: 8px; display: none;" >
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h4 class="text-muted cardListHead px-0"> Baggage Protection </h4>
+                    <div class="">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <span class="font-weight-bold pt-2">
+                                    For {{baggagelist?.CurrencyCode}} {{baggagelist?.ProductPrice}} per traveller:
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 form-group p-3 border rounded">
+                                <p class="">
+                                    <i class="fa fa-check text-success" aria-hidden="true"> </i>
+                                    Blue Ribbon Bags will track and expedite your delayed bagage
+                                </p>
+                                <p class="">
+                                    <i class="fa fa-check text-success" aria-hidden="true"> </i>
+                                    Provides real-time push notifications via email or SMS regarding the status
+                                    of your bagage
+                                </p>
+                                <p class="">
+                                    <i class="fa fa-check text-success" aria-hidden="true"> </i>
+                                    Receive {{baggagelist?.CurrencyCode}} {{baggagelist?.BagCoverage}} if your bag is
+                                    not at the destination within 96 hours
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-row mt-4">
+                            <form [formGroup]="baggageForm">
+                                <div class="form-group col-md-12">
+                                    <input formControlName="baggageProtection" [value]="true" type="radio" name=""
+                                        id="yes" class="" (change)="updateBaggage(true)"> <label for="yes"
+                                        class="text-info">
+                                        Yes, add to my reservation <span class="text-success ml-3"> HIGHLY RECOMMENDED
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <input formControlName="baggageProtection" [value]="false" type="radio" name=""
+                                        id="no" class="" (change)="updateBaggage(false)" [checked]="true"> <label
+                                        for="no" class="text-info">
+                                        No I'll run the risk
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </table>
+        <div style="text-align: center;">
+            <div class="position-relative row form-check" style="margin-bottom: 20px;">
+                <div class="col-sm-12">
+                    <!-- <button type="button" style="background-color: #0A5081 !important;" *ngIf="!flights?.HoldTicket && bookingSource=='ZBAPINO00015'" class="btn btn-success btn_hover" (click)="onFinalBooking()">Hold Ticket</button>
+                    &nbsp;&nbsp; -->
+                    <button type="button" style="background-color: #0A5081 !important;"  class="btn btn-success btn_hover" (click)="proceedToConfirm()" >Confirm Request</button>
+                    &nbsp;&nbsp;               
+                    <a routerLink="/dashboard"><button style="background: #333 !important; border-color:#333 !important;" class="btn btn-success btn_hover">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 pl-0 pl-4 pt-2 mobile_pl-15" *ngIf="flightsFare">
+        <app-booking-fare-summary [flight]="flightsFare" [showTotalDisplayFare]="false"></app-booking-fare-summary>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>
+
+    <!-- Payment modal -->
+    <div class="modal" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true"
+    [style.display]="showPaymentDetails ? 'block' : 'none'">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 590px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Payment Methods</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="showPaymentDetails=false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="paymentForm">
+                    <div class="cc-selector-2">
+                        <div class="row">
+                            <div class="col-md-3 col-4" *ngFor="let paymentMethod of paymentGateways">
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='wallet'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'wallet'}">
+                                    <label style="width: 46px;" class="drinkcard-cc wallet" for="wallet">
+                                    </label>
+                                    <span class="payment_label" >
+                                        <input id="wallet" type="radio" name="paymentMethod" value="wallet" formControlName="paymentMethod" 
+                                        /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='nagad'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'nagad'}">
+                                    <label class="drinkcard-cc nagad" for="nagad"></label>
+                                    <span class="payment_label">
+                                        <input id="nagad" type="radio" name="paymentMethod" value="nagad" formControlName="paymentMethod" 
+                                        /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='bkash'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'bkash'}">
+                                    <label class="drinkcard-cc bKash" for="bKash"></label>
+                                    <span class="payment_label">
+                                        <input id="bKash" type="radio" name="paymentMethod" value="bKash" formControlName="paymentMethod" /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='sslcommerz'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'sslcommerz'}">
+                                    <label style="width: 100%; background-position: center;" class="drinkcard-cc sslCommerz" for="sslCommerz"></label>
+                                    <span class="payment_label">
+                                        <input id="sslCommerz" type="radio" name="paymentMethod" value="sslCommerz" formControlName="paymentMethod"  />
+                                        {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='razorpay'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'razorpay'}">
+                                    <label style="width: 100%; background-position: center;" class="drinkcard-cc razorpay" for="razorpay"></label>
+                                    <span class="payment_label">
+                                        <input id="razorpay" type="radio" name="paymentMethod" value="razorpay" formControlName="paymentMethod"/>
+                                        {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='cashfree'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'cashfree'}">
+                                    <label style="width: 100%;" class="drinkcard-cc cashfree" for="cashfree"></label>
+                                    <span class="payment_label">
+                                      <input id="cashfree" type="radio" name="paymentMethod" value="cashfree" formControlName="paymentMethod"/>
+                                      {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <small class="error text-danger col-xs-12 col-12" style="margin-bottom:10px; display:block;"
+                        *ngIf="hasError('paymentMethod', 'required');">
+                        Please select the payment type* <br>
+                    </small>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="paymentConfirm()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,326 @@
+<app-hotel-booking-steps [rooms]="true" [guests]="true" [payment]="true"></app-hotel-booking-steps>
+<div class="row mobile_mx-0" *ngIf="hotel">
+    <div class="col-md-8 col-lg-8 ">
+        <div class="card mb-2 mt-2">
+            <div class="card-body pb-3">
+                <div *ngIf="hotel" class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <h5 class="cusromGrey f-18"><strong>{{hotel.HotelName}} <ng-container *ngIf="hotel.HotelCategory">({{hotel.HotelCategory}})</ng-container></strong> </h5>
+                        <ng-template
+                        *ngIf="(hotel.StarRating === '' || hotel.StarRating === 0) then noStar; else stars">
+                    </ng-template>
+                    <ng-template #noStar>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </ng-template>
+                    <ng-template #stars>
+                        <i class="fas fa-star star_rtng_clr cusromBlue"
+                            *ngFor="let s of hotel.StarRating | map: getStarArray"></i>
+                        <i class="fas fa-star" *ngFor="let s of hotel.StarRating | map: getStarArrayRemaining"></i>
+                    </ng-template>
+                        <br>
+                        <p class="cusromGrey">
+                                <i class="fa fa-map-marker-alt cusromGrey" aria-hidden="true"></i>
+                                &nbsp; {{hotel.HotelAddress}}
+                        </p>
+                        <br>
+                        <section class="font-weight-bold ml-3 marin_zero" style="background-color: #fafafa !important; border:1px solid #f0f0f0;">
+                            <div class="row mobile_row">
+                                <div class="col-md-2 p-0">
+                                    <img class="imgStyle" *ngIf="hotel.MainImage!=''" src="{{hotel.MainImage}}" alt="">
+                                    <img class="imgStyle" *ngIf="hotel.MainImage==''" src="assets/images/no_image.png" alt="">
+                                </div>
+                                <div class="col-md-2 p-1 text-center">
+                                    <p class="cusromBlue m-0">
+                                        Check-In:
+                                    </p>
+                                    <p class="m-0">
+                                        {{hotel.HotelCheckIn | date: 'dd MMM yyyy'}}
+                                    </p>
+                                </div>
+                                <div class="col-md-2 p-1 text-center">
+                                    <p class="cusromBlue m-0">
+                                        Check-Out:
+                                    </p>
+                                    <p class="m-0">
+                                        {{hotel.HotelCheckOut | date: 'dd MMM yyyy'}}
+                                    </p>
+                                </div>
+                                <div class="col-md-2 p-1 text-center">
+                                    <p class="cusromBlue m-0">
+                                        Passenger(s):
+                                    </p>
+                                    <p class="m-0">
+                                        {{pax}}
+                                    </p>
+                                </div>
+                                <div class="col-md-2 p-1 text-center">
+                                    <p class="cusromBlue m-0">
+                                        Room(s):
+                                    </p>
+                                    <p class="m-0">
+                                        {{hotel?.NoOfRooms}}
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                        <br>
+                        <p class="cusromGrey" *ngIf="hotel.CancellationPolicy!=''">
+                            <strong style="color: #252c40;">
+                            {{'Cancellation Policy'}}
+                            </strong><br>
+                            <span class="ml-0">
+                            </span>
+                            <span class="ml-0" [innerHTML]="getCancelationPolicy(hotel.CancellationPolicy)">
+                            </span>
+                        </p> 
+                        <!-- <div class="col-12 p-0">
+                            <ul class="pl-3 m-0">
+                            <li><span class="darkclr">NIl Charges</span> - If cancel before 72 hrs.</li>
+                            <li><span class="darkclr">1 Night / 50%</span> - If cancel within 48 hrs prior to 24hrs.</li>
+                            <li><span class="darkclr">NIl Refund</span> - If cancel within 24 hrs.</li>
+                            </ul>
+                            <br>
+                            <p><strong>Note:</strong> The above given charges are generic charges based on hotel policy. Exact charges will be known once we cancel the booking.</p>
+                        </div> -->
+
+                        <p class="cusromGrey" *ngIf="hotel?.Remarks">
+                            <strong>
+                            {{'Remarks'}}
+                            </strong>
+                            <span class=""> {{hotel.Remarks}} </span>
+                        </p>
+                    </div>
+                </div>
+                <br>
+
+                <table style="width:100%;">
+                    <tbody>
+                      <tr>
+                         <td style="background-color: #525a62; padding: 9px 15px; color: #fff;border-radius: 8px 8px 0px 0px;">
+                          <span class="gst_dtl" style="font-size:20px; font-weight:600;color:#fff;vertical-align:middle;">Passenger Details</span>
+                         </td>
+                      </tr>
+                      <tr>
+                        <td width="100%" style="padding:0px;">
+                          <table width="100%" cellpadding="5" style="padding: 10px;font-size: 15px;"
+                            class="gst_dtl_ctn">
+                            <tbody>
+                              <tr>
+                                <td
+                                  style="background-color:#fff;padding:9px 15px;color: #353945; font-weight: 600;">
+                                  Sl No.
+                                </td>
+                                <td
+                                  style="background-color:#fff;padding:9px 15px;color: #353945; font-weight: 600;">
+                                  Passenger(s) Name
+                                </td>
+                                <td
+                                  style="background-color:#fff;padding:9px 15px;color: #353945; font-weight: 600;">
+                                  Type
+                                </td>
+                               
+                              </tr>
+                              <tr style="font-size:15px;" *ngFor="let t of paxDetails; index as i" class="gst_dtl_contnt">
+                                <td
+                                  style="padding: 9px 15px; border-bottom: 1px dashed #bebcb8; color: #343a40;">
+                                  {{i+1}}</td>
+                                <td 
+                                  style="padding: 9px 15px; border-bottom: 1px dashed #bebcb8; color: #343a40;">
+                                  {{t?.Title +'. '+ t?.FirstName +' '+ t?.LastName }} </td>
+                                <td
+                                  style="padding: 9px 15px; border-bottom: 1px dashed #bebcb8; color: #343a40;">
+                                  {{t.PaxType || 'N/A' }} </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" (click)="onBooking()"
+                            class="btn btn-lg btn-success prcd">
+                            {{'Proceed To Confirm'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 pl-0 mobile_position" style="position: sticky;top: 80px;">
+        <div class="card mb-2 mt-2">
+            <section style="background-color: #252c40;color: white;border-radius:8px 8px 0px 0px;">
+                <h4 class="p-2 m-0 text-muted">Room Details</h4>
+            </section>
+            <div class="card-body pb-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0">
+                        <div class="float-left customColor">
+                            Room Type
+                        </div>
+                        <ng-container *ngFor="let r of room; let i = index; last as isLast">
+                            <div class="float-right customColor" *ngIf="i==0">
+                                {{r?.RoomTypeName || 'N/A'}}</div>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            Board Type
+                        </div>
+                        <ng-container>
+                            <div class="float-right customColor">
+                                {{ hotel.PaymentMode || 'N/A'}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0">
+                        <div class="float-left customColor">
+                            No. Of Rooms
+                        </div>
+                        <div class="float-right customColor"> {{room.length}} </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            Check-In
+                        </div>
+                        <div class="float-right customColor">  {{hotel.HotelCheckIn | date: 'dd MMM yyyy'}} </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            Check-Out
+                        </div>
+                        <div class="float-right customColor">  {{hotel.HotelCheckOut | date: 'dd MMM yyyy'}} </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            No of Nights
+                        </div>
+                        <div class="float-right customColor">  {{hotel?.NoOfNights}} </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            No of Adult
+                        </div>
+                        <div class="float-right customColor">  {{adultCount}} </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted">
+                        <div class="float-left customColor">
+                            No of Child
+                        </div>
+                        <div class="float-right customColor">  {{childCount}} </div>
+                    </div>
+
+                    
+                   
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0">
+                        <div class="float-left customColor">
+                            Total Room Price
+                        </div>
+                        <div class="float-right customColor">  {{hotel.Currency + ' ' + (getTotalAmount() |  number:'1.0-0')}} </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0 && room[0].RoomTypeName">
+                        <div class="float-left customColor">
+                            Tax
+                        </div>
+                        <div class="float-right customColor"> {{hotel.Currency + ' ' + (getTotalTax() |  number:'1.0-0')}} </div>
+                    </div>
+                    <!-- <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0">
+                        <div class="float-left customColor">
+                            Convenience Fee:
+                        </div>
+                        <div class="float-right customColor"> {{hotel.Currency}} 0</div>
+                    </div> -->
+                    <div class="col-md-12 col-lg-12 f-14 mb-2 ng-star-inserted" *ngIf="room && room.length>0">
+                        <div class="float-left text-uppercase cusromBlue" style="color: #082B3A !important;font-size: 16px;">
+                            Grand Total
+                        </div>
+                        <div class="float-right customCocusromBluelor" style="font-size: 16px; color: #189AD3;font-weight:700 ">{{hotel.Currency + ' ' + (getTotal() |  number:'1.0-0')}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Payment modal -->
+<div class="modal" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true"
+    [style.display]="showPaymentDetails ? 'block' : 'none'">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 590px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Payment Methods</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="showPaymentDetails=false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="paymentForm">
+                    <div class="cc-selector-2">
+                        <div class="row">
+                            <div class="col-md-3 col-4" *ngFor="let paymentMethod of paymentGateways">
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='wallet'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'wallet'}">
+                                    <label style="width: 46px;" class="drinkcard-cc wallet" for="wallet">
+                                    </label>
+                                    <span class="payment_label">
+                                        <input id="wallet" type="radio" name="paymentMethod" value="wallet" formControlName="paymentMethod"  /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='nagad'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'nagad'}">
+                                    <label class="drinkcard-cc nagad" for="nagad"></label>
+                                    <span class="payment_label">
+                                        <input id="nagad" type="radio" name="paymentMethod" value="nagad" formControlName="paymentMethod" /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='bkash'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'bkash'}">
+                                    <label class="drinkcard-cc bKash" for="bKash"></label>
+                                    <span class="payment_label">
+                                        <input id="bKash" type="radio" name="paymentMethod" value="bKash" formControlName="paymentMethod" /> {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='sslcommerz'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'sslcommerz'}">
+                                    <label style="width: 100%; background-position: center;" class="drinkcard-cc sslCommerz" for="sslCommerz"></label>
+                                    <span class="payment_label">
+                                        <input id="sslCommerz" type="radio" name="paymentMethod" value="sslCommerz" formControlName="paymentMethod" />
+                                        {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='razorpay'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'razorpay'}">
+                                    <label style="width: 100%; background-position: center;" class="drinkcard-cc razorpay" for="razorpay"></label>
+                                    <span class="payment_label">
+                                        <input id="razorpay" type="radio" name="paymentMethod" value="razorpay" formControlName="paymentMethod" />
+                                        {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                                <div *ngIf="(paymentMethod?.remarks | lowercase)==='cashfree'" [ngClass]="{'active': paymentForm.get('paymentMethod').value === 'cashfree'}">
+                                    <label style="width: 100%;" class="drinkcard-cc cashfree" for="cashfree"></label>
+                                    <span class="payment_label">
+                                      <input id="cashfree" type="radio" name="paymentMethod" value="cashfree" formControlName="paymentMethod" />
+                                      {{paymentMethod?.remarks}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <small class="error text-danger col-xs-12 col-12" style="margin-bottom:10px; display:block;"
+                        *ngIf="hasError('paymentMethod', 'required');">
+                        Please select the payment type* <br>
+                    </small>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="paymentConfirm()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

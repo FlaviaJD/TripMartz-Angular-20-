@@ -1,0 +1,24 @@
+<ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange($event)" #tabs>
+    <ngb-tab id="create/update_approval">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                &nbsp;{{'Create/Update Employee Approval'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-employee-aprroval-create (toUpdate)="triggerTab($event)"></app-employee-aprroval-create>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab id="employeeApprovalList">
+        <ng-template ngbTabTitle>
+            <span class="">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                &nbsp;{{'Employee Approval List'}}
+            </span>
+        </ng-template>
+        <ng-template ngbTabContent>
+            <app-employee-approval-list (toUpdate)="triggerTab($event)"></app-employee-approval-list>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

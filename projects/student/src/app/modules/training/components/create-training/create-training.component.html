@@ -1,0 +1,131 @@
+<div class="row card">
+    <div class="mb-3">
+        <div class="card-header-tab card-header">
+            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <span class="my-color"  style="color:#000; font-size:21px; font-weight:500;">
+                    {{'Create Training'}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="offset-md-1 col-md-10 mobile_pr-0">
+        <form class="p-3 clearfix" [formGroup]="regConfig" autocomplete="off">
+            <div class="form-group row">
+                <label for="TrainingName" class="col-sm-3 col-form-label ">Training Name:<sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <select class="form-control" formControlName="TrainingName" name="TrainingName" id="TrainingName">
+                     <option value="">Select Training Name</option>
+                     <option *ngFor="let c of trainingNameList" [value]="c.Name">
+                        {{c.Name}}</option>
+                    </select>                        
+                 
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="TrainingDate" class="col-sm-3 col-form-label" >Date <sup
+                        class="f-16 text-danger">*</sup>
+                </label>
+                <div class="col-sm-5">
+                    <input type="text" maxlength="150" class="form-control" placement="bottom left" placeholder="dd/mm/yyyy"
+                    bsDatepicker [bsConfig]="bsDateConf" [readonly]="true"
+                    [isOpen]="isOpen" id="TrainingDate" name="TrainingDate" formControlName="TrainingDate">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="TrainingTime" class="col-sm-3 col-form-label ">Time: <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <!-- <input type="text" class="form-control" formControlName="TrainingTime" name="TrainingTime" id="TrainingTime" maxlength="150"> -->
+                
+
+                      <ng-template #popTemplate>
+                        <timepicker [(ngModel)]="mytime" [ngModelOptions]="{standalone: true}" showMeridian="true"></timepicker>
+                      </ng-template>
+                      <input class="form-control" formControlName="TrainingTime"
+                        [ngModel]="mytime | date:'hh:mm aa'" readonly
+                        (ngModelChange)="mytime=$event"
+                        [popover]="popTemplate"
+                        [outsideClick]="true"
+                        placement="bottom"
+                      />
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Trainer" class="col-sm-3 col-form-label ">Trainer <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <select class="form-control " id="Trainer" name="Trainer"  formControlName="Trainer">
+                        <option value="">Select Trainer</option>
+                        <option *ngFor="let t of trainerNameList" [value]="t.Name">
+                           {{t.Name}}</option>
+                       </select>                        
+                    
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="Venue" class="col-sm-3 col-form-label ">Venue <sup
+                        class="f-16 text-danger">*</sup> </label>
+                <div class="col-sm-5">
+                    <select class="form-control " id="Venue" name="Venue"  formControlName="Venue">
+                        <option value="">Select Venue</option>
+                        <option *ngFor="let tv of trainingVenueList" [value]="tv.Name">
+                           {{tv.Name}}</option>
+                       </select>    
+                </div>
+            </div>
+                <div class="form-group row">
+                  <label for="Venue" class="col-sm-3 col-form-label">Services <sup class="f-16 text-danger">*</sup> </label>
+                  <div class="col-sm-9">
+                    <div class="form-row m-0 mt-1">
+                      <div class="col-3 p-0" *ngFor="let service of services">
+                        <label>
+                          <input
+                            type="checkbox"
+                            formControlName="Services"
+                            [value]="service.value"
+                            (change)="onServiceChange(service.value, $event.target.checked)"
+                          />
+                          <span class="design"></span>
+                          <span class="text" style="margin-left: 4px;">{{ service.name }}</span>
+                       </label> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <div class="form-group row">
+                <label for="remarks" class="col-sm-3 col-form-label ">Employee List CSV Upload<sup
+                        class="f-16 text-danger">*</sup></label>
+                <div class="col-sm-5">
+                    <div class="file-input">
+                    <input type="file" class="form-control-file" id="SelectedFile" name="SelectedFile" (change)="onFileSelected($event)" #theFile
+                    style="margin-top: 0px" accept=".csv" formControlName="SelectedFile" />
+                    <span class="text-danger">(Maximum upload file size: 1 MB)</span>
+                    <div class="title pl-30">
+                        <a href="#" (click)="onSampleDownload($event)" [ngClass]="{'clicked': isClicked}">(Download CSV Sample)</a>
+                    </div>
+                    </div>               
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="remarks" class="col-sm-3 col-form-label ">Upload Training Image<sup
+                        class="f-16 text-danger">*</sup></label>
+                <div class="col-sm-5">
+                    <div class="file-input">
+                    <input type="file" class="form-control-file" id="SelectedFile" name="SelectedFile" 
+                    style="margin-top: 0px" accept="image/*" formControlName="SelectedTrainingImage" />
+                    <span class="text-danger">(Maximum upload file size: 1 MB)</span>
+                    </div>            
+                </div>
+            </div>
+
+            <div class="form-group row text-center mr-0" style="margin-left: 30%;">
+                <button class="btn btn-lg btn-primary mr-1" style="background: #0A5081 !important; border:1px solid #0A5081!important;" (click)="onSubmit()">Send</button>
+                <button class="btn btn-lg btn-primary" style="background: #333 !important; border:1px solid #333 !important;" (click)="onReset()">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

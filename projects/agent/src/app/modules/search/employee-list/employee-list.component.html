@@ -1,0 +1,9 @@
+<form [formGroup]="regConfig" class="airport_complete" *ngIf="hasViewList">
+    <ul class="arpt_list">
+        <div class="p-0" *ngFor="let item of getEmployee">
+            <li class="p-3" (click)="onEmployeeSelect(item, inputFor)">
+                <h5 class="include"> {{item.first_name}} {{item.last_name}} <ng-container *ngIf="item.business_number">- {{item.business_number}}</ng-container></h5>
+            </li>
+        </div>
+    </ul>
+</form>

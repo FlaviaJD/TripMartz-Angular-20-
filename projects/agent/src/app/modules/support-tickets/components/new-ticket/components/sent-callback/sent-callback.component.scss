@@ -1,0 +1,71 @@
+
+  .btnStyle {
+    padding: 5px 12px;
+    background: #333;
+    border-radius: 5px;
+    color: #ffffff;
+    border: none;
+    margin: 0px 4px;
+}
+
+
+.page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    width: 100%; background-image: url('../../../../../../../assets/images/header.jpg'); transform: translate3d(0px, 0px, 0px);
+    height:300px; left: 0px; right: 0px; top:0px;
+}
+
+.h-title { z-index: 99; color: #fff; position: relative;      margin-bottom: 30px;}
+
+.mt180 { margin-top: 80px !important;}
+
+
+.page-header-image::after{ position: absolute; content: ''; width: 100%; height: 100%; left: 0px;; right: 0px;
+    background: rgba(44,44,44,.2);
+    background: linear-gradient(0deg, rgb(44 44 44 / 50%), rgb(51 61 84));
+}
+
+table {
+    width: 100%;
+}
+th{
+    color: #333;
+}
+.exportWrapper{
+    font-family: 'Asap';
+    width:100%;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 50px;
+}
+.exportWrapper p{
+    color: #333;
+    float: left;
+}
+
+.exportWrapper button{
+    float: right;
+    background-color: #252c40;
+    padding: 5px 12px;
+    border: #333;
+    margin: 5px;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.text-left{
+    span{color: #333;}
+}
+
+.srch_btn {
+    background: #065081;
+    border-radius: 5px !important;
+    width: 183px;
+    height: 50px !important;
+    color: #fff;
+    transition: 0.3s;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 400;
+}

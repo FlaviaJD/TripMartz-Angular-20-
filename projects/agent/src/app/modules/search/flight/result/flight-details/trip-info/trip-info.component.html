@@ -1,0 +1,63 @@
+<div class="trip-modal-container" style="background: #fff; color: #0000; padding: 25px 0px 10px 0px; border-radius: 10px;">
+    <div class="">
+        
+        <!-- <img src="assets/images/airplane.gif" style="width:140px;" class="load_logo" alt="loader" /> -->
+        
+        <div class="trip-modal-title">
+            <h4>Please wait..! </h4>
+            <p>This will take few seconds, While we search the best fares for you.</p>
+        </div>
+        <br>
+        
+        <div class="destination-section">
+            <div class="dest-from" *ngIf="flightInfo['tripType']!='Multi-city'">
+                <!-- <p>Departure</p> -->
+                <p> {{ getCity(flightInfo['departureCity'])}}  
+                    
+                    <i class="fi-rr-exchange"></i>
+                    
+                    {{ getCity(flightInfo['destinationCity'])}} </p>
+                
+            </div>
+            <div class="dest-from" *ngIf="flightInfo['tripType']=='Multi-city'">
+                <!-- <p>Departure</p> -->
+                <p *ngFor="let f of flightInfo['cities']">
+                    {{f.mDepartureCity}} <i class="fi-rr-exchange"></i> {{f.mDestinationCity}} {{f.mDepartureDate | date: 'MMM d y'}}
+                </p>
+            </div>
+            <div class="dest-to d-none" *ngIf="flightInfo['tripType']!='Multi-city'">
+                <!-- <p>Arrival</p> -->
+                <p> {{ getCity(flightInfo['destinationCity'])}} </p>
+                <p *ngIf='flightInfo.tripType=="Oneway"'>{{ flightInfo.departureDate | date: 'MMM d y' }}</p>
+                <p *ngIf='flightInfo.tripType!="Oneway"'>{{ flightInfo.returnDate | date: 'MMM d y' }}</p>
+            </div>
+        </div>
+
+        <div class="progress-bar-container">
+            <div #progressBar class="progress-bar">
+              <span class="progress-text">{{ percent }}%</span>
+            </div>
+          </div>
+
+
+        <div style="background-color: #ebf2f7; padding: 13px; margin-top: 0px; font-size: 16px; color: #000;">
+        <div class="dest-trip" style=" font-size: 16px; color: #000;" *ngIf="flightInfo['tripType']!='Multi-city'">
+            <p>Departure Date: {{ flightInfo.departureDate | date: 'MMM d y' }}</p>
+            <p *ngIf="flightInfo.tripType=='Roundtrip'">Return Date: {{ flightInfo.returnDate | date: 'MMM d y' }}</p>
+            <p>{{ flightInfo.tripType }}</p>
+        </div>
+        <div class="dest-class" style=" font-size: 16px; color: #000; text-align: center;">
+            Class: {{ flightInfo.CabinClass }}
+        </div>
+        <div class="dest-class" style=" font-size: 16px; color: #000; text-align: center;" *ngIf="flightInfo?.traveller?.adults">
+            Adult: {{ flightInfo?.traveller?.adults }}
+        </div>
+        <div class="dest-class" style=" font-size: 16px; color: #000; text-align: center;"
+            *ngIf="flightInfo?.traveller?.childrens" >
+            Child: {{ flightInfo?.traveller?.childrens }}
+        </div>
+        <div class="dest-class" style=" font-size: 16px; color: #000; text-align: center;"
+            *ngIf="flightInfo?.traveller?.infants">
+            Infants: {{ flightInfo?.traveller?.infants }}
+    </div>
+</div>

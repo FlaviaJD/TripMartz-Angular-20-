@@ -1,0 +1,99 @@
+.page-header-image {
+    position: fixed;
+    background-size: cover;
+    background-position: center center;
+    width: 100%; background-image: url('../../../../assets/images/header.jpg'); transform: translate3d(0px, 0px, 0px);
+   min-height:inherit; height: 100%; left: 0px; right: 0px; top:0px;
+}
+.marque { position: absolute; left: 0px; right: 0px; top: 0px;}
+.h-title { z-index: 99; color: #fff; position: relative;      margin-bottom: 30px;}
+
+.mt180 { margin-top: 80px !important;}
+
+.tab_div{ float: left; width:100%;}
+.book_con { padding: 14px 20px;
+    background: #0A5081;
+    border-radius: 5px;
+    color: #fff;}
+.page-header-image::after{ position: absolute; content: ''; width: 100%; height: 100%; left: 0px;; right: 0px;
+    background-color: #e9e9e9;
+    // background: rgba(44,44,44,.2);
+    // background: linear-gradient(0deg, rgb(37 44 64 / 86%), #252c40b3);
+}
+
+.search_form{ z-index: 999;  top: 29%;
+    //  margin-top:2%;
+    right: 20px;
+    left: 20px;}
+.btn-secondary.dropdown-toggle {        padding: 7px 20px;
+    font-size: 14px;
+    color: #fff;
+    background: #252c40;border-radius: 8px;}
+.search_form ul { margin-bottom: 4% !important; top: 0px !important; max-height: 200px;
+    overflow: auto;    border-radius: 8px;
+    border: none; }   
+
+
+.show_training .show_train {
+    background: #065081;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 16px;
+    font-size: 15px;
+    border: none; margin-top: 20px;
+    margin-bottom: 15px;
+    float: left;
+    font-weight: 600;
+}
+
+.tabspl {
+    float: left;
+    padding: 0;
+    width: 100%;
+}
+
+.hrtraining {
+    margin-bottom: 20px;
+}
+
+.tabspl {
+   
+    border: 0px solid #ddd;
+    background: #fff;
+}
+.dropdown-item:active { background: none !important;}
+
+.tabspl table th { background: #252c40; color: #fff;}
+.tabspl table { margin-bottom: 0px;}
+.tabspl table tbody tr:nth-child(even){ background: #f0f3f3;}
+.particpan {border: none;
+    background: #333;
+    color: #fff; margin: 5px 0px; display: inline;
+    padding: 10px 12px;
+    border-radius: 5px;}
+.particpan:hover { text-decoration: none;} 
+.voucherlink { background-color: #73A839;} 
+.selected{
+    background: #d8e4e1!important;
+}
+.stateControl {
+    padding: 7px 20px;
+    font-size: 14px;
+    color: #fff;
+    background: #252c40;
+    border-color: #252c40;
+    border-radius: 8px;
+    margin-left: 4px;
+    height: 37px;
+}
+::placeholder {
+    color: white!important; 
+    opacity: 1; 
+    font-weight: 500;
+}
+.selecttr .btn{margin-left: 15px;}
+@media only screen and (max-width: 767px) {
+.selecttr{margin: 0px 15px 10px  !important;}
+.selecttr .btn{margin-left: 0px;}
+}
