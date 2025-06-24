@@ -1,0 +1,449 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <form class="" [formGroup]="regConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>Agent Information</h3>
+                </div>
+                <div class="row mb-2">
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="business_name"  class="required col-sm-12 col-form-label">Company Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="business_name" class="form-control" id="business_name" maxlength="250" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="business_address" class="required col-sm-12 col-form-label">Company Address<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="business_address" class="form-control" id="business_address" maxlength="250" autocomplete="off">
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 mb-2 required p-0">
+                    <label for="website"  class="required col-sm-12 col-form-label">Company Website<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="website" class="form-control" id="website" maxlength="250">
+                    </div>
+                </div> -->
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="business_phone" class="required col-sm-12 col-form-label">Office Phone<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="business_phone" (keypress)="numberOnly($event)" id="business_phone"
+                            class="form-control"  maxlength="25">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="city"  class="required col-sm-12 col-form-label">City<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input 
+                        type="text" 
+                        formControlName="city" autocomplete="off"
+                        class="form-control" 
+                        id="city" 
+                        maxlength="250" 
+                        list="cityList" 
+                        placeholder="Start typing a city name">
+                      <datalist id="cityList" class="cityList">
+                        <option *ngFor="let city of cityList" [value]="city?.city_name">
+                            {{city?.city_name}}
+                        </option>
+                      </datalist>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="state"  class="required col-sm-12 col-form-label">State<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <!-- <select id="state" class="form-control" formControlName="state">
+                            <option selected disabled value="">Please Select</option>
+                        </select> -->
+                        <input formControlName="state" type="text" class="form-control"
+                                placeholder="State" id="appReference"
+                                (keyup)="getAutoCompleteState($event,'from')" list="dynamicLocationsOrigin">
+                        <ul class="droplocations" id="dynmicLocations">
+                            <li *ngFor="let state of statesList" (click)="onStateSelect(state)">
+                                <i class="fal fa-map-marker-alt"></i>
+                                {{state?.state_code}}-{{state?.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="country"  class="required col-sm-12 col-form-label">Country<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="country" class="form-control" formControlName="country">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let c of countriesList" value="{{c.id}}">{{c.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="zip_code" class="required col-sm-12 col-form-label">Pincode<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="zip_code" (keypress)="numberOnly($event)" class="form-control" id="zip_code"
+                            maxlength="6">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="xlpro_client_code" class="required col-sm-12 col-form-label">Xlpro Client code
+                        <!-- <span class="text-danger">*</span> -->
+                    </label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="xlpro_client_code" class="form-control" id="xlpro_client_code"
+                            maxlength="250">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="xlpro_client_code" class="required col-sm-12 col-form-label">Voucher Price Required<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class="col-sm-12 d-flex align-items-center mt-2">
+                            <div class="col-auto pl-0">
+                                <label>
+                                    <input type="radio" value="Yes" formControlName="bio">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Yes</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="No" formControlName="bio">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+                <div class="title">
+                    <h3>Corporate Agent Information</h3>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-3 mb-2 required p-0">
+                    <label for="title" class="col-sm-12 col-form-label">Title<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="inputState" class="form-control" formControlName="title">
+                            <option selected value="" disabled>Please Select</option>
+                            <option class="capitalize" *ngFor="let t of userTitleList" value="{{t.id}}">{{t.title}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="first_name" class="required col-sm-12 col-form-label">First Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="first_name" maxlength="250"
+                            (keypress)="omitSpecialCharacters($event)" formControlName="first_name">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="last_name" class="col-sm-12 col-form-label">Last Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="last_name" maxlength="250"
+                            (keypress)="omitSpecialCharacters($event)" formControlName="last_name">
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 mb-2 required p-0">
+                    <label for="countrycode" class="col-sm-12 col-form-label">Country Code<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="countrycode" class="form-control" formControlName="countrycode">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let c of countriesList" value="{{c.id}}">{{c.name}}</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="phone" class="col-sm-12 col-form-label">Phone Number<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 m-0">
+                        <input type="text" formControlName="phone" (keypress)="numberOnly($event)" id="phone"
+                            class="form-control"  maxlength="25">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="agent_address" class="col-sm-12 col-form-label">Address<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 m-0">
+                        <input type="text" formControlName="agent_address" class="form-control" id="agent_address"
+                            maxlength="150" >
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 mb-2 required p-0">
+                    <label for="daily_amount"  class="required col-sm-12 col-form-label">Daily Amount</label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="daily_amount" class="form-control" id="daily_amount" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="weekly_amount"  class="required col-sm-12 col-form-label">Weekly Amount</label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="weekly_amount" class="form-control" id="weekly_amount" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2 required p-0">
+                    <label for="monthly_amount" class="required col-sm-12 col-form-label">Monthly Amount</label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="monthly_amount" class="form-control" id="monthly_amount" maxlength="250">
+                    </div>
+                </div> -->
+                    <div class="col-md-3 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">User Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0">
+                            <label>
+                                <input type="radio" value="1" formControlName="status">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Active</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="0" formControlName="status">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-32required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Product Module<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0">
+                            <label>
+                                <input type="radio" value="Travel Desk" formControlName="product_module">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Travel Desk Module</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="Corporate" formControlName="product_module">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Corporate Module</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Module</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let module of moduleList">
+                            <label>
+                                <input type="checkbox"  [checked]="module.isChecked" value="{{module.id}}" (change)="onModuleCheckBoxChange($event.target.checked,module.name)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{module.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Flight API</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let api of flightApiList">
+                            <label>
+                                <input type="checkbox"  [checked]="api.isChecked" value="{{api.id}}" (change)="onApiCheckBoxChange($event.target.checked,api.id)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{api.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Hotel API</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let api of hotelApiList">
+                            <label>
+                                <input type="checkbox"  [checked]="api.isChecked" value="{{api.id}}" (change)="onHotelApiCheckBoxChange($event.target.checked,api.id)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{api.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Payment mode</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let api of paymentMode">
+                            <label>
+                                <input type="checkbox"  [checked]="api.isChecked" value="{{api.id}}" (change)="onPaymentModeChange($event.target.checked,api.id)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{api.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Prefered Airline<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0">
+                            <label>
+                                <input type="radio" value="All" formControlName="prefered_airline">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">All</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="Specific Airlines" formControlName="prefered_airline">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Specific Airlines</span>
+                            </label>
+                        </div>
+                    </div>
+                </div> -->
+                 <!-- <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                 <div class="col-12" *ngIf="regConfig.get('prefered_airline').value === 'Specific Airlines'">
+                    <label class="col-sm-12 col-form-label">Airline Name</label>
+                    <div class="col-sm-12">
+                        <ng-multiselect-dropdown formControlName="airline_name"
+                                        [placeholder]="'Select airline'" 
+                                        [data]="airlineDropdownList"
+                                        [(ngModel)]="selectedAirlineList" 
+                                        [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="onItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                    </div>
+                </div>
+                </div> 
+                <div class="clear"></div>-->
+                <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Flight Pricing</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let price of priceList">
+                            <label>
+                                <input type="checkbox"  [checked]="price.isChecked" value="{{price.name}}" (change)="setFlightPricing($event.target.checked,price.name)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{price.name}}</span>
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Hotel Pricing</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0">
+                            <label>
+                                <input type="radio" value="Only HyperMiles Fare" formControlName="hotel_pricing">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Only HyperMiles Fare</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="Only API Fare" formControlName="hotel_pricing">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Only API Fare</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="Lowest Fare" formControlName="hotel_pricing">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Lowest Fare</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="Both Fare" formControlName="hotel_pricing">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Both Fare</span>
+                            </label>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <hr />
+
+
+            <div class="title">
+                <h3>GST Information</h3>
+            </div>
+            <div class="row mb-2">
+                
+            <div class="col-md-6 mb-2 required p-0">
+            <label class="col-sm-12 col-form-label">Prefered GST<span class="text-danger">*</span></label>
+                <div class="col-sm-12 d-flex align-items-center mt-2">
+                    <div class="col-auto pl-0">
+                        <label>
+                            <input type="radio" value="HyperMiles GST" formControlName="prefered_gst">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">TripMartz GST</span>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <label>
+                            <input type="radio" value="Corporate GST" formControlName="prefered_gst">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Corporate GST</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-6 mb-2 required p-0">
+                <label class="col-sm-12 col-form-label">GST Type<span class="text-danger">*</span></label>
+                <div class="col-sm-12 d-flex align-items-center mt-2">
+                    <div class="col-auto pl-0">
+                        <label>
+                            <input type="radio" value="K3" formControlName="gst_type">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">K3</span>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <label>
+                            <input type="radio" value="Paid" formControlName="gst_type">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Paid</span>
+                        </label>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <hr />
+
+                <div class="title pl-30">
+                    <h3>Login Details</h3>
+                </div>
+
+            <div class="row">              
+                <div class="col-md-4 mb-2 p-0 required">
+                    <label for="firstName" class="required col-sm-12 col-form-label">Email ID<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input formControlName="email" type="text" class="form-control" id="firstName" maxlength="250"
+                            [readonly]="addOrUpdate=='update' ? true : false">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2 p-0 required">
+                    <label for="password" class="col-sm-12 col-form-label">Password<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input formControlName="password" type="password" class="form-control" id="password"
+                            maxlength="250">
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2 p-0 required">
+                    <label for="confirm_password" class="col-sm-12 col-form-label">Confirm Password<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="password" formControlName="confirm_password" class="form-control"
+                            id="confirm_password" maxlength="250">
+                    </div>
+                    <p *ngIf="regConfig.controls['confirm_password'].errors?.matchPassword"
+                        style="color: #C71C22;font-size: 80%;">
+                        Password and Confirm Password did not match.
+                    </p>
+                </div>
+            </div>
+            <hr/>
+                <div class="btn-group">
+                    <div class="form-group required row">
+                        <div class="col-12 d-flex">
+                            <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                (click)="onSubmit()">Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

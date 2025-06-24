@@ -1,0 +1,24 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_icici_hotel_queue" [disabled]="!enableUpdate">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;Update Hotel/GuestHouse Booking
+                    </span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-icici-update-hotel-queues [iciciUpdateData]="iciciUpdateData" (back)="showList(false)"></app-icici-update-hotel-queues>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="icici_hotel_queues">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp;ICICI Hotel Queues</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-icici-hotel-queues (iciciHotelQueueUpdate)="triggerTab($event)"></app-icici-hotel-queues>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

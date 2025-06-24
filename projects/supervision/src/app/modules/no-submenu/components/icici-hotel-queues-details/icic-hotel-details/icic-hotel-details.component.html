@@ -1,0 +1,239 @@
+<div class = "centered" *ngIf="loading">
+    <div class ="blob-1"></div>
+    <div class ="blob-2"></div>
+  </div>
+  <div class="text-center" style="margin-bottom: 10px;" *ngIf="!loading">
+    <a [routerLink]="['/icici-hotel-queues']">
+        <button class="text-white btn btn-sm btn-primary m-1">Back</button>
+    </a>
+</div>
+<div *ngIf="!loading" style=" width:100%; padding: 30px 10px; position:relative;" id="tickect_hotel"
+    class="htl_vouchr_wrppr">
+    <table style="width: 100%;
+    max-width: 900px;
+    margin: 0% auto;
+    border-collapse: collapse;
+    background: #f5f5f5;
+    border-radius: 15px;
+    font-family: arial; box-shadow: 0 0.46875rem 2.1875rem rgba(0, 0, 0, 0.03), 0 0.9375rem 1.40625rem rgba(0, 0, 0, 0.03), 0 0.25rem 0.53125rem rgba(0, 0, 0, 0.05), 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.03);
+    font-size: 12px;">
+       <tbody>
+      <tr>
+        <td style="background-color: #F99D1C;padding: 35px 60px 0;">
+
+                            <table style="
+                           width: 100%;
+                           background: none;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="
+                                    padding: 15px 20px; 
+                                    "><img style="width: 280px; margin-bottom: 30px;" src="assets/images/login-images/l-logo1.png" alt="image/png"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                             <table style="
+                           width: 100%;
+                           background: #fff;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                                <tbody>
+                                    <tr>
+                                        <td style="
+                                    padding: 20px 20px 0px; font-size: 23px;
+                                    "><strong style="
+                                       font-size: 16px;
+                                       padding-bottom: 0px;
+                                       line-height: 30px;
+                                       ">Dear {{(voucherData?.requestedBy) || 'N/A'}},</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+            </td>
+         </tr>
+         <tr>
+            
+            <td style="background-color: #f3f4f8;padding: 0 60px 60px;border: none;">
+                            
+
+            <table style="width:100%; padding: 15px; background: #fff;">
+               <tbody>
+                  <tr >
+                     <td style="border-collapse:collapse; padding: 15px;">
+                        <table style="
+                           width: 100%;
+                           background: #fff;
+                           border-radius: 3px 3px 0 0;
+                           ">
+                           <tbody>
+                             
+                             <tr>
+                              <td style="padding-bottom:10px;line-height:20px;font-size: 14px;"><span>Your Hotel/Guest house booking request has been acknowledged.<br><br>Our team is currently working on your request. You will receive the confirmation voucher
+
+                              </span><br><br></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <table style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;border-radius: 6px;">
+                                       <tbody>
+                                          <tr>
+                                             <td colspan="5" style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">Request Details
+                                             </td>
+                                          </tr>
+                                          <tr style="font-size:14px;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Request ID</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6; text-align: center;">Request Type</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Requested By</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Request Date</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Company Name</td>
+                                          </tr>
+                                          <tr style="font-size:14px;text-align: left;color:#343a40;">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.requestId) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6; text-align: center;">{{(voucherData?.requestType) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.requestedBy) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.requestDate | date: 'dd MMM yyyy') || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.companyName) || 'N/A'}}</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                              <tr>
+                                 <td>
+                                    <table style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                       <tbody>
+                                          <tr>
+                                             <td colspan="6" style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">Guest Details
+                                             </td>
+                                          </tr>
+                                          <tr style="font-size:14px;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Emp Code</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Emp Name</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Gender</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Email ID</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Number</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Band</td>
+                                          </tr>
+                                          
+                                          <tr style="font-size:14px;text-align: left;" *ngFor="let data of voucherData?.guestDetails">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empCode) || 'N/A' }}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empName) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empGender) || 'N/A' }}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empEmailId) || 'N/A' }}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empNumber ) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(data?.empBand ) || 'N/A'}}</td>
+                                          </tr>
+                                          
+                                         
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr><td style="line-height: 10px">&nbsp;</td></tr>
+
+                            <tr>
+                                <td>
+                                    <table style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px;">
+                                        <tbody>
+                                        <tr
+                                            style="font-size:14px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                            
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Travel to City
+                                            </td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Reason for
+                                                Travel</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Check In</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Check Out</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Total Number of Nights</td>
+                                        </tr>
+                                        <tr style="font-size:14px;text-align: left;">
+                            
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(voucherData?.toCity) || 'N/A'}}</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(voucherData?.reasonForTravel) || 'N/A'}}</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(voucherData?.checkIn | date: 'dd MMM yyyy') || 'N/A'}}, {{voucherData?.checkInTime}}</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">{{(voucherData?.checkOut | date: 'dd MMM yyyy') || 'N/A'}}, {{voucherData?.checkOutTime}}</td>
+                                            <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.totalNumberOfNights) || 'N/A'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+
+                             <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                              <tr>
+                                 <td>
+                                    <table style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px; line-height: 16px;">
+                                       <tbody>
+                                          <tr style="border:1px solid #c6c6c6">
+                                             <td colspan="4" style="background: #065081;color:rgb(255,255,255);font-size:14px;font-weight:600;padding:9px 10px; border-radius:0px 0px 0px 0px; text-align:left;text-transform: uppercase;">
+                                                Remarks
+                                             </td>
+                                          </tr>
+                                          <tr style="font-size:13px">
+                                             <td colspan="4" style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;width:25%">{{(voucherData?.remarks || 'N/A')}}&nbsp;</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                              <tr>
+                                 <td>
+                                    <table style="width:100%;border:1px solid #c6c6c6;border-collapse:collapse;margin-bottom:10px;line-height: 16px; white-space: nowrap;">
+                                       <tbody>
+                                          
+                                           <tr style="font-size:14px;border-top:1px solid #c6c6c6;border-left:1px solid #c6c6c6;background: #e3f1fc;color:#000;font-weight: 600;text-align: left;">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Supervisor Id</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Guest House/Hotel</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Cost Center</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Department</td>                                           
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6;">Designation</td>
+                                             
+                                             
+                                          </tr>
+                                          <tr style="font-size:14px;text-align: left;">
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.supervisorId) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.guestHouse) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.costCenter) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.department) || 'N/A'}}</td>
+                                             <td style="padding:7px 5px;border-top:1px solid #c6c6c6;border-right:1px solid #c6c6c6">{{(voucherData?.designation) || 'N/A'}}</td>
+                                             
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </td>
+                              </tr>
+                              <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                             
+                             
+                              
+                             <!--   <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                                <tr>
+                                   <td align="center" style="padding-top: 15px;padding-bottom: 20px;">
+                                     <a style="padding:10px 20px;font-size:16px;border-radius:8px;color:#fff;background:#065081;text-decoration:none" href="" target="_blank">Approve</a>
+                                     <a style="padding:10px 20px;font-size:16px;border-radius:8px;color:#fff;background:#555;text-decoration:none" href="#" target="_blank">Reject</a>
+                                   </td>
+                               </tr> -->
+                              <tr><td style="line-height: 10px">&nbsp;</td></tr>
+                              <tr>
+                                 <td style="font-size:12px;padding-bottom:5px">
+                                    <strong>For Booking Support :  </strong> 022 4141 1909 / hotel1@HyperMilesholidays.com
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </td>
+      </tr>
+   </tbody>
+</table>
+
+</div>
+

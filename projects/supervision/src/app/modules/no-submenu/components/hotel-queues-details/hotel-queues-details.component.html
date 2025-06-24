@@ -1,0 +1,24 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_hotel_queue" [disabled]="!enableUpdate">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;Update Hotel/GuestHouse Booking
+                    </span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-update-hotel-queues [updateData]="updateData" (back)="showList(false)"></app-update-hotel-queues>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="hotel_queues">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Hotel Queues</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-hotel-queues (hotelQueueUpdate)="triggerTab($event)"></app-hotel-queues>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

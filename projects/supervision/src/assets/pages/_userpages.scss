@@ -1,0 +1,34 @@
+// User Pages
+
+.app-logo {
+ 
+    background: url('~/assets/images/login-images/l-logo1.png');
+    height: 62px;
+    width: 280px;
+    background-size: 100%;
+}
+
+.app-logo-inverse {
+    height    : $logo-height;
+    width     : $logo-width;
+    background: url('~/assets/images/logo1.png');
+}
+
+.app-login-box {
+    .app-logo {
+        margin-bottom: $layout-spacer-lg;
+    }
+
+    h4 {
+        margin-bottom: $layout-spacer-x;
+        font-weight  : normal;
+
+        div {
+            opacity: .6;
+        }
+
+        span {
+            font-size: $font-size-lg;
+        }
+    }
+}

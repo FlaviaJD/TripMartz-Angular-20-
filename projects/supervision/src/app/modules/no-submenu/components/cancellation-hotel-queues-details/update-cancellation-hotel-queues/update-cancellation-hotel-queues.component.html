@@ -1,0 +1,95 @@
+<div class="custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <div class="col-md-12 p-0">
+                <div class="title pl-30">
+                    <h3>Cancellation Details</h3>
+                </div>
+                <form [formGroup]="cancellationConfig">
+                    <div class="row">
+                        <div class="col-md-4 mb-2 p-0 required">
+                            <label class="col-sm-12 col-form-label" for="cancellation_feedback">Cancellation Reason
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <input class="form-control" readonly id="cancellation_feedback"
+                                    formControlName="EmployeeCancellationRemarks" maxlength="250" type="text"
+                                    name="cancellation_feedback">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                            <label class="col-sm-12 col-form-label" for="adminCancellationRemarks">Cancellation Remarks
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <input class="form-control" id="AdminCancellationRemarks" formControlName="AdminCancellationRemarks"
+                                    maxlength="250" type="text" name="adminCancellationRemarks">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2 p-0 required">
+                            <label class="col-sm-12 col-form-label" for="RefundStatus">Refund Status
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <select formControlName="RefundStatus" (change)="onRefundStatusChange($event.target.value)" class="form-control">
+                                    <option value="" disabled>Please Select</option>
+                                    <option value="Full Refund">Full Refund</option>
+                                    <option value="Retention">Retention</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="cancellationConfig.get('RefundStatus').value === 'Retention'" class="col-md-4 mb-2 p-0 required">
+                            <label class="col-sm-12 col-form-label" for="NumberOfNightsToRefund">Number Of Nights To Refund
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <select formControlName="NumberOfNightsToRefund" (change)="onChange($event.target.value)" class="form-control">
+                                    <option value="" disabled>Please Select</option>
+                                    <option value="Entire Booking">Entire Booking</option>
+                                    <option value="1 Night">1 Night</option>
+                                    <option value="2 Nights">2 Nights</option>
+                                    <option value="3 Nights">3 Nights</option>
+                                    <option value="4 Nights">4 Nights</option>
+                                    <option value="Enter Amount">Enter Amount</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4 mb-2 p-0 required">
+                            <label class="col-sm-12 col-form-label" for="confirmation_feedback">Confirmation
+                                Feedback<span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="confirmation_feedback"
+                                    formControlName="AdminCancellationRemarks" maxlength="250"
+                                    name="confirmation_feedback"></textarea>
+                            </div>
+                        </div> -->
+                        <div class="col-md-4 mb-2 p-0 required" *ngIf="cancellationConfig.get('NumberOfNightsToRefund').value === 'Enter Amount'" >
+                            <label class="col-sm-12 col-form-label" for="cancellation_charges">Cancellation Charges<span
+                                    class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-12">
+                                <input class="form-control" id="cancellation_charges"
+                                    formControlName="CancellationCharges" maxlength="250" type="text" appNumericOnly
+                                    name="cancellation_charges">
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="btn-group">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"  (click)="onSubmit()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

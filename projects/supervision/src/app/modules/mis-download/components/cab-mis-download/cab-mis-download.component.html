@@ -1,0 +1,78 @@
+<div class="card-header text-uppercase bg-dark text-white">
+    <h5 style="border-bottom: 0;">
+        <i class="fa fa-edit"></i>
+        Download Cab MIS Report
+    </h5>
+</div>
+<div class="mb-3 btop">
+    <div class="card-body bg-white">
+        <form [formGroup]="regConfig" autocomplete="off">
+            <div class="form-row">
+                <!-- <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="corporate">Corporate Name</label>
+                        <div>
+                            <mat-form-field class="full-width" appearance="fill" style="padding-left: 0; width: 100%;">
+                                <div class="autocomplete-container">
+                                    <input type="text" placeholder="-Select Corporate-" class=" nrm_input" matInput
+                                        formControlName="corporate" [matAutocomplete]="auto">
+                                    <button mat-button *ngIf="regConfig.get('corporate').value" matSuffix mat-icon-button
+                                        aria-label="Clear" (click)="regConfig.get('corporate').setValue('')">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+                                    <mat-option [value]="corp" *ngFor="let corp of filteredCorp | async">
+                                        {{ corp }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="filter_type">Choose Date Type</label>
+                        <div>
+                            <select formControlName="filter_type" class="form-control">
+                                <option *ngFor="let date_type of date_type" [value]="date_type.code">
+                                    {{date_type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="cabFromDate">Booked From Date</label>
+                        <input type="text" id="cabFromDate" autocomplete="off" formControlName="fromDate"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="toDate">Booked To Date</label>
+                        <input type="text" id="toDate" autocomplete="off" formControlName="toDate"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                <!-- <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="reportType">Report Type</label>
+                        <select name="reportType" id="reportType" formControlName="reportType"
+                            class="form-control form-control-sm nrm_input">
+                            <option value="" selected disabled>-Select MIS Type-</option>
+                            <option *ngFor="let item of reportTypeList" value="item">{{item}}</option>
+                        </select>
+                    </div>
+                </div> -->
+            </div>
+            <div class="btncontainer">
+                <button type="submit" class="btnStyle" (click)="onDownloadMISReport()">Download MIS Report</button>
+                &nbsp;
+                <!-- <button type="button" class="btnStyle" (click)="onViewMISAsGraph()">View MIS as Graph</button> -->
+            </div>
+        </form>
+    </div>
+</div>

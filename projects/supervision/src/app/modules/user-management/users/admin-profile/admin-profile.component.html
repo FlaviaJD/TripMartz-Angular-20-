@@ -1,0 +1,91 @@
+<div class="update-profile-section main-card mb-3 card p-0">
+    <div class="card-body p-0">
+        <div class="card-title align-items-center d-flex px-3">
+            <div class="card-profile">
+                <i *ngIf="!currentUser.image" class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+                <img *ngIf="currentUser.image" width="42" [src]="getImage()" alt="" class="rounded-circle">
+            </div>
+            <div class="d-flex flex-column ml-2">
+                <h5 class="title">Id : {{currentUser.uuid}}</h5>
+                <span>Email : {{ currentUser.email }}</span>
+            </div>
+            <div class=" ml-auto">
+                <h5 class="title cust-fs">Update Profile</h5>
+            </div>
+        </div>
+        <form [formGroup]="profileForm" autocomplete="off" class="needs-validation px-4" novalidate
+            (validSubmit)="onSubmit(profileForm.value)">
+            <div class="row" style="margin: 0px;">
+            <div class="col-4 p-0">
+                <label for="first_name" class="col-form-label">First Name</label>
+                <input formControlName="first_name" placeholder="First Name" type="text" class="form-control"
+                    (keypress)="omitSpecialCharacters($event)" maxlength="20">
+            </div>
+            <div class="col-4">
+                <label for="last_name" class="col-form-label">Last Name</label>
+                <input formControlName="last_name" placeholder="Last Name" type="text" class="form-control"
+                    (keypress)="omitSpecialCharacters($event)" maxlength="20">
+            </div>
+            <div class="col-4 p-0">
+                <label for="address" class="col-form-label">Address</label>
+                <textarea formControlName="address" class="form-control"></textarea>
+            </div>
+        
+                <div class="col-4 p-0">
+                    <label for="date_of_birth" class="col-form-label">Date Of Birth</label>
+                    <mat-form-field appearance="fill">
+                        <input matInput [matDatepicker]="picker" formControlName="date_of_birth"
+                            placeholder="Date Of Birth" [min]="minDate" [max]="maxDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <label for="country_code" class="col-form-label">Country</label>
+                    <select formControlName="country_code" class="form-control">
+                        <option value="">Select Country</option>
+                        <option *ngFor="let country of countries" [value]="country.id">
+                            {{country.name}}</option>
+                    </select>
+                </div>
+            <div class="col-4 p-0">
+                <label for="phone" class="col-form-label">Phone</label>
+                <input formControlName="phone" placeholder="phone" type="text" class="form-control" maxlength="10"
+                    (keypress)="numberOnly($event)">
+            </div>
+            <div class="col-4 p-0">
+                <label for="business_phone" class="col-form-label">Business Phone</label>
+                <input formControlName="business_phone" placeholder="Business Phone" type="text" class="form-control"
+                    maxlength="10" (keypress)="numberOnly($event)">
+            </div>
+            <div class="col-4">
+                <label for="business_name" class="col-form-label">Business Name</label>
+                <input formControlName="business_name" placeholder="Business Name" type="text" class="form-control"
+                    maxlength="20">
+            </div>
+            <div class="col-4 p-0">
+                <label for="business_number" class="col-form-label">Business Number</label>
+                <input formControlName="business_number" placeholder="Business Number" type="text" class="form-control"
+                    (keypress)="numberOnly($event)" maxlength="20">
+            </div>
+            <div class="col-4 p-0 custom-file-section">
+                <label for="image" class="col-form-label">Upload Profile</label>
+                <div class="file-input">
+                    <input type="file" class="" accept=".png, .jpg, .jpeg" formControlName="importFile"
+                        id="importFile" (change)="onFileChange($event.target.files)">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="col-4 mt-3 mb-4 p-0">
+            <div class="update-btn btncontainer">
+                <button type="submit" class=" btnStyle" (click)="onSubmit(profileForm.value)">
+                    Update
+                </button>
+            </div>
+        </div>
+
+        </form>
+    </div>
+</div>

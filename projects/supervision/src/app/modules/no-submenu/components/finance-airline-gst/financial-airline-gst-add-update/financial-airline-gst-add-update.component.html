@@ -1,0 +1,105 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+            <div class="col-md-12 p-0">
+                <form class="" [formGroup]="regConfig" autocomplete="off">
+                    <div class="title pl-0">
+                        <h3>Airline Wise GST Details</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 p-0">
+                            <label for="CorporateName" class="col-sm-12">Finance List<span
+                                    class="text-danger">*</span>&nbsp;</label>
+                            <mat-form-field class="col-sm-12" appearance="fill">
+                                <input type="text" placeholder="Choose..." class="" matInput
+                                    formControlName="CorporateName" [matAutocomplete]="auto">
+                                <mat-autocomplete class="text-uppercase" #auto="matAutocomplete"
+                                    (optionSelected)="onSelectionChanged($event)">
+                                    <mat-option *ngFor="let corpList of filteredOptions | async"
+                                        [value]="corpList.business_name+' ('+ corpList.uuid +')'" [id]="corpList.id">
+                                        {{corpList.business_name | lowercase}} ({{corpList.uuid}})
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="col-3">
+                            <label for="prefered_airline" class="col-sm-12 p-0">Prefered Airlines<span class="text-danger">*</span></label>
+                        <div class=" d-flex align-items-center mt-2">
+                            <div class="col-auto pl-0">
+                                <label>
+                                    <input formControlName="prefered_airline" name="prefered_airline" type="radio" value="All" (click)="setValue()">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">All</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto pl-0">
+                                <label>
+                                    <input formControlName="prefered_airline" name="prefered_airline" type="radio" value="Specific Airlines">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Specific Airlines</span>
+                                </label>
+                            </div>
+                            </div>
+                        </div>  
+
+                        <div class="col-3" *ngIf="regConfig.get('prefered_airline').value === 'Specific Airlines'">
+                            <label for="AirlineName" class="col-sm-12" style="padding: 0px;">Airline Name<span
+                                    class="text-danger">*</span>&nbsp;</label>
+                                    <ng-multiselect-dropdown formControlName="AirlineName"
+                                    [placeholder]="'Select Airlines'"
+                                    [settings]="dropdownSettings"
+                                    [data]="airlineDropdownList"
+                                    (onSelect)="onItemSelect($event)">
+                                    </ng-multiselect-dropdown>
+                        </div>
+
+                        <!-- <div class="col-3 pr-0">
+                            <label for="GstOption" class="col-sm-12 p-0">Prefered GST<span class="text-danger">*</span></label>
+                            <div class=" d-flex align-items-center mt-2">
+                            <div class="col-auto pl-0">
+                                <label>
+                                    <input formControlName="GstOption" name="GstOption" type="radio" value="HyperMiles GST">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">HyperMiles GST</span>
+                                </label>
+                            </div>
+
+                            <div class="col-auto pr-0">
+                                <label>
+                                    <input formControlName="GstOption" name="GstOption" type="radio" value="Corporate GST">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Corporate GST</span>
+                                </label>
+                            </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    
+                    <div class="btn-group  pl-0 mt-3">
+                        <div class="form-group required row">
+                            <div class="col-12 d-flex">
+                                <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                    (click)="onSubmit()">
+                                    <ng-container *ngIf="isUpdate">
+                                        Update
+                                    </ng-container>
+                                    <ng-container *ngIf="!isUpdate">
+                                        Save
+                                    </ng-container>
+                                    </button>
+                                <button type="reset" class="btn btn-sm btn-primary lg"
+                                    (click)="onReset()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: primaryColour, secondaryColour: secondaryColour, tertiaryColour: primaryColour, backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

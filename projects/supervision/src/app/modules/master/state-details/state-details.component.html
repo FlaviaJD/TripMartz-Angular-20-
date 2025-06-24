@@ -1,0 +1,23 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeTab">
+            <ngb-tab id="add_update_state">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;  Add State</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-add-update-state (stateUpdate)="triggerTab($event)"></app-add-update-state>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="state_list">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; State List</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-state-list (stateUpdate)="triggerTab($event)"></app-state-list>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

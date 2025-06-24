@@ -1,0 +1,62 @@
+<div class="card">
+    <div class=" p-0 col-md-12 col-lg-12">
+        <div class="card-header-tab card-header bg-dark text-white">
+            <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <i class="header-icon fa fa-edit"> </i>
+                <span class="text-uppercase"> {{'Add/Update Slider Image'}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 offset-lg-2 offset-md-2 col-md-8 col-lg-8">
+        <form class="" [formGroup]="regConfig">
+
+            <div class="form-group row">
+                <label for="title" class="col-sm-2 col-form-label">Title <sup
+                    class="text-danger f-16"> * </sup></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="title" maxlength="200"
+                        (keypress)="omitSpecialCharacters($event)" formControlName="title">
+                </div>
+            </div>
+            <div class="form-group required row">
+                <label for="description" class="col-sm-2 col-form-label">Description <sup
+                    class="text-danger f-16"> * </sup></label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="description" maxlength="500"
+                        formControlName="description"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2 col-lg-2">
+                        <label for="customcheckboxInline1"> Status  <sup
+                        class="text-danger f-16"> * </sup></label>
+                </div>
+                <div class="col-lg-10 col-md-10 d-flex">
+
+                    <div class="col-2 p-0">
+                        <label>
+                            <input formControlName="status" value="1" type="radio" id="customcheckboxInline1">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Active</span>
+                        </label>
+                    </div>
+
+                    <div class="col-3 p-0">
+                        <label>
+                            <input formControlName="status" value="0" type="radio" id="customcheckboxInline2">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">In-Active</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="form-group row mb-n2">
+                <div class="col-sm-12 customCenter">
+                    <button type="submit" class="btn btn-sm btn-primary mr-1" (click)="onSubmit()">Add/Update</button>
+                    <button type="reset" class="btn btn-sm btn-primary" (click)="onReset()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

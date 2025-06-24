@@ -1,0 +1,78 @@
+.nrm_input,
+.src_btn {
+    padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+    line-height: 1.7;
+    height: calc(2.5em + 0.75rem + 2px);
+}
+
+.card {
+    padding: 30px;
+    font-family: 'Asap';
+}
+
+h5 {
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.btncontainer {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0px;
+}
+
+label {
+    color: #000000;
+    font-weight: 600;
+}
+
+/* Remove box appearance and padding */
+.mat-form-field {
+    border: none;
+    padding: 0;
+    margin: 0;
+    /* Optional, adjust as needed */
+}
+
+/* Remove underline and focus outline from input */
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex,
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: none;
+    box-shadow: none;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: 1px solid #86a4c3;
+    padding: 0px;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white !important;
+    padding: 0 !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-wrapper {
+    width: 100%;
+}
+
+.mat-autocomplete-panel {
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.mat-option {
+    text-align: left;
+}
+
+.autocomplete-container {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+}
+
+.mat-icon-button {
+    height: 33px;
+    line-height: 31px;
+}

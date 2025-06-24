@@ -1,0 +1,56 @@
+<div class="card-header text-uppercase bg-dark text-white">
+    <h5 style="border-bottom: 0;">
+        <i class="fa fa-edit"></i>
+        Download CMS/UTR MIS Reports
+    </h5>
+</div>
+<div class="mb-3 btop">
+    <div class="card-body bg-white">
+        <form [formGroup]="regConfig" autocomplete="off">
+            <div class="form-row">
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="filter_type">Choose Date Type</label>
+                        <div>
+                            <select formControlName="filter_type" class="form-control">
+                                <option *ngFor="let date_type of date_type" [value]="date_type.code">
+                                    {{date_type.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="from_date">From Date</label>
+                        <input type="text" id="from_date" autocomplete="off" formControlName="from_date"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="to_date">To Date</label>
+                        <input type="text" id="to_date" autocomplete="off" formControlName="to_date"
+                            class="form-control form-control-sm nrm_input" placement="bottom left"
+                            placeholder="Request Date" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" [maxDate]="maxDate">
+                    </div>
+                </div>
+                <div class="col-4 pr-0">
+                    <div class="form-group">
+                        <label for="report_type">Report Type</label>
+                        <select name="report_type" id="report_type" formControlName="report_type"
+                            class="form-control form-control-sm nrm_input">
+                            <option value="" selected disabled>-Select MIS Type-</option>
+                            <option value="CMS">CMS</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            <hr />
+            <div class="btncontainer">
+                <button type="submit" class="btnStyle" (click)="onDownloadMISReport()">Download MIS Report</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,1189 @@
+<div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHoverMouseIn()"
+    (mouseout)="sidebarHoverMouseOut()">
+    <div class="app-header__logo" >
+        <a routerLink="/" *ngIf="!globals.toggleSidebar">
+            <img 
+
+            src="assets/layout/tripmartz_logo.png" 
+
+            alt="Logo" 
+            height="33" 
+            width="auto">
+            </a>
+        <div class="header__pane ml-auto">
+            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar();">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+    <div class="app-sidebar-content">
+        <div class="app-sidebar-scroll overflow-auto">
+            <perfect-scrollbar [autoPropagation]="true" class="scroll-container" [config]="config$"
+                [scrollIndicators]="true" style="max-width: 600px; max-height: 600px;">
+                <div class="v-sidebar-menu vsm-default">
+                    <div class="vsm-list">
+                        <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
+                            <!--Dashboard Starts-->
+                            <ngb-panel id="dashboardsMenus" *ngIf="isMenuExists('Dashboard')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLink="/" routerLinkActive="active-item"
+                                        [routerLinkActiveOptions]="{exact: true}" class="vsm-link">
+                                        <i class="vsm-icon pe-7s-rocket"></i>
+                                        <span class="vsm-title pl-10">Dashboard</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--Dashboard Ends-->
+                            <!--User Management Starts-->
+                            <ngb-panel id="UserManagement" *ngIf="isMenuExists('User Management')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-add-user"></i>
+                                        <span class="vsm-title pl-10">User Management</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true"
+                                                [activeIds]="extraParameter">
+                                                <ngb-panel id="ManageAgentMenus"
+                                                    *ngIf="isSubMenuExists('Agent',USER_MANAGEMENT)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1 "
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10"><i class="fa fa-circle-o"
+                                                                    aria-hidden="true"></i>
+                                                                Agent</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Agent Active',USER_MANAGEMENT)"
+                                                            routerLink='/user/manage-agent/active'
+                                                            [queryParams]="{type: 'active'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-check  text-success"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Agent InActive',USER_MANAGEMENT)"
+                                                            routerLink='/user/manage-agent/in-active'
+                                                            [queryParams]="{type: 'inactive'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-times  text-danger"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                In
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                    </ng-template>
+                                                </ngb-panel>
+
+                                                <ngb-panel id="ManageAgentB2BMenus"
+                                                    *ngIf="isSubMenuExists('Corporate management',USER_MANAGEMENT)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1 "
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10"><i class="fa fa-circle-o"
+                                                                    aria-hidden="true"></i>
+                                                                Corporate</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Corporate Active',Corporate)"
+                                                            routerLink='/user/manage-corporate/active'
+                                                            [queryParams]="{type: 'active'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-check  text-success"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Corporate InActive',Corporate)"
+                                                            routerLink='/user/manage-corporate/in-active'
+                                                            [queryParams]="{type: 'inactive'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-times  text-danger"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                In
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                    </ng-template>
+                                                </ngb-panel>
+
+
+                                                <ngb-panel id="ManageFinanceB2BMenus"
+                                                    *ngIf="isSubMenuExists('Finance',USER_MANAGEMENT)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1 "
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10"><i class="fa fa-circle-o"
+                                                                    aria-hidden="true"></i>
+                                                                Finance</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Finance Active',Corporate)"
+                                                            routerLink='/user/manage-finance/list'
+                                                            [queryParams]="{type: 'active'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-check  text-success"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Finance InActive',Corporate)"
+                                                            routerLink='/user/manage-finance/list/in-active'
+                                                            [queryParams]="{type: 'inactive'}" class="vsm-link pl-1 ">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-times  text-danger"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                In
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                    </ng-template>
+                                                </ngb-panel>
+
+
+                                                <ngb-panel id="ManageSubAdminMenus"
+                                                    *ngIf="isSubMenuExists('Subadmin management',USER_MANAGEMENT)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10"><i class="fa fa-circle-o"
+                                                                    aria-hidden="true"></i> Sub Admin/
+                                                                Staff</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Subadmin Active',Subadmin)"
+                                                            routerLink='/user/subAdmin/active'
+                                                            [queryParams]="{type: 'active'}" class="vsm-link pl-1">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-check text-success"
+                                                                    aria-hidden="true"></i>&nbsp;
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                        <a routerLinkActive="active-item"
+                                                            *ngIf="isSubMenuExists('Subadmin InActive',Subadmin)"
+                                                            routerLink='/user/subAdmin/in-active'
+                                                            [queryParams]="{type: 'inactive'}" class="vsm-link pl-1">
+                                                            <span class="vsm-title pl-10">
+                                                                <i class="fa fa-times text-danger"
+                                                                    aria-hidden="true"></i>&nbsp; In
+                                                                Active
+                                                            </span>
+                                                        </a>
+                                                    </ng-template>
+                                                </ngb-panel>
+                                            </ngb-accordion>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--User Management Ends-->
+                            <!--Reports Starts-->
+                            <ngb-panel id="reportsMenus" *ngIf="isMenuExists('Reports')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-note2"></i>
+                                        <span class="vsm-title pl-10">Reports</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true"
+                                                [activeIds]="extraParameter">
+                                                <ngb-panel id="b2b-reports-Menus"
+                                                    *ngIf="isSubMenuExists('Reports Flight',REPORTS) || isSubMenuExists('Reports Hotel',REPORTS) || isSubMenuExists('Reports Train',REPORTS) || isSubMenuExists('Reports Bus',REPORTS)|| isSubMenuExists('Reports Car',REPORTS)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10">Corporate</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Flight',REPORTS)">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/report/flight' class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-plane"></i>
+                                                                    Flight
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Hotel',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/hotel'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bed"></i>
+                                                                    Hotel
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <!-- <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Bus',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/bus'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bus"></i>
+                                                                    Bus
+                                                                </span>
+                                                            </a>
+                                                        </div> -->
+                                                        
+                                                    </ng-template>
+                                                </ngb-panel>
+                                                 <ngb-panel id="reports-Menus"
+                                                    >
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10">Finance</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Flight',REPORTS)">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/report/finance-flight' class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-plane"></i>
+                                                                    Flight
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Hotel',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/finance-hotel'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bed"></i>
+                                                                    Hotel
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </ng-template>
+                                                </ngb-panel>
+                                            </ngb-accordion>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true"
+                                                [activeIds]="extraParameter">
+                                                <ngb-panel id="b2b-reports-Menus"
+                                                    *ngIf="isSubMenuExists('Reports Flight',REPORTS) || isSubMenuExists('Reports Hotel',REPORTS) || isSubMenuExists('Reports Train',REPORTS) || isSubMenuExists('Reports Bus',REPORTS)|| isSubMenuExists('Reports Car',REPORTS)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10">Corporate</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Flight',REPORTS)">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/report/flight' class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-plane"></i>
+                                                                    Flight
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Hotel',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/hotel'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bed"></i>
+                                                                    Hotel
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <!-- <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Bus',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/bus'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bus"></i>
+                                                                    Bus
+                                                                </span>
+                                                            </a>
+                                                        </div> -->
+                                                        
+                                                    </ng-template>
+                                                </ngb-panel>
+                                            </ngb-accordion>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true"
+                                                [activeIds]="extraParameter">
+                                                <ngb-panel id="b2b-reports-Menus"
+                                                    *ngIf="isSubMenuExists('Reports Flight',REPORTS) || isSubMenuExists('Reports Hotel',REPORTS) || isSubMenuExists('Reports Train',REPORTS) || isSubMenuExists('Reports Bus',REPORTS)|| isSubMenuExists('Reports Car',REPORTS)">
+                                                    <ng-template ngbPanelHeader>
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10">Corporate</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Flight',REPORTS)">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/report/flight' class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-plane"></i>
+                                                                    Flight
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="vsm-item"
+                                                            *ngIf="isSubMenuExists('Reports Hotel',REPORTS)">
+                                                            <a routerLinkActive="active-item" routerLink='/report/hotel'
+                                                                class="vsm-link pl-10">
+                                                                <span class="vsm-title pl-10">
+                                                                    <i class="fa fa-bed"></i>
+                                                                    Hotel
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </ng-template>
+                                                </ngb-panel>
+                                            </ngb-accordion>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--Reports Ends-->
+                            <!-- MIS Downloads Start -->
+                            <ngb-panel id="misDownloadsMenus" *ngIf="isMenuExists('Mis')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-download"></i>
+                                        <span class="vsm-title pl-10">MIS Downloads</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Mis Flight',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/flight"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Flight
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Mis Hotel',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/hotel"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-bed"></i>
+                                                        Hotel
+                                                    </span></a>
+                                            </div>
+                                            <!-- <div class="vsm-item" *ngIf="isSubMenuExists('Mis Train',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/train"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-train"></i>
+                                                        Train
+                                                    </span></a>
+                                            </div> -->
+                                            <!-- <div class="vsm-item" *ngIf="isSubMenuExists('Mis Bus',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/bus"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-bus"></i>
+                                                        Bus
+                                                    </span></a>
+                                            </div> -->
+                                            <!-- <div class="vsm-item" *ngIf="isSubMenuExists('Mis Car',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/cab"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-car"></i>
+                                                        Cab
+                                                    </span></a>
+                                            </div> -->
+                                            <!-- <div class="vsm-item" *ngIf="isSubMenuExists('Mis Cms',MIS)">
+                                                <a routerLinkActive="active-item" routerLink="/mis-download/cms"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-book"></i>
+                                                        CMS
+                                                    </span></a>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-- MIS Downloads Ends -->
+                           
+                            <!-- Master Start -->
+                            <ngb-panel id="masterMenus" *ngIf="isMenuExists('Master')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-drawer"></i>
+                                        <span class="vsm-title pl-10">Master</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Airport',Master)">
+                                                <a routerLinkActive="active-item" routerLink="/master/airport-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Airport
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Airline',Master)">
+                                                <a routerLinkActive="active-item" routerLink="/master/airline-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Airline
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Country',Master)">
+                                                <a routerLinkActive="active-item" routerLink="/master/country-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-car"></i>
+                                                        Country
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('State',Master)">
+                                                <a routerLinkActive="active-item" routerLink="/master/state-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-train"></i>
+                                                        State
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('City',Master)">
+                                                <a routerLinkActive="active-item" routerLink="/master/city-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-bus"></i>
+                                                        City
+                                                    </span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-- MIS Downloads Ends -->
+                            <!-------Group Booking Starts-->
+                            <!-- <ngb-panel id="groupMenus" *ngIf="isMenuExists('Group Booking')">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-users"></i>
+                    <span class="vsm-title pl-10">Group Booking</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <a routerLinkActive="active-item" *ngIf="isSubMenuExists('Flight',GROUP_BOOKING)"
+                        routerLink="/group/flight" class="vsm-link pl-1 "><span
+                          class="vsm-title pl-10">Flight</span></a>
+                      <a routerLinkActive="active-item" *ngIf="isSubMenuExists('Hotel',GROUP_BOOKING)"
+                        routerLink="/group/hotel" class="vsm-link pl-1 "><span class="vsm-title pl-10">Hotel</span></a>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel> -->
+                            <!-------Group Booking Ends-->
+                          
+                            <!-------GST Details Start-->
+
+                            <ngb-panel id="GSTMenus" *ngIf="isMenuExists('Gst Details')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-download"></i>
+                                        <span class="vsm-title pl-10">GST</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item"  *ngIf="isSubMenuExists('Manage Gst',GSTDETAIL)">
+                                                <a routerLinkActive="active-item" routerLink="/gst-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Manage GST
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item"  *ngIf="isSubMenuExists('Airline GST',GSTDETAIL)">
+                                                <a routerLinkActive="active-item" routerLink="/airline-gst"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Airline Wise GST
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item"  *ngIf="isSubMenuExists('Manage Gst',GSTDETAIL)">
+                                                <a routerLinkActive="active-item" routerLink="/finance-gst-details"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Finance Manage GST
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item"  *ngIf="isSubMenuExists('Airline GST',GSTDETAIL)">
+                                                <a routerLinkActive="active-item" routerLink="/finance-airline-gst"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        <i class="fa fa-plane"></i>
+                                                        Finance Airline Wise GST
+                                                    </span></a>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+
+                            <!-- <ngb-panel id="GSTMenus" *ngIf="isMenuExists('Gst Details')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLinkActive="active-item" routerLink="/gst-details"
+                                        class="vsm-link">
+                                        <i class="vsm-icon pe-7s-add-user"></i>
+                                        <span class="vsm-title pl-10">GST Details</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel> -->
+                            <!-------GST Details  Ends-->
+                            <!-------Import Pnr Start-->
+                            <!-- <ngb-panel *ngIf="isMenuExists('Import Pnr')">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle routerLinkActive="active-item" routerLink="/import-pnr" class="vsm-link">
+                    <i class="vsm-icon pe-7s-add-user"></i>
+                    <span class="vsm-title pl-10">Import PNR</span>
+                  </button>
+                </ng-template>
+              </ngb-panel> -->
+                            <!-------Import Pnr   Ends-->
+
+
+                            <!-------CorporateCode Start-->
+                            <ngb-panel id="CorporateCodeMenus" *ngIf="isMenuExists('Corporate Code')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLinkActive="active-item" routerLink="/corporate-code"
+                                        class="vsm-link">
+                                        <i class="vsm-icon pe-7s-add-user"></i>
+                                        <span class="vsm-title pl-10">Corporate Code</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-------CorporateCode  Ends-->
+
+                              <!-------Agent Balance Start-->
+                              <ngb-panel id="AgentBalanceMenus" *ngIf="isMenuExists('Agent Balance')">
+                                <ng-template ngbPanelHeader>
+                                  <button ngbPanelToggle routerLinkActive="active-item" routerLink="/agent-balance" class="vsm-link">
+                                    <i class="vsm-icon pe-7s-add-user"></i>
+                                    <span class="vsm-title pl-10">Corporate Analysis</span>
+                                  </button>
+                                </ng-template>
+                              </ngb-panel>
+                                            <!-------Agent Balance  Ends-->
+
+
+                            <!-------Transaction logs starts-->
+                            <ngb-panel id="transactionLogsMenus" *ngIf="isMenuExists('Transaction Logs')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLinkActive="active-item" routerLink="/transaction-logs"
+                                        class="vsm-link">
+                                        <i class="vsm-icon fal fa-list"></i>
+                                        <span class="vsm-title pl-10">Transaction Logs</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-------Transaction logs Ends-->
+
+                            <!-------Ledger starts -->
+                            <ngb-panel id="transactionLogsMenus"
+                                *ngIf="isMenuExists('Ledger')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLinkActive="active-item"
+                                        routerLink="/masterbalance/allAgentSpecific" class="vsm-link">
+                                        <i class="vsm-icon fal fa-wallet"></i>
+                                        <span class="vsm-title pl-10">Ledger</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-------Ledger ends -->
+
+                            <!---Master Balance Manager starts-->
+                            <ngb-panel id="master-balance-Menus" *ngIf="isMenuExists('Master Balance Manager')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-notebook"></i>
+                                        <span class="vsm-title pl-10">Master Balance Manager</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Agent Request',MASTER_BALANCE_MANAGER)">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/masterbalance/agentRequest" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Payment
+                                                        Request</span></a>
+                                            </div>
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Credit Limit Request',MASTER_BALANCE_MANAGER)">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/masterbalance/credtLimitRequest"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Credit Limit
+                                                        Request</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!---Master Balance Manager Ends-->
+
+                            <!---Commission starts-->
+                            <!-- <ngb-panel id="commissionsMenus" *ngIf="isMenuExists('Commission')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-cash"></i>
+                                        <span class="vsm-title pl-10">Commission</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Default Commission',COMMISSION)">
+                                                <a routerLinkActive="active-item"
+                                                    [routerLink]="['/commissions/default']" class="vsm-link pl-1">
+                                                    <span class="vsm-title pl-10">
+                                                        Default Commission
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Agent Commission',COMMISSION)">
+                                                <a routerLinkActive="active-item" [routerLink]="['/commissions/agents']"
+                                                    class="vsm-link pl-1">
+                                                    <span class="vsm-title pl-10">
+                                                        Agent Commission
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('GDS Commission',COMMISSION)">
+                                                <a routerLinkActive="active-item" [routerLink]="['/commissions/gds']"
+                                                    class="vsm-link pl-1">
+                                                    <span class="vsm-title pl-10">
+                                                        GDS Commission
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel> -->
+                            <!---Comission Ends-->
+
+                            <!---Account Manager starts-->
+                            <ngb-panel id="accountManagerMenusEmployee" *ngIf="isMenuExists('Account Manager')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-monitor"></i>
+                                        <span class="vsm-title pl-10">Employee Account Manager</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Credit Balance-Note',ACCOUNT_MANAGER)">
+                                                <a routerLinkActive="active-item" routerLink="/account/creditBalance"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Credit
+                                                        Balance - Note</span></a>
+                                            </div>
+                                            <div class="vsm-item">
+                                                <a routerLinkActive="active-item"
+                                                    *ngIf="isSubMenuExists('Debit Balance-Note',ACCOUNT_MANAGER)"
+                                                    routerLink="/account/debitBalance" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Debit
+                                                        Balance - Note</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <ngb-panel id="accountManagerMenusAgent" *ngIf="isMenuExists('Agent Account Manager')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-monitor"></i>
+                                        <span class="vsm-title pl-10">Agent Account Manager</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Credit Balance-Note',AGENT_ACCOUNT_MANAGER)">
+                                                <a routerLinkActive="active-item" routerLink="/agent-account/agent-creditBalance"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Credit
+                                                        Balance - Note</span></a>
+                                            </div>
+                                            <div class="vsm-item">
+                                                <a routerLinkActive="active-item"
+                                                    *ngIf="isSubMenuExists('Debit Balance-Note',AGENT_ACCOUNT_MANAGER)"
+                                                    routerLink="/agent-account/agent-debitBalance" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Debit
+                                                        Balance - Note</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            
+                            <!---Account Manager Ends-->
+
+                            <!--Bank Account Details starts-->
+                            <ngb-panel id="BankAccountDetailsMenus" *ngIf="isMenuExists('Bank Account Details')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLink="/bank/accountDetails"
+                                        routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}"
+                                        class="vsm-link">
+                                        <i class="vsm-icon pe-7s-culture"></i>
+                                        <span class="vsm-title pl-10">Bank Account Details</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!-- <ngb-panel id="markupMenus" *ngIf="isMenuExists('Markup Corporate')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-plus"></i>
+                                        <span class="vsm-title pl-10">Markup</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item">
+                                                <a routerLinkActive="active-item" [routerLink]="['/markup/corporate']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Corporate
+                                                    </span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel> -->
+                            <!--Markup Ends-->
+                            <!--Rewards B2C Starts-->
+                            <!-- <ngb-panel id="rewards-b2c-Menus">
+               <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                  <i class="vsm-icon pe-7s-medal"></i>
+                  <span class="vsm-title pl-10">Rewards B2C</span>
+                  <i class="vsm-arrow"></i>
+                  </button>
+               </ng-template>
+               <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                     <div class="vsm-list">
+                        <div class="vsm-item">
+                           <a routerLinkActive="active-item"
+                              routerLink="/b2creward/addManageRewards"
+                              class="vsm-link pl-1"><span class="vsm-title pl-10">Add/Manage
+                           Rewards</span></a>
+                        </div>
+                        <div class="vsm-item">
+                           <a routerLinkActive="active-item"
+                              routerLink="/b2creward/setRewardsRange" class="vsm-link pl-1"><span
+                              class="vsm-title pl-10">Set Rewards
+                           Range</span></a>
+                        </div>
+                        <div class="vsm-item">
+                           <a routerLinkActive="active-item"
+                              routerLink="/b2creward/rewardsConversion"
+                              class="vsm-link pl-1"><span class="vsm-title pl-10">Rewards
+                           Conversion</span></a>
+                        </div>
+                        <div class="vsm-item">
+                           <a routerLinkActive="active-item" routerLink="/b2creward/rewardsReports"
+                              class="vsm-link pl-1"><span class="vsm-title pl-10">Rewards
+                           Reports</span></a>
+                        </div>
+                     </div>
+                  </div>
+               </ng-template>
+            </ngb-panel> -->
+                            <!--Rewards B2C Ends-->
+                            <!-- Hotel CRS -->
+                            <!-- <ngb-panel id="hotelCrsMenus" *ngIf="isMenuExists('Hotel Crs')"
+                            >
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-plus"></i>
+                                        <span class="vsm-title pl-10">Hotel CRS</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Hotel List',HOTELCRS)">
+                                                <a routerLinkActive="active-item"
+                                                    [routerLink]="['/hotels/hotel-crs-lists']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Hotel List
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Hotel Type',HOTELCRS)">
+                                                <a routerLinkActive="active-item" [routerLink]="['/hotels/hotel-types']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Hotel Type
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Room Type',HOTELCRS)">
+                                                <a routerLinkActive="active-item" [routerLink]="['/hotels/room-types']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Room Type
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Hotel Amenities',HOTELCRS)">
+                                                <a routerLinkActive="active-item"
+                                                    [routerLink]="['/hotels/hotel-amenities']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Hotel Amenities
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Room Amenitiess',HOTELCRS)">
+                                                <a routerLinkActive="active-item"
+                                                    [routerLink]="['/hotels/room-amenities']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                        Room Amenities
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Season',HOTELCRS)">
+                                                <a routerLinkActive="active-item"
+                                                    [routerLink]="['/hotels/hotel-season']"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">
+                                                      Season
+                                                    </span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel> -->
+                            <!-- Hotel CRS End
+               <--Supplier Management starts-->
+                            <!-- <ngb-panel id="supplier-Management-Menus">
+               <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                  <i class="vsm-icon pe-7s-users"></i>
+                  <span class="vsm-title pl-10">Supplier Management</span>
+                  <i class="vsm-arrow"></i>
+                  </button>
+               </ng-template>
+               <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                     <div class="vsm-list">
+                        <a routerLinkActive="active-item" routerLink="/supplier/report"
+                           class="vsm-link pl-1 "><span class="vsm-title pl-10">Supplier Report</span></a>
+                        <a routerLinkActive="active-item" routerLink="/supplier/ledger"
+                           class="vsm-link pl-1 "><span class="vsm-title pl-10">Supplier
+                        Ledger</span></a>
+                     </div>
+                  </div>
+               </ng-template>
+            </ngb-panel> -->
+                            <!-- <ngb-panel id="supplier-Management-Menus">
+               <ng-template ngbPanelHeader>
+                   <button ngbPanelToggle routerLink="/supplier/management"
+                       routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}"
+                       class="vsm-link">
+                       <i class="vsm-icon pe-7s-monitor"></i>
+                       <span class="vsm-title pl-10">Supplier Management</span>
+                   </button>
+               </ng-template>
+               </ngb-panel> -->
+                            <!--Supplier Management Ends-->
+                            <!-- B2C CMS starts -->
+                            <!-- <ngb-panel id="b2cCmsMenus" *ngIf="isMenuExists('Content Management')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-note2"></i>
+                                        <span class="vsm-title pl-10">Content Management</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true"
+                                                [activeIds]="extraParameter">
+                                                <ngb-panel id="b2c-cms">
+                                                    <ng-template ngbPanelHeader
+                                                        *ngIf="isSubMenuExists('Home Page Widgets',CONTENT_MANAGEMENT)">
+                                                        <button ngbPanelToggle class="vsm-link pl-1"
+                                                            [ngClass]="{'collapsed' : globals.toggleSidebar}">
+                                                            <span class="vsm-title pl-10"> Home Page Widgets</span>
+                                                            <i class="vsm-arrow"></i>
+                                                        </button>
+                                                    </ng-template>
+                                                    <ng-template ngbPanelContent
+                                                        *ngIf="isSubMenuExists('Flight Widget',CONTENT_MANAGEMENT)">
+                                                        <div class="vsm-item">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/b2c-cms/homepage-widgets/add-modify-flight'
+                                                                class="vsm-link pl-10"><span class="vsm-title pl-10">
+                                                                    <i class="fa fa-plane"></i>
+                                                                    Flight Widget</span></a>
+                                                        </div>
+
+                                                        <div class="vsm-item">
+                                                            <a routerLinkActive="active-item"
+                                                                routerLink='/b2c-cms/homepage-widgets/add-modify-hotel'
+                                                                class="vsm-link pl-10"><span class="vsm-title pl-10">
+                                                                    <i class="fa fa-hotel"></i>
+                                                                    Hotel Widget</span></a>
+                                                        </div>
+                                                    </ng-template>
+                                                </ngb-panel>
+                                            </ngb-accordion>
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Main Banner Image',CONTENT_MANAGEMENT)"
+                                                routerLink="/b2c-cms/homepage-banner/add-modify-image"
+                                                class="vsm-link pl-1 "><span class="vsm-title pl-10">Main Banner
+                                                    Image</span></a>
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Static Page Content',CONTENT_MANAGEMENT)"
+                                                routerLink="/b2c-cms/homepage-footer/static-page-content"
+                                                class="vsm-link pl-1 "><span class="vsm-title pl-10">Static Page
+                                                    Content</span></a>
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Testimonial',CONTENT_MANAGEMENT)"
+                                                routerLink="/b2c-cms/homepage/testimonial" class="vsm-link pl-1"
+                                                style="display: none;"><span
+                                                    class="vsm-title pl-10">Testimonial</span></a>
+                                            <a style="display: none;" routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Discount/Offers',CONTENT_MANAGEMENT)"
+                                                routerLink="/b2c-cms/homepage/discounts" class="vsm-link pl-1 "><span
+                                                    class="vsm-title pl-10">Discount/Offers</span></a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel> -->
+                            <!-- B2C CMS ends -->
+                            <!--B2B CMS starts-->
+                            <ngb-panel id="cmsMenusEmployee" *ngIf="isMenuExists('Employee CMS')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-users"></i>
+                                        <span class="vsm-title pl-10">Employee CMS</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Slider Settings',EmployeeCMS)"
+                                                routerLink="/main-banner-image" class="vsm-link pl-1 "><span
+                                                    class="vsm-title pl-10">Slider
+                                                    Settings</span></a>
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Static Page Content',EmployeeCMS)"
+                                                routerLink="/static-page-content" class="vsm-link pl-1 "><span
+                                                    class="vsm-title pl-10">Static
+                                                    Page
+                                                    Content</span></a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <ngb-panel id="cmsMenus" *ngIf="isMenuExists('Agent CMS')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-users"></i>
+                                        <span class="vsm-title pl-10">Agent CMS</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Slider Settings',AgentCMS)"
+                                                routerLink="/agent-main-banner-image" class="vsm-link pl-1 "><span
+                                                    class="vsm-title pl-10">Slider
+                                                    Settings</span></a>
+                                            <a routerLinkActive="active-item"
+                                                *ngIf="isSubMenuExists('Static Page Content',AgentCMS)"
+                                                routerLink="/agent-static-page-content" class="vsm-link pl-1 "><span
+                                                    class="vsm-title pl-10">Static
+                                                    Page
+                                                    Content</span></a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--B2B CMS  Ends-->
+                            <!--agent callback support starts-->
+                            <ngb-panel id="agent-CallBack-Support" *ngIf="isMenuExists('Agent Call Back Support')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle routerLinkActive="active-item"
+                                        routerLink="/agentCallBackSupport" class="vsm-link">
+                                        <i class="vsm-icon pe-7s-help2"></i>
+                                        <span class="vsm-title pl-10">Agent Call Back Support</span>
+                                    </button>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--agent callback supportEnds-->
+                            <!--Settings starts-->
+                            <ngb-panel id="setting-Menus" *ngIf="isMenuExists('Settings')">
+                                <ng-template ngbPanelHeader>
+                                    <button ngbPanelToggle class="vsm-link">
+                                        <i class="vsm-icon pe-7s-settings"></i>
+                                        <span class="vsm-title pl-10">Settings</span>
+                                        <i class="vsm-arrow"></i>
+                                    </button>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="vsm-dropdown">
+                                        <div class="vsm-list">
+                                            <!-- <div class="vsm-item" *ngIf="isSubMenuExists('B2C Promo Code',SETTINGS)">
+                        <a routerLinkActive="active-item" routerLink="/settings/b2cPromocode"
+                          class="vsm-link pl-1"><span class="vsm-title pl-10">B2C Promo
+                            Code</span></a>
+                      </div>-->
+                                            <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Payment Gateway Charges-B2C',SETTINGS)">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/b2cPaymentGatewayCharges"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Payment Gateway
+                                                        Charges</span></a>
+                                            </div>
+                                            <!-- <div class="vsm-item"
+                                                *ngIf="isSubMenuExists('Manage Payment Gateway',SETTINGS)">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/managepaymentgatway"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Manage Payment
+                                                        Gateway</span></a>
+                                            </div> -->
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Manage Api',SETTINGS)">
+                                                <a routerLinkActive="active-item" routerLink="/settings/manageApi"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Manage
+                                                        API</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/currencyConversion"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Currency
+                                                        Conversion</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/push-notification" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Push Notification</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/error-event-logs" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Error Event
+                                                        logs</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item" routerLink="/settings/social-networks"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Social
+                                                        Networks</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item" routerLink="/settings/social-login"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Social
+                                                        Login</span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Domain Logo',SETTINGS)">
+                                                <a routerLinkActive="active-item" routerLink="/settings/domain-logo"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Domain
+                                                        Logo</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item" routerLink="/settings/liveEvents"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Live
+                                                        Events</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/airportManagement" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Airport Management
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item" *ngIf="isSubMenuExists('Manage Domain',SETTINGS)">
+                                                <a routerLinkActive="active-item" routerLink="/settings/manage-domains"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Manage Domain
+                                                    </span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/clearCacheOnServer"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Clear Cache on
+                                                        Server</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/push-notification" class="vsm-link pl-1"><span
+                                                        class="vsm-title pl-10">Push Notification</span></a>
+                                            </div>
+                                            <div class="vsm-item hide">
+                                                <a routerLinkActive="active-item"
+                                                    routerLink="/settings/update-last-ticketing-duration"
+                                                    class="vsm-link pl-1"><span class="vsm-title pl-10">Update Last
+                                                        Ticketing Duration
+                                                    </span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                            <!--Settings Ends-->
+                        </ngb-accordion>
+                    </div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+    </div>
+</div>

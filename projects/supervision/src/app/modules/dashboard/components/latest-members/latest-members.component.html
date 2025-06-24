@@ -1,0 +1,52 @@
+<div class="card mb-3" style="border-radius: 15px;">
+    <div class="card-header-tab card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-bold">
+            <i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>
+            {{'Latest Members'}}
+        </div>
+        <div class="">
+            <sup>
+                <span *ngIf="howManyAgentUser"> <small class="badge badge-success m-1 font-weight-bold" style="font-size: 11px; background:#065081;"> {{howManyAgentUser}} Corporate Users
+                    </small> </span>
+                <!-- <span *ngIf="howManySubAgentUser"> <small class="badge badge-info m-1"> {{howManySubAgentUser}}
+                        Sub-Agent Users </small></span>
+                <span *ngIf="howManyStaffUser"> <small class="badge badge-info m-1"> {{howManyStaffUser}} Staff Users
+                    </small> </span> -->
+            </sup>
+        </div>
+    </div>
+    <div class="card-body p-0" style="max-height: 250px; overflow: auto;">
+        <ul class="w-100 p-0 rounded">
+            <li class="w-100" *ngIf="noDataFound; else notShow;">
+                <!-- <mat-spinner [diameter]="30" mode="indeterminate" style="margin: 0 auto;"></mat-spinner> -->
+                <div class="text-center">
+                    No data found
+                </div>
+            </li>
+         
+            </ul>
+
+                <ng-template #notShow > 
+                <div class="pb-2 pt-2 mb-1 d-lg-flex d-block bbottom justify-content-between"  *ngFor="let item of latestMembers | slice: 0:8; let i = index;">
+                    <div class="d-flex">
+                        <img src="./assets/images/avatars/face.png" class="w-40 h-40 mr-10 rounded100" alt="">
+                        <div>
+                            <p class="mb-0" style="color: #172b4c;">{{ item['first_name'] }} <span class="text-primary ml-10"></span></p>
+                            <p class="mb-0"><small class="text-mute"> {{'(Scince:'}} {{item['created_at'] | date: 'MMM, y'}} {{')'}}</small></p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0 mr-10 font-weight-normal" style="color: #172b4c;">{{ item?.authRole?.name }}</p>
+                        <div class="bg-info rounded-circle w-30 h-30 l-h-30 text-center">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+    </div>
+    <!-- <div class="text-center p-2 mt-3 w-100">
+        <a [routerLink]="['/user/subAdmin/active']" [queryParams]="{type: 'active'}">
+            View More
+        </a>
+    </div> -->
+</div>

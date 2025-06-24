@@ -1,0 +1,177 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form d-flex">
+            <div class="col-md-12 p-0"> 
+            <form class="" [formGroup]="updateHotelConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>Update Cab Booking</h3>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="CompanyName" class="required col-sm-12 col-form-label">Company Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="CompanyName" class="form-control"
+                            id="CompanyName" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="EmployeeCode"  class="required col-sm-12 col-form-label">Employee Code<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="EmployeeCode" class="form-control"
+                            id="EmployeeCode" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="BillingEntityName" class="required col-sm-12 col-form-label">Billing Entity Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="BillingEntityName" class="form-control"
+                            id="BillingEntityName" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="City" class="required col-sm-12 col-form-label">Rental City<span class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="City" class="form-control"
+                            id="City" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="MobileNo" class="required col-sm-12 col-form-label">Mobile Number<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="MobileNo" class="form-control"
+                        id="MobileNo" maxlength="250" appNumericOnly maxLength="12" minLength="10">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="EmployeeEmail"  class="required col-sm-12 col-form-label">Email Id<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="email" formControlName="EmployeeEmail" class="form-control"
+                        id="EmployeeEmail" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="VehicleType"  class="required col-sm-12 col-form-label">Car Type<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <!-- <input type="text" formControlName="VehicleType" class="form-control"
+                        id="VehicleType" maxlength="250"> -->
+                        <select class="form-control form-control-sm nrm_input"
+                        (change)="onDropUpChange($event.target.value)" formControlName="VehicleType">
+                        <option value="" disabled selected>Select</option>
+                        <option *ngFor="let vechileType of vechileType" [value]="vechileType" class="ui-menu-item">
+                            {{ vechileType }}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="Appreference"  class="required col-sm-12 col-form-label">App Reference<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="Appreference" class="form-control"
+                        id="Appreference" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="DriverName"  class="required col-sm-12 col-form-label">Driver Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="DriverName" class="form-control"
+                        id="DriverName" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="DriverPhone"  class="required col-sm-12 col-form-label">Driver Phone<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="DriverPhone" class="form-control" appNumericOnly
+                        id="DriverPhone" maxLength="12" minLength="10">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="PickupAddress"  class="required col-sm-12 col-form-label">Car Pick Up<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="PickupAddress" class="form-control"
+                        id="PickupAddress" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="DropAddress"  class="required col-sm-12 col-form-label">Car Drop<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="DropAddress" class="form-control"
+                        id="DropAddress" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="ReportingTime"  class="required col-sm-12 col-form-label">Reporting Time<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <!-- <input type="text" formControlName="ReportingTime" class="form-control"
+                        id="ReportingTime" maxlength="250"> -->
+                        <select class="form-control form-control-sm nrm_input"
+                            (change)="onChange($event.target.value,'ReportingTime')" formControlName="ReportingTime">
+                            <option value="" disabled selected>Select</option>
+                            <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                {{ time }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="ReportingAddress"  class="required col-sm-12 col-form-label">Reporting Address<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="ReportingAddress" class="form-control"
+                        id="ReportingAddress" maxlength="250">
+                    </div>
+                </div>
+                <!-- <div class="col-4 p-0">
+                    <label for="BookedBy"  class="required col-sm-12 col-form-label">Booked By<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="BookedBy" class="form-control"
+                        id="BookedBy" maxlength="250">
+                    </div>
+                </div> -->
+                <div class="col-4 p-0">
+                    <label for="Usage"  class="required col-sm-12 col-form-label">Usage<span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <select id="Usage" class="form-control" formControlName="Usage">
+                                <option selected disabled value="">Please Select</option>
+                                <option  value="Drop">Drop</option>
+                                <option  value="Disposal">Disposal</option>
+                                <option  value="Outstation">Outstation</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="SpecialInstructionIfany"  class="required col-sm-12 col-form-label">Special Instructions<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="SpecialInstructionIfany" class="form-control"
+                        id="SpecialInstructionIfany" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="booking_status"  class="required col-sm-12 col-form-label">Booking Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="booking_status" class="form-control" formControlName="booking_status">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let status of statusList" [value]="status">{{ getFormattedStatus(status) }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group mt-3">
+                <div class="form-group required row">
+                    <div class="col-12 d-flex">
+                        <button type="submit" class="btn-sm btn-primary lg mr-4"
+                            (click)="onSubmit()">Save</button>
+                        <!-- <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button> -->
+                    </div>
+                </div>
+            </div>
+
+            </form>
+        </div>   
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>
+    

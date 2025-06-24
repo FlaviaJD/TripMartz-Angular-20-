@@ -1,0 +1,37 @@
+
+/* Remove box appearance and padding */
+.mat-form-field {
+    border: none;
+    padding: 0;
+    margin: 0; /* Optional, adjust as needed */
+  }
+  
+  /* Remove underline and focus outline from input */
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex,
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: none;
+    box-shadow: none;
+  }
+
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix{
+    border: 1px solid #86a4c3 ;
+    padding: 0px;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex
+  {
+    background-color: white !important;
+    padding: 0 !important;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-wrapper {
+    width: 100%;
+  }
+  
+  .mat-autocomplete-panel {
+    background-color: transparent;
+    border-radius: 0;
+  }
+  
+  .mat-option {
+    text-align: left;
+  }

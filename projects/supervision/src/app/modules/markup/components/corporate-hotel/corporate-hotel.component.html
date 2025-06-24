@@ -1,0 +1,54 @@
+<hr>
+<div class="card">
+    <div class="card-header-tab card-header bg-dark text-white">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <i class="header-icon fa fa-edit"></i>
+            <span class="text-uppercase">{{ 'Hotel Markup' }} </span>
+        </div>
+    </div>
+    <form [formGroup]="regConfig" (ngSubmit)="onSubmit(regConfig.value)" class="form m-4">
+        <div class="">
+            <table class="mb-3">
+                <tr>
+                    <td>
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="airlines" class="mr-sm-2">Markup Type</label>
+                            <div style="display: flex;">
+                                <div class="position-relative form-check p-0">
+                                    <label class="form-check-label">
+                                        <input value="plus" name="markupType" formControlName="markupType" type="radio"
+                                            class="form-check-input" />
+                                       
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;"> Plus(+/- {{defaultCurrency}})</span>
+                                    </label>
+                                </div>
+                                <div class="position-relative form-check">
+                                    <label class="form-check-label">
+                                        <input value="percentage" formControlName="markupType" type="radio"
+                                            class="form-check-input" />
+                                            
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;"> Percentage(%)</span>
+                                       
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+                            <label for="markupValue" class="mr-sm-2">Markup Value</label>
+                            <input formControlName="markupValue" placeholder="" type="text" step="0.01" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer customCenter">
+            <button type="reset" class="btn btn-primary">Reset</button>
+            &nbsp; &nbsp;
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

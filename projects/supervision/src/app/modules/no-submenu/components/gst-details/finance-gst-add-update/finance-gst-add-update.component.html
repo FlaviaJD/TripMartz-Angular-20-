@@ -1,0 +1,182 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form">
+
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">GST Details</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">GST CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+            <form class="" [formGroup]="regConfig" autocomplete="off">
+                <div class="title pl-0">
+                    <h3>GST Details</h3>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="client_name"  class="required col-sm-12 col-form-label">Client Name<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="client_name" (ngModelChange)="onChange($event)" class="form-control" formControlName="client_id">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let client of clientList" [ngValue]="client">{{client?.business_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="client_code"  class="required col-sm-12 col-form-label">Client Code<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="client_code" class="form-control"
+                            id="client_code" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="gst_module_name" class="required col-sm-12 col-form-label">Module Name<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="gst_module_name" class="form-control"
+                            formControlName="gst_module_name">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let module of moduleList" value="{{module}}">{{module}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="gst_number"  class="required col-sm-12 col-form-label">GST Number<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="gst_number" class="form-control"
+                            id="gst_number" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="client_address" class="required col-sm-12 col-form-label">Client Address<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="client_address" id="client_address"
+                            class="form-control" >
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="gst_phone_number"  class="required col-sm-12 col-form-label">GST Phone Number<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="gst_phone_number" class="form-control"
+                            id="gst_phone_number" maxlength="250" appNumericOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="gst_email_id"  class="required col-sm-12 col-form-label">GST Email ID<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="email" class="form-control" id="gst_email_id" formControlName="gst_email_id" >
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="gst_state"  class="required col-sm-12 col-form-label">GST State<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <!-- <select id="gst_state" class="form-control" formControlName="gst_state">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let c of countriesList" value="{{c.id}}">{{c.name}}</option>
+                        </select> -->
+                        <input formControlName="gst_state" type="text" class="form-control"
+                                placeholder="State" id="appReference"
+                                (keyup)="getAutoCompleteState($event,'from')" list="dynamicLocationsOrigin">
+                            <ul class="droplocations" id="dynmicLocations">
+                                <li *ngFor="let state of statesList" (click)="onStateSelect(state)">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    {{state?.state_code}}-{{state?.name}}
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="type"  class="required col-sm-12 col-form-label">Type<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="type"  class="form-control" formControlName="type">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let type of typeList" value="{{type}}">{{type}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+                <div class="btn-group  pl-0 mt-3">
+                    <div class="form-group required row">
+                        <div class="col-12 d-flex">
+                            <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                (click)="onSubmit()">Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>   
+       
+
+           <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+            <form class="" [formGroup]="fileConfig" autocomplete="off">
+                <div class="title pl-0">
+                    <h3>GST CSV File Upload <a (click)="onDownload()" [ngClass]="{'clicked': isClicked,'visited':!isClicked}">(Download CSV Sample)</a></h3>
+                </div>
+                <!-- <div class="form-group row">
+                    <label for="upload_client_name"  class="required col-sm-12 col-form-label">Client Name<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="upload_client_name" class="form-control" formControlName="upload_client_name">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let client of clientList" value="{{client?.first_name+' '+client?.last_name}}">{{getFullName(client?.title,client?.first_name,client?.last_name)}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="upload_module_name" class="required col-sm-12 col-form-label">Module Name<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="upload_module_name" class="form-control" formControlName="upload_module_name">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let module of moduleList" value="{{module}}">{{module}}</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="form-group row">
+                    <div class="col-4 p-0">
+                    <label for="upload_file"  class="required col-sm-12 col-form-label">File Upload<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input formControlName="upload_file" type="file" class="form-control" style="font-size: 14px; padding: 10px;" (change)="uploadFile($event)" accept="image/*" accept=".csv">
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="btn-group pl-0 mt-3">
+                    <div class="form-group required row">
+                        <div class="col-12 d-flex">
+                            <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                (click)="onCSVUpload()">Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onFileReset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+a {
+    text-decoration: underline !important;
+    color: blue !important; 
+}
+  
+a:visited {
+  color: purple !important; 
+}
+  
+a.clicked {
+  text-decoration: none !important; 
+  color: green !important; 
+}

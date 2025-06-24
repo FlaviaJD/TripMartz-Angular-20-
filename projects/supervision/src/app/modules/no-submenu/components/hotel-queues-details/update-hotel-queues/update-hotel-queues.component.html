@@ -1,0 +1,480 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form d-flex">
+            <div class="col-md-12 p-0"> 
+            <form class="" [formGroup]="updateHotelConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>Update Hotel/GuestHouse Booking</h3>
+                </div>
+                <hr>
+
+                <div class="title pl-30">
+                    <h3>Hotel Details</h3>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="property"  class="required col-sm-12 col-form-label">Property <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="property" class="form-control" formControlName="property" (change)="clearHotelName($event.target.value)">
+                            <option selected disabled value="">Please Select</option>
+                            <option style="text-transform: capitalize" *ngFor="let property of propertyList" value="{{property}}">{{property}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="booking_id" class="required col-sm-12 col-form-label">Confirmation/Reference No <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="BookingId" class="form-control" 
+                            id="booking_id" maxlength="100">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="hotel_name"  class="required col-sm-12 col-form-label">Hotel/GuestHouse Name <span class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <mat-form-field appearance="fill" style="padding-left: 0; width: 100%;" *ngIf="updateHotelConfig.get('property').value == 'TripMartz'">
+                            <div class="autocomplete-container" >
+                                <input type="text"  id="hotel_name" formControlName="HotelName" matInput class="form-control form-control-sm nrm_input"
+                                    [matAutocomplete]="auto">
+                                <button mat-button *ngIf="updateHotelConfig.get('HotelName').value" matSuffix mat-icon-button aria-label="Clear"
+                                    (click)="updateHotelConfig.get('HotelName').setValue('')">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+                                <mat-option *ngFor="let hotel of filteredHotelNames | async" [value]="hotel?.HotelName" [id] ="hotel?.HotelCode" style="text-transform: capitalize;">
+                                    {{ hotel?.HotelName }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <input type="text"  id="hotel_name" formControlName="HotelName"  class="form-control form-control-sm nrm_input" *ngIf="updateHotelConfig.get('property').value != 'TripMartz'">
+                        <span *ngIf="!hotelSelected" class="requiredText">
+                            Please select a hotel name from the dropdown.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="phone_number"  class="required col-sm-12 col-form-label">Hotel Phone Number <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="HotelContactNo" class="form-control form-control-sm nrm_input"
+                            id="phone_number" maxlength="15" appNumericOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="hotel_address" class="required col-sm-12 col-form-label">Hotel Address <span class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="HotelAddress" class="form-control"
+                            id="hotel_address" >
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="state"  class="required col-sm-12 col-form-label">Hotel/GuestHouse State<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                            <input type="text" formControlName="state" id="state" style="border-radius: 9px 0px 0px 9px !important;"
+                                class="form-control form-control-sm nrm_input" formControlName="state"
+                                 (keyup)="getSearchedList($event)" (focus)="setCurrentInput('state')"
+                                autocomplete="off" #state>
+                            <div *ngIf="updateHotelConfig.controls.state.valid && isCurrentInput('state')">
+                                <app-hotel-state-list (whichCity)="getDynamicCity($event)" [getCity]="searchedList" [inputFor]="'state'">
+                                </app-hotel-state-list>
+                            </div>
+                            <span *ngIf="!stateSelected" class="requiredText">
+                                Please select a state from the dropdown.
+                            </span>
+                    </div>
+                </div>
+             
+                <div class="col-4 p-0">
+                    <label for="hotel_check_in" class="required col-sm-12 col-form-label">Hotel CheckIn <span class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="hotel_check_in" autocomplete="off" formControlName="HotelCheckIn"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" readonly
+                         bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="checkin_time" class="required col-sm-12 col-form-label">Hotel CheckIn Time<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select class="form-control form-control-sm nrm_input"
+                            (change)="onChange($event.target.value,'checkin_time')" formControlName="checkin_time">
+                            <option value="" disabled selected>Please Select</option>
+                            <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                {{ time }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="hotel_check_out" class="required col-sm-12 col-form-label">Hotel CheckOut <span class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <input type="text" id="hotel_check_out" autocomplete="off" formControlName="HotelCheckOut"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" readonly
+                         bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="checkout_time" class="required col-sm-12 col-form-label">Hotel CheckOut Time <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                            <select class="form-control form-control-sm nrm_input"
+                                (change)="onChange($event.target.value,'checkout_time')" formControlName="checkout_time">
+                                <option value="" disabled selected>Please Select</option>
+                                <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                    {{ time }}
+                                </option>
+                            </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="start_ratings" class="required col-sm-12 col-form-label">Start Rating<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select class="form-control form-control-sm nrm_input" (change)="onChangeStar($event.target.value)"
+                            formControlName="StarRating">
+                            <option value="" disabled selected>Please Select</option>
+                            <option *ngFor="let starRating of starRating" [value]="starRating" class="ui-menu-item">
+                                {{ starRating }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <hr>
+                <div class="title pl-30">
+                    <h3>Room & Pasenger Details</h3>
+                </div>
+                <div formArrayName="roomDetails">
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <label for="name" class="required col-sm-12 col-form-label">Name<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="rooms"  class="required col-sm-12 col-form-label">Room Number<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="max_occupancy" class=" required col-sm-12 col-form-label">Occupancy <span class="text-danger">*</span></label>
+                    </div>
+                </div>
+                <div *ngFor="let roomDetail of roomDetails.controls; let i = index">
+                <div class="row" [formGroupName]="i">
+                <div class="col-4 p-0">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="name" formControlName="passengerName" disabled>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <div class="col-sm-12">
+                        <select id="rooms" class="form-control" formControlName="RoomId" (change)="setRoomId($event.target.value)">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let room of roomList" value="{{room}}">{{room}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <div class="col-sm-12">
+                        <select id="max_occupancy" style="text-transform: capitalize;" class="form-control" formControlName="max_occupancy" (change)="setMaxOccupancy($event.target.value)">
+                            <option selected disabled value="">Please Select</option>
+                            <option value="1">Single</option>
+                            <option value="2">Double</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <br>
+            </div>
+            </div>
+
+            <ng-container *ngIf="shouldShowClubBooking()">
+                <hr>    
+                <div class="title pl-30">
+                    <h3>Club Booking<span class="text-danger">*</span></h3>
+                </div>
+                <div class="col-md-12 mt-2 mb-2 p-0 required cust-radio-group">
+                    <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                        <div class="col-auto p-0">
+                            <label>
+                                <input type="radio"  formControlName="is_club_booking" [value]="true"
+                                    (change)="setClubBooking(true)"  type="radio" />
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px; font-size: 16px; font-weight: 500;">Yes</span>
+                            </label>
+                        </div>
+                        <div class="col-auto pl-3">
+                            <label>
+                                <input type="radio" formControlName="is_club_booking" [value]="false"
+                                (change)="setClubBooking(false)"
+                                    type="radio" />
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px; font-size: 16px; font-weight: 500;">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="showDiv.club">
+                    <div class="col-4 p-0">
+                        <label for="rooms"  class="required col-sm-12 col-form-label">Room Number <span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <select id="rooms" class="form-control" (change)="setSelectedRoom($event.target.value)" formControlName="RoomId">
+                                <option selected disabled value="">Please Select</option>
+                                <option *ngFor="let room of singleRoom" value="{{room}}">{{room}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="dc" class="required col-sm-12 col-form-label">Request ID<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="request_id" formControlName="request_id">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="person_name" class="required col-sm-12 col-form-label">Person Name <span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="person_name" formControlName="person_name">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="dc" class="required col-sm-12 col-form-label">Cost Center<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="cost_center" formControlName="cost_center">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="dc" class="required col-sm-12 col-form-label">Emp ID<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="emp_id" formControlName="emp_id">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="Department" class="required col-sm-12 col-form-label">Department<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="Department" formControlName="Department">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="EmployeeBand" class="required col-sm-12 col-form-label">Employee Band<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="EmployeeBand" formControlName="EmployeeBand">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="dc" class="required col-sm-12 col-form-label">Mobile No.<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="MobileNo" formControlName="MobileNo" appNumericOnly maxlength="15">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="Email" class="required col-sm-12 col-form-label">Email<span class="text-danger" *ngIf="showDiv.club">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="Email" formControlName="Email">
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+                <hr>
+                <div class="title pl-30">
+                    <h3>Early Checkin / Checkout Details</h3>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="early_checkin" class="required col-sm-12 col-form-label">Early CheckIn <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="early_checkin" class="form-control" formControlName="early_checkin">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let earlyCheckin of earlyCheckinList" value="{{earlyCheckin}}" style="text-transform:capitalize">{{earlyCheckin}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-4 p-0">
+                    <label for="early_check_in_supplier_charge" class="required col-sm-12 col-form-label">Early CheckIn Supplier Charge <span class="text-danger" *ngIf="updateHotelConfig.get('early_checkin').value =='Yes'">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="early_check_in_supplier_charge" formControlName="early_check_in_supplier_charge" appDecimalOnly>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="late_checkOut"  class="required col-sm-12 col-form-label">Late CheckOut <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="late_checkOut" class="form-control" formControlName="late_checkout">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let earlyCheckin of earlyCheckinList" value="{{earlyCheckin}}" style="text-transform:capitalize">{{earlyCheckin}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="early_check_out_supplier_charge" class="required col-sm-12 col-form-label">Late CheckOut Supplier Charge<span class="text-danger" *ngIf="updateHotelConfig.get('late_checkout').value =='Yes'">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="early_check_out_supplier_charge" formControlName="early_check_out_supplier_charge" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="supplier_supplementary_charge"  class="required col-sm-12 col-form-label">Supplementary Charges</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="supplier_supplementary_charge" formControlName="supplier_supplementary_charge" appDecimalOnly disabled>
+                    </div>
+                </div>
+                </div>
+                
+                <div class="title pl-30" *ngIf="enableSingleTarrief || enableDoubleTarrief">
+                    <hr>
+                     <h3>Tariff</h3>
+                </div>
+            
+                <ng-container *ngIf="enableSingleTarrief">
+                <div class="title mt-3 pl-30">
+                    <h5>Single Tariff Details
+                    </h5>
+                </div>
+                <div class="row">
+                <div class="col-4 p-0">
+                    <label for="single_basic_fare"  class="required col-sm-12 col-form-label">Basic Fare <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_basic_fare" formControlName="single_basic_fare" appDecimalOnly>
+                    </div>
+                </div>
+                
+                <div class="col-4 p-0">
+                    <label for="single_Tax" class="required col-sm-12 col-form-label">Tax (in %)<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_Tax" formControlName="single_Tax" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="single_TotalFare" class="required col-sm-12 col-form-label">Total Fare <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_TotalFare" formControlName="single_TotalFare" appNumericOnly disabled>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="single_supplier_basic" class="required col-sm-12 col-form-label">Supplier Basic <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_supplier_basic" formControlName="single_supplier_basic" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="single_supplier_tax" class="required col-sm-12 col-form-label">Supplier Tax <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_supplier_tax" formControlName="single_supplier_tax" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="single_supplier_payable"  class="required col-sm-12 col-form-label">Supplier Payable</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="single_supplier_payable" formControlName="single_supplier_payable" appDecimalOnly disabled>
+                    </div>
+                </div>
+                </div>
+                </ng-container>
+                <ng-container *ngIf="enableDoubleTarrief">
+                <div class="title mt-4 pl-30">
+                    <h5>Double Tariff Details
+                    </h5>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <label for="double_basic_fare"  class="required col-sm-12 col-form-label">Basic Fare <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_basic_fare" formControlName="double_basic_fare" appDecimalOnly>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="double_Tax" class="required col-sm-12 col-form-label">Tax (in %)<span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_Tax" formControlName="double_Tax" appDecimalOnly>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="double_TotalFare" class="required col-sm-12 col-form-label">Total Fare <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_TotalFare" formControlName="double_TotalFare" appNumericOnly disabled>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="double_supplier_basic" class="required col-sm-12 col-form-label">Supplier Basic <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_supplier_basic" formControlName="double_supplier_basic" appDecimalOnly>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="double_supplier_tax" class="required col-sm-12 col-form-label">Supplier Tax <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_supplier_tax" formControlName="double_supplier_tax" appDecimalOnly>
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="double_supplier_payable"  class="required col-sm-12 col-form-label">Supplier Payable</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="double_supplier_payable" formControlName="double_supplier_payable" appDecimalOnly disabled>
+                        </div>
+                    </div>
+                    </div>
+                </ng-container>
+                    <hr>
+                    <div class="title pl-30">
+                        <h3>Other Details
+                        </h3>
+                    </div>
+                <div class="row">
+                    <div class="col-4 p-0">
+                    <label for="payment_mode" class="required col-sm-12 col-form-label">Payment Mode <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="payment_mode" class="form-control" formControlName="PaymentMode">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let paymentMode of paymentModeList" value="{{paymentMode}}">{{paymentMode}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="room_type"  class="required col-sm-12 col-form-label">Room Type <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="room_type" class="form-control" formControlName="RoomType">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let roomType of roomType" value="{{roomType}}" style="text-transform:capitalize">{{roomType}}</option>
+                        </select>                      
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="voucher_occupancy" class=" required col-sm-12 col-form-label">Voucher Occupancy<span
+                        class="text-danger">*</span> </label>
+                    <div class="col-sm-12">
+                        <select id="voucher_occupancy" style="text-transform: capitalize;" class="form-control" formControlName="voucher_occupancy">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let voucher of voucherList" value="{{voucher}}" style="text-transform:capitalize">{{voucher}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="status"  class="required col-sm-12 col-form-label">Booking Status <span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="status" class="form-control" formControlName="status">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let status of statusList" [value]="status">{{ getFormattedStatus(status) }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-9 p-0">
+                    <label for="payment_remarks" class="required col-sm-12 col-form-label">Payment Remarks </label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="payment_remarks" formControlName="Remarks">
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group mt-3">
+                <div class="form-group required row">
+                    <div class="col-12 d-flex">
+                        <button type="submit" class="btn-sm btn-primary lg mr-4"
+                            (click)="onSubmit()">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            </form>
+        </div>   
+        </div>
+    </div>
+</div>
+
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

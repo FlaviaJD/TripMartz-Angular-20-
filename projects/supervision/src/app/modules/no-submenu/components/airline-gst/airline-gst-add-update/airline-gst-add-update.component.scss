@@ -1,0 +1,38 @@
+.droplocations {
+    background: #fbfbfb;
+    position  : absolute;
+    width     : 93%;
+    max-height: 113px;
+    overflow  : auto;
+    display   : block;
+    z-index: 1;
+}
+
+.droplocations li {
+    display   : block;
+    padding   : 10px 15px;
+    color     : #000;
+    font-size : 14px;
+    box-shadow: 0px 0px 1px 0px #8c8c8c;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: 1px solid #86a4c3;
+    padding: 0px;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white !important;
+    padding: 0 !important;
+}
+
+::ng-deep .dropdown-list .item1 li:first-child{ display: none !important;}
+::ng-deep .multiselect-dropdown .dropdown-btn { padding: 8px 12px !important;}
+::ng-deep .dropdown-btn span:last-child span:first-child { position: absolute !important;
+    right: 20px;
+    top: 10px;}
+
+    .mat-option {
+        text-align: left;
+        text-transform: capitalize;
+    }

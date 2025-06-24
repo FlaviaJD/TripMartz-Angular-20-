@@ -1,0 +1,24 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_cab_queue" [disabled]="!enableUpdate">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;Update Cab Cancellation Details	
+                    </span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-update-cancellation-cab-queues [cabUpdateData]="cabUpdateData" (back)="showList(false)"></app-update-cancellation-cab-queues>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="cab_queues">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Cancellation Cab Queues</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-cancellation-cab-queues (cabQueueUpdate)="triggerTab($event)"></app-cancellation-cab-queues>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="card mb-3">
+    <div class="card-header-tab card-header bg-dark text-white">
+        <div class="card-header-title font-size-lg text-uppercase font-weight-normal">
+            <i class="header-icon fa fa-credit-card"></i>
+            <h5>{{' Currency Converter '}}</h5>
+        </div>
+    </div>
+    <form class="m-4">
+        <div class="table-btn-group mb-3 exportWrapper" style="margin-top: 30px;">
+            <div class="col-12 p-0">
+               <h5><strong> Note: Currency conversion is from INR to Other.</strong></h5>
+            </div>
+        </div>
+        <div class="table-btn-group mb-3 exportWrapper" style="margin-top: 30px;">
+            <div class="col-12 p-0">
+                <button type="button" class="btnStyle" routerLink="/settings/add-currency">Add Currency</button>
+                <div class="form-group mb-0 col-sm-3 p-0 float-right has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input placeholder="Search" class="form-control" type="text" name="searchTerm"
+                        (keyup)="applyFilter($event.target.value)" />
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-borderless table-striped table-hover" matSort (matSortChange)="sortData($event)">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-left" *ngFor="let header of displayColumn;"
+                            mat-sort-header="{{header.key}}">
+                            {{header.value }} </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="noData">
+                        <td colspan="4">
+                            <mat-spinner [diameter]="30" style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!noData && !currencyConverisonData.length">
+                        <td colspan="4">
+                            <h4 class="text-muted text-center">
+                                No Data Found!
+                            </h4>
+                        </td>
+                    </tr>   
+                    <tr *ngFor="let data of currencyConverisonData | slice: (page-1)*pageSize: (page-1)*pageSize + pageSize; let i=index;">
+                        <td class="text-left text-muted">{{i+1}}.</td>
+                        <td class="text-left"> {{data['currency']}} </td>
+                        <td class="text-left">
+                            <span title="Slide for Active/Deactive">
+                                <mat-slide-toggle class="example-margin" [color]="''" [checked]="data['status']"
+                                    name="status{{i}}" [(ngModel)]="data['status']" name="status{{i}}" (change)="onUpdateStatus($event,data)">
+                                </mat-slide-toggle>
+                            </span>
+                        </td>
+                        <td class="text-left">
+                            <input type="number" name="conversionRate{{i}}" [(ngModel)]="data['value']" class="form-control"  maxlength="250">
+                        </td>
+                        <td class="text-left">
+                            <button class="btn btn-sm btn-primary"  [disabled]="data.value==null" (click)="onUpdate(data)"> {{'Update'}} </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer pb-0">
+            <div class="d-flex w-100 justify-content-between">
+                <ngb-pagination [collectionSize]="collectionSize" [maxSize]="12" [rotate]="true"
+                                [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize">
+                </ngb-pagination>
+                <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                    <option [ngValue]="2">2 items per page</option>
+                    <option [ngValue]="4">4 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
+                    <option [ngValue]="50">50 items per page</option>
+                    <option [ngValue]="100">100 items per page</option>
+                    <option [ngValue]="200">200 items per page</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,243 @@
+<div class="">
+    <hr>
+    <div class="card mb-3">
+        <form [formGroup]="regConfig" autocomplete="off">
+            <div>
+                    <div class="form-group row">
+
+                        
+                        <label for="agent_id" class="col-sm-2">Corporate List<span class="text-danger">*</span>&nbsp;</label>
+                        <mat-form-field class="col-sm-5"  appearance="fill" style="padding-left: 0;">
+                            <input type="text" placeholder="Choose..."  class="" matInput formControlName="agent_id"
+                                [matAutocomplete]="auto" [readonly]="addOrUpdate=='update'?true:null" >
+                            <mat-autocomplete class="text-uppercase" #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+                                <mat-option *ngFor="let agent of filteredOptions  | async"
+                                    [value]="agent.business_name+' ('+ agent.uuid +')'" [id]="agent.id">
+                                    {{agent.business_name}} ({{agent.uuid}})
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group row">
+                        <label for="airline_type" class="col-sm-2">Airline Type<span class="text-danger">*</span>&nbsp;</label>
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <label>
+                                    <input type="radio" value="Domestic" formControlName="airline_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Domestic</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="International" formControlName="airline_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">International</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="airlines" class="col-sm-2">Airline Name<span class="text-danger">*</span> &nbsp;</label>
+                        <mat-form-field class="col-sm-5" appearance="fill" style="padding-left: 0;">
+                            <input type="text" placeholder="Choose..." class="" matInput formControlName="airlines"
+                                [matAutocomplete]="autoAirline" [readonly]="addOrUpdate=='update'?true:null">
+                            <mat-autocomplete #autoAirline="matAutocomplete" (optionSelected)="checkAirline($event)">
+                                <mat-option *ngFor="let airline of filteredAirline  | async"
+                                    [value]="airline.name +' '+' ('+ airline.code +')'" [id]="airline.id">
+                                    {{airline.name}} ({{airline.code}})
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fare_type" class="col-sm-2">Fare Type<span class="text-danger">*</span>&nbsp;</label>
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <label>
+                                    <input type="radio" value="Retail" formControlName="fare_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Retail</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="Corporate" formControlName="fare_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Corporate</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="SME" formControlName="fare_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">SME</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="All" formControlName="fare_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">All</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="policy_type" class="col-sm-2">Policy Type&nbsp;</label>
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <label>
+                                    <input type="radio" value="Markup" formControlName="policy_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Markup</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="Discount" formControlName="policy_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Discount</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="policy_markup_type" class="col-sm-2">Markup Added On&nbsp;</label>
+                        <div class="d-flex align-items-center">
+                            <div class="">
+                                <label>
+                                    <input type="radio" value="ManagementFee" formControlName="policy_markup_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Management Fee</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="MarkupOnBasic" formControlName="policy_markup_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Markup on Basic</span>
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <label>
+                                    <input type="radio" value="MarkupOnTax" formControlName="policy_markup_type">
+                                    <span class="design"></span>
+                                    <span class="text" style="margin-left: 4px;">Markup on Tax</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="value_type" class="col-sm-2">Markup Type <span class="text-danger">*</span>&nbsp;</label>
+                        <div class="col-auto p-0">
+                            <label>
+                                <input type="radio" value="plus" formControlName="value_type" checked/>
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Plus</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="percentage" formControlName="value_type" />
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Percentage</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="value" class="col-sm-2">Markup Value<span class="text-danger">*</span>&nbsp;</label>
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="value" class="form-control col-sm-5" />
+                    </div>
+
+                <div formArrayName="segments">
+                    <div class="row" style="position: relative;"
+                        *ngFor="let segment of segments()?.controls; let i=index;let last=last" [formGroupName]="i">
+
+                        <div class="form-group col-md-4">
+                            <label for="from_airport_name">From</label>
+                            <input formControlName="from_airport_name" type="text" class="form-control"
+                                placeholder="From Airport" id="appReference"
+                                (keyup)="getAutoCompleteLocations($event,'from', i)" list="dynamicLocationsOrigin">
+                            <ul class="droplocations" id="dynmicLocations" *ngIf="i==selectedCity">
+                                <li *ngFor="let location of locationsOrigin" (click)="selectedOrigin(location, i)">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                    {{location | map: getAirportLocation}}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="to_airport_name">To</label>
+
+                            <input formControlName="to_airport_name" type="text" class="form-control"
+                                placeholder="To Airport" id="phone" (keyup)="getAutoCompleteLocations($event,'to', i)"
+                                list="dynamicLocationsDest">
+                            <ul class="droplocations" id="dynmicLocations" *ngIf="i==selectedCity">
+                                <li *ngFor="let location of locationsDestination" (click)="selectedDest(location, i)">
+                                    <i class="fa fa-trash"></i>
+                                    {{location | map: getAirportLocation}}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <div> 
+                                <!-- <label for="to_airport_name">Percentage</label> -->
+                                <div class="d-flex">
+                                <div class="col-auto p-0">
+                                    <label>
+                                        <input type="radio" value="plus" formControlName="value_type"/>
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;">Plus</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-auto">
+                                    <label>
+                                        <input type="radio" value="percentage" formControlName="value_type" />
+                                        <span class="design"></span>
+                                        <span class="text" style="margin-left: 4px;">Percentage</span>
+                                    </label>
+                                </div>
+                                </div>
+                                <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' formControlName="value" class="form-control"
+                                     />
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+
+                            <label for="city">&nbsp;</label>
+                            <button class="col-sm-1" class="rmvBtn" (click)="removeSegment(i)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                            <div class="col-4" *ngIf="last">
+                                <button type="button" class="btn btn-primary" (click)="addMoreSegments()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <div id="allbtn" class="customCenter">
+                                <span class="p-1">
+                                    <button (click)="onSubmit()" class="btn btn-primary p-1">{{addOrUpdate |
+                                        uppercase}}</button>
+                                </span>
+                                <span class="p-1">
+                                    <button type="reset" class="btn btn-primary p-1" (click)="reset()">RESET</button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

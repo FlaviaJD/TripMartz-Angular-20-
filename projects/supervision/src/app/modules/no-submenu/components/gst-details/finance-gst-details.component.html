@@ -1,0 +1,23 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_gst">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;  Add/Update GST</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-finance-gst-add-update (gstUpdate)="triggerTab($event)"></app-finance-gst-add-update>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="gst_list">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; GST List</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-finance-gst-list (gstUpdate)="triggerTab($event)"></app-finance-gst-list>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

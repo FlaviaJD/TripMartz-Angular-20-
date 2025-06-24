@@ -1,0 +1,51 @@
+.select_passenger{ padding: 0px !important;}
+
+.select_passenger option {
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+    padding: 10px 10px; /* Padding */ border-bottom: 1px solid #ddd; position: relative;
+  }
+
+  .select_passenger option:after { 
+    position: absolute; 
+    content: "\f054"; 
+    font-family: 'FontAwesome';
+    right: 15px;
+}
+ 
+  .select_passenger option:hover { background-color: #065081; color: #fff;}
+
+
+  .select_passenger1{ padding: 0px !important;}
+
+.select_passenger1 option {
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+    padding: 10px 10px; /* Padding */ border-bottom: 1px solid #ddd; position: relative; padding-left: 45px;
+  }
+
+  .select_passenger1 option:after { 
+    position: absolute; 
+    content: "\f053"; 
+    font-family: 'FontAwesome';
+    left: 15px;
+}
+ 
+  .select_passenger1 option:hover { background-color: #065081; color: #fff;}
+
+.pax_select{ background-image: none; appearance: none; -webkit-appearance: none; width: 100%; max-height: 114px; overflow: auto;}
+.pax_select[size="0"]{height: 20px;}
+
+.pax_select::-webkit-scrollbar {
+    width: 9px;
+    height: 100%;
+}
+.pax_select::-webkit-scrollbar-button {
+    background: #000
+}
+.pax_select::-webkit-scrollbar-track-piece {
+    background: #ccc
+}
+.selectpax_select_passenger::-webkit-scrollbar-thumb {
+    background: #eee
+}

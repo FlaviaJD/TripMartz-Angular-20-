@@ -1,0 +1,32 @@
+// Main Base
+
+.app-main__outer {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  z-index: 8;
+  padding: $app-header-height 0 0 240px;
+  transition: all .2s;
+}
+
+// .app-main__inner {
+//   padding: ($grid-gutter-width + 15) ($grid-gutter-width + 15) 0 ($grid-gutter-width + 5);
+//   flex: 1;
+//   background: #F1F1F1;
+// }
+
+.body-tabs {
+  margin: (-($grid-gutter-width / 3)) 0 ($grid-gutter-width / 1.3);
+}
+
+// Themes
+
+@import "themes/main-white";
+
+//chakri changes
+.app-main__inner {
+    padding: 25px !important;
+    flex: 1; 
+    background: #e9e9e9;
+    // background: #f3f2f7;
+  }

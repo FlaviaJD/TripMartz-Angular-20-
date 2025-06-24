@@ -1,0 +1,219 @@
+<div class="card-header text-uppercase bg-dark text-white">
+    <h5 style="border-bottom: 0;">
+        <i class="fa fa-edit"></i>
+      ICICI Hotel Queues
+    </h5>
+</div>
+<div class="card">
+    <form [formGroup]="regConfig">
+        <div class="row">
+            <div class="col-4 p-0">
+                <div class="form-group">
+                    <label for="hotel_app_reference">Reservation Code</label>
+                    <input formControlName="hotel_app_reference" type="text"
+                        class="form-control form-control-sm nrm_input"
+                        placeholder="Application Reference" id="hotel_app_reference">
+                </div>
+            </div>
+            <div class="col-4 pr-0">
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select formControlName="hotel_status" name="hotel_status" id="hotel_status"
+                        class="form-control form-control-sm nrm_input">
+                        <option value="BOOKING_PENDING">BOOKING PENDING</option>
+                    </select>
+                    <div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 pr-0">
+                <div class="form-group">
+                    <span class="icon depart_date" (click)="isOpen= !isOpen"></span>
+                    <label for="booked_from_date">Booked From Date</label>
+                    <input formControlName="hotel_booked_from_date" type="text" id="hotel_booked_from_date" autocomplete="off"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                        bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false" [maxDate]="maxDate">
+                </div>
+            </div>
+            <div class="col-4 p-0">
+                <div class="form-group">
+                    <span class="icon depart_date" (click)="isOpen= !isOpen"></span>
+                    <label for="hotel_booked_to_date">Booked To Date</label>
+                    <input formControlName="hotel_booked_to_date" type="text" id="hotel_booked_to_date" autocomplete="off"
+                        class="form-control form-control-sm nrm_input" placement="bottom left" placeholder="dd-mm-yyyy"
+                        bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen"  onkeydown="return false" [maxDate]="maxDate">
+                </div>
+            </div>
+        </div>
+        <div class="btncontainer">
+            <button type="submit" class="btnStyle" (click)="onSearchSubmit()">Search</button> &nbsp;
+            <button type="button" class="btnStyle" (click)="onReset()">Reset</button>
+        </div>
+    </form>
+</div>
+
+<div class="card" style="margin-top: 30px;">
+    <div class="card-body p-0">
+        <p>Total {{respData?.length}} Bookings</p>
+        <div style="padding-bottom:15px;">
+            <div class="col-12 p-0">
+                <button class="btnStyle" (click)="exportExcel()">Export to Excel</button>
+                <div class="form-group mb-0 col-sm-3 p-0 float-right has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input class="form-control" type="text" name="Search" [(ngModel)]="searchText"
+                        autocomplete="off" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        
+            <div class="mb-3">
+                <form>
+                    <div class="wrapper1" id="notifications-list" (scroll)="scrollTwo.scrollLeft = scrollOne.scrollLeft"
+                        #scrollOne>
+                        <div class="div1"></div>
+                    </div>
+                    <div class="wrapper2" #scrollTwo (scroll)="scrollOne.scrollLeft = scrollTwo.scrollLeft">
+                        <div class="div2 invisible-scrollbar">
+                            <div class="table-respons">
+                                <table class="table table-borderless table-striped table-hover" matSort
+                                    (matSortChange)="sortData($event)" id="b2b-flight-data">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-left text-nowrap"
+                                                *ngFor="let header of displayColumn;" mat-sort-header="{{header.key}}">
+                                                {{header.value }}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="noData">
+                                            <td colspan="10">
+                                                <mat-spinner [diameter]="30" style="margin:0 auto;"
+                                                    mode="indeterminate"></mat-spinner>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                            *ngIf="!noData && (!respData.length || (respData | filter:searchText).length === 0)">
+                                            <td colspan="12">
+                                                <h4 class="text-muted text-center">
+                                                    No Data Found!
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr
+                                        *ngFor="let data of respData | filter:searchText | slice: (page - 1) * pageSize : (page - 1) * pageSize + pageSize; let i=index;">
+                                            <td class="text-left text-muted">{{i+1}}.</td>
+                                            <td class="text-left overflow-hidden">
+                                                <div ngbDropdown container="body"><button class="btnStyle"
+                                                        ngbDropdownToggle>
+                                                        {{'Action'}}
+                                                    </button>
+                                                    <div ngbDropdownMenu>
+                                                            <button  ngbDropdownItem (click)="updateHotelQueue(data)">Update</button>
+                                                            <button *ngIf="data?.HotelDetails?.BookingStatus == 'BOOKING_PENDING'"  ngbDropdownItem (click)="confirmDelete(data)">Reject</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-left text-capitalize"><a class="change" [routerLink]="['/icic-hotel-details']" 
+                                                [queryParams]="{appReference: data?.HotelDetails?.AppReference}">{{data?.HotelDetails?.request_id}}</a></td>
+                                            <td class="text-left">
+                                                <span *ngIf="data?.HotelDetails?.BookingStatus == 'BOOKING_PENDING'"
+                                                    class="badge badge-primary text-white">
+                                                    Booking Pending
+                                                </span>
+                                            </td>
+                                            <td class="text-left" *ngIf="data?.HotelDetails?.ApprovalRequired=='YES'">
+                                                <span
+                                                class="badge" [ngClass]="{ 'badge-warning' : (data?.HotelDetails?.ApprovalStatus!='Approve' && data?.HotelDetails?.ApprovalStatus!='NOT REQUIRED'),'badge-primary' : data?.HotelDetails?.ApprovalStatus=='NOT REQUIRED', 'badge-success' : data?.HotelDetails?.ApprovalStatus=='Approve' , 'badge-danger' : data?.HotelDetails?.ApprovalStatus=='Reject'}">
+                                                {{(data?.HotelDetails?.ApprovalStatus || 'PENDING')}}
+                                            </span>
+                                            </td>
+                                            <td  class="text-left" *ngIf="data?.HotelDetails?.ApprovalRequired=='NO'">
+                                                <span class="badge badge-info">
+                                                    NOT REQUIRED
+                                                </span>
+                                            </td>
+                                            <!-- <td class="text-left">{{data?.HotelDetails?.BookingType || 'N/A'}} </td> -->
+                                            <td class="capitalize">{{data?.PaxDetails[0]?.FirstName}} {{data?.PaxDetails[0]?.LastName}}</td>
+                                            <td class="text-left"> {{data?.HotelDetails?.BookingRequestType || 'N/A'}} </td>
+                                            <!-- <td class="text-left"> {{data?.HotelDetails?.BookingRequestId || 'N/A'}} </td> -->
+                                            <td class="text-left"> {{(data?.HotelDetails?.HotelName) || 'N/A'}}</td>
+                                            <td class="text-left"> {{(data?.HotelDetails?.GuestHouse) || 'N/A'}}</td>
+                                            <td class="text-left"> {{(data?.HotelDetails?.MealPreference) || 'N/A'}}</td>
+                                            <td class="text-left"> {{data?.HotelDetails?.City}}</td>
+                                            <td class="text-left"> {{data?.HotelDetails?.Location}}</td>
+                                            <td class="text-left"> {{data?.HotelDetails?.CheckInDate  | date: 'dd MMM yyyy'}}</td>
+                                            <td class="text-left"> {{(data?.HotelDetails?.CheckInTime ) || 'N/A'}}</td>
+                                            <td class="text-left"> {{(data?.HotelDetails?.CheckOutDate  | date: 'dd MMM yyyy') || 'N/A'}}</td>
+                                            <td class="text-left"> {{(data?.HotelDetails?.CheckOutTime) || 'N/A'}}</td>
+                                            <td class="text-left">{{data?.HotelDetails?.CreatedAt | date: 'dd MMM yyyy'}} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer pb-0">
+                        <div class="d-flex w-100 justify-content-between">
+                            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"[maxSize]="12" [rotate]="true"
+                            [boundaryLinks]="true">
+                            </ngb-pagination>
+                            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
+                                <option [ngValue]="10">10 items per page</option>
+                                <option [ngValue]="50">50 items per page</option>
+                                <option [ngValue]="100">100 items per page</option>
+                                <option [ngValue]="150">150 items per page</option>
+                                <option [ngValue]="200">200 items per page</option>
+                                <option [ngValue]="500">500 items per page</option>
+                                <option [ngValue]="700">700 items per page</option>
+                                <option [ngValue]="1000">1000 items per page</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="modal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true"
+    [style.display]="showConfirm ? 'block' : 'none'">
+    <div class="modal-dialog  modal-sm" role="document" *ngIf="!showReject">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you really want to reject?</p>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn btn-success" (click)="showRejectReason()">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-dialog  modal-sm" role="document" *ngIf="showReject">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Enter Rejection Remark <span class="required">*</span></p>
+                <input type="text" class="form-control form-control-sm nrm_input" [(ngModel)]="cancellationRemark">
+                <span *ngIf="cancellationRemark==''" class="mandatory">Cancellation Remark Required</span>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button type="button" class="btn btn-success" (click)="deleteRequest()">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="hide()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

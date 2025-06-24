@@ -1,0 +1,26 @@
+.blob-1,.blob-2{
+    width:70px;
+    height:70px;
+    position:absolute;
+    background:#000;
+    border-radius:50%;
+    top:50%;left:50%; border: none;
+    
+  }
+  .blob-1{
+    left:20%;
+    animation:osc-l 2.5s ease infinite;
+  }
+  .blob-2{
+    left:80%;
+    animation:osc-r 2.5s ease infinite;
+    background:#0ff;
+  }
+  .centered{
+    width:200px;
+    height:300px;
+    position:relative;
+    top:0%;  bottom: 0px; margin: auto;
+    left:0; right: 0px;   background:#f3f2f7;
+    filter: blur(10px) contrast(30);
+  }

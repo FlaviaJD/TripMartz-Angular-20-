@@ -1,0 +1,23 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeTab">
+            <ngb-tab id="add_update_airport">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;  Add Airport</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-add-update-airport (airportUpdate)="triggerTab($event)"></app-add-update-airport>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="airport_list">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Airport List</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-airport-list (airportUpdate)="triggerTab($event)"></app-airport-list>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

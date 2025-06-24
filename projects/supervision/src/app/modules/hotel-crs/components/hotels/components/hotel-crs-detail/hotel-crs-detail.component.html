@@ -1,0 +1,368 @@
+<ng-container >
+    <div class="container p-0">
+        <form [formGroup]="hotelForm" (ngSubmit)="onSubmitHotelDetail()">
+            <fieldset form="hotelImage">
+                <h4 class="form_legend">Add Hotel Details</h4>
+                <div class="row">
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Hotel Type
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="hotel_hotel_type_id" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel?.hotel_hotel_type_id.errors }">
+                            <option value="" disabled selected>Select Hotel Type</option>
+                            <option *ngFor="let hotelType of hotelTypeList" [value]="hotelType.id">
+                                {{hotelType.hotel_type_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel?.hotel_hotel_type_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_hotel_type_id.errors.required">Hotel Type is required</div>
+                        </div>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Hotel Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="hotel_name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_name.errors }" />
+                        <div *ngIf="submittedHotel && hotel.hotel_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_name.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Contract Expiry Date
+                            <span class="text-danger">*</span>
+                        </label>
+                        <!-- <span class="date btn btn-success" (click)="isOpen=!isOpen">
+                            <i class="fa fa-calendar"></i>
+                        </span> -->
+                        <input type="text" id="contract_expiry_date" formControlName="contract_expiry_date"
+                            class="form-control" bsDatepicker [bsConfig]="bsDateConf" [isOpen]="isOpen" readonly>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Star Rating
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="star_rating" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.star_rating.errors }">
+                            <option value="" disabled selected>Select Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.star_rating.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.star_rating.errors.required">Star Rating is required</div>
+                        </div>
+                    </div>
+               
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Amenities
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-multiselect-dropdown #multiSelect formControlName="hotel_hotel_amenities"
+                            [placeholder]="'Select Amenities'" [data]="hotelAmenityList"
+                            [settings]="dropdownSettingsForHotel">
+                        </ng-multiselect-dropdown>
+                        <div *ngIf="submittedHotel && hotel.hotel_hotel_amenities.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_hotel_amenities.errors.required">Amenities are required</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 mb-3">
+                        <label class=" control-label">
+                            Hotel Description
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="hotel_description" style="height: 130px !important;" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_description.errors }"></textarea>
+                        <div *ngIf="submittedHotel && hotel.hotel_description.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_description.errors.required">Hotel Description is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Country
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="core_country_id" class="form-control" (change)="getStateList($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.core_country_id.errors }">
+                            <option value="" disabled selected>Select Country</option>
+                            <option *ngFor="let coreCountry of coreCountryList" [value]="coreCountry.name">
+                                {{coreCountry.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.core_country_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.core_country_id.errors.required">Country is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            State
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="core_state_id" class="form-control" (change)="getCityList($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.core_state_id.errors }">
+                            <option value="" disabled selected>Select State</option>
+                            <option *ngFor="let coreState of coreStateList" [value]="coreState.name">
+                                {{coreState.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.core_state_id.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.core_state_id.errors.required">State is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class="control-label">
+                            City
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select formControlName="city_name" class="form-control"(ngModelChange)="onCityChange($event)"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.city_name.errors }">
+                            <option value="" disabled selected>Select City</option>
+                            <option *ngFor="let coreCity of coreCityList" [value]="coreCity.city_name">
+                                {{coreCity.city_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submittedHotel && hotel.city_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.city_name.errors.required">City is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-12 mb-3">
+                        <label class="control-label">
+                            Hotel Map
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div #mapContainer id="map"></div>
+                    </div>
+               
+                    <div class="col-sm-12 mb-3">
+                        <label class=" control-label">
+                            Hotel Address
+                            <span class="text-danger">*</span>
+                        </label>
+                        <textarea type="text" formControlName="address" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.address.errors }"></textarea>
+                        <div *ngIf="submittedHotel && hotel.address.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.address.errors.required">Hotel Address is required</div>
+                        </div>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Latitude
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input id="lat" type="text" formControlName="latitude" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.latitude.errors }" />
+                        <div *ngIf="submittedHotel && hotel.latitude.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.latitude.errors.required">Latitude is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Longitude
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input id="lng" type="text" formControlName="longitude" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.longitude.errors }" />
+                        <div *ngIf="submittedHotel && hotel.longitude.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.longitude.errors.required">Longitude is required</div>
+                        </div>
+                    </div>
+                
+                    <!-- <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Postal Code
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="postal_code" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.postal_code.errors }" />
+                        <div *ngIf="submittedHotel && hotel.postal_code.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.postal_code.errors.required">Postal Code is required</div>
+                        </div>
+                    </div> -->
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Phone Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input formControlName="phone_number" placeholder="phone" type="text" class="form-control" maxlength="12"
+                    (keypress)="numberOnly($event)" [ngClass]="{ 'is-invalid': submittedHotel && hotel.phone_number.errors }">
+                        <div *ngIf="submittedHotel && hotel.phone_number.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.phone_number.errors.required">Phone Number is required</div>
+                        </div>
+                    </div>
+                
+                    <!-- <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Fax Number
+                        </label>
+                        <input type="text" formControlName="fax_number" class="form-control" />
+                    </div> -->
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Email
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="email" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.email.errors }" />
+                        <div *ngIf="submittedHotel && hotel.email.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.email.errors.required">Email is required</div>
+                        </div>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            XL Hotel Code
+                        </label>
+                        <input type="text" formControlName="xl_hotel_code" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.xl_hotel_code.errors }" />
+                        <div *ngIf="submittedHotel && hotel.xl_hotel_code.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.xl_hotel_code.errors.required">Email is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            GST State
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="gst_state" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.gst_state.errors }" />
+                        <div *ngIf="submittedHotel && hotel.gst_state.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.gst_state.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            GST Number
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="gst_number" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.gst_number.errors }" />
+                        <div *ngIf="submittedHotel && hotel.gst_number.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.gst_number.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Location
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="location" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.location.errors }" />
+                        <div *ngIf="submittedHotel && hotel.location.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.location.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+               
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Bank Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="bank_name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.bank_name.errors }" />
+                        <div *ngIf="submittedHotel && hotel.bank_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.bank_name.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Beneficiary Name
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="beneficiary_name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.beneficiary_name.errors }" />
+                        <div *ngIf="submittedHotel && hotel.beneficiary_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.beneficiary_name.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+           
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Beneficiary Account No.
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="beneficiary_account_number" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.beneficiary_account_number.errors }" />
+                        <div *ngIf="submittedHotel && hotel.beneficiary_account_number.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.beneficiary_account_number.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+   
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            IFSC Code
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="ifsc_code" class="form-control"
+                            [ngClass]="{ 'is-invalid': submittedHotel && hotel.hotel_name.errors }" />
+                        <div *ngIf="submittedHotel && hotel.hotel_name.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.hotel_name.errors.required">Hotel Name is required</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Priority
+                            <span class="text-danger">*</span>
+                        </label>
+                        <span class="m-3"title="Slide for Active/Deactive">
+                            <mat-slide-toggle class="example-margin" formControlName="priority" [color]="''">
+                            </mat-slide-toggle>
+                        </span>
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label class=" control-label">
+                            Image
+                        </label>
+                     <div class="file-input">
+                        <img [src]="updateImage" style="position: absolute;
+                        width: 60px;
+                        height: 44px;
+                        right: -70px;
+                        border-radius: 5px;" height="100" width="100" *ngIf="updateImage">
+                        <img [src]="imgURL" style="position: absolute;
+                        width: 60px;
+                        height: 44px;
+                        right: -70px;
+                        border-radius: 5px;" height="100" width="100" *ngIf="imgURL">
+                        <input  #file type="file" accept='image/*' (change)="preview($event)"
+                            >
+                       </div> 
+                       <span class="text-danger col-sm-12 customCenter">(Image file should be in PNG, JPG or JPEG format and no bigger than 100KB.)</span>
+                        <!-- <div *ngIf="submittedHotel && hotel.image.errors" class="invalid-feedback">
+                            <div *ngIf="hotel.image.errors.required">Image is required</div>
+                        </div>  -->
+                    </div>
+                </div>
+                <div class="text-center mt-3 mb-3 btncontainer p-0">
+                    <button class="btn btn-sm btn-primary btnStyle mr-3">Continue</button>
+                    <button class="btn btn-sm btn-secondary btnStyle mr-3" type="reset">Cancel</button>
+                    <button class="btn btn-sm btn-secondary" (click)="backToHotel()">Back</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</ng-container>

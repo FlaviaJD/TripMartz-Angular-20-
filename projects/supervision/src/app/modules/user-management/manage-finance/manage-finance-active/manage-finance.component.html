@@ -1,0 +1,23 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_finance">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;  Create/Update Finance</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-finance-create (b2bUserUpdate)="triggerTab($event)"></app-finance-create>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="finance_list">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Finance List</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-finance-list (b2bUserUpdate)="triggerTab($event)"></app-finance-list>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

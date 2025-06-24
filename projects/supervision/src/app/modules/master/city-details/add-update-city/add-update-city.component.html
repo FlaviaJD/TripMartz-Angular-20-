@@ -1,0 +1,124 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form ">
+
+            <div class="col-md-12 mb-2 p-0 required cust-radio-group">
+                <div class="col-sm-12 mt-2 p-0 d-flex align-items-center">
+                    <div class="col-auto p-0">
+                        <label for="airportdetails">
+                            <input type="radio" id="airportdetails" (change)="showDiv.Details = !showDiv.Details;showDiv.Csv = false;" name="airportdetails" checked type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">City Details</span>
+                        </label>
+                    </div>
+                    <div class="col-auto"><label>/</label></div>
+                    <div class="col-auto p-0">
+                        <label for="csvupload">
+                            <input type="radio" id="csvupload" (change)="showDiv.Csv = !showDiv.Csv;showDiv.Details = false;" name="airportdetails" type="radio" />
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">City CSV File Upload</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 p-0" *ngIf="showDiv.Details"> 
+            <form class="" [formGroup]="cityConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>City Details</h3>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 mb-2 p-0 required">
+                    <label for="city_name" class="required" class="col-sm-12 col-form-label">City Name<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="city_name" class="form-control"
+                            id="city_name" maxlength="250">
+                    </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-2 p-0 required">
+                    <label for="city_code" class="required" class="col-sm-12 col-form-label">City Code<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="city_code" class="form-control"
+                            id="city_code" maxlength="250">
+                    </div>
+                    </div>
+                
+                    <div class="col-md-4 mb-2 p-0 required">
+                    <label for="xlpro_city_code" class="required" class="col-sm-12 col-form-label">Xlpro City Code<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="xlpro_city_code" class="form-control"
+                            id="xlpro_city_code" maxlength="250">
+                    </div>
+                    </div>
+               
+                    <div class="col-md-4 mb-2 p-0 required">
+                    <label class="col-sm-12 col-form-label">Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 d-flex align-items-center">
+                        <div class="">
+                            <label>
+                                <input type="radio" value="1" formControlName="status" [checked]="radioSelection(1)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Active</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="0" formControlName="status" [checked]="radioSelection(0)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Inactive</span>
+                            </label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <div class="form-group required row">
+                        <div class="col-12 d-flex">
+                            <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                (click)="onSubmit()">Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>   
+         <!-- <div class="col-md-2 text-center mt-5">    
+            <div class="title pl-30">
+                <h3>OR</h3>
+            </div>
+           </div> -->
+
+           <div class="col-md-12 p-0" *ngIf="showDiv.Csv"> 
+            <form class="" [formGroup]="cityFileConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>City CSV File Upload <a href="#" (click)="onSampleDownload($event)" [ngClass]="{'clicked': isClicked}">(Download CSV Sample)</a></h3>
+                </div>
+                <div class="form-group row">
+                    <label for="city_file_upload" class="required" class="col-sm-12 col-form-label">File Upload<span
+                            class="text-danger">*</span></label>
+                    <div class="col-sm-6">
+                        <div class='file-input'>
+                            <input formControlName="upload_file" type="file" (change)="uploadFile($event)" accept="image/*" accept=".csv">
+                           
+                          </div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <div class="form-group required row">
+                        <div class="col-12 d-flex">
+                            <button type="submit" class="btn-sm btn-primary lg mr-4"
+                                (click)="onCSVUpload()">Save</button>
+                            <button type="reset" class="btn btn-sm btn-primary lg mr-4" (click)="onFileReset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

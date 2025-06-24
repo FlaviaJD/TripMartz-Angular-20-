@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-6">
+      <h5>Available Passengers</h5>
+      <input type="text" class="form-control" [(ngModel)]="availableFilter" placeholder="Filter available" />
+      <select multiple class="select_passenger pax_select" size={{filteredAvailableItems.length}}>
+        <option *ngFor="let item of filteredAvailableItems" (click)="moveItemToSelected(item)">
+          {{ item.FirstName }} {{item.LastName}}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <h5>Selected Passengers</h5>
+      <input type="text" class="form-control" [(ngModel)]="selectedFilter" placeholder="Filter selected" />
+      <select multiple class="select_passenger1 pax_select" size={{filteredSelectedItems.length}}>
+        <option *ngFor="let item of filteredSelectedItems" (click)="moveItemToAvailable(item)">
+          {{ item.FirstName }} {{item.LastName}}
+        </option>
+      </select>
+
+      
+      <div *ngIf="filteredSelectedItems.length === 0" class="text-danger">No selected passengers. Please choose at least one.</div>
+    </div>
+  </div>
+  

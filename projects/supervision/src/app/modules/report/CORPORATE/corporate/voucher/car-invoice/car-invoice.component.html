@@ -1,0 +1,226 @@
+<div class="centered" *ngIf="loading">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+</div>
+<div class="card" style="width: auto;height: auto; overflow-y: scroll; padding: 0px;" *ngIf="voucherData">
+    <div class="text-center" style="margin-top: 20px; padding: 0px 20px;">
+        <a [routerLink]="['/report/car']"><button class="btnStyle">Back</button></a>
+        <!-- <a id="download" (click)="downloadA4('pdf', 'potrait')" style="margin-left:15px;"><button
+            class="btnStyle">Download PDF</button></a> -->
+    </div>
+
+    <div style=" -webkit-print-color-adjust: exact; width: 100%; padding:0px 20px; display: table; margin: auto; height: auto; overflow-y: scroll;"
+        id="print_voucher">
+
+        <table class="table" cellpadding="0" cellspacing="0" width="100%"
+            style="font-size:14px; width:100%; margin:0px auto;background-color:#fff; padding:50px 45px;margin-top:20px;">
+            <tbody style="width: 100%; -webkit-print-color-adjust: exact">
+                <tr>
+
+                    <td colspan="4" style="padding:5px 0px;"><img style="max-width: 170px;  margin-top: 5px;"
+                            src="assets/images/login-images/l-logo.png" alt="">
+                    </td>
+
+                    <td colspan="4" style="font-weight: 200; font-size:14px; color: #607d8b;" align="right">
+                        <strong style="font-weight: 600;">TripMartz.</strong><br>
+                        VILLAGE MAKARBA, A-610, WORLD TRADE TOWER, BEHIND SKODA<br>
+                        SHOWROOM,TALUKA<br>
+                        AHMEDABAD CITY, GUJARAT, 380051<br>
+                        13/09/2017 ADD CHANGED - 09/06/2023<br>
+                        <strong style="font-weight: 600;">C I N</strong> : U74120MH2011PTC211897,&nbsp;&nbsp;&nbsp;
+                        <strong style="font-weight: 600;">P A N</strong> : AAHCM0059P<br>
+                        <strong style="font-weight: 600;">GSTIN</strong> : N/A
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="width: 50%; padding: 14px;">
+                        <div style="float: left; font-weight: 700; min-width: 70px;">To:</div>
+                        <div style="float: left; padding-left: 15px;  max-width: 350px;">
+                            <p style="margin-bottom: 0px; font-size:14px; font-weight: 500; color: #607d8b;">
+                                {{voucherData?.EmployeeName}}
+                                <br>
+                                {{voucherData?.MobileNo}}<br>
+                                PAN No: &nbsp; AAACI7904G
+                            </p>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <br>
+                        <div style="float: left; font-weight: 700; min-width: 70px;">GSTIN:</div>
+                        <div style="float: left; padding-left: 15px;  max-width: 350px;">
+                            <p style="margin-bottom: 0px; font-size:14px; font-weight: 500; color: #607d8b;">
+                                24AAACI7904G1ZT
+                            </p>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div style="float: left; font-weight: 700; min-width: 70px;">Narr:</div>
+                        <div style="float: left; padding-left: 15px;  max-width: 350px;">
+                            <p style="margin-bottom: 0px; font-size:14px; font-weight: 500; color: #607d8b;">
+                                N/A
+                            </p>
+
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div style="float: left; font-weight: 700; min-width: 70px;">Approve:</div>
+                        <div style="float: left; padding-left: 15px;  max-width: 350px;">
+                            <p style="margin-bottom: 0px; font-size:14px; font-weight: 500; color: #607d8b;">
+                                N/A
+                            </p>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div style="float: left; font-weight: 700; min-width: 70px;">IRN No.:</div>
+                        <div style="float: left; padding-left: 15px;  max-width: 350px;">
+                            <p style="margin-bottom: 0px; font-size:14px; font-weight: 500; color: #607d8b;">
+                                {{voucherData?.AppReference}}
+                            </p>
+                        </div>
+                    </td>
+                    <td colspan="4" style="width: 50%; text-align: right; padding: 14px;">
+                        <table width="100%" cellspacing="0" cellpadding="10" border="0"
+                            style=" font-size: 14px; line-height: 30px;border: 0;">
+                            <tbody class="">
+                                <tr class="">
+                                    <td style="text-align: right; border:none; padding: 2px; font-weight: 700;">Invoice
+                                        No :</td>
+                                    <td
+                                        style="text-align: right; border:none; width: 30%;  padding: 2px; font-weight: 500; color: #607d8b;">
+                                        HW23/ 72622
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right; border:none; padding: 2px; font-weight: 700;">Invoice
+                                        Date:</td>
+                                    <td
+                                        style="text-align: right; border:none; width: 30%;  padding: 2px; color: #607d8b; font-weight: 500;">
+                                        30/09/2023</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: right; border:none; padding: 2px; font-weight: 700;">Due
+                                        Date:</td>
+                                    <td
+                                        style="text-align: right; border:none; width: 30%;  padding: 2px; color: #607d8b; font-weight: 500;">
+                                        {{voucherData?.CarDetails?.BookingConfirmedDate | date: 'dd MMM yyyy'}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: right; border:none; padding: 2px; font-weight: 700;">Code :
+                                    </td>
+                                    <td
+                                        style="text-align: right; border:none; width: 30%;  padding: 2px; color: #607d8b; font-weight: 500;">
+                                        1023244</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right; padding: 2px; border:none; font-weight: 700;">
+                                        Reference No: </td>
+                                    <td
+                                        style="text-align: right; padding: 2px; width: 30%; border:none; color: #607d8b; font-weight: 500;">
+                                        {{voucherData?.AppReference}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="border-bottom:1px solid #000; padding:0px;">
+                        <table style="width: 100%; border:0px solid transparent; font-size: 14px;">
+                            <tr style="border-top: 1px solid #313131;
+                        border-bottom: 1px solid #313131;
+                        background: #313131;
+                        color: #fff;">
+                                <th style="border:0px solid transparent;">City</th>
+                                <th style="border:0px solid transparent;">Pickup Address</th>
+                                <th style="border:0px solid transparent;">Drop Address</th>
+                                <th style="border:0px solid transparent;">Pickup Date & Time</th>
+                                <th style="border:0px solid transparent;">Drop Date & Time</th>
+                                <th style="border:0px solid transparent;">Vehicle Type</th>
+                                <th style="border:0px solid transparent;">Company Name </th>
+                            </tr>
+                            <tr style="color: #607d8b;">
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.City}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.PickupAddress}}
+                                </td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.DropAddress}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.PickupDate | date:
+                                    'dd MMM yyyy'}}, {{voucherData?.CarDetails?.PickupTime}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.DropDate | date:
+                                    'dd MMM yyyy'}}, {{voucherData?.CarDetails?.DropTime}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.VehicleType}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.CompanyName}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="border-bottom:1px solid #000; padding:0px;">
+                        <table style="width: 100%; border:0px solid transparent; font-size: 14px;">
+                            <tr style="border-top: 1px solid #313131;
+                        border-bottom: 1px solid #313131;
+                        background: #313131;
+                        color: #fff;">
+                                <th style="border:0px solid transparent;">Driver Name</th>
+                                <th style="border:0px solid transparent;">Driver Phone</th>
+                                <th style="border:0px solid transparent;">Reporting Time</th>
+                                <th style="border:0px solid transparent;">Reporting Address
+                                </th>
+                            </tr>
+                            <tr style="color: #607d8b;">
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.DriverName}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.DriverPhone}}</td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.ReportingTime}}
+                                </td>
+                                <td style="border:0px solid transparent;">{{voucherData?.CarDetails?.ReportingAddress}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none; padding: 0px;" colspan="8">
+                        <table width="100%" cellspacing="0" cellpadding="5" border="0"
+                            style="margin: 15px auto; font-size: 14px;">
+                            <tbody>
+                                <tr style="border: none;">
+                                    <td style="border: none; padding: 0px;">
+                                        <h6 style="font-weight: 600; color: #607d8b;">Bank Details</h6>
+                                        Bank Name : DCB BANK LIMITED<br>
+                                        Bank Addr : VASHI (030) BRANCH,<br>
+                                        IFSC Code : DCBL0000030<br>
+                                        A/c. No. : OD-03042600000453
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table width="100%" cellspacing="0" cellpadding="5" border="0"
+                            style="margin: 15px auto; font-size: 13px;">
+                            <tbody>
+                                <tr style="border: none;">
+                                    <td style="border: none;  padding: 0px;">
+                                        <h6 style="font-weight: 600; color: #607d8b;">Terms & Conditions :</h6>
+                                        <p style="margin-bottom: 4px;">CASH : Payment to be made to the cashier &
+                                            printed Official Receipt must be obtained.</p>
+                                        <p style="margin-bottom: 4px;">CHEQUE : All cheques / demand drafts in payment
+                                            of bills must be crossed 'A/c Payee Only' and drawn in favour of 'TripMartz'.</p>
+                                        <p style="margin-bottom: 4px;">LATE PAYMENT : Interest @ 24% per annum will be
+                                            charged on all outstanding bills after due date.</p>
+                                        <p style="margin-bottom: 4px;">VERY IMP : Kindly check all details carefully to
+                                            avoid un-necessary complications.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

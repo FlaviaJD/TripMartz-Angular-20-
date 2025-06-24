@@ -1,0 +1,163 @@
+.nrm_input,
+.src_btn {
+    padding: 0.5rem 0.75rem 0.5rem 2.2rem;
+    line-height: 1.7;
+    height: calc(2.5em + 0.75rem + 2px);
+}
+
+.card {
+    padding: 30px;
+    font-family: 'Asap';
+}
+
+.modal-dialog {
+    max-width: 700px;
+}
+
+h5 {
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.btncontainer {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0px;
+}
+
+label {
+    color: #000000;
+    font-weight: 600;
+}
+
+.css {
+    background: #000000;
+    color: #ffffff;
+    font-family: "Asap";
+    border-radius: 5px;
+}
+
+.modal {
+    -webkit-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    top: 58%;
+    margin: 0 auto;
+}
+
+.wrapper1,
+.wrapper2 {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.wrapper1 {
+    height: 20px;
+}
+
+.div1 {
+    width: 3500px;
+    height: 20px;
+}
+
+.div2 {
+    width: 3500px;
+    overflow: hidden;
+}
+
+.div2 .table-responsive {
+    overflow: inherit;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Remove box appearance and padding */
+.mat-form-field {
+    border: none;
+    padding: 0;
+    margin: 0;
+    /* Optional, adjust as needed */
+}
+
+/* Remove underline and focus outline from input */
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex,
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: none;
+    box-shadow: none;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    border: 1px solid #86a4c3;
+    padding: 0px;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: white !important;
+    padding: 0 !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-wrapper {
+    width: 100%;
+}
+
+.mat-autocomplete-panel {
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.mat-option {
+    text-align: left;
+}
+
+.autocomplete-container {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+}
+
+.mat-icon-button {
+    height: 33px;
+    line-height: 31px;
+}
+.modal-header {
+    background: #F99D1C;
+}
+
+.modal-header h4 {
+    color: #fff;
+}
+
+.modal-header .close {
+    color: #fff;
+}
+
+.modal-dialog {
+    max-width: 600px;
+}
+
+.change {
+    text-decoration: none;
+    background-color: transparent;
+    color: #212529;
+  }
+  
+  .change:hover {
+    color: #212529;
+    text-decoration: underline;
+  }
+
+  .badge-warning {
+    color: white!important;
+}
+.dropdown .btnStyle {
+    border: none;
+    background: #252c40!important;
+    color: #fff;
+    padding: 4px 7px!important;
+    border-radius: 5px;
+}

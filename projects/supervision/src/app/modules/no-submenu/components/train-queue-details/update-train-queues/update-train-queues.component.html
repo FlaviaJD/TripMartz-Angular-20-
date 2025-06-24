@@ -1,0 +1,258 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px;">
+    <div class="add-traveller">
+        <div class="custom-inline-form d-flex">
+            <div class="col-md-12 p-0"> 
+            <form class="" [formGroup]="updateTrainConfig" autocomplete="off">
+                <div class="title pl-30">
+                    <h3>Update Train Booking</h3>
+                </div>
+                <hr>
+                <div class="title pl-30">
+                    <h3>Train Details</h3>
+                </div>
+                <div>
+                    <app-dual-listbox [availablePassengers]="availablePassengers"  [selectedPassenger]="selectedPassenger"
+                        (selectionChange)="onSelectionChange($event)"></app-dual-listbox>
+                </div>
+                <div class="row">
+                <!-- <div class="col-4 p-0">
+                    <label for="employee_no" class="required col-sm-12 col-form-label">Employee No.<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="employee_no" class="form-control"
+                        id="employee_no" maxlength="250" disabled>
+                    </div>
+                </div> -->
+                <div class="col-4 p-0">
+                    <label for="train_name" class="required col-sm-12 col-form-label">Train Name<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="TrainName" class="form-control"
+                            id="train_name" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="train_from" class="required col-sm-12 col-form-label">Train From<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="From" class="form-control"
+                            id="train_from" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="train_to" class="required col-sm-12 col-form-label">Train To<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="To" class="form-control"
+                            id="train_from" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="OnwardDate" class="required col-sm-12 col-form-label">Travel Date<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="OnwardDate" class="form-control"
+                            id="OnwardDate" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="OnwardTime" class="required col-sm-12 col-form-label">Travel Time<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select class="form-control form-control-sm nrm_input" (change)="onChange($event.target.value)"
+                            formControlName="OnwardTime" id="OnwardTime">
+                            <option value="" disabled selected>Please Select</option>
+                            <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                {{ time }}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="ArrivalDate" class="required col-sm-12 col-form-label">Arrival Date<span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                                <input type="text" id="arrivalDate" formControlName="ArrivalDate" 
+                            class="form-control form-control-sm nrm_input" placement="top right" placeholder="Select Date" bsDatepicker
+                            [bsConfig]="bsDateConf" 
+                            [maxDate]="maxDate" #arrivalDate onkeydown="return false">
+                        </div>
+                    </div>
+                    <div class="col-4 p-0">
+                        <label for="ArrivalTimeTrain" class="required col-sm-12 col-form-label">Arrival Time<span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <select class="form-control form-control-sm nrm_input" (change)="onArrivalChange($event.target.value)"
+                                formControlName="ArrivalTimeTrain" id="ArrivalTimeTrain">
+                                <option value="" disabled selected>Please Select</option>
+                                <option *ngFor="let time of times" [value]="time" class="ui-menu-item">
+                                    {{ time }}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                <div class="col-4 p-0">
+                    <label for="train_number"  class="required col-sm-12 col-form-label">Train Number<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="TrainNumber" class="form-control"
+                            id="train_number" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="pnr"  class="required col-sm-12 col-form-label">PNR<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="PNR" class="form-control"
+                            id="pnr" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="ticket_no" class="required col-sm-12 col-form-label">Ticket No.<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="TicketNo" class="form-control"
+                            id="ticket_no" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="class"  class="required col-sm-12 col-form-label">Class<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="class" class="form-control" formControlName="PreferredClass">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let class of classList" value="{{class.code}}">{{class.value}}</option>                        </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="ticketStatus" class="required col-sm-12 col-form-label">Ticket Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="class" class="form-control" formControlName="TicketStatus">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let ticketStatus of ticketStatusList" value="{{ticketStatus}}">{{ticketStatus}}</option>   
+                           </select>
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="ticketStatus" class="required col-sm-12 col-form-label">Current Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="CurrentStatus" class="form-control"
+                        id="CurrentStatus" maxlength="250">
+                    </div>
+                </div>
+                <div class="col-4 p-0">
+                    <label for="type"  class="required col-sm-12 col-form-label">Ticket Type<span class="text-danger">*</span></label>
+                    <div class="col-sm-12 d-flex align-items-center">
+                        <div class="">
+                            <label>
+                                <input type="radio" value="GN" formControlName="Quote">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">General</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="TQ" formControlName="Quote">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Tatkal</span>
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <label>
+                                <input type="radio" value="PT" formControlName="Quote">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">Premium Tatkal
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <hr>
+                <div class="title pl-30">
+                    <h3>Fare Details</h3>
+                </div>
+                <div class="row">
+                <div class="col-3 p-0">
+                    <label for="basic_fare" class="required col-sm-12 col-form-label">Basic Fare<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="BasicFare" class="form-control"
+                            id="basic_fare" maxlength="250" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="service_charge" class="required col-sm-12 col-form-label">Service Charge<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="ServiceCharges" class="form-control"
+                            id="service_charge" maxlength="250" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="tax" class="required col-sm-12 col-form-label">Tax (18 % of Service Charge)<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="Tax" class="form-control"
+                            id="tax" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="total_fare" class="required col-sm-12 col-form-label">Total Fare<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="TotalFare" class="form-control"
+                            id="total_fare" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="supplier_basic" class="required col-sm-12 col-form-label">Supplier Basic<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="SupplierBasic" class="form-control"
+                            id="supplier_basic" maxlength="250" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="supplier_service_charge" class="required col-sm-12 col-form-label">Supplier Service Charges <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="SupplierServiceCharges" class="form-control"
+                            id="supplier_service_charge" maxlength="250" appDecimalOnly>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="supplier_tax" class="required col-sm-12 col-form-label">Tax (18 % of Service Charges)<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="SupplierTax" class="form-control"
+                            id="supplier_tax" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="supplier_pay" class="required col-sm-12 col-form-label">Supplier Pay <span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" formControlName="SupplierPayable" class="form-control"
+                            id="supplier_pay" maxlength="250" disabled>
+                    </div>
+                </div>
+                <div class="col-3 p-0">
+                    <label for="status" class="required col-sm-12 col-form-label">Status<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <select id="status" class="form-control" formControlName="booking_status">
+                            <option selected disabled value="">Please Select</option>
+                            <option *ngFor="let status of statusList" value="{{status}}">{{status | map: getFormtedStatus}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 p-0">
+                    <label for="status" class="required col-sm-12 col-form-label">Upload<span class="text-danger">*</span></label>
+                    <div class="col-sm-12">
+                        <div class='file-input'>
+                            <input formControlName="file" type="file" (change)="uploadFile($event)" accept=".pdf, .doc, image/*">
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group mt-3">
+                <div class="form-group required row">
+                    <div class="col-12 d-flex">
+                        <button type="submit" class="btn-sm btn-primary lg mr-4"
+                            (click)="onSubmit()">Save</button>
+                        <!-- <button type="reset" class="btn btn-sm btn-primary lg" (click)="onReset()">Reset</button> -->
+                    </div>
+                </div>
+            </div>
+
+            </form>
+        </div>   
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading"
+    [config]="{primaryColour: '#fff', secondaryColour: '#ccc', tertiaryColour: '#fff', backdropBorderRadius: '3px',fullScreenBackdrop:true}"
+    [template]="loadingTemplate"></ngx-loading>

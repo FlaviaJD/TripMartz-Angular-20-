@@ -1,0 +1,24 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="beforeChange(false)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_train_queue" [disabled]="!enableUpdate">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;Update Train Booking Details	
+                    </span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-update-train-queues [trainUpdateData]="trainUpdateData" (back)="showList(false)"></app-update-train-queues>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="train_queues">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Train Queues</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-train-queue (trainQueueUpdate)="triggerTab($event)" [queueType]="queueType"></app-train-queue>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

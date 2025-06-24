@@ -1,0 +1,23 @@
+<div class="">
+    <div class="">
+        <ngb-tabset class="tabs-animated tabs-animated-shadow" (tabChange)="onTabSelected($event)" #tabs
+            [activeId]="activeIdString">
+            <ngb-tab id="add_update_corporate_code">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-edit"></i> &nbsp;  Add/Update Corporate Code</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-corporate-code-add-update (corporateCodeUpdate)="triggerTab($event)"></app-corporate-code-add-update>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="corporate_code_list">
+                <ng-template ngbTabTitle>
+                    <span><i class="fa fa-users"></i> &nbsp; Corporate Code List</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                    <app-corporate-code-list (corporateCodeUpdate)="triggerTab($event)"></app-corporate-code-list>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>

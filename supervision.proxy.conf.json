@@ -1,0 +1,11 @@
+{
+  "/Antripx/*": {
+    "target": "https://hypermiles.com/uat/",
+    "secure": false,
+    "pathRewrite": {
+      "^/Antripx": "Antripx"
+    },
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

@@ -1,0 +1,792 @@
+// variables
+.mt-5rem {
+    margin-top: 5rem !important;
+  }
+  .p-t-35{
+    padding-top: 35px !important;
+  }
+  //login-layout
+  .login-max-screen {
+    max-width: 1366px;
+    padding-right: 15px;
+    padding-left: 15px !important;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .max-screen-1130{
+    max-width: 1130px !important;
+    margin: 0 auto;  
+  }
+  .login-max-screen-1260{
+    max-width: 1260px !important;
+    margin: 0 auto;
+  }
+  //common ngx-slick-slider styles start
+  .slick-slider,
+  .slick-list,
+  .slick-track,
+  .slick-slide {
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  //common ngx-slick-slider styles end
+  
+  // common styles for airline brands, hotel brands, Service section, presence brands
+  .login-brand-section {
+    width: 100%;
+    padding: 14px 0 70px 0;
+  
+    h2 {
+      letter-spacing: 0px;
+      color: #12B3DE;
+      font-size: 36px;
+      line-height: 42px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+      margin-right: 20px;
+    }
+  
+    .sub-title {
+      text-align: center;
+      color: #12B3DE;
+      font-size: 20px;
+      line-height: 32px;
+    }
+  
+    .banner-section {
+      img {
+        margin: 0 auto;
+      }
+  
+      &:focus {
+        outline: none;
+      }
+    }
+  
+    .brand-section {
+      .slick-prev {
+        left: auto;
+        right: 105px;
+      }
+  
+      .slick-next {
+        right: 50px;
+      }
+  
+      .slick-track {
+        display: flex;
+        // align-items: center;
+        align-items: baseline;
+      }
+  
+      .slick-prev,
+      .slick-next {
+        color: #fff;
+        bottom: -78px;
+        top: auto;
+        transform: translate(0);
+        background: transparent linear-gradient(90deg, #12B3DE 0%, #0D7EBF 100%) 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+  
+  //login-header start
+  .login-header {
+    padding: 28px 0px 26px 0px !important; position: relative;
+  
+    .content {
+      h4 {
+        color: #F87808;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 16px;
+      }
+  
+      p {
+        line-height: initial;
+        color: #707070;
+        font-size: 14px;
+      }
+    }
+  
+    .support-number {
+      p {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: #707070;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  //login-header end
+  
+  //login-banner-slider start
+  .login-banner-slider {
+    .banner-bg {
+      // height: 528px;
+      // background-repeat: no-repeat;
+      // background-size: cover;
+      // background-position: center;
+      width: 100%;
+      border-radius: 20px;
+      max-width: 1260px;
+      margin: 0 auto;
+      position: relative;
+      .d-flex,
+      .slick-slider,
+      .slick-list,
+      .slick-track,
+      .slick-slide {
+        height: 100%;
+      }
+  
+      .slick-slider {
+        margin: 0px 0px;
+      }
+      .slick-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+     .cms_title { position: absolute; left: 120px; width: 40%;}
+      .banner-section {
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center; position: relative;
+        flex-direction: column;
+  
+        @media screen and (min-width: 1366px) {
+         
+        }
+  
+        h3 {
+          font-size: 54px;
+          line-height: 61px;
+          color: #FFFFFF;
+          text-shadow: 0px 3px 6px #00000029;
+          font-weight: bold;
+          margin-bottom: 30px;
+        }
+  
+        p {
+          font-size: 22px;
+          line-height: 38px;
+          color: #fff;
+          font-weight: normal;
+          margin: 0px 50px 0 0;
+        }
+      }
+  
+      .banner-slider {
+        flex-basis: 100%;
+        max-width: 100%; height: 530px;
+        .slick-prev{
+          left:0px;
+        }
+        .slick-next { right: 25px;}
+        .slick-prev,
+        .slick-next {
+          background: transparent;
+          box-shadow: none; top: 55%;
+          color: #fff;
+          height: 70px;
+          width: 70px;
+  
+          &::before {
+            font-size: 100px;
+            height: 70px;
+            line-height: 70px;
+            width: 70px;
+          }
+        }
+  
+        .slick-dots {
+          position: absolute;
+          bottom: 60px;
+          margin: 0;
+  
+          li {
+            margin: 0 2px;
+  
+            button {
+              background: transparent;
+            }
+          }
+        }
+      }
+  
+       
+
+         
+  
+          .login-sub-header {
+            text-align: center;
+  
+            h3 {
+                color: #333;
+                font-size: 22px;
+                font-weight: 500;
+                line-height: 29px;
+                text-align: left;
+                margin-bottom: 40px;
+            
+            }
+
+            h3 span{
+                color: #f06a4e;  
+            }
+  
+            img {
+              width: 45px;
+            }
+          }
+  
+         
+  
+          .login-footer {
+            text-align: center;
+            // margin-top: 15px;
+  
+            .create-account,
+            .forgot-password {
+              color: #0D7EBF;
+              font-size: 14px;
+              line-height: 16px;
+            }
+  
+            hr {
+              width: 100%;
+              border-top: 1px solid #D2D2D2;
+              margin: 10px auto;
+            }
+          }
+        
+      
+    }
+  }
+  
+  //login-banner-slider end
+  
+  //service section styles start
+  .login-service-section {
+    .sevice-cards {
+      display: flex;
+      justify-content: space-between;
+  
+      .card {
+        background: transparent linear-gradient(180deg, #F3F3F3 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+        border-radius: 14px;
+        box-shadow: none;
+        width: 380px;
+        flex-direction: row;
+        align-items: center;
+        padding: 15px;
+  
+        .card-icon {
+          padding-right: 20px;
+  
+          img {
+            vertical-align: middle;
+            border-style: none;
+            border-radius: 50%;
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+            box-shadow: 0px 3px 16px #00000026;
+          }
+        }
+  
+        .card-title {
+          h3 {
+            font-size: 26px;
+            line-height: 30px;
+            font-weight: bold;
+            color: #12B3DE;
+            text-transform: initial;
+          }
+        }
+  
+        .card-content {
+          p {
+            color: #2F302F;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      
+    
+  }
+}
+  }
+  
+  //service section styles end
+  
+  //Presence start
+  .presence-layer{
+    position: relative;
+    .layer-bg{
+      height: 170px;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      top: 20px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: auto auto;
+    }
+  }
+  .login-brand-section {
+    .brand-section {
+      &.banner-section-with-text {
+        .slick-track {
+          align-items: flex-end;
+        }
+  
+        p {
+          margin: 0;
+          color: #252c40;
+          font-size: 16px;
+          line-height: 32px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  
+  //Presence end
+  
+  //Signup section styles start
+  .signup-section {
+  .hr-line{
+    background: #1899D3 0% 0% no-repeat padding-box;
+      opacity: 1;
+      width: 100%;
+      height: 2px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+  }
+    .signup-bg,
+    .bg-layer {
+      height: 285px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      width: 100%;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  
+      .title {
+        max-width: 500px;
+        text-align: center;
+        margin-bottom: 2rem;
+  
+        h2 {
+          font-size: 36px;
+          line-height: 47px;
+          color: #fff;
+          font-weight: bold;
+        }
+      }
+  
+      .signup-btn {
+        button {
+          box-shadow: 0px 1px 2px #0000003D;
+          border: 1px solid #FFFFFF;
+          border-radius: 5px;
+          height: 40px;
+          width: 146px;
+          color: #0D7EBF;
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  .footer-menu-list{
+    .links{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      li{
+        position: relative;
+        margin-top: 5px;
+        margin-bottom: 25px;
+  
+        a{
+          letter-spacing: 0px;
+          color: #131313;
+          text-transform: uppercase;
+          opacity: 1;
+          font-size: 15px;
+          line-height: 17px;
+          text-decoration: none;
+          margin-right: 13px;
+          margin-left: 13px;
+        }
+        &::after{
+          content: "";
+          position: absolute;
+          // border-left: 0.5px solid #beafaf;
+          height: 27px;
+          top: -4px;
+        }
+      }
+    }
+  }
+  //Signup section styles end
+  
+  // Login- Footer section
+  .login-footer {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+  
+      &.connect-icons {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+  
+        li {
+          margin-right: 15px;
+  
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+  
+      &.payment-cards {
+        display: flex;
+        align-items: center;
+  
+        li {
+          margin-right: 25px;
+  
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+  
+      li {
+        .footer-title {
+          h3 {
+            color: #252c40;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 27px;
+            margin-bottom: 15px;
+          }
+        }
+  
+        .footer-content {
+          p {
+            font-size: 14px;
+            line-height: 16px;
+            color: #2F302F;
+            font-weight: normal;
+          }
+  
+          li {
+            a {
+              color: #707070;
+              font-size: 16px;
+              line-height: 38px;
+              font-weight: 500;
+  
+              &:hover {
+                text-decoration: none;
+              }
+            }
+  
+            &.links {
+              margin-bottom: 20px;
+  
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+  
+        &.aboutus {
+          flex-basis: 30%;
+          max-width: 30%;
+          .icon-container{
+            margin-bottom: 18px;
+          }
+          .aboutus-icons {
+            ul {
+              li {
+                .icon-container {
+                  display: flex;
+                  align-items: center;
+  
+                  img {
+                    width: 30px;
+                    margin-right: 15px;
+                  }
+  
+                  span {
+                    color: #707070;
+                    font-size: 16px;
+                    line-height: 38px;
+                    font-weight: 500;
+                  }
+                }
+  
+                &:first-child {
+                  margin-bottom: 5px;
+                }
+              }
+            }
+          }
+        }
+  
+        &.imp-link {
+          flex-basis: 25%;
+          max-width: 25%;
+        }
+  
+      //   &.connectus {
+  
+      //   }
+      }
+    }
+  
+    hr {
+      border-color: #BCBCBC;
+      border-width: 2px;
+    }
+  }
+  
+  .company-year {
+    background: transparent linear-gradient(270deg, #0D7EBF 0%, #12B3DE 100%) 0% 0% no-repeat padding-box;
+    opacity: 1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    span {
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: normal;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      padding: 8px 0px;
+    }
+  }
+  //mat errors
+  
+  .mat-error{
+      color: #FF0D26;
+  }
+  
+  // Login- Footer section end
+  
+  .forgot-password-section{
+    form{
+        margin-right: auto;
+        max-width: 600px;
+    }
+    .card-title{
+        background: #333;
+        height: 50px;
+        .title{
+            letter-spacing: 0px;
+            color: #FFFFFF;
+            opacity: 1;
+            font-size: 16px;
+            line-height: 18px;
+            text-align: left;
+            font-weight: 500;
+            text-transform: capitalize;
+            margin-bottom: 2px;
+        }
+        .cust-fs{
+            font-size: 21px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        span{
+            letter-spacing: 0px;
+            color: #FFFFFF;
+            opacity: 1;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: left;
+            font-weight: 100;
+            text-transform: capitalize;
+        }
+    }
+    .card-body{
+        .form-control{
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 40px;
+            letter-spacing: 0px;
+            color: #363636;
+            opacity: 1;
+            font-size: 13px;
+            line-height: 15px;
+            &::placeholder{
+                color: #363636;
+            }
+        }
+        .form-group{
+            label{
+                letter-spacing: 0px;
+                color: #082B3A;
+                opacity: 1;
+                font-size: 12px;
+                line-height: 14px;
+            }
+            .invalid-feedback{
+              position: absolute;
+            }
+        }
+        ::ng-deep {
+            .invalid-feedback{
+                position: absolute;
+                margin-top: 2px;
+            }
+        }
+        .update-btn{
+            .btn{
+              border-radius: 5px;
+              opacity: 1;
+              background: #0A5081 ;
+              letter-spacing: 0px;
+              color: #FFFFFF;
+              text-transform: capitalize;
+              opacity: 1;
+              font-size: 12px;
+              line-height: 14px;
+              height: 36px;
+              margin: 0 auto;
+              font-weight: 400;
+            }
+        }
+    }
+  }
+  
+  .loaderspin { position: fixed; top: 0px; left: 0px; z-index: 9; right: 0px; bottom:0px; width: 100%; height: 100%; background: #e2eef6;}
+  .loaderspin .loadimg img { position:absolute; width: 190px; top: 0px; bottom: 0px; left: 0px; right: 0px; margin: auto; }
+  @media only screen and (max-width: 767px) {
+      .login-banner-slider .banner-bg .banner-section, .banner-slider { display: none; }
+      .login-banner-slider .banner-bg .login-form { position: relative; right: inherit;}
+      .login-banner-slider .banner-bg .login-form .login-container { width: 100%;}
+      .login-banner-slider .banner-bg .login-form {  flex-basis: 100%;
+          max-width: 100%; padding: 10px;}
+      .login-brand-section .brand-section .slick-next { right: 150px !important; bottom: -50px;} 
+      .login-brand-section .brand-section .slick-prev { left: 150px !important; bottom: -50px;}   
+      .login-brand-section h2 { margin-bottom: 10px;}
+      .login-brand-section { margin-bottom: 10px; padding: 14px 0 70px 0 !important;}
+      .login-service-section .sevice-cards { display: block !important;}
+      .login-brand-section h2 { margin-right: 0px !important;}
+      .login-service-section .sevice-cards .card { width: 100% !important;  margin-bottom: 10px;}
+      .login-footer ul { display: block !important; margin-bottom: 0px; float: left;}
+      .login-footer ul.connect-icons li { float: left;}
+      .login-footer ul.connect-icons li img { width: 30px;}
+      .login-footer ul.payment-cards li { float: left;}
+      .login-footer ul.payment-cards li img { width: 60px;}
+      .right-side { position: relative !important;}
+      .mobile_width { width: 35px;}
+      .login-header { padding: 12px !important;}
+      .login-header .support-number p{ font-size: 15px !important;}
+    }
+  
+    .searchload { position:fixed; background: #d7e4eb; width: 100%; z-index: 99; height: 100%;}
+    .searchload img { position: absolute; width: 230px; left: 0px; right: 0px; top: 0px; bottom: 0px; display: table; margin: auto;}
+    .mobile-app { width: 100%; margin-bottom: 30px; }
+    .mobile-app img { width: 100%; border-radius: 10px;}
+  
+    
+  
+    .login_bg:after { z-index: 0; background: rgba(255,255,255,0.95); content: ''; position: absolute; top: 0px; left: 0px; right: 0px; bottom:0px; width:100%; height: 100%;}
+    .login-form {
+      flex-basis: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: center; left: 0px; right: 0px; margin: auto;
+      justify-content: center;
+        z-index: 999; 
+      position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 0px 50px;
+    min-height: 100%;}
+.bg_con { position: absolute; left: 60px; top: 260px; text-align: left; z-index: 999; color: #fff;}
+.bg_con h3 { font-size: 35px;}
+.bg_con p { font-size: 17px;}
+  .bg_log{ width: 50%; float: left; height:600px; position: relative;}
+  .bg_log::after { position: absolute; content: ''; left: 0px; right: 0px; top:0px; 
+    bottom: 0px; width: 100%; height: 100%; background: rgb(2,0,36);
+    background: linear-gradient(180deg, #02cdb9e6 0%, rgb(3 204 184 / 88%) 0%, rgb(2 56 51 / 95%) 100%);}
+  .bg_log img { width: 100%; height: 100%; object-fit: cover;}
+    .login-container {
+      width: 50%; float: left; height: 600px;
+      background-color: #fff;
+      border-radius: 11px;
+      
+      padding:60px 110px;
+    }
+  
+    .login-title p {
+        color: #707070;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+    
+  
+      .mat-form-field {
+          width: 100%;
+        }
+  
+        .login-button button {
+            background: transparent linear-gradient(90deg, #12B3DE 0%, #0D7EBF 100%) 0% 0% no-repeat padding-box;
+            border-radius: 5px;
+            height: 54px;
+            letter-spacing: 0px;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 23px;
+            text-align: center;
+            border: 0;
+            cursor: pointer;
+            width: 100%;
+          
+        }
+
+.forgot-password a { background: #f5f5f5;
+    padding: 8px 10px;
+    width: 100%;
+    display: block;
+    border-radius: 30px;
+    color: #838181 !important; }
+
+    #particles-js {
+        height: 100%; z-index: 99; position: absolute;
+    }
+
+    .particles-js-canvas-el {
+        top: 0;
+        position: relative;
+    }

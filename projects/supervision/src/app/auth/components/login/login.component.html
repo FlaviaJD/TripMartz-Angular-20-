@@ -1,0 +1,195 @@
+<style>
+    .input_t {
+        height: 45px !important;
+        padding: 5px 14px !important;
+        border: none;
+        width: 100%;
+        border: 1px solid #606060 !important;
+        border-radius: 5px !important;
+        background: none !important;
+        margin-bottom: 0px;
+        font-weight: 600;
+        color: #000;
+    }
+
+
+    .loader--spinner {
+    display: inline-block;
+    position: absolute;
+    color: #000;
+    height: 60px;
+    width: 60px;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+}
+
+.loader--spinner div {
+    animation: loader--spinner 1.2s linear infinite;
+    transform-origin: 30px 30px;
+}
+
+.loader--spinner div:after {
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 27px;
+    border-radius: 20%;
+    content: " ";
+    height: 10px; background: #000;
+    width: 5px;
+}
+
+.loader--spinner div:nth-child(1) {
+    animation-delay: -1.1s;
+    transform: rotate(0deg);
+}
+
+.loader--spinner div:nth-child(2) {
+    animation-delay: -1s;
+    transform: rotate(30deg);
+}
+
+.loader--spinner div:nth-child(3) {
+    animation-delay: -0.9s;
+    transform: rotate(60deg);
+}
+
+.loader--spinner div:nth-child(4) {
+    animation-delay: -0.8s;
+    transform: rotate(90deg);
+}
+
+.loader--spinner div:nth-child(5) {
+    animation-delay: -0.7s;
+    transform: rotate(120deg);
+}
+
+.loader--spinner div:nth-child(6) {
+    animation-delay: -0.6s;
+    transform: rotate(150deg);
+}
+
+.loader--spinner div:nth-child(7) {
+    animation-delay: -0.5s;
+    transform: rotate(180deg);
+}
+
+.loader--spinner div:nth-child(8) {
+    animation-delay: -0.4s;
+    transform: rotate(210deg);
+}
+
+.loader--spinner div:nth-child(9) {
+    animation-delay: -0.3s;
+    transform: rotate(240deg);
+}
+
+.loader--spinner div:nth-child(10) {
+    animation-delay: -0.2s;
+    transform: rotate(270deg);
+}
+
+.loader--spinner div:nth-child(11) {
+    animation-delay: -0.1s;
+    transform: rotate(300deg);
+}
+
+.loader--spinner div:nth-child(12) {
+    animation-delay: 0s;
+    transform: rotate(330deg);
+}
+
+@keyframes loader--spinner {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+</style>
+<div class = "centered" *ngIf="loadinglogo">
+<!-- <div class="logo_loader"><img src="assets/images/logo_loader.gif" alt="" /></div> -->
+</div>
+
+<div class="login_bg">
+<div class="h-100">
+    <div class="row h-100 no-gutters">
+        <div class="h-100 d-flex bg-black-opacity justify-content-center align-items-center col-md-12 col-lg-6">
+         <h3 style="color: #fff;">Welcome to Tripmartz</h3>
+        </div>
+        <div class="h-100 bg-white-opacity justify-content-center align-items-center col-md-12 col-lg-6">
+
+            <div class="app-logo mx-auto mt-5 mb-4 pb-4"></div>
+            <div class="mx-auto app-login-box col-sm-12 col-md-4 col-lg-7 d-flex justify-content-center align-items-center">
+                
+                <div class="alert alert-danger" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                </div>
+                <div>
+                    <h5 class="mb-4 font-weight-bold text-center">
+                        <span style="color:#000;">Please sign in to your account.</span>
+                    </h5>
+                    <form autocomplete="off" class="needs-validation" [formGroup]="loginForm" novalidate
+                        (validSubmit)="onLogin()">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <div tabindex="-1" role="group"><label for="exampleUserID" class="font-weight-bold">User ID</label><input
+                                            id="exampleUserID" formControlName="user_id" name="user_id" type="text"
+                                            placeholder="User ID" class="form-control login_box">
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <div tabindex="-1" role="group"><label for="exampleEmail" class="font-weight-bold">Email</label><input
+                                            id="exampleEmail" formControlName="email" name="email" type="email"
+                                            placeholder="Email here..." class="form-control login_box">
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <div tabindex="-1" role="group"><label for="examplePassword" class="font-weight-bold">Password</label>
+                                        <input class="input_t"  [type]="hidePassword ? 'password' : 'text'"  formControlName="password" 
+                                        placeholder="Password">
+                                      <a (click)="hidePassword = !hidePassword" *ngIf="!hidePassword">
+                                          <i class="fa fa-eye-slash"
+                                              style="cursor: pointer; position: absolute; right: 25px; top: 59%; transform: translateY(-50%);">
+                                          </i>
+                                      </a>
+                                      <a (click)="hidePassword = !hidePassword" *ngIf="hidePassword">
+                                          <i class="fa fa-eye"
+                                              style="cursor: pointer; position: absolute;right: 25px; top: 59%; transform: translateY(-50%);">
+                                          </i>
+                                      </a>
+                                        </div>
+                                    <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched) && errorMessage"
+                                        class="alert alert-danger">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="mr-auto col-md-12 p-0"><a routerLink="/auth/forgot-password"
+                                    class="">Recover
+                                    Password</a>
+                                <button type="submit" class="btn btn-lg pull-right loginbt" style="background-color: #0A5081;color: #fff;" [disabled]="isLoading">
+                                    <i *ngIf="isLoading" class="fa fa-spin fa-spinner"></i> 
+                                    <span *ngIf="!isLoading">Login to Dashboard</span>
+                                </button> 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,458 @@
+<div class="sub-agent-container custom-table-layout card" style="padding: 20px">
+  <div class="add-traveller">
+    <div class="custom-inline-form">
+      <form class="" [formGroup]="financeForm" autocomplete="off">
+        <div class="title pl-30">
+          <h3>Company Information</h3>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="business_name" class="required col-sm-12 col-form-label"
+              >Company Name<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                placeholder="Enter Company Name"
+                formControlName="business_name"
+                class="form-control"
+                id="business_name"
+                maxlength="250"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <!-- <div class="col-md-3 mb-2 required p-0">
+            <label for="office_email" class="required col-sm-12 col-form-label"
+              >Company Email<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                formControlName="office_email"
+                class="form-control"
+                id="office_email"
+                maxlength="250"
+                autocomplete="off"
+              />
+            </div>
+          </div> -->
+          <div class="col-md-3 mb-2 required p-0">
+            <label
+              for="business_address"
+              class="required col-sm-12 col-form-label"
+              >Company Address<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                placeholder="Enter Company Address"
+                formControlName="business_address"
+                class="form-control"
+                id="business_address"
+                maxlength="250"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="locality" class="required col-sm-12 col-form-label"
+              >Locality<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                placeholder="Enter Locality"
+                formControlName="locality"
+                class="form-control"
+                id="locality"
+                maxlength="250"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="business_phone" class="required col-sm-12 col-form-label"
+              >Office Phone<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                placeholder="Enter Office Phone"
+                formControlName="business_phone"
+                (keypress)="numberOnly($event)"
+                id="business_phone"
+                class="form-control"
+                maxlength="25"
+              />
+            </div>
+          </div>
+          
+
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="country" class="required col-sm-12 col-form-label"
+              >Country<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <select
+                id="country"
+                class="form-control"
+                formControlName="country"
+              >
+                <option selected disabled value="">Please Select</option>
+                <option *ngFor="let c of countriesList" value="{{ c.id }}">
+                  {{ c.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="state" class="required col-sm-12 col-form-label"
+              >State<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                formControlName="state"
+                type="text"
+                class="form-control"
+                placeholder="State"
+                id="appReference"
+                (keyup)="getAutoCompleteState($event, 'from')"
+                list="dynamicLocationsOrigin"
+              />
+              <ul class="droplocations" id="dynmicLocations">
+                <li
+                  *ngFor="let state of statesList"
+                  (click)="onStateSelect(state)"
+                >
+                  <i class="fal fa-map-marker-alt"></i>
+                  {{ state?.state_code }}-{{ state?.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="city" class="required col-sm-12 col-form-label"
+              >City<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 city-list">
+              <mat-form-field appearance="fill" class="city-list-input col-12 ">
+                <!-- <mat-label>Select City</mat-label> -->
+                <mat-select required formControlName="city" (openedChange)="onDropdownOpen()">
+                  <mat-option disabled>
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Search City"
+                      [(ngModel)]="searchText"
+                      (click)="$event.stopPropagation()"
+                      (keydown)="$event.stopPropagation()"
+                      (keyup)="filteredCities($event)"
+                      style="width: 100%; border: none; outline: none;"
+                      [ngModelOptions]="{standalone: true}" />
+                  </mat-option>
+                  <mat-option *ngFor="let city of filteredCity" [value]="city">
+                      {{ city.city_name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="zip_code" class="required col-sm-12 col-form-label"
+              >Pincode<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                placeholder="Enter Pincode"
+                formControlName="zip_code"
+                (keypress)="numberOnly($event)"
+                class="form-control"
+                id="zip_code"
+                maxlength="6"
+              />
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="title">
+          <h3>User Information</h3>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="title" class="col-sm-12 col-form-label"
+              >Title<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <select
+                id="inputState"
+                class="form-control"
+                formControlName="title"
+              >
+                <option selected value="" disabled>Please Select</option>
+                <option
+                  class="capitalize"
+                  *ngFor="let t of userTitleList"
+                  value="{{ t.id }}"
+                >
+                  {{ t.title }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="first_name" class="required col-sm-12 col-form-label"
+              >First Name<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter First Name"
+                id="first_name"
+                maxlength="250"
+                (keypress)="omitSpecialCharacters($event)"
+                formControlName="first_name"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="last_name" class="col-sm-12 col-form-label"
+              >Last Name<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                type="text"
+                class="form-control"
+                id="last_name"
+                maxlength="250"
+                placeholder="Enter Last Name"
+                (keypress)="omitSpecialCharacters($event)"
+                formControlName="last_name"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="phone" class="col-sm-12 col-form-label"
+              >Phone Number<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 m-0">
+              <input
+                type="text"
+                formControlName="phone"
+                placeholder="Enter Phone Number"
+                (keypress)="numberOnly($event)"
+                id="phone"
+                class="form-control"
+                maxlength="25"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="designation" class="col-sm-12 col-form-label"
+              >Designation<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 m-0">
+              <input
+                type="text"
+                placeholder="Enter Designation"
+                formControlName="position_name"
+                id="designation"
+                class="form-control"
+                maxlength="25"
+              />
+            </div>
+          </div>
+          <div class="col-md-3 mb-2 required p-0">
+            <label for="department" class="col-sm-12 col-form-label"
+              >Department<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 m-0">
+              <input
+              placeholder="Enter Department"
+                type="text"
+                formControlName="department_name"
+                id="department"
+                class="form-control"
+                maxlength="25"
+              />
+            </div>
+          </div>
+            <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Module</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let module of moduleList">
+                            <label>
+                                <input type="checkbox"  [checked]="module.isChecked" value="{{module.id}}" (change)="onModuleCheckBoxChange($event.target.checked,module.name)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{module.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Flight API</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let api of flightApiList">
+                            <label>
+                                <input type="checkbox"  [checked]="api.isChecked" value="{{api.id}}" (change)="onApiCheckBoxChange($event.target.checked,api.id)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{api.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                   <div class="col-md-6 mb-2 required p-0 cust-radio-group">
+                    <label class="col-sm-12 col-form-label">Hotel API</label>
+                    <div class="col-sm-12 d-flex align-items-center mt-2">
+                        <div class="col-auto pl-0" *ngFor="let api of hotelApiList">
+                            <label>
+                                <input type="checkbox"  [checked]="api.isChecked" value="{{api.id}}" (change)="onHotelApiCheckBoxChange($event.target.checked,api.id)">
+                                <span class="design"></span>
+                                <span class="text" style="margin-left: 4px;">{{api.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+          <!-- <div class="col-md-3 mb-2 required p-0">
+            <label for="user_rights" class="col-sm-12 col-form-label"
+              >User Rights<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 m-0">
+              <input
+                type="text"
+                formControlName="user_rights"
+                id="user_rights"
+                class="form-control"
+                maxlength="25"
+              />
+            </div>
+          </div> -->
+          <div class="col-md-3 mb-2 required p-0 cust-radio-group">
+            <label class="col-sm-12 col-form-label"
+              >User Status<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12 d-flex align-items-center mt-2">
+              <div class="col-auto pl-0">
+                <label>
+                  <input type="radio" value="1" formControlName="status" />
+                  <span class="design"></span>
+                  <span class="text" style="margin-left: 4px">Active</span>
+                </label>
+              </div>
+              <div class="col-auto">
+                <label>
+                  <input type="radio" value="0" formControlName="status" />
+                  <span class="design"></span>
+                  <span class="text" style="margin-left: 4px">Inactive</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+            <div class="title">
+                <h3>GST Information</h3>
+            </div>
+            <div class="row mb-2">
+                
+            <div class="col-md-6 mb-2 required p-0">
+            <label class="col-sm-12 col-form-label">Prefered GST<span class="text-danger">*</span></label>
+                <div class="col-sm-12 d-flex align-items-center mt-2">
+                    <div class="col-auto pl-0">
+                        <label>
+                            <input type="radio" value="TripMartz GST" formControlName="prefered_gst">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Tripmartz GST</span>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <label>
+                            <input type="radio" value="Corporate GST" formControlName="prefered_gst">
+                            <span class="design"></span>
+                            <span class="text" style="margin-left: 4px;">Corporate GST</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        
+
+        <div class="title pl-30">
+          <h3>Login Details</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-2 p-0 required">
+            <label for="firstName" class="required col-sm-12 col-form-label"
+              >Email ID<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+                formControlName="email"
+                type="text"
+                placeholder="Enter Email ID"
+                class="form-control"
+                id="firstName"
+                maxlength="250"
+                [readonly]="addOrUpdate == 'update' ? true : false"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 mb-2 p-0 required">
+            <label for="password" class="col-sm-12 col-form-label"
+              >Password<span class="text-danger">*</span></label
+            >
+            <div class="col-sm-12">
+              <input
+              placeholder="Enter Password"
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="password"
+                maxlength="250"
+              />
+            </div>
+          </div>
+          <div class="col-md-4 mb-2 p-0 required">
+            <label for="confirm_password" class="col-sm-12 col-form-label">Confirm Password<span class="text-danger">*</span></label>
+            <div class="col-sm-12">
+                <input placeholder="Enter Confirm Password"type="password" formControlName="confirm_password" class="form-control"
+                    id="confirm_password" maxlength="250">
+            </div>
+            <p class="d-flex justify-content-center" *ngIf="financeForm.controls['confirm_password'].errors?.matchPassword"
+                style="color: #C71C22;font-size: 80%;">
+                Password and Confirm Password did not match.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="btn-group">
+          <div class="form-group required row">
+            <div class="col-12 d-flex">
+              <button
+                type="submit"
+                class="btn-sm btn-primary lg mr-4"
+                (click)="onSubmit()"
+              >
+                Save
+              </button>
+              <button
+                type="reset"
+                class="btn btn-sm btn-primary lg"
+                (click)="onReset()"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
